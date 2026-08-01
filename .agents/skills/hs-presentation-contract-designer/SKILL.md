@@ -45,9 +45,10 @@ description: Define actor-visible visual, audio, asset, and consequence-presenta
 7. Define provenance and release requirements for each new or modified asset,
    including source/generation metadata, license basis, hashes, modifications,
    attribution, and approval state.
-8. Name focused contract tests, manual review needs, and evidence limits. Do not
-   equate static or automated checks with human usability, lived accessibility,
-   learning, calibration, or policy validity.
+8. Name focused contract tests, optional external feedback, and evidence limits.
+   Automated checks are the technical progression mechanism; do not equate them
+   with human usability, lived accessibility, learning, calibration, or policy
+   validity.
 
 ## Outputs
 
@@ -74,6 +75,8 @@ Write `_workspace/02_presentation_contract.md` with these sections:
 - The contract does not copy or closely imitate proprietary game assets.
 - The requested slice can be implemented without creating a second simulation
   or legality engine in the browser.
+- The contract has agent-executable entry/exit criteria and no required human
+  participant, approval, or review stop gate.
 
 ## References
 

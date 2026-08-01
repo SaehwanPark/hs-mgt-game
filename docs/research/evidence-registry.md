@@ -1,6 +1,6 @@
 # Evidence Registry
 
-**Status:** Phase 2 draft converting Phase 1 research into actionable links  
+**Status:** Maintained research reference; mapped against v0.14.3
 **Source:** [`docs/history/foundations/phase1-lit-review.md`](../history/foundations/phase1-lit-review.md)
 
 This registry tracks mechanisms, evidence quality, and design use. It is not an
@@ -39,10 +39,10 @@ ledger records a source, range, and versioned ruleset use.
 | Deterministic replay | Architecture proof | Project requirement | ODD/STRESS-aligned documentation target |
 | Actor decision rationales | History and debrief | Project requirement | Records why each local strategic actor selected an outcome |
 | Attributed effects | Transition explanation | Project requirement | Supports causal inspection without claiming calibration |
-| Competitive regional campaign (design) | Phase 6.0 parallel track | Design artifact | See [`gameplay-competitive-sketch.md`](../design/gameplay-competitive-sketch.md), ADRs 0003–0006; not runtime |
+| Competitive regional campaign | Implemented runtime and maintained design reference | Project requirement / gameplay-driven abstraction | 24-month host-authoritative campaign; see [`gameplay-competitive-sketch.md`](../design/gameplay-competitive-sketch.md) and ADRs 0003–0006 |
 | Difficulty pressure tiers | Future Phase 7/9 expansion review | Gameplay-driven / design abstraction | Current runtime varies rival count, AP, and AI ability; future resource, information, and aggression differences require validation and Expert winnability evidence |
 | Regional merger/acquisition | v0.11.13 affiliation-first design gate; v0.11.14 opt-in runtime proposal | Literature-grounded direction / stylized abstraction | DOJ/FTC merger review and HHS consolidation materials support institutional relevance; design outcomes must not imply legal forecasting or calibrated mechanics |
-| GUI asset sourcing | Future interface expansion | Licensing / product constraint | Prefer CC0 assets such as Kenney; OpenGameArt/itch.io assets require per-asset license review before distribution |
+| GUI asset sourcing | Current host-backed presentation governance | Licensing / product constraint | Prefer repository-generated or explicitly registered assets; uncertain provenance fails closed to exclusion and generic fallback |
 | Differentiated in-house advisor market | Future decision-support and strategic-actor proposal | Literature-grounded direction / gameplay-driven parameters | Management-analyst work supports specialization, experience, and compensation context. Roster cap, monthly salary scale, candidate arrivals, layoffs, and firing remain abstractions; see [expansion-proposal-review.md](../design/expansion-proposal-review.md). |
 
 ## Boundary Evidence Notes

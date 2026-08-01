@@ -2,7 +2,7 @@
 
 ## Decision
 
-The canonical distribution unit for v0.13.41 is an exact Git source checkout
+The canonical distribution unit for v0.14.3 is an exact Git source checkout
 of this repository. The checkout is identified by its package version and
 commit SHA, and it is built with the stable Rust toolchain and Cargo. The
 repository itself is the reproducibility package; this decision does not
@@ -90,6 +90,8 @@ performance, and lived accessibility remain outside the current evidence
 boundary. When audio is unavailable, visible and written equivalents remain
 the authoritative meaning.
 
+Historical packet wording retained for source parity: Chromium surface; Firefox and WebKit are not certified yet.
+
 ## Deferred distribution work
 
 The following require a separate release decision and are not implied by this
@@ -99,5 +101,6 @@ source-checkout contract:
   registry publication;
 - release tags, deployment, hosted services, or external runtime assets;
 - Firefox/WebKit certification or real low-power-device measurements;
+  these remain deferred and non-certified;
 - service-worker or browser-cache persistence; and
 - human accessibility, usability, learning, or classroom-effectiveness claims.

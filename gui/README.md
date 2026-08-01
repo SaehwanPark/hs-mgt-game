@@ -1,5 +1,17 @@
 # GUI executive desktop and adapter reference
 
+**Current status (v0.14.3):** The loopback Axum host is the active GUI surface
+for all three campaigns. The host owns actions, transitions, history/replay,
+debriefs, and durable checkpoint discovery/restoration; this browser client is
+presentation-only. Chromium evergreen desktop is the default end-user target;
+Codex in-app browser inspection is development evidence. Firefox,
+WebKit/Safari, mobile, and legacy browsers are deferred and non-certified.
+
+## Authority and presentation state
+
+The loopback host is authoritative for simulation state and transitions; the
+browser renders actor-visible projections and text/accessibility fallbacks.
+
 ## Players: use the live GUI host
 
 From the repository root, run:
@@ -45,8 +57,9 @@ use the same contextual drawer with text fallbacks.
 
 This redesign is technically verified by static, host-contract, loading, and
 offline checks. Human cognitive-load, clarity, consequence-comprehension, and
-accessibility validation remain pending the authorized five-group pilot; no
-generated artwork is included until that evidence gate is met.
+lived-accessibility outcomes remain unestablished; optional external feedback
+does not gate technical GUI progression. Unverified artwork remains excluded in
+favor of generic registered fallbacks.
 
 ## Unified Actions workspace
 
@@ -302,20 +315,27 @@ queued, aggregated, ducked, muted, reduced, unsupported, or interrupted.
 
 ## Local generation workflow proof
 
+The generation and portrait proof pages below are historical fixture and
+asset-admission references, not active GUI technical promotion gates. Their
+separate external-review fields protect candidate asset release claims; an incomplete
+candidate remains excluded and the registered generic fallback is used, while
+technical GUI work continues.
+
 Open `gui/generation-workflow-proof.html` directly or through a static server
 to inspect the Phase 8.1 approved-model scope, generation metadata contract,
-prompt template, human-review checklist, fail-closed release gate, and empty
-manifest. The proof is contributor-facing and fixture-only: it does not load
+prompt template, external-review boundary, fail-closed release gate,
+and empty manifest. The proof is contributor-facing and fixture-only: it does not load
 model weights, run inference, create an asset, call a hosted service, or use
 network resources.
 
 `scripts/capture_generation_metadata.py` captures prompts, negative prompts,
 seeds, settings, source/release hashes, post-processing, accessibility, and
 review metadata from a local request. `scripts/validate_generation_metadata.py`
-rejects unknown models/licenses, missing or mismatched hashes, incomplete human
-review, unapproved release records, and invalid visual/audio registry bridges.
-Future assets must retain written equivalents, generic fallbacks, and the
-existing asset-registry approval boundary.
+rejects unknown models/licenses, missing or mismatched hashes, incomplete
+human-review metadata, unapproved release records, and invalid visual/audio
+registry bridges from release. A rejected candidate remains out of the runtime
+registry; future technical work uses the written equivalent and generic
+fallback.
 
 ## Fictional actor portrait proof
 
@@ -327,13 +347,14 @@ outside the runtime GUI, visual asset registry, release directory, and
 generation manifest because the preview tool does not expose the approved
 local model revision or actual seed. `scripts/validate_generation_metadata.py`
 enforces the exact role set, preview hash/dimension/path boundary, and blocks
-promotion until approved model/seed provenance and portrait review fields are
-complete.
+candidate asset promotion until approved model/seed provenance and portrait
+review fields are complete; it does not block technical GUI progression.
 
-Open `portrait-review-proof.html` to inspect the seven per-role human-review
-packets, explicit pending gates, written equivalents, generic fallbacks, and
-release-block rule. The worksheet is contributor/release-only; it does not
-perform human review or add portrait authority to the runtime GUI.
+Open `portrait-review-proof.html` to inspect the seven per-role external-review
+packets, explicit pending evidence, written equivalents,
+generic fallbacks, and candidate release-boundary rule. The worksheet is
+contributor/release-only; it does not perform human review or add portrait
+authority to the runtime GUI.
 
 ## Developers: adapter contracts
 
@@ -493,10 +514,11 @@ presentation active. Optional debrief music is atmospheric only; written
 history, hashes, and debrief text remain complete when audio is muted.
 
 When supplied, `getCampaignCoverage(sessionId)` returns
-`schema_version: "campaign-coverage-v1"` for the `stabilization` or
-`regional-affiliation` campaign. The loopback launcher exposes this read and
-the action client falls back to it when a noncompetitive session has no
-competitive presentation/action catalog. The projection keeps each campaign's
+`schema_version: "campaign-coverage-v1"` for all three campaigns. The loopback
+launcher exposes this read; stabilization and regional-affiliation use it as
+their primary action surface, while competitive sessions retain their richer
+presentation/action catalog and may use the coverage envelope as a companion.
+The projection keeps each campaign's
 briefing, visible metrics, actor signals, process status, decision forms,
 immutable history, replay metadata, and host-provided debrief distinct.
 Decision forms substitute only host-provided parameter values into the host

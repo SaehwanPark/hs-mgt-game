@@ -4408,3 +4408,33 @@ Automated and host-backed checks prove technical/interface continuity only. No
 human usability, accessibility, educational, browser/device certification, or
 cognitive-load claim is made. No host schema, simulation, persistence,
 dependency, asset, or broader workspace redesign is included.
+
+---
+
+# Request Summary — GUI-focused documentation and SDD cleanup v0.14.3
+
+## Authorized outcome
+
+Align the maintained Markdown surface with the v0.14.2 codebase, make the
+loopback GUI the active presentation-development focus, make future progression
+AI-native, and defer non-default browser support. Preserve `docs/history/` and
+versioned `_workspace/` records as dated evidence.
+
+## Scope
+
+- Compact and synchronize `SPEC.md`, `ARCHITECTURE.md`, canonical project
+  documents, GUI/player/contributor references, ADR indexing, and active
+  presentation/harness instructions.
+- Add automated documentation-currentness checks and CI wiring.
+- Bump the repository once to v0.14.3, commit in meaningful chunks, push
+  `codex/docs-gui-sdd-alignment`, and open a draft PR against `main`.
+
+## Non-goals and validation
+
+No simulation, GUI runtime, MCP/API schema, persistence format, asset
+generation, or browser-engine implementation change. Human-centered outcomes
+remain explicit evidence limits rather than development stop gates; uncertain
+assets use exclusion and registered generic fallbacks. Validate with
+documentation-currentness, link, release-metadata, browser-policy, asset,
+offline/loading, device-proxy, full Python, formatting, Clippy, Rust, and
+three independent review passes.

@@ -7,7 +7,11 @@ Before opening a pull request that adds or changes a visual or audio asset:
   `assets/generated/`.
 - Add a stable ID to the matching visual or audio registry with a known semantic
   role, visible host source, accessible equivalent, creator, method,
-  modifications, license, attribution, approval, hashes, and provenance.
+  modifications, license, attribution, `approval_status`, hashes, and
+  provenance. `approval_status` is the machine-checked release-eligibility
+  field; where the asset policy requires external human review for candidate
+  release, an incomplete candidate remains excluded and does not block GUI
+  technical progression.
 - Use only the allowlisted license or `project-generated` basis. Do not add
   unclear, non-commercial, personal-use, redistribution-hostile, proprietary,
   or close-imitation assets.
@@ -15,7 +19,10 @@ Before opening a pull request that adds or changes a visual or audio asset:
   sources. External and locally generated entries require an HTTPS source URL,
   retrieval date, and license reference; preserve any applicable license text.
 - For AI generation, preserve model/license, prompt, seed or equivalent,
-  settings, source output, post-processing, and human review metadata.
+  settings, source output, post-processing, and generation metadata. A missing
+  identity, resemblance, provenance, licensing, or generation field fails closed
+  to exclusion and a registered generic fallback; human review is optional
+  external feedback, not a technical promotion gate.
 - Confirm meaning survives no color, reduced motion, mute, missing assets, and
   large text. Decorative assets must be labeled decorative.
 - Run `python3 scripts/validate_assets.py` and

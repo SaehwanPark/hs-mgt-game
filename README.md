@@ -1,19 +1,19 @@
 # Health Policy Strategy Game
 
-Health Policy Strategy Game is a strategy simulation about leading a fictional
-nonprofit US health system through financial pressure, workforce constraints,
-payer negotiations, policy oversight, market competition, and community trust.
+Health Policy Strategy Game is a deterministic strategy simulation about
+leading a fictional nonprofit US health system through financial pressure,
+workforce constraints, payer negotiations, policy oversight, market
+competition, and community trust.
 
-The current public milestone is a playable Rust prototype at v0.14.2.
-
-Health-policy outcomes are not direct levers here. Other institutions respond
-to your choices based on their own authority, incentives, information, and
-constraints. You make tradeoffs with incomplete information, live with delayed
-consequences, and review what happened in an educational debrief.
+The current public milestone is a playable Rust prototype at v0.14.3. The
+simulation remains the authority for commands, observations, transitions,
+history, replay, checkpoints, and debriefs. The CLI is the reference interface;
+the loopback GUI is the active presentation-development surface over the same
+host contracts.
 
 ![Terminal view of the game's executive report and competitive command entry](https://i.imgur.com/gfmOO3O.png)
 
-## Start Here
+## Start here
 
 You need a Rust toolchain with Cargo. From the repository root, run:
 
@@ -27,27 +27,21 @@ For a friendly first session:
 2. Press Enter for the default deterministic seed.
 3. Choose beginner mode.
 
-The stabilization campaign is a short, five-turn introduction. The game
-explains the available choices as you play, and `?` or `help` shows guidance
-when you need it.
+## Playable campaigns
 
-## What You Can Play
-
-- `stabilization-v1` — a five-turn executive stabilization campaign and the
-  recommended starting point.
+- `stabilization-v1` — a five-turn executive stabilization campaign.
 - `competitive-regional-v1` — a 24-month regional-market campaign with AI
   rivals, simultaneous monthly actions, and lagged information.
-- `regional-affiliation-v1` — a six-stage affiliation campaign covering
-  partner assessment, commitments, review, integration, and debriefing.
+- `regional-affiliation-v1` — a six-stage affiliation campaign covering partner
+  assessment, commitments, review, integration, and debriefing.
 
 Every campaign is deterministic for the same seed and choices. The simulation
-keeps actor-visible information separate from its underlying state, records an
+keeps actor-visible information separate from underlying state, records an
 append-only history, and supports replay verification.
 
-## Optional GUI
+## GUI mode
 
-The live GUI currently supports `competitive-regional-v1`,
-`stabilization-v1`, and `regional-affiliation-v1`:
+The loopback GUI currently launches all three campaigns:
 
 ```bash
 cargo run --bin hs-mgt-game-gui
@@ -55,20 +49,21 @@ cargo run --bin hs-mgt-game-gui
 
 Keep that terminal running and open the printed URL, normally
 `http://127.0.0.1:7878`. Choose seed `42`, Normal difficulty, and
-**Start competitive session**.
-
-Opening `gui/index.html` directly shows demo data; it does not start a live
-scenario.
+**Start competitive session** for the recommended first GUI session.
 
 The GUI uses a progressive Setup/Brief/Decide/Resolve/Review workspace with
-host-ordered disclosures and text-first source/uncertainty fallbacks. This
-technical redesign remains pending the authorized human usability and
-accessibility pilot; it does not certify browser/device ergonomics.
+host-ordered actions, host-owned checkpoints, replay/history reads, and
+text-first source/uncertainty fallbacks. `gui/index.html` opened directly shows
+demo data; it does not start a live scenario.
 
-See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for the complete
-first month, settings, alternate ports, and troubleshooting.
+The declared default browser target is Chromium evergreen desktop. The Codex in-app browser
+is a development inspection surface. Firefox, WebKit/Safari,
+mobile, and legacy-browser support are deferred and not certified.
 
-## Current Boundaries
+See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for launch,
+settings, alternate ports, checkpoint recovery, and troubleshooting.
+
+## Current boundaries
 
 This is a playable research and educational prototype, not a finished
 educational release or a model of any real institution.
@@ -76,15 +71,16 @@ educational release or a model of any real institution.
 - Numerical thresholds and game units are documented abstractions, not
   empirically calibrated parameters or forecasts.
 - Rivals are local AI or bounded MCP agents; there is no network multiplayer.
-- Automated playtests help evaluate gameplay and explanations, but they are not
-  evidence of measured human learning.
-- Human accessibility, educational, browser/device, provenance, and
-  public-release reviews remain open.
+- Automated and AI-agent playtests support technical and gameplay iteration;
+  they do not establish human learning, lived accessibility, classroom
+  effectiveness, legal conclusions, or policy validity.
+- Asset provenance is machine-checked. Content with incomplete provenance uses
+  a generic fallback and is not promoted to runtime release.
 
-Do not use the game for operational, clinical, financial, regulatory, legal,
-or policy decisions.
+Do not use the game for operational, clinical, financial, regulatory, legal, or
+policy decisions.
 
-## Learn More
+## Learn more
 
 ### Players
 
@@ -106,13 +102,15 @@ For a longer introduction to the design, read
 
 ## Contributing
 
-The codebase is intentionally CLI-first. Keep core simulation transitions
-deterministic and resolve randomness into explicit inputs before evaluating a
-transition.
+Keep core simulation transitions deterministic and resolve randomness into
+explicit inputs before evaluating a transition. Treat the host as authoritative
+for commands, legality, state, history, replay, checkpoints, and debriefs;
+presentation layers must remain actor-visible and reversible.
 
 Run the standard checks:
 
 ```bash
+python3 scripts/check_documentation_currentness.py
 python3 scripts/check_release_metadata.py
 python3 scripts/check_documentation_links.py
 cargo fmt --check

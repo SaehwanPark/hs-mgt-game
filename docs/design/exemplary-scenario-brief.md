@@ -1,6 +1,6 @@
 # Exemplary Scenario Brief: The Regional Workforce and Market Realignment Challenge
 
-**Status:** Phase 6.2 design artifact  
+**Status:** Historical design reference; `competitive-exemplary-v1` is not an active GUI campaign
 **Audience:** Contributors, domain reviewers, playtest designers  
 **Campaign id:** `competitive-exemplary-v1`  
 **Relationship:** Complements `first-scenario-brief.md` and `competitive-scenario-brief.md`.

@@ -14,6 +14,10 @@ CANONICAL_PATHS = (
   "docs/proposal.md",
   "docs/roadmap.md",
   "docs/design_principles.md",
+  "SPEC.md",
+  "ARCHITECTURE.md",
+  "docs/visual_audio_enhancement_roadmap.md",
+  "docs/decision-records/0014-ai-native-gui-and-browser-boundary.md",
   "docs/harness/health-policy-strategy-game/team-spec.md",
 )
 MARKDOWN_LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")

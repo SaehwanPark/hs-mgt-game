@@ -1,15 +1,15 @@
 # Scenario Format Draft
 
-**Status:** Phase 6.2 design draft; stabilization, competitive, and regional-affiliation runtime loading implemented
+**Status:** Maintained scenario-format reference; stabilization, competitive, and regional-affiliation loading implemented
 **Audience:** Contributors designing scenario loading and campaign content  
-**Version:** draft-0.1.28
+**Version:** `scenario-toml-0.1.40`; reviewed for v0.14.3
 
 This document proposes a typed, versioned scenario description for regional
 market campaigns. ADR-0007 accepted the first narrow `scenario-toml-0.1.40`
 runtime format for the bundled `stabilization-v1` scenario; later slices added
-validated custom scenario loading for both `stabilization-v1` and
-`competitive-regional-v1`. Broader authoring workflows and scenario migration
-tooling remain deferred.
+validated custom scenario loading for `stabilization-v1`,
+`competitive-regional-v1`, and the `regional-affiliation-v1` campaign shape.
+Broader authoring workflows and scenario migration tooling remain deferred.
 
 ## Campaign kinds
 
@@ -113,7 +113,8 @@ source of truth for what actually happened in a session.
 ## Non-Goals (this draft)
 
 - No executable scripts, WASM, or general-purpose expression language.
-- No competitive mid-run save format (stabilization session save: ADR-0002).
+- No new scenario-specific save format; host-owned checkpoint artifacts remain
+  the current persistence boundary for supported campaigns.
 - No Medicare/Medicaid actor stubs until first-scenario scope expands.
 - No empirical parameter files; use [`evidence-registry.md`](../research/evidence-registry.md)
   ledger when calibrating rulesets.

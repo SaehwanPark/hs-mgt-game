@@ -1,6 +1,6 @@
 # Initial System Boundary and Ontology Draft
 
-**Status:** Phase 2 conceptual design draft (updated for the 24-month competitive campaign)
+**Status:** Maintained conceptual reference; updated for v0.14.3
 **Audience:** Contributors and domain reviewers
 
 This document defines the conceptual boundary for regional market slices. It
@@ -10,12 +10,13 @@ format is approved.
 
 ## Campaign Fork
 
-Two campaign concepts coexist:
+Three executable campaign paths coexist:
 
 | Campaign | Id | Turn unit | Status |
 | --- | --- | --- | --- |
 | Stabilization demo | `stabilization-v1` | Abstract (5 points) | Implemented v0.1.27 |
 | Competitive regional market | `competitive-regional-v1` | 1 month | 24-month campaign implemented v0.5.0 |
+| Regional affiliation | `regional-affiliation-v1` | 1 month/stage | Six-stage runtime implemented v0.12.0 |
 
 See [`core-loop-spec.md`](core-loop-spec.md) and [`competitive-scenario-brief.md`](competitive-scenario-brief.md).
 
@@ -32,7 +33,7 @@ See [`core-loop-spec.md`](core-loop-spec.md) and [`competitive-scenario-brief.md
 
 ### Competitive campaign
 
-- Same regional US market; multiple health systems (1 human + K AI players).
+- Same regional US market; multiple health systems (1 player-controlled + K AI players).
 - One strategy turn equals one calendar month; annual policy tick every 12 months.
 - The campaign loop runs for 24 months.
 
@@ -132,8 +133,9 @@ Excluded from the **stabilization demo** conceptual boundary:
 - Service-line portfolio modeling.
 - Individual patient simulation.
 - Federal legislative process.
-- Scenario or ruleset file loading beyond the accepted stabilization TOML
-  boundary.
+- New scenario authoring and migration workflows beyond the validated
+  `scenario-toml-0.1.40` loader boundary; all three current campaign shapes
+  load through the checked-in scenario/runtime contracts.
 - Graphical interface or release packaging.
 
 The **competitive campaign** adds multi-system peer players, monthly calendar,
@@ -155,7 +157,8 @@ Future expansion boundaries:
   histories, replay, and debrief outputs. Graphical rendering and asset loading
   stay outside the deterministic core.
 
-Mid-run session autosave/resume is implemented for both campaigns (ADR-0002).
+Mid-run session autosave/resume is implemented for all three launchable GUI
+campaigns through the host-owned checkpoint boundary (ADR-0002).
 
 ## Deferred Ontology and Runtime Work
 

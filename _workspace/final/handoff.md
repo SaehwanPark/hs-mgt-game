@@ -3341,6 +3341,36 @@ campaign expansion approval remain pending and promotion-blocking.
 
 ---
 
+# Final Handoff — GUI-focused documentation and SDD cleanup v0.14.3
+
+## Status
+
+Planned as a documentation/governance PR on
+`codex/docs-gui-sdd-alignment`, with four meaningful commits and a draft PR
+against `main`. Runtime code, GUI behavior, APIs, schemas, and persistence are
+out of scope.
+
+## Intended changes
+
+- Compact SDD/current-state documents around the implemented three-campaign
+  host-backed GUI and deterministic core.
+- Replace human-dependent future stop gates with AI-native technical checks and
+  explicit nonblocking evidence limits.
+- Make Chromium evergreen the active browser target and defer non-default
+  engines while preserving historical evidence.
+- Add automated documentation-currentness coverage and bump v0.14.2 to
+  v0.14.3 once.
+
+## Validation and limits
+
+Run documentation, asset, browser-policy, device-proxy, Python, formatting,
+Clippy, Rust, and diff checks. Open a draft PR, run three independent
+code-reviewer passes, fix Critical/High findings, and report remaining risks.
+Do not claim human learning, lived accessibility, legal clearance, calibration,
+or policy validity from automated or AI-agent evidence.
+
+---
+
 # Final Handoff — Unified draft contextual actions v0.14.2
 
 ## Status
@@ -3538,3 +3568,47 @@ Asset provenance/portrait review, audio and first-session evaluation,
 debrief/educational review, content/resemblance/clinical review, competitive
 campaign human coverage, browser/device certification, revision decisions, and
 campaign expansion approval remain pending and promotion-blocking.
+
+# Final Handoff — Documentation alignment v0.14.3 final verification
+
+## Status
+
+The documentation cleanup is complete on `codex/docs-gui-sdd-alignment` as four
+meaningful commits. It changes no runtime API, simulation rule, persistence
+format, MCP schema, GUI behavior, asset, or audio implementation.
+
+## Changed-file groups
+
+- Current project state and SDD: root README/spec/architecture, canonical
+  proposal/roadmap/design direction, and ADR indexing/ADR-0014.
+- GUI workflow and contributor surface: GUI/player/MCP/distribution guides,
+  active design and asset references, validation protocol, harness/orchestrator,
+  presentation contract/QA instructions, and compact visual/audio roadmap.
+- Automated governance: Markdown role/currentness checker, focused tests,
+  documentation-link contract, and CI invocation.
+- Release/handoff: v0.14.3 metadata, changelog, lesson, and append-only
+  workspace evidence.
+
+## Checks and evidence limits
+
+The final verification passed currentness, links, release metadata,
+browser/device policy, assets, generated credits, visual/audio contracts, the
+944-test Python suite, `cargo fmt --check`, Clippy with warnings denied,
+`cargo test` (388 library tests plus integration/doc tests), and
+`git diff --check`. It is technical source-bound evidence;
+human usability, learning, lived accessibility, legal/provenance conclusions,
+calibration, balance, policy validity, and public release remain unestablished.
+
+Chromium evergreen desktop is the sole active browser-support target. Codex
+in-app browser use is development evidence. Firefox, WebKit/Safari, mobile,
+legacy, and real-device certification are deferred and non-certified. The PR
+remains draft and is not merged or released.
+
+## Review result
+
+Exactly three independent code-reviewer passes completed. They checked
+code-to-document accuracy, SDD consistency, actor-visible and host-authority
+boundaries, AI-native progression, accessibility/provenance, browser scope,
+links, versioning, tests, churn, and historical preservation. Findings were
+fixed or explicitly bounded as historical evidence; no unresolved Critical or
+High findings remain. The draft PR is intentionally unmerged.

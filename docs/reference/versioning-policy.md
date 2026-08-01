@@ -1,6 +1,6 @@
 # Versioning Policy
 
-**Status:** Phase 0 governance artifact  
+**Status:** Maintained governance reference; reviewed for v0.14.3
 **Audience:** Contributors and release maintainers
 
 ## Package Version (Cargo)

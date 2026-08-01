@@ -6224,3 +6224,75 @@ educational review remain pending.
   against the 445,000-byte device proxy.
 
 No human pilot or pixel-level browser certification is claimed by this record.
+
+---
+
+# Presentation QA — Documentation alignment v0.14.3
+
+## Status
+
+`pass` for the documentation-only presentation contract, subject to the
+automated checks and three independent review passes required by the plan.
+
+## Findings and verification target
+
+- Current wording is checked against the implemented three-campaign host,
+  task-workspace/action-surface behavior, durable checkpoint/replay contracts,
+  and actor-visible presentation boundaries.
+- Human evaluation, legal-quality conclusions, and lived accessibility remain
+  unestablished evidence limits; they are not future stop gates.
+- Chromium evergreen is the active browser target. Firefox/WebKit/mobile and
+  legacy-browser work remains deferred; historical smoke evidence is not
+  promoted to support certification.
+- Incomplete asset provenance is handled by exclusion and generic fallback.
+
+Run documentation-currentness, links, release metadata, browser policy, asset,
+full Python, formatting, Clippy, Rust, and diff checks. No runtime/API or
+browser implementation change is authorized.
+
+# Presentation QA — Documentation alignment v0.14.3 final verification
+
+## Status
+
+Documentation-only alignment is complete for the maintained surface. The
+loopback Axum host remains authoritative for all three campaigns; the browser
+is a presentation client with history/replay, durable-checkpoint, accessibility,
+and text/audio fallback wording aligned to source and tests.
+
+## Changed-file groups
+
+- Root SDD and canonical direction: `README.md`, `SPEC.md`,
+  `ARCHITECTURE.md`, `docs/proposal.md`, `docs/roadmap.md`, and
+  `docs/design_principles.md`.
+- GUI and contributor references: `gui/README.md`, active guides, design and
+  asset references, ADR index, presentation/harness instructions, and the
+  compact visual/audio roadmap with historical evidence index.
+- Governance automation: `scripts/check_documentation_currentness.py`, its
+  focused tests, documentation-link updates, and CI wiring.
+- Release evidence: version projections, `CHANGELOG.md`, `LESSONS.md`, and
+  append-only request/contract/QA/handoff records.
+
+## Verification and limits
+
+The final check run passed `check_documentation_currentness.py`, documentation
+links, release metadata, browser compatibility, device performance, asset
+registry/release, generated credits, and the visual/audio contract audit. The
+full Python suite passed 944 tests; `cargo fmt --check`, Clippy with warnings
+denied, and `cargo test` (388 library tests plus integration/doc tests) passed;
+`git diff --check` passed. Automated evidence proves technical contracts only;
+it does not establish human learning, lived accessibility, legal/provenance
+clearance, calibration, balance, policy validity, or public-release approval.
+Uncertain assets remain excluded in favor of registered generic fallbacks.
+
+Chromium evergreen desktop is the active end-user target. Codex in-app browser
+inspection is development evidence. Firefox, WebKit/Safari, mobile, legacy,
+and real-device certification remain deferred and non-certified.
+
+## Review result
+
+Three independent code-reviewer passes covered code-to-document facts and SDD
+consistency; actor-visible, AI-native, accessibility/provenance, and browser
+policy; and links, versioning, tests, churn, and historical preservation. The
+MCP persistence, campaign-coverage wording, scenario-format, asset-admission,
+role-classification, and stale-reference findings were corrected or explicitly
+bounded as historical evidence. No Critical or High finding remains.

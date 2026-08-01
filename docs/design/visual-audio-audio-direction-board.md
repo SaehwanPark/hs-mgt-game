@@ -1,15 +1,18 @@
 # Audio-direction prototype board — Phase 1.3
 
-**Status:** Complete in v0.12.38
+**Status:** Point-in-time prototype reference; current GUI queue is governed by
+`docs/visual_audio_enhancement_roadmap.md`
+**Version:** Original prototype v0.12.38; reviewed for v0.14.3
 **Prototype:** `gui/audio-proof.html`
 **Recipe source:** `gui/audio-direction.mjs`
 
 ## Decision
 
-The next audio direction uses short tonal cues, restrained low-level generated
+The prototype direction uses short tonal cues, restrained low-level generated
 beds, and explicit visible-source mappings. The prototype remains dependency-
 free and generates previews through the Web Audio API after a user gesture. It
-does not replace the existing runtime catalog yet.
+does not replace the existing runtime catalog; current release behavior is
+defined by the registered GUI audio catalog and host-visible fallback contract.
 
 ## Standards
 
@@ -67,8 +70,9 @@ validity.
 
 ## Deferred next slice
 
-Broader production assets, calibrated measurement, and human listening remain
-separate gates. The policy prototype now covers deterministic priority order,
+Broader production assets, calibrated measurement, and optional external human
+listening remain separate evidence limits, not technical stop gates. The policy
+prototype now covers deterministic priority order,
 music ducking metadata, cooldown, full/cues-only/muted modes, and reduced-audio
 preference behavior.
 

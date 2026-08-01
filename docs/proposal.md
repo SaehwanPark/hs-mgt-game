@@ -3,13 +3,13 @@
 
 **Status:** Canonical project proposal  
 **Audience:** Project owner and contributors  
-**Initial platform:** Command-line interface  
+**Initial platform:** Command-line interface with a local loopback GUI
 **Initial domain:** United States health policy and health-system strategy  
 **Primary implementation language:** Rust
 
 ## Current Implementation Checkpoint
 
-As of 2026-07-15, the proposal has progressed beyond its initial concept and
+As of 2026-08-01 (v0.14.3), the proposal has progressed beyond its initial concept and
 vertical-slice stages into a playable, evidence-gated prototype. The repository
 contains three deterministic campaign paths:
 
@@ -17,15 +17,15 @@ contains three deterministic campaign paths:
 - a 24-month competitive regional-market campaign; and
 - an opt-in six-stage regional-affiliation campaign.
 
-The implementation includes a CLI, a local stdio MCP adapter for bounded agent
-playtesting, replay and state-hash verification, scenario loading, competitive
-autosave/resume, educational debriefs, and a dependency-free GUI thin-client
-over existing MCP-shaped outputs. A loopback-only local GUI host now makes the
-competitive first-month path playable without manual adapter injection while
-leaving the Rust session store authoritative. Current numerical mechanisms remain
-documented game abstractions rather than calibrated forecasts, and AI-agent
-playtests remain gameplay and explanation evidence rather than evidence of
-human learning.
+The implementation includes a CLI reference interface, a local stdio MCP adapter
+for bounded agent playtesting, replay and state-hash verification, scenario
+loading, durable checkpoint discovery/restoration, educational debriefs, and a
+loopback Axum GUI host over the shared action surface. The GUI presents all three
+campaigns through the Setup/Brief/Decide/Resolve/Review workspace while leaving
+the Rust session store and action ordering authoritative. Current numerical
+mechanisms remain documented game abstractions rather than calibrated forecasts,
+and AI-agent playtests remain gameplay and explanation evidence rather than
+evidence of human learning.
 
 The original proposal below remains the durable product thesis. Current scope,
 completed slices, and promotion gates are tracked in [`SPEC.md`](../SPEC.md),
@@ -35,7 +35,7 @@ completed slices, and promotion gates are tracked in [`SPEC.md`](../SPEC.md),
 
 ## 1. Project Summary
 
-This project is a turn-based strategy and simulation game in which the player leads a health system as a newly appointed chief executive. The player must navigate financial pressure, clinical obligations, workforce constraints, market competition, government policy, and stakeholder politics.
+This project is a turn-based strategy and simulation game in which the player leads a health system as a newly appointed chief executive. The player must navigate financial pressure, clinical obligations, workforce constraints, market competition, government policy, and stakeholder politics through a CLI/reference or loopback GUI workspace.
 
 The first version will focus on the United States. Its deeper purpose, however, is broader: to model health policy as an evolving system produced by strategic interaction among institutions operating under economic, political, legal, and social constraints.
 
@@ -459,7 +459,8 @@ The first version should not attempt to:
 - solve global equilibria among all actors;
 - provide empirically authoritative policy forecasts;
 - simulate individual patients in full detail;
-- build a graphical interface;
+    - replace the current shared-action GUI boundary with a second simulation or
+      browser-owned state model;
 - or create a general-purpose policy programming language.
 
 The goal is a credible, transparent, and extensible strategy simulation—not comprehensive replication of reality.

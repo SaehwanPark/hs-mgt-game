@@ -24,6 +24,9 @@ jobs:
       - name: Check documentation links
         run: python3 scripts/check_documentation_links.py
 
+      - name: Check documentation currentness
+        run: python3 scripts/check_documentation_currentness.py
+
       - name: Check presentation asset registries
         run: |
           python3 scripts/validate_assets.py

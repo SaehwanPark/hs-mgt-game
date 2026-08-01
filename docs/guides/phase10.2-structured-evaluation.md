@@ -1,11 +1,12 @@
 # Phase 10.2 structured visual/audio evaluation protocol
 
-Status: ready for authorized human evaluation; no participant result is recorded
-by this protocol artifact.
+Status: optional external-feedback preparation; no participant result is recorded
+by this protocol artifact and no technical promotion depends on it.
 
 ## Purpose and boundaries
 
-Evaluate whether the first-month `competitive-regional-v1` presentation helps
+Evaluate, if external feedback is later requested, whether the first-month
+`competitive-regional-v1` presentation helps
 people identify institutions, facilities, visible pressures, and consequence
 chains without exposing hidden state or making audio necessary. The protocol
 evaluates the existing technical slice; it does not approve assets, establish
@@ -20,7 +21,7 @@ feedback needed for revision.
 
 ## Participants and session shape
 
-Recruit across the roadmap groups: project contributors, strategy-game players,
+If a separately authorized study is chosen, recruit across the roadmap groups: project contributors, strategy-game players,
 health-policy/management experts, accessibility-oriented reviewers, and
 first-time users. A facilitator may stop a task for discomfort, fatigue,
 accessibility barriers, privacy concerns, or information-boundary confusion.
@@ -94,14 +95,16 @@ Classify each finding as exactly one of:
 
 Enter only anonymized findings in
 `docs/evaluation/phase10.2-revision-log.md`. Leave the go/no-go decision blank
-until authorized reviewers inspect the findings and evidence.
+for external feedback; it does not gate the automated technical queue.
 
 ## Evidence limits
 
-This protocol prepares human evaluation. No participant results are included.
+This protocol prepares optional human evaluation. No participant results are
+included and no technical work waits for them.
 Preparation does not establish legal clearance, universal accessibility,
 clinical validity, policy forecasting accuracy, or educational effectiveness.
-Any release or human-approval decision remains separately authorized.
+Any release or human-approval decision remains separately authorized and outside
+the automated GUI progression policy.
 
 ## Phase 13.2 pilot-preparation addendum
 

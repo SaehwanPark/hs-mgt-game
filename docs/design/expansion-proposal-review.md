@@ -1,20 +1,22 @@
 # Expansion Proposal Review
 
-**Status:** Phase 7 proposal-review artifact  
+**Status:** Historical proposal-review artifact; current GUI direction is in ADR-0014
 **Audience:** Contributors, domain reviewers, playtest designers  
-**Scope:** Difficulty expansion, regional merger/acquisition mechanics, a
-future GUI layer, and a differentiated in-house advisor market
+**Scope:** Difficulty expansion, regional merger/acquisition mechanics, the
+host-backed GUI boundary, and a differentiated in-house advisor market
 
-This document reviews expansion ideas before they are promoted into
-runtime work. It is intentionally a gate, not an implementation specification.
-Future slices should update this review, then the roadmap, then SDD documents
-before changing mechanics or interfaces.
+This document records point-in-time expansion hypotheses. It is not an active
+promotion gate or implementation specification. Current GUI work follows
+`docs/roadmap.md`, `docs/visual_audio_enhancement_roadmap.md`, and ADR-0014;
+runtime changes require a new bounded proposal and ADR.
 
 ## Review posture
 
 - Treat each idea as a hypothesis about player value and educational value.
-- Require evidence or domain review before runtime tuning, new actor classes,
-  scenario-schema changes, or GUI architecture.
+- Require a bounded technical contract and automated evidence before runtime
+  tuning, new actor classes, scenario-schema changes, or GUI architecture.
+- Treat optional human or legal feedback as an evidence limit, never as a
+  routine technical stop gate.
 - Preserve deterministic replay, actor-specific observations, append-only
   history, and debrief traceability.
 - Label unsupported mechanics as stylized abstractions or gameplay-driven
@@ -166,13 +168,15 @@ implementation-PR decisions. Direct acquisition, national deal markets,
 private-equity rollups, detailed deal finance, calibrated legal outcomes, and
 changes to the default campaign remain deferred. See ADR-0010.
 
-## Proposal 3: GUI Layer
+## Proposal 3: Host-backed GUI presentation (implemented boundary)
 
-The GUI should be a thin client over the existing deterministic core, not a
-second game. It should broaden audience access while preserving the CLI's
-strengths: inspectable commands, reproducible histories, and causal debriefs.
+The GUI is now a host-backed presentation client over the existing deterministic
+core, not a second game. It broadens access while preserving the CLI's strengths:
+inspectable commands, reproducible histories, durable checkpoints, and causal
+debriefs. The current implementation is described in `ARCHITECTURE.md` and
+`gui/README.md`.
 
-Recommended gate:
+Current technical contract:
 
 - Design the GUI around existing observations, command validation, history,
   replay, and debrief outputs.
@@ -181,8 +185,8 @@ Recommended gate:
 - Use publicly downloadable assets only after license review; prefer CC0 assets
   from sources such as Kenney, or individually audited OpenGameArt/itch.io
   assets.
-- Prototype one campaign screen and one end-of-run debrief surface before
-  committing to packaging or release workflows.
+- Use the Setup/Brief/Decide/Resolve/Review workspace for all three campaigns;
+  do not add a browser-owned rules or persistence model.
 - Preserve CLI and MCP as first-class interfaces.
 
 Design implications:
@@ -286,13 +290,17 @@ Deferred / non-goals:
   automatic layoff system, severance model, performance management, calibrated
   salary model, or broad human-resources simulation.
 
-## Promotion rule
+## Future-slice entry rule
 
-Before any implementation slice begins, the active `SPEC.md` Present entry
-should cite:
+Before any future implementation slice begins, its current `SPEC.md` or roadmap
+entry should cite:
 
 - the relevant section of this review;
-- the roadmap gate it satisfies;
+- the agent-executable roadmap entry and technical contract it satisfies;
 - the narrow artifact or runtime behavior being changed;
 - verification evidence needed before the slice can close; and
 - explicit non-goals that keep the other proposals from entering scope.
+
+No participant study, approval, or human review is required to close the
+technical slice. Record optional external feedback separately and preserve its
+claim limits.
