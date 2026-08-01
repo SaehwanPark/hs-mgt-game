@@ -305,22 +305,57 @@ pub fn load_gui_session_checkpoint(
   )
 }
 
-pub fn remove_gui_session_save(path: &Path, session_id: &str) -> Result<(), String> {
+#[derive(Debug)]
+enum GuiSessionSaveRemovalError {
+  Io(String),
+  InvalidContent(String),
+}
+
+impl std::fmt::Display for GuiSessionSaveRemovalError {
+  fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    match self {
+      Self::Io(message) | Self::InvalidContent(message) => formatter.write_str(message),
+    }
+  }
+}
+
+fn remove_gui_session_save(
+  path: &Path,
+  session_id: &str,
+) -> Result<(), GuiSessionSaveRemovalError> {
   if !path.is_file() {
     return Ok(());
   }
-  let text = fs::read_to_string(path)
-    .map_err(|error| format!("unable to read GUI save at {}: {error}", path.display()))?;
-  let value: serde_json::Value = serde_json::from_str(&text)
-    .map_err(|error| format!("GUI save parse error at {}: {error}", path.display()))?;
+  let text = fs::read_to_string(path).map_err(|error| {
+    GuiSessionSaveRemovalError::Io(format!(
+      "unable to read GUI save at {}: {error}",
+      path.display()
+    ))
+  })?;
+  let value: serde_json::Value = serde_json::from_str(&text).map_err(|error| {
+    GuiSessionSaveRemovalError::InvalidContent(format!(
+      "GUI save parse error at {}: {error}",
+      path.display()
+    ))
+  })?;
   let schema = value
     .get("schema_version")
     .and_then(serde_json::Value::as_str)
-    .ok_or_else(|| format!("GUI save at {} has no schema version", path.display()))?;
+    .ok_or_else(|| {
+      GuiSessionSaveRemovalError::InvalidContent(format!(
+        "GUI save at {} has no schema version",
+        path.display()
+      ))
+    })?;
   let stored_session_id = value
     .get("session_id")
     .and_then(serde_json::Value::as_str)
-    .ok_or_else(|| format!("GUI save at {} has no session ID", path.display()))?;
+    .ok_or_else(|| {
+      GuiSessionSaveRemovalError::InvalidContent(format!(
+        "GUI save at {} has no session ID",
+        path.display()
+      ))
+    })?;
   if stored_session_id == session_id
     && matches!(
       schema,
@@ -329,23 +364,31 @@ pub fn remove_gui_session_save(path: &Path, session_id: &str) -> Result<(), Stri
         | GUI_AFFILIATION_SAVE_SCHEMA_VERSION
     )
   {
-    fs::remove_file(path)
-      .map_err(|error| format!("unable to remove GUI save at {}: {error}", path.display()))?;
+    fs::remove_file(path).map_err(|error| {
+      GuiSessionSaveRemovalError::Io(format!(
+        "unable to remove GUI save at {}: {error}",
+        path.display()
+      ))
+    })?;
   }
   Ok(())
 }
 
 pub fn remove_gui_session_checkpoint(path: &Path, session_id: &str) -> Result<(), String> {
   let checkpoint_path = gui_session_checkpoint_path(path, session_id)?;
-  if let Err(error) = remove_gui_session_save(path, session_id)
-    && path.is_file()
-  {
-    fs::remove_file(path).map_err(|remove_error| {
-      format!(
-        "unable to remove invalid legacy GUI save at {}: {remove_error} (original cleanup error: {error})",
-        path.display()
-      )
-    })?;
+  if let Err(error) = remove_gui_session_save(path, session_id) {
+    match error {
+      GuiSessionSaveRemovalError::InvalidContent(error) if path.is_file() => {
+        fs::remove_file(path).map_err(|remove_error| {
+          format!(
+            "unable to remove invalid legacy GUI save at {}: {remove_error} (original cleanup error: {error})",
+            path.display()
+          )
+        })?;
+      }
+      GuiSessionSaveRemovalError::Io(error) => return Err(error),
+      GuiSessionSaveRemovalError::InvalidContent(error) => return Err(error),
+    }
   }
   if checkpoint_path.is_file() {
     fs::remove_file(&checkpoint_path).map_err(|error| {
@@ -614,6 +657,40 @@ mod tests {
         .expect("archive directory")
         .exists()
     );
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn checkpoint_cleanup_preserves_valid_legacy_checkpoint_for_other_session() {
+    let directory = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-legacy-other-{}",
+      std::process::id()
+    ));
+    let path = directory.join("gui.save");
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, "session-target").expect("target checkpoint path");
+    let ruleset = default_ruleset();
+    let save = SessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      experience_mode: ExperienceMode::Standard,
+      history: History {
+        genesis: genesis_state(),
+        transitions: Vec::new(),
+      },
+      next_turn: 1,
+    };
+    write_stabilization_session_save(&checkpoint_path, "session-target", &save)
+      .expect("archive checkpoint");
+    write_stabilization_session_save(&path, "session-other", &save)
+      .expect("other legacy checkpoint");
+
+    remove_gui_session_checkpoint(&path, "session-target")
+      .expect("target cleanup must preserve other legacy checkpoint");
+    assert!(!checkpoint_path.exists());
+    assert!(path.is_file());
+    remove_gui_session_save(&path, "session-other").expect("other legacy cleanup");
+    assert!(!path.exists());
     let _ = fs::remove_dir(&directory);
   }
 
