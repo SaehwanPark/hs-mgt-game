@@ -7828,6 +7828,23 @@ release remain open. The target is recorded in
 `_workspace/183_implementation_plan_phase11-save-artifact-download-v0.13.105.md`,
 `_workspace/00_input/request-summary-v0.13.105.md`, and the Phase 11.1 ledger.
 
+### Automatic resume policy (v0.13.106)
+
+The browser-refresh resume policy is versioned as
+`gui-session-resume-policy-v1`. Only an opaque session ID recovered from
+best-effort browser storage after refresh may trigger one host-owned
+`loadSession` retry after an unknown live-session read. Manual session loads,
+checkpoint discovery, reference import, and Restore remain explicit; transient
+refresh failures preserve the ID for retry, while confirmed unknown sessions
+clear it.
+
+The browser still never serializes, parses, stores, or reconstructs save
+artifacts. The policy is a presentation/recovery contract only; it adds no
+simulation, replay-regeneration, asset, audio, or human/runtime certification
+claim. The target is recorded in
+`_workspace/184_implementation_plan_phase11-automatic-resume-policy-v0.13.106.md`,
+`_workspace/00_input/request-summary-v0.13.106.md`, and the Phase 11.1 ledger.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

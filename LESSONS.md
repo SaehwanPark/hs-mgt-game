@@ -3813,3 +3813,15 @@ separate gates.
 - Prevention: preserve explicit storage-source selection, open archive directories
   and files with no-follow handle confinement, reject unsafe paths and invalid
   content, and keep automatic resume/replay regeneration separate.
+
+## Keep Automatic Resume Narrow (v0.13.106)
+
+- Context: browser refresh can recover a best-effort opaque session ID while
+  the host owns the durable checkpoint and hydration path.
+- Risk: applying durable recovery to manually entered IDs or retrying without a
+  bound would make an explicit user action surprising and could create loops.
+- Resolution: allow one host restore attempt only for the refresh-recovered
+  opaque ID; manual loads remain explicit, transient failures retain the ID,
+  and confirmed unknown sessions clear it.
+- Prevention: keep the policy versioned and source-bound, test the one-attempt
+  boundary, and never add browser save parsing, serialization, or state.

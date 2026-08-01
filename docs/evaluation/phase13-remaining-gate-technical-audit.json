@@ -1,7 +1,7 @@
 {
   "schema_version": "phase13-remaining-gate-technical-audit-v1",
   "status": "complete-technical-audit-pending-human-gates",
-  "package_version": "0.13.105",
+  "package_version": "0.13.106",
   "roadmap_item": "Remaining visual/audio roadmap gates",
   "purpose": "Map every substantive unchecked visual/audio roadmap gate to source-bound technical evidence and the authorized human or runtime action still required, without fabricating a result or promoting release scope.",
   "roadmap_contract": {
@@ -90,6 +90,12 @@
       "status": "pass-source-bound-technical-preparation",
       "command": "cargo test gui_server::tests::live_transport_downloads_only_a_host_validated_checkpoint_artifact && python3 -m unittest tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_host_save_artifact_download_is_manual_and_opaque",
       "sources": ["src/mcp/persistence.rs", "src/mcp/session.rs", "src/gui_server.rs", "gui/host-adapter.mjs", "gui/app.mjs", "gui/index.html", "docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_phase11_browser_refresh_recovery.py"]
+    },
+    {
+      "id": "automatic-resume-policy",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "python3 -m unittest tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_action_client_refresh_recovery_is_one_attempt_and_manual_load_is_explicit tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_resume_policy_is_opaque_bounded_and_manual_load_explicit",
+      "sources": ["gui/app.mjs", "gui/host-adapter.mjs", "gui/index.html", "docs/guides/gui-how-to-play.md", "docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_phase11_browser_refresh_recovery.py"]
     }
   ],
   "gates": [

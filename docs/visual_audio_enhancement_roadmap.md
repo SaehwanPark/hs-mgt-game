@@ -4825,6 +4825,28 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.105.md`, the Phase 11.1 ledger, and
 the host/browser transport tests.
 
+### v0.13.106 browser-refresh automatic resume policy
+
+- The browser now exposes a versioned `gui-session-resume-policy-v1` contract:
+  only a stored opaque session ID recovered after browser refresh may trigger
+  one host-owned durable checkpoint restore attempt.
+- Manual session loads remain explicit-load-only. Transient refresh failures
+  preserve the stored ID for retry, while a confirmed unknown session clears
+  it. The browser never serializes, parses, stores, or reconstructs a save
+  artifact and never selects a different checkpoint automatically.
+- This closes the bounded automatic-resume policy evidence only. Replay
+  regeneration, screenshots, human accessibility/educational review,
+  browser/device certification, provenance/legal review, and public-release
+  gates remain open.
+- The emulated low-power source-byte proxy is synchronized to 410,175 bytes
+  under a bounded 411,000-byte limit; this remains technical proxy evidence,
+  not real-device certification.
+
+The target is recorded in
+`_workspace/184_implementation_plan_phase11-automatic-resume-policy-v0.13.106.md`,
+`_workspace/00_input/request-summary-v0.13.106.md`, the Phase 11.1 ledger, and
+the browser recovery tests.
+
 ### v0.13.69 current competitive campaign-coverage envelope
 
 - `src/mcp/campaign_coverage.rs` now connects `competitive-regional-v1` to the

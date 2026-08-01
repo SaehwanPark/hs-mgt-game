@@ -673,7 +673,7 @@
     ],
     "boundary": "The host validates and summarizes durable wrappers; the browser renders metadata and reuses the existing load/restore path without serializing, loading, or creating transition authority. Explicit artifact download is tracked as a separate host-validated transfer.",
     "limits": [
-      "This does not establish browser save serialization, automatic resume, replay regeneration, broader durable save/load evidence, screenshots, or human quality findings.",
+      "This does not establish browser save serialization, replay regeneration, broader durable save/load evidence, screenshots, or human quality findings; browser-refresh recovery is covered by the separate automatic-resume-policy entry.",
       "The route and picker are source-bound technical preparation only; browser/device certification, accessibility, educational, legal, and public-release gates remain open."
     ]
   },
@@ -698,7 +698,7 @@
     ],
     "boundary": "The browser transfers an informational metadata reference only; the host remains authoritative for save contents, true state, history, replay, hashes, hydration, and transitions.",
     "limits": [
-      "This closes browser-safe checkpoint-reference transfer only; actual browser save-artifact serialization, automatic resume policy, replay regeneration, broader durable save/load evidence, screenshots, human quality findings, and release gates remain open.",
+      "This closes browser-safe checkpoint-reference transfer only; actual browser save-artifact serialization, replay regeneration, broader durable save/load evidence, screenshots, human quality findings, and release gates remain open. Browser-refresh recovery is governed by the separate automatic-resume-policy entry.",
       "The reference does not prove the checkpoint is current or available until the host validates it."
     ]
   },
@@ -724,8 +724,32 @@
     ],
     "boundary": "Host/core owns save serialization, validation, file I/O, true state, history, replay, hashes, hydration, and transitions; the browser is only a manual opaque download surface.",
     "limits": [
-      "This closes host-validated browser download of existing save artifacts only; it does not add browser serialization, automatic resume, replay regeneration, or browser-side load authority.",
+      "This closes host-validated browser download of existing save artifacts only; it does not add browser serialization, replay regeneration, or browser-side load authority. Browser-refresh recovery is governed by the separate automatic-resume-policy entry.",
       "Screenshots, human visual/listening/accessibility/educational review, browser/device certification, provenance/legal review, and public-release gates remain open."
+    ]
+  },
+  "automatic_resume_policy": {
+    "status": "complete-browser-refresh-host-resume-policy",
+    "schema": "gui-session-resume-policy-v1",
+    "policy_source": "gui/app.mjs: SESSION_RESUME_POLICY",
+    "storage_source": "gui/app.mjs: createSessionIdStorage",
+    "browser_source": "gui/app.mjs: action-client initialization + createActionClient.load",
+    "host_source": "gui/host-adapter.mjs: loadSession + src/gui_server.rs: load_session",
+    "test_source": [
+      "tests/test_phase11_browser_refresh_recovery.py: test_action_client_refresh_recovery_is_one_attempt_and_manual_load_is_explicit",
+      "tests/test_phase11_browser_refresh_recovery.py: test_resume_policy_is_opaque_bounded_and_manual_load_explicit"
+    ],
+    "behavior": [
+      "Only a stored opaque session ID recovered at browser-refresh initialization may enable automatic durable recovery.",
+      "The host receives at most one loadSession restore request after an unknown live-session read; the retry then calls the ordinary actor-visible reads once.",
+      "Manual session loads and checkpoint selection do not automatically hydrate an unknown ID.",
+      "Transient refresh failures preserve the stored ID for retry, while confirmed unknown sessions clear it.",
+      "The browser never serializes, parses, stores, or reconstructs save bytes and never selects a different checkpoint."
+    ],
+    "boundary": "The browser stores only a best-effort opaque ID; the host owns checkpoint discovery, save validation, hydration, history, replay, hashes, and transitions.",
+    "limits": [
+      "This closes the bounded browser-refresh resume policy only; it does not establish browser save serialization, replay regeneration, screenshots, or cross-browser/device certification.",
+      "Human accessibility, educational, visual/listening, provenance/legal, campaign-quality, and public-release gates remain open."
     ]
   },
   "full_campaign_audio_state_coverage": {
@@ -1148,7 +1172,7 @@
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
     "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, per-session cross-campaign archive identity, typed checkpoint metadata discovery, full-campaign host audio-state continuity, full-campaign history/replay alignment, and fixture-level full-campaign renderer continuity are covered; browser serialization, real-browser screenshots, broader durable save/load evidence, and human visual/listening/accessibility review remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
-    "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
+    "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded; the browser-refresh resume policy is source-bound and not a runtime certification.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."
   ]
 }

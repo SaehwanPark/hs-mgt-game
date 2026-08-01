@@ -413,7 +413,9 @@ remain loadable as a migration fallback. `GET /api/v1/checkpoints` and the
 entry fills the existing ID field but never loads automatically. After a host
 restart, a browser refresh may request the existing host `loadSession` route
 once after an unknown live-session read, then repeat the same actor-visible
-reads. The browser never serializes or loads the save artifact; invalid
+reads. Manual loads do not trigger that durable hydration path; transient
+refresh failures preserve the stored opaque ID for retry, while confirmed
+unknown sessions clear it. The browser never serializes or loads the save artifact; invalid
 checkpoint files are omitted from discovery. An explicit Download host save
 request is the only path that transfers validated bytes to the user's file
 download.
