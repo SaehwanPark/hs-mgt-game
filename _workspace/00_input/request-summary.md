@@ -4341,3 +4341,38 @@ The slice proves one current host terminal-debrief presentation boundary and
 its written/read-only fallbacks. It does not establish that a person
 understands the debrief, learns from it, can use it accessibly, or finds audio
 useful.
+
+---
+
+# Request Summary — GUI task-workspace redesign v0.14.1
+
+## Authorized outcome
+
+Replace the all-at-once GUI surface with a progressive Setup/Brief/Decide/
+Resolve/Review workspace shell that reduces default scrolling and cognitive
+load while preserving every actor-visible source, uncertainty, consequence,
+cost, legality, history, replay, checkpoint, and written equivalent owned by
+the host.
+
+## Implemented scope
+
+- Added `gui/workspace.mjs` event routing, workspace visibility, ephemeral
+  navigation, focus restoration, utility/context dialog behavior, and bounded
+  default collection limits.
+- Added explicit `briefingReviewed` and `resolutionReviewed` handoffs to the
+  existing first-month flow without changing commands or host envelopes.
+- Reflowed the shell for supported desktop/tablet widths, safe stacked phone
+  review/setup, full-width supported board presentation, wrapping, 125% Large
+  Text, 44px targets, source-led text fallbacks, and contextual visual-token
+  explanations.
+- Registered the module in embedded Rust routes and loading/offline manifests;
+  added focused workspace and acknowledgement tests.
+
+## Non-goals and evidence limits
+
+No simulation, actor, campaign, command, persistence, deterministic
+transition, history/hash, replay, checkpoint, debrief-semantic, framework, or
+file-backed asset change is authorized. Automated and host-backed checks prove
+technical continuity only; the authorized five-group human pilot remains
+pending, so no usability, educational-effectiveness, accessibility,
+browser-certification, or cognitive-load claim is made.

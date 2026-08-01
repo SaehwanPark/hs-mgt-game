@@ -5317,3 +5317,41 @@ terminal host tests, and existing debrief visual/audio contracts. No gameplay
 or simulation rule changes are authorized; the existing player-facing terminal
 projection may remove instructor-only debrief text while preserving the
 separate instructor/CLI debrief path.
+
+---
+
+# Presentation Contract — Task workspace redesign v0.14.1
+
+## Player questions and visible sequence
+
+The shell answers one question at a time: what must I set up, what actor-visible
+brief should I inspect, which host-shaped decision can I draft, what committed
+effects and uncertainty did the host return, and what history/debrief can I
+review? Setup, Brief, Decide, Resolve, and Review are presentation roots only.
+The task strip and navigation never enter commands or host state.
+
+## Host-led information contract
+
+Host envelopes remain the only source for metrics, signals, actors, processes,
+actions, legality, costs, uncertainty, committed effects, history, replay,
+checkpoints, and debrief. Default lists show host order with visible totals and
+“Show remaining N” disclosures: three signals/actors/processes, six actions,
+and five history rows. No local severity, ranking, recommendation, private
+intent, prediction, or causal certainty is added.
+
+## Accessibility and asset contract
+
+Body/control text is at least 16px, supporting/source text at least 14px,
+meaningful SVG labels have a readable HTML equivalent, Large Text is 125%, and
+interactive targets are at least 44px. Native hidden roots remove inactive
+controls from rendering/focus order. Utility and contextual drawers support
+Escape/close, initial focus, and restoration. Existing symbols are reused;
+there are no generated or file-backed assets in this slice.
+
+## Authority and evidence boundary
+
+The browser changes only ephemeral workspace, disclosure, focus, tooltip, and
+settings state. Host HTTP/MCP/adapters, DTOs, commands, deterministic
+transitions, history, replay, checkpoint, and persistence schemas remain
+unchanged. Technical checks are not a substitute for the authorized
+five-participant-group pilot.

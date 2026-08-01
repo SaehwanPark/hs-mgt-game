@@ -23,14 +23,14 @@ The host also exposes `campaign-coverage-v1` for a typed competitive read of
 the current player-visible metrics, public signals, process summaries, action
 metadata, history, and terminal debrief. This read does not replace the
 competitive catalog/validation/submit sequence or reveal private rival state.
-In the normal competitive GUI it appears as a companion panel after
-start/load and accepted monthly refreshes; if that optional read is unavailable,
-the action rail remains usable.
+In the normal competitive GUI it is split across the Brief, Decide, Resolve,
+and Review workspaces after start/load and accepted monthly refreshes; if that
+optional read is unavailable, the action rail remains usable.
 
 For a first session, start with the documented Normal/seed-42 defaults, then
-adjust presentation settings only if they reduce friction. These controls are
-local browser presentation preferences; they do not change commands, host
-validation, simulation outcomes, or replay history.
+use the task workspace to reveal one step at a time. Presentation settings are
+local browser preferences; they do not change commands, host validation,
+simulation outcomes, or replay history.
 
 ## Start the GUI
 
@@ -62,25 +62,32 @@ browser.
 
 ## Follow the first session
 
-The First-session path panel selects a rail from the host campaign. Competitive
-sessions track seven action handoffs:
+The GUI opens one task workspace at a time. Use **Brief**, **Decide**,
+**Resolve**, and **Review** in the task navigation; inactive workspaces are
+removed from keyboard navigation. The compact Current task strip shows the
+primary next action, while **Show all first-session steps** reveals the full
+rail. Competitive sessions track seven action handoffs:
 
 1. **Start or load:** create a session or load an ID from this running host.
-2. **Inspect:** read the executive briefing, regional market, Riverside detail,
-   visible resources, capacity, workforce, payer, and rival signals.
+2. **Inspect:** read the executive briefing, regional market, selected-entity
+   drawer, visible resources, capacity, workforce, payer, and rival signals,
+   then choose **Continue to decisions** to acknowledge the brief.
 3. **Draft:** choose parameters in a contextual action form and add it locally.
 4. **Validate:** add at least two drafts, review their canonical commands, then
    select **Validate draft with host**.
 5. **Submit:** if validation passes and you have not changed the draft, select
    **Submit validated month**.
-6. **Resolution:** read, play, pause, skip, or review the committed monthly
-   resolution. Skipping animation does not skip the game result.
-7. **Continue:** inspect the refreshed observation for the next month.
+6. **Resolution:** in **Resolve**, read, play, pause, skip, or review the
+   committed monthly resolution. Skipping animation does not skip the game
+   result.
+7. **Continue:** select **Continue to next brief** to acknowledge the written
+   resolution and inspect the refreshed observation for the next month.
 
 For stabilization and regional affiliation, the rail instead tracks five
 campaign-coverage handoffs: start/load, inspect the visible campaign envelope,
-choose a host-shaped decision, review the committed stage, and continue. These
-campaigns do not use the competitive local-draft or validation steps.
+explicitly continue to the host-shaped decision, review the committed stage in
+Resolve, and explicitly continue. These campaigns do not use the competitive
+local-draft or validation steps.
 
 After each accepted GUI decision, the host automatically requests a checkpoint
 through the same host-only path. The GUI reports the committed transition count
@@ -115,8 +122,8 @@ Rival private state and unresolved stochastic inputs are deliberately not shown.
 
 ## Settings and accessibility
 
-The **Accessibility and settings** panel is available before or during a live
-session:
+Open **Settings, audio, and help** to access the utility drawer before or during
+a live session:
 
 - **Low-distraction mode** combines Reduced motion, Large text, visible cue
   explanations, muted audio, and reduced notifications. While active, the

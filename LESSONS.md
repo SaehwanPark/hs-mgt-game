@@ -3882,3 +3882,16 @@ separate gates.
 - Prevention: keep campaign-specific runtime smoke separate from Firefox
   support certification, alternative decision coverage, audio decoding,
   human review, device measurement, and public-release approval.
+
+## Keep Workspace Handoffs Explicit (v0.14.1)
+
+- Context: reducing the mounted surface required separating presentation
+  navigation from first-session progress and host refresh events.
+- Risk: treating a load, refresh, or direct navigation click as a review
+  acknowledgement could advance the task strip without the player seeing the
+  actor-visible brief or resolution.
+- Resolution: keep `briefingReviewed` and `resolutionReviewed` in ephemeral
+  first-month flow state and update them only from explicit handoff controls;
+  ordinary workspace navigation remains presentation-only.
+- Prevention: test event mapping, visibility/focus boundaries, terminal
+  routing, and failure/retry states independently from host transition tests.

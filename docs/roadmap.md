@@ -1261,7 +1261,24 @@ At each phase gate, explicitly decide what will not be built next.
 
 ---
 
-# 4. Recommended Immediate Next Steps
+# 4. GUI task-workspace redesign (v0.14.1)
+
+The current GUI presentation slice now uses a task-oriented workspace shell
+over the unchanged host contracts. Setup, Brief, Decide, Resolve, and Review
+are independently navigable presentation states; inactive roots are native
+`hidden` surfaces, and explicit briefing/resolution handoffs prevent a load or
+refresh from masquerading as player review. Bounded host-ordered collections,
+responsive wrapping, 125% Large Text, utility/context drawers, and text-first
+visual-token help reduce default density without hiding uncertainty, source,
+cost, legality, history, or written equivalents.
+
+The implementation is technically verified by focused GUI, host-boundary,
+loading/offline, Rust, and static checks. It is not a human usability,
+accessibility, educational-effectiveness, or browser/device certification. The
+authorized five-group pilot remains the gate for task-blocking refinements and
+any generated artwork; no generated assets are part of this slice.
+
+# 5. Recommended Immediate Next Steps
 
 1. Keep the current campaigns, replay boundaries, assumptions, and contributor
    checks reproducible while the project waits for a concrete evidence gap.

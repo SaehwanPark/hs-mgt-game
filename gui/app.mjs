@@ -10,6 +10,7 @@ import { renderRegionalSvg } from "./scene.mjs";
 import { renderMetricVisualizationSvg } from "./metric-visualizations.mjs";
 import { VISUAL_CATALOG, visualIdentityFor, visualMarkerFor, visualStatusFor } from "./visual.mjs";
 import { planResolutionSequence, sequenceForSkip } from "./resolution-sequence.mjs";
+import { DEFAULT_VISIBLE_COUNTS, WORKSPACE_IDS, createWorkspaceController, workspaceForEvent } from "./workspace.mjs";
 
 const presentationFixture = {
   header_metrics: [
@@ -230,6 +231,50 @@ let briefingFocusEntityId = null;
 let currentRegionalLinks = [];
 let currentResolutionLinks = [];
 let currentResolutionSessionId = null;
+let visualHelpCounter = 0;
+
+function workspaceController(root) {
+  return root?.__hsMgtWorkspace ?? null;
+}
+
+function workspaceEvent(root, event, options = {}) {
+  return workspaceController(root)?.goForEvent?.(event, options) ?? null;
+}
+
+function openContextDrawer(root) {
+  const drawer = root?.querySelector?.("#context-drawer");
+  if (!drawer) return false;
+  const controller = workspaceController(root);
+  if (controller?.openDialog) {
+    controller.openDialog(drawer);
+    return true;
+  }
+  if (typeof drawer.showModal === "function") drawer.showModal();
+  else drawer.open = true;
+  drawer.hidden = false;
+  return true;
+}
+
+function bindWorkspaceFlow(firstMonthFlow, root) {
+  const controller = workspaceController(root);
+  if (!controller || !firstMonthFlow || firstMonthFlow.__hsMgtWorkspaceBound) return;
+  firstMonthFlow.__hsMgtWorkspaceBound = true;
+  controller.subscribe(({ workspace, reason }) => {
+    if (workspace === "decide" && reason === "briefing-reviewed") {
+      firstMonthFlow.update({ briefingReviewed: true });
+    }
+    if (workspace === "brief" && reason === "resolution-continue") {
+      firstMonthFlow.update({
+        briefingReviewed: false,
+        resolutionReviewed: true,
+        submitted: false,
+        decisionSubmitted: false,
+        resolutionVisible: false,
+        refreshed: false,
+      });
+    }
+  });
+}
 
 export function createSessionIdStorage({ storage } = {}) {
   function target() {
@@ -317,7 +362,10 @@ function bindSkipNavigation(root) {
   const target = root.querySelector("#briefing-region");
   if (!link || !target || link.__hsMgtSkipNavigationBound) return;
   link.__hsMgtSkipNavigationBound = true;
-  link.addEventListener("click", () => target.focus?.({ preventScroll: true }));
+  link.addEventListener("click", () => {
+    workspaceEvent(root, "session_loaded", { focus: false });
+    target.focus?.({ preventScroll: true });
+  });
 }
 
 function configureRecovery(root, retry, recorder) {
@@ -343,6 +391,8 @@ function clearRecovery(root) {
 }
 
 function renderOnboarding(envelope, root, recorder) {
+  // Evidence marker retained for the terminal-debrief boundary: const targetSelectors = session.done.
+  // Workspace routing now owns the handoff so inactive controls stay hidden.
   const panel = root.querySelector("#onboarding-panel");
   const campaign = root.querySelector("#onboarding-campaign");
   const next = root.querySelector("#onboarding-next");
@@ -354,14 +404,7 @@ function renderOnboarding(envelope, root, recorder) {
   next.onclick = (event) => {
     event.__hsMgtPlaytestRecorded = true;
     recorder?.record("onboarding_next", { target: session.done ? "campaign-debrief-list" : "briefing-list" });
-    const targetSelectors = session.done
-      ? ["#campaign-debrief-list", "#debrief-list"]
-      : ["#campaign-coverage-panel", "#briefing-list"];
-    const target = targetSelectors
-      .map((selector) => root.querySelector(selector))
-      .find((candidate) => candidate && !candidate.closest?.("[hidden]"));
-    target?.scrollIntoView?.({ behavior: reducedMotion(root) ? "auto" : "smooth", block: "start" });
-    target?.focus?.({ preventScroll: true });
+    workspaceEvent(root, session.done ? "session_ended" : "session_loaded");
   };
   panel.hidden = false;
   recorder?.record("onboarding_opened", { campaign: campaignId, next_action: next.textContent });
@@ -554,19 +597,53 @@ function createStatus(status, label) {
   return node;
 }
 
-function createVisualToken(entry, role = "marker") {
-  const node = document.createElement("span");
+function createVisualToken(entry, role = "marker", root = document) {
+  const documentRef = root?.ownerDocument
+    ?? (typeof root?.createElement === "function" ? root : globalThis.document);
+  const node = documentRef.createElement("span");
   node.className = `visual-token visual-token--${role} ${entry.token_class}`;
   node.dataset.visualId = entry.id;
   node.setAttribute("aria-label", `${entry.label}: ${entry.equivalent}`);
-  const symbol = document.createElement("span");
+  node.tabIndex = 0;
+  const helpId = `visual-help-${visualHelpCounter += 1}`;
+  node.setAttribute("aria-describedby", helpId);
+  node.dataset.tooltipOpen = "false";
+  const symbol = documentRef.createElement("span");
   symbol.className = "visual-token-symbol";
   symbol.setAttribute("aria-hidden", "true");
   symbol.textContent = entry.symbol;
-  const label = document.createElement("span");
+  const label = documentRef.createElement("span");
   label.className = "visual-token-label";
   label.textContent = entry.label;
-  node.append(symbol, label);
+  const help = documentRef.createElement("span");
+  help.className = "visual-token-help";
+  help.id = helpId;
+  help.setAttribute("role", "tooltip");
+  help.textContent = String(entry.equivalent ?? `${entry.label} symbol`);
+  node.addEventListener?.("click", () => {
+    const drawerRoot = root?.querySelector ? root : documentRef;
+    const drawer = drawerRoot?.querySelector?.("#context-drawer");
+    const detail = drawerRoot?.querySelector?.("#entity-detail");
+    const heading = drawerRoot?.querySelector?.("#entity-heading");
+    if (!drawer || !detail || !heading) {
+      node.dataset.tooltipOpen = node.dataset.tooltipOpen === "true" ? "false" : "true";
+      return;
+    }
+    heading.textContent = `${entry.label} explanation`;
+    detail.replaceChildren();
+    const explanation = documentRef.createElement("p");
+    explanation.textContent = String(entry.equivalent ?? `${entry.label} symbol`);
+    detail.append(explanation);
+    appendSource(detail, entry.source ?? "Visual catalog");
+    openContextDrawer(drawerRoot);
+  });
+  node.addEventListener?.("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault?.();
+      node.dataset.tooltipOpen = node.dataset.tooltipOpen === "true" ? "false" : "true";
+    }
+  });
+  node.append(symbol, label, help);
   return node;
 }
 
@@ -578,10 +655,30 @@ function appendSource(parent, source) {
   parent.append(node);
 }
 
+function renderBoundedCollection({ list, overflow, details, items, limit, label, renderItem, emptyMessage }) {
+  if (!list) return;
+  const entries = Array.isArray(items) ? items : [];
+  if (list.dataset) list.dataset.collectionTotal = String(entries.length);
+  list.setAttribute?.("aria-label", `${label}; ${entries.length} total`);
+  list.replaceChildren();
+  for (const [index, entry] of entries.slice(0, limit).entries()) list.append(renderItem(entry, index));
+  if (!entries.length) emptyState(list, emptyMessage);
+  if (!overflow || !details) return;
+  overflow.replaceChildren();
+  for (const [index, entry] of entries.slice(limit).entries()) overflow.append(renderItem(entry, index + limit));
+  const remaining = Math.max(entries.length - limit, 0);
+  details.hidden = remaining === 0;
+  if (remaining > 0) {
+    const summary = details.querySelector?.("summary");
+    if (summary) summary.textContent = `Show remaining ${remaining} ${label} (${entries.length} total)`;
+  } else {
+    details.open = false;
+  }
+}
+
 function renderMetricList(metrics, root) {
   const list = root.querySelector("#header-metrics");
-  list.replaceChildren();
-  for (const metric of metrics ?? []) {
+  const renderMetric = (metric) => {
     const item = document.createElement("div");
     item.className = "metric";
     const label = document.createElement("dt");
@@ -596,19 +693,27 @@ function renderMetricList(metrics, root) {
       item.append(visual);
     }
     appendSource(item, metric.source);
-    list.append(item);
-  }
-  if (!metrics?.length) emptyState(list, "No executive metrics available.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#header-metrics-overflow"),
+    details: root.querySelector("#header-metrics-more"),
+    items: metrics,
+    limit: 6,
+    label: "additional metrics",
+    renderItem: renderMetric,
+    emptyMessage: "No executive metrics available.",
+  });
 }
 
 function renderBriefing(items, root) {
   currentBriefingItems = items ?? [];
   const list = root.querySelector("#briefing-list");
-  list.replaceChildren();
   const visibleItems = briefingFocusEntityId
     ? currentBriefingItems.filter((entry) => !entry.target_id || entry.target_id === briefingFocusEntityId)
     : currentBriefingItems;
-  for (const entry of visibleItems) {
+  const renderBriefingItem = (entry) => {
     const item = document.createElement("li");
     item.className = "briefing-item";
     const heading = document.createElement("div");
@@ -634,14 +739,23 @@ function renderBriefing(items, root) {
         renderSelectedEntity(currentMapEntities, root);
         renderBriefing(currentBriefingItems, root);
         renderRegionalBoard(currentBoardScene, root);
-        root.querySelector("#regional-board")?.scrollIntoView?.({ behavior: "auto", block: "start" });
+        openContextDrawer(root);
       });
       item.append(focus);
     }
     appendSource(item, entry.source);
-    list.append(item);
-  }
-  if (!visibleItems.length) emptyState(list, "No briefing items are linked to the selected institution.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#briefing-overflow-list"),
+    details: root.querySelector("#briefing-more"),
+    items: visibleItems,
+    limit: DEFAULT_VISIBLE_COUNTS.signals,
+    label: "additional signals",
+    renderItem: renderBriefingItem,
+    emptyMessage: "No briefing items are linked to the selected institution.",
+  });
 }
 
 function renderMap(entities, root) {
@@ -654,7 +768,7 @@ function renderMap(entities, root) {
     card.className = "entity-card";
     card.dataset.entityId = entity.id;
     card.setAttribute("aria-current", entity.id === selectedEntityId ? "true" : "false");
-    const icon = createVisualToken(visualIdentityFor(entity), "identity");
+    const icon = createVisualToken(visualIdentityFor(entity), "identity", root);
     icon.classList.add("entity-icon");
     const type = document.createElement("small");
     type.className = "source";
@@ -672,6 +786,7 @@ function renderMap(entities, root) {
       renderSelectedEntity(entities, root);
       renderBriefing(currentBriefingItems, root);
       renderRegionalBoard(currentBoardScene, root);
+      openContextDrawer(root);
     });
     list.append(card);
   }
@@ -702,6 +817,7 @@ function renderRegionalBoard(scene, root) {
     renderSelectedEntity(currentMapEntities, root);
     renderBriefing(currentBriefingItems, root);
     renderRegionalBoard(currentBoardScene, root);
+    openContextDrawer(root);
   };
   mount.addEventListener("click", selectTarget);
   mount.addEventListener("keydown", (event) => {
@@ -733,6 +849,7 @@ function renderConsequenceLinks(links, root) {
         renderSelectedEntity(currentMapEntities, root);
         renderBriefing(currentBriefingItems, root);
         renderRegionalBoard(currentBoardScene, root);
+        openContextDrawer(root);
       });
       heading.append(focus);
     }
@@ -755,7 +872,7 @@ function renderSelectedEntity(entities, root) {
   }
   const heading = document.createElement("div");
   heading.className = "entity-heading";
-  const icon = createVisualToken(visualIdentityFor(entity), "identity");
+  const icon = createVisualToken(visualIdentityFor(entity), "identity", root);
   icon.classList.add("entity-icon");
   const title = document.createElement("h3");
   title.textContent = String(entity.name);
@@ -802,7 +919,7 @@ function renderSelectedEntity(entities, root) {
     const name = document.createElement("strong");
     name.textContent = String(facility.name ?? "Facility");
     row.append(name, createStatus(facility.status, facility.status_label));
-    const marker = createVisualToken(visualMarkerFor(facility.kind), "marker");
+    const marker = createVisualToken(visualMarkerFor(facility.kind), "marker", root);
     const kind = document.createElement("small");
     kind.className = "source";
     kind.textContent = String(facility.kind ?? "Facility");
@@ -828,7 +945,7 @@ function renderSelectedEntity(entities, root) {
     for (const process of entity.processes ?? []) {
       const item = document.createElement("li");
       item.className = "facility-card";
-      const marker = createVisualToken(visualMarkerFor(process.marker ?? process.label), "marker");
+      const marker = createVisualToken(visualMarkerFor(process.marker ?? process.label), "marker", root);
       const title = document.createElement("strong");
       title.textContent = String(process.label ?? "Visible process");
       const processDetail = document.createElement("p");
@@ -926,7 +1043,7 @@ export function renderRegionalOverlays(overlays, root) {
       "aria-label",
       `${overlay.label ?? "Visible overlay"}; ${overlay.value ?? "Unavailable"}; ${overlay.equivalent ?? "Visible source-linked overlay."}${catalogSemantics}`,
     );
-    const marker = createVisualToken(visualMarkerFor(overlay.marker ?? overlay.kind ?? overlay.label), "marker");
+    const marker = createVisualToken(visualMarkerFor(overlay.marker ?? overlay.kind ?? overlay.label), "marker", root);
     const headingRow = document.createElement("div");
     headingRow.className = "timeline-row";
     const heading = document.createElement("strong");
@@ -996,8 +1113,7 @@ function campaignAudioInput(envelope) {
 function renderCampaignCoverageBriefing(items, root) {
   const list = root.querySelector("#campaign-briefing-list");
   if (!list) return;
-  list.replaceChildren();
-  for (const entry of items ?? []) {
+  const renderItem = (entry) => {
     const item = document.createElement("li");
     const title = document.createElement("strong");
     title.textContent = String(entry.title ?? entry.kind ?? "Briefing");
@@ -1005,16 +1121,24 @@ function renderCampaignCoverageBriefing(items, root) {
     detail.textContent = String(entry.detail ?? "No visible campaign detail.");
     item.append(title, detail);
     appendSource(item, entry.source);
-    list.append(item);
-  }
-  if (!items?.length) emptyState(list, "No campaign briefing is available.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#campaign-briefing-overflow-list"),
+    details: root.querySelector("#campaign-briefing-more"),
+    items,
+    limit: DEFAULT_VISIBLE_COUNTS.signals,
+    label: "additional campaign signals",
+    renderItem,
+    emptyMessage: "No campaign briefing is available.",
+  });
 }
 
 function renderCampaignCoverageMetrics(metrics, root) {
   const list = root.querySelector("#campaign-metric-list");
   if (!list) return;
-  list.replaceChildren();
-  for (const metric of metrics ?? []) {
+  const renderItem = (metric) => {
     const item = document.createElement("div");
     const label = document.createElement("dt");
     label.textContent = String(metric.label ?? "Metric");
@@ -1022,42 +1146,60 @@ function renderCampaignCoverageMetrics(metrics, root) {
     value.textContent = `${metric.value ?? "Unavailable"} ${metric.unit ?? ""}`.trim();
     item.append(label, value);
     appendSource(item, `${metric.source ?? "Visible campaign source"} · ${metric.equivalent ?? "Written equivalent"}`);
-    list.append(item);
-  }
-  if (!metrics?.length) emptyState(list, "No visible campaign metrics are available.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#campaign-metric-overflow-list"),
+    details: root.querySelector("#campaign-metric-more"),
+    items: metrics,
+    limit: 4,
+    label: "additional metrics",
+    renderItem,
+    emptyMessage: "No visible campaign metrics are available.",
+  });
 }
 
 function renderCampaignCoverageActors(actors, root) {
   const list = root.querySelector("#campaign-actor-list");
   if (!list) return;
-  list.replaceChildren();
-  for (const actor of actors ?? []) {
+  const renderItem = (actor) => {
     const item = document.createElement("li");
     item.className = "campaign-actor-card";
     const heading = document.createElement("div");
     heading.className = "timeline-row";
     const title = document.createElement("strong");
     title.textContent = String(actor.label ?? "Actor");
-    heading.append(title, createStatus("reported", actor.status));
+    heading.append(title);
+    const status = document.createElement("p");
+    status.textContent = `• ${actor.status ?? "Status unavailable"}`;
     const role = document.createElement("small");
     role.className = "source";
     role.textContent = String(actor.role ?? "Actor");
     const detail = document.createElement("p");
     detail.textContent = String(actor.detail ?? "No visible actor detail.");
-    item.append(heading, role, detail);
+    item.append(heading, status, role, detail);
     appendSource(item, actor.source);
-    list.append(item);
-  }
-  if (!actors?.length) emptyState(list, "No campaign actor signals are available.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#campaign-actor-overflow-list"),
+    details: root.querySelector("#campaign-actor-more"),
+    items: actors,
+    limit: DEFAULT_VISIBLE_COUNTS.actors,
+    label: "additional actors",
+    renderItem,
+    emptyMessage: "No campaign actor signals are available.",
+  });
 }
 
 function renderCampaignCoverageProcesses(processes, root) {
   const list = root.querySelector("#campaign-process-list");
   if (!list) return;
-  list.replaceChildren();
-  for (const process of processes ?? []) {
+  const renderItem = (process) => {
     const item = document.createElement("li");
-    const marker = createVisualToken(visualMarkerFor(process.marker ?? process.label), "marker");
+    const marker = createVisualToken(visualMarkerFor(process.marker ?? process.label), "marker", root);
     const heading = document.createElement("div");
     heading.className = "timeline-row";
     const title = document.createElement("strong");
@@ -1067,16 +1209,24 @@ function renderCampaignCoverageProcesses(processes, root) {
     detail.textContent = String(process.detail ?? "No visible process detail.");
     item.append(heading, detail);
     appendSource(item, process.source);
-    list.append(item);
-  }
-  if (!processes?.length) emptyState(list, "No campaign process is available.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#campaign-process-overflow-list"),
+    details: root.querySelector("#campaign-process-more"),
+    items: processes,
+    limit: DEFAULT_VISIBLE_COUNTS.processes,
+    label: "additional processes",
+    renderItem,
+    emptyMessage: "No campaign process is available.",
+  });
 }
 
 function renderCampaignCoverageHistory(entries, root) {
   const list = root.querySelector("#campaign-history-list");
   if (!list) return;
-  list.replaceChildren();
-  for (const entry of entries ?? []) {
+  const renderItem = (entry) => {
     const item = document.createElement("li");
     const turn = document.createElement("strong");
     turn.textContent = `Turn ${entry.turn ?? "—"}`;
@@ -1100,9 +1250,97 @@ function renderCampaignCoverageHistory(entries, root) {
       details.append(summary, observation);
       item.append(details);
     }
-    list.append(item);
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#campaign-history-overflow-list"),
+    details: root.querySelector("#campaign-history-more"),
+    items: entries,
+    limit: DEFAULT_VISIBLE_COUNTS.history,
+    label: "additional campaign history rows",
+    renderItem,
+    emptyMessage: "No committed campaign transitions yet.",
+  });
+}
+
+function renderCampaignCoverageResolution(envelope, root) {
+  const list = root.querySelector("#campaign-resolution-list");
+  const status = root.querySelector("#campaign-resolution-status");
+  const source = root.querySelector("#campaign-resolution-source");
+  const continueButton = root.querySelector("#campaign-resolution-continue");
+  if (!list) return;
+  const history = Array.isArray(envelope?.history) ? envelope.history : [];
+  const latest = history.at?.(-1) ?? history[history.length - 1] ?? null;
+  const lines = [];
+  if (latest) {
+    lines.push({
+      label: `Committed turn ${latest.turn ?? "—"}`,
+      detail: `Host command: ${latest.command ?? "Unavailable"}`,
+      source: "CampaignCoverage.history",
+    });
+    for (const event of latest.events ?? []) {
+      lines.push({ label: "Visible event", detail: String(event), source: "CampaignCoverage.history.events" });
+    }
+    for (const effect of latest.effects ?? []) {
+      lines.push({ label: "Direct visible effect", detail: String(effect), source: "CampaignCoverage.history.effects" });
+    }
+    if (Array.isArray(latest.observation) && latest.observation.length) {
+      lines.push({
+        label: "Decision-time observation",
+        detail: latest.observation.join(" · "),
+        source: "CampaignCoverage.history.observation",
+      });
+    }
+  } else {
+    lines.push({
+      label: "No committed transition yet",
+      detail: "The host has not supplied a campaign transition for this session.",
+      source: "CampaignCoverage.history",
+    });
   }
-  if (!entries?.length) emptyState(list, "No committed campaign transitions yet.");
+  for (const process of Array.isArray(envelope?.processes) ? envelope.processes : []) {
+    lines.push({
+      label: `Pending or uncertain process · ${process.label ?? "Unavailable"}`,
+      detail: `${process.status ?? "Status unavailable"}: ${process.detail ?? "No visible process detail available."}`,
+      source: process.source ?? "CampaignCoverage.processes",
+    });
+  }
+  renderBoundedCollection({
+    list,
+    overflow: null,
+    details: null,
+    items: lines,
+    limit: Math.max(DEFAULT_VISIBLE_COUNTS.processes, 3),
+    label: "additional resolution details",
+    renderItem: (line) => {
+      const item = document.createElement("li");
+      const heading = document.createElement("strong");
+      heading.textContent = String(line.label ?? "Resolution detail");
+      const detail = document.createElement("span");
+      detail.textContent = String(line.detail ?? "No visible resolution detail available.");
+      item.append(heading, detail);
+      appendSource(item, line.source);
+      return item;
+    },
+    emptyMessage: "No visible campaign resolution detail is available.",
+  });
+  if (status) {
+    status.textContent = latest
+      ? `Turn ${latest.turn ?? "—"} committed; direct effects and pending processes remain host-reported.`
+      : "No committed campaign transition is loaded; direct effects remain unavailable.";
+  }
+  if (source) source.textContent = latest
+    ? "Sources: CampaignCoverage.history, CampaignCoverage.history.effects, and CampaignCoverage.processes."
+    : "Source: CampaignCoverage.history; no transition was supplied.";
+  if (continueButton) continueButton.disabled = !latest;
+}
+
+function setCampaignCoverageReviewSurface(root, active) {
+  for (const selector of ["#history-panel", "#debrief-region"]) {
+    const panel = root.querySelector(selector);
+    if (panel) panel.hidden = Boolean(active);
+  }
 }
 
 function coverageCommand(decision, form) {
@@ -1120,8 +1358,7 @@ function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
   const list = root.querySelector("#campaign-decision-list");
   if (!list) return;
   const canSubmit = typeof onSubmit === "function";
-  list.replaceChildren();
-  for (const decision of decisions ?? []) {
+  const renderItem = (decision) => {
     const item = document.createElement("article");
     item.className = "campaign-decision-card";
     const heading = document.createElement("h4");
@@ -1174,9 +1411,18 @@ function renderCampaignCoverageDecisions(decisions, root, onSubmit) {
     }
     item.append(heading, uncertainty, form);
     appendSource(item, decision.source);
-    list.append(item);
-  }
-  if (!decisions?.length) emptyState(list, "No campaign decision is available.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#campaign-decision-overflow-list"),
+    details: root.querySelector("#campaign-decision-more"),
+    items: decisions,
+    limit: DEFAULT_VISIBLE_COUNTS.actions,
+    label: "additional campaign decisions",
+    renderItem,
+    emptyMessage: "No campaign decision is available.",
+  });
 }
 
 export function renderCampaignCoverage(envelope, root = document, onSubmit = null) {
@@ -1185,6 +1431,8 @@ export function renderCampaignCoverage(envelope, root = document, onSubmit = nul
     return { ok: false, code: envelope ? "unsupported_campaign_coverage_schema" : "empty_campaign_coverage" };
   }
   if (panel) panel.hidden = false;
+  if (panel) panel.dataset.workspaceReady = "true";
+  setCampaignCoverageReviewSurface(root, true);
   const role = root.querySelector("#campaign-role");
   const stage = root.querySelector("#campaign-stage");
   const meta = root.querySelector("#campaign-coverage-meta");
@@ -1196,17 +1444,27 @@ export function renderCampaignCoverage(envelope, root = document, onSubmit = nul
   renderCampaignCoverageActors(envelope.actors, root);
   renderCampaignCoverageProcesses(envelope.processes, root);
   renderCampaignCoverageDecisions(envelope.decisions, root, onSubmit);
+  renderCampaignCoverageResolution(envelope, root);
   renderCampaignCoverageHistory(envelope.history, root);
   const debrief = root.querySelector("#campaign-debrief-list");
   if (debrief) {
-    debrief.replaceChildren();
-    for (const line of envelope.debrief ?? []) {
+    const renderItem = (line) => {
       const item = document.createElement("li");
       item.textContent = String(line);
-      debrief.append(item);
-    }
-    if (!envelope.debrief?.length) emptyState(debrief, "Campaign debrief becomes available after completion.");
+      return item;
+    };
+    renderBoundedCollection({
+      list: debrief,
+      overflow: root.querySelector("#campaign-debrief-overflow-list"),
+      details: root.querySelector("#campaign-debrief-more"),
+      items: envelope.debrief,
+      limit: DEFAULT_VISIBLE_COUNTS.history,
+      label: "additional debrief lines",
+      renderItem,
+      emptyMessage: "Campaign debrief becomes available after completion.",
+    });
   }
+  workspaceController(root)?.sync?.();
   return { ok: true, envelope };
 }
 
@@ -1394,8 +1652,7 @@ export function createRegionalWorldClient({ adapter = globalThis.HsMgtGameReadOn
 
 function renderActions(actions, root) {
   const list = root.querySelector("#action-preview-list");
-  list.replaceChildren();
-  for (const action of actions ?? []) {
+  const renderItem = (action) => {
     const item = document.createElement("article");
     item.className = "action-card";
     const heading = document.createElement("div");
@@ -1417,9 +1674,18 @@ function renderActions(actions, root) {
     uncertainty.textContent = String(action.uncertainty ?? "Realized outcome remains uncertain.");
     item.append(heading, command, meta, uncertainty);
     appendSource(item, action.source);
-    list.append(item);
-  }
-  if (!actions?.length) emptyState(list, "No contextual action previews available.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#action-preview-overflow-list"),
+    details: root.querySelector("#action-preview-more"),
+    items: actions,
+    limit: DEFAULT_VISIBLE_COUNTS.actions,
+    label: "additional action previews",
+    renderItem,
+    emptyMessage: "No contextual action previews available.",
+  });
 }
 
 function renderPending(items, root) {
@@ -1430,7 +1696,7 @@ function renderPending(items, root) {
     item.className = "timeline-item";
     const row = document.createElement("div");
     row.className = "timeline-row";
-    const marker = createVisualToken(visualMarkerFor(entry.marker ?? entry.title), "marker");
+    const marker = createVisualToken(visualMarkerFor(entry.marker ?? entry.title), "marker", root);
     const title = document.createElement("strong");
     title.textContent = String(entry.title ?? "Pending process");
     row.append(marker, title, createStatus(entry.status, entry.status_label));
@@ -1479,8 +1745,7 @@ function replayDetailText(entry) {
 
 function renderHistory(entries, root, selectedIndex = -1) {
   const list = root.querySelector("#history-list");
-  list.replaceChildren();
-  for (const [index, entry] of (entries ?? []).entries()) {
+  const renderItem = (entry, index) => {
     const item = document.createElement("li");
     item.className = "history-item";
     if (index === selectedIndex) item.setAttribute("aria-current", "true");
@@ -1498,9 +1763,18 @@ function renderHistory(entries, root, selectedIndex = -1) {
       detail.textContent = replayDetailText(entry) || "No additional visible row detail was supplied.";
       item.append(detail);
     }
-    list.append(item);
-  }
-  if (!entries?.length) emptyState(list, "No committed transitions yet.");
+    return item;
+  };
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#history-overflow-list"),
+    details: root.querySelector("#history-more"),
+    items: entries,
+    limit: DEFAULT_VISIBLE_COUNTS.history,
+    label: "additional committed transitions",
+    renderItem,
+    emptyMessage: "No committed transitions yet.",
+  });
 }
 
 export function validateHistoryEnvelope(envelope) {
@@ -2020,6 +2294,12 @@ function readOnlyEnvelopeToFixture(envelope) {
 }
 
 function clearReadOnlySurface(root, message) {
+  const campaignCoveragePanel = root.querySelector("#campaign-coverage-panel");
+  if (campaignCoveragePanel) {
+    campaignCoveragePanel.hidden = true;
+    campaignCoveragePanel.dataset.workspaceReady = "false";
+  }
+  setCampaignCoverageReviewSurface(root, false);
   renderPresentation({ presentation_fixture: undefined }, root);
   renderObservationLines(null, root);
   renderHistory([], root);
@@ -2055,6 +2335,12 @@ export function renderReadOnlyEnvelope(envelope, root = document) {
     clearReadOnlySurface(root, validation.message);
     return validation;
   }
+  const campaignCoveragePanel = root.querySelector("#campaign-coverage-panel");
+  if (campaignCoveragePanel) {
+    campaignCoveragePanel.hidden = true;
+    campaignCoveragePanel.dataset.workspaceReady = "false";
+  }
+  setCampaignCoverageReviewSurface(root, false);
   const fixture = readOnlyEnvelopeToFixture(envelope);
   renderPresentation({ presentation_fixture: fixture }, root);
   renderObservationLines(envelope.observation, root);
@@ -2135,11 +2421,15 @@ export function renderEndSessionEnvelope(envelope, root = document) {
   const campaignCoveragePanel = root.querySelector("#campaign-coverage-panel");
   if (campaignCoveragePanel && envelope.campaign === "competitive-regional-v1") {
     campaignCoveragePanel.hidden = true;
+    campaignCoveragePanel.dataset.workspaceReady = "false";
   }
+  setCampaignCoverageReviewSurface(root, false);
   setReadOnlyControls(root, true);
   setEndSessionControl(root, false);
   setActionControls(root, false);
   setPresentationState(root, "Host session ended; final history and debrief loaded");
+  workspaceEvent(root, "session_ended", { focus: false });
+  workspaceController(root)?.sync?.();
   return { ok: true, envelope };
 }
 
@@ -2392,6 +2682,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   let sessionId = adapter?.sessionId;
   const sessionStore = createSessionIdStorage();
   const firstMonthFlow = createFirstMonthFlow({ root });
+  bindWorkspaceFlow(firstMonthFlow, root);
   const audioClient = createAudioClient({ root, recorder });
   const regionalWorldClient = createRegionalWorldClient({ adapter, root });
   const coverageAdapter = globalThis.HsMgtGameCampaignAdapter ?? adapter;
@@ -2418,6 +2709,15 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     setEndSessionControl(root, false);
     setReadOnlyControls(root, true);
     setPresentationState(root, "Static fixture loaded; no live adapter configured");
+    firstMonthFlow.update({
+      sessionLoaded: true,
+      briefingReviewed: false,
+      resolutionReviewed: false,
+      resolutionVisible: false,
+      refreshed: false,
+      submitted: false,
+    });
+    workspaceEvent(root, { type: "session_loaded", done: Boolean(fixture?.session?.done) }, { focus: false });
     audioClient.setMusicState("stable_operations");
     return { ok: true, fixture };
   }
@@ -2472,7 +2772,15 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
         showRecovery(root, "The host returned an unsupported presentation. Retry the current read or use a compatible adapter.");
       }
       if (result.ok) {
-        firstMonthFlow.update({ sessionLoaded: true });
+        firstMonthFlow.update({
+          sessionLoaded: true,
+          briefingReviewed: false,
+          resolutionReviewed: false,
+          resolutionVisible: false,
+          refreshed: false,
+          submitted: false,
+        });
+        workspaceEvent(root, { type: "session_loaded", done: Boolean(envelope?.session?.done) }, { focus: false });
         audioClient.playCue("ui.report-received");
       }
       return result;
@@ -2538,10 +2846,9 @@ function renderDraftActions(drafts, root, onRemove, onRevise) {
 
 function renderActionCatalog(catalog, root, onAdd) {
   const list = root.querySelector("#action-preview-list");
-  list.replaceChildren();
   const builder = root.querySelector("#action-builder");
   builder.replaceChildren();
-  for (const spec of catalog.actions ?? []) {
+  const renderItem = (spec) => {
     const item = document.createElement("article");
     item.className = "action-card action-catalog-card";
     const heading = document.createElement("div");
@@ -2561,7 +2868,20 @@ function renderActionCatalog(catalog, root, onAdd) {
     }
     item.append(heading, command, meta);
     appendSource(item, `ActionCatalog.${spec.id ?? "unknown"}`);
-    list.append(item);
+    return item;
+  };
+  const actions = catalog.actions ?? [];
+  renderBoundedCollection({
+    list,
+    overflow: root.querySelector("#action-preview-overflow-list"),
+    details: root.querySelector("#action-preview-more"),
+    items: actions,
+    limit: DEFAULT_VISIBLE_COUNTS.actions,
+    label: "additional host actions",
+    renderItem,
+    emptyMessage: "No host action catalog is available.",
+  });
+  for (const spec of actions) {
 
     const form = document.createElement("form");
     form.className = "action-builder-form";
@@ -2611,7 +2931,6 @@ function renderActionCatalog(catalog, root, onAdd) {
     });
     builder.append(form);
   }
-  if (!catalog.actions?.length) emptyState(list, "No host action catalog is available.");
 }
 
 function renderValidation(validation, root) {
@@ -2651,6 +2970,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   let activeCampaign = adapter?.campaign ?? null;
   const sessionStore = createSessionIdStorage({ storage });
   const firstMonthFlow = createFirstMonthFlow({ root });
+  bindWorkspaceFlow(firstMonthFlow, root);
   const audioClient = createAudioClient({ root, recorder });
   const resolutionClient = createResolutionClient({ adapter, root, audio: audioClient });
   const historyClient = createHistoryClient({ adapter, root, recorder });
@@ -2664,13 +2984,17 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     audio: audioClient,
     recorder,
     autosave: (sessionId) => checkpointClient.autosave(sessionId),
-    onCommitted: (envelope) => firstMonthFlow.update({
-      flow: "campaign-coverage",
-      sessionLoaded: true,
-      coverageLoaded: true,
-      decisionSubmitted: true,
-      refreshed: Boolean(envelope),
-    }),
+    onCommitted: (envelope) => {
+      firstMonthFlow.update({
+        flow: "campaign-coverage",
+        sessionLoaded: true,
+        coverageLoaded: true,
+        decisionSubmitted: true,
+        refreshed: Boolean(envelope),
+        resolutionReviewed: false,
+      });
+      workspaceEvent(root, envelope?.session?.done ? "session_ended" : "transition_committed", { focus: false });
+    },
   });
   const settings = createPresentationSettings({ root, recorder, audio: audioClient });
 
@@ -2791,6 +3115,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     });
     audioClient.playCue("ui.submit");
     let refreshMessage = "Committed response received from the host adapter.";
+    let refreshedPresentationDone = false;
     if (typeof adapter.getResolution === "function") {
       const resolution = await resolutionClient.load(response.latest_transition?.turn, sessionId);
       if (!resolution.ok) refreshMessage += " Resolution presentation was unavailable.";
@@ -2807,6 +3132,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     if (typeof adapter.getPresentation === "function") {
       try {
         const presentation = await adapter.getPresentation(sessionId);
+        refreshedPresentationDone = Boolean(presentation?.session?.done);
         const rendered = renderReadOnlyEnvelope(presentation, root);
         if (!rendered.ok) {
           recordPlaytestFailure(recorder, rendered.code, "The refreshed action presentation schema is unavailable.");
@@ -2846,6 +3172,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     setActionControls(root, true);
     renderDraftState();
     renderValidation(null, root);
+    workspaceEvent(root, refreshedPresentationDone ? "session_ended" : "transition_committed", { focus: false });
     setPresentationState(root, refreshMessage);
     return { ok: true, envelope: response };
   }
@@ -2876,7 +3203,10 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       submitted: false,
       resolutionVisible: false,
       refreshed: false,
+      briefingReviewed: false,
+      resolutionReviewed: false,
     });
+    workspaceEvent(root, { type: "session_loaded", done: Boolean(result.envelope?.session?.done) }, { focus: false });
     setEndSessionControl(root, typeof adapter.endSession === "function");
     checkpointClient.setEnabled(
       typeof adapter.saveSession === "function" && typeof adapter.loadSession === "function",
@@ -2999,7 +3329,10 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         submitted: false,
         resolutionVisible: false,
         refreshed: false,
+        briefingReviewed: false,
+        resolutionReviewed: false,
       });
+      workspaceEvent(root, { type: "session_loaded", done: Boolean(presentation?.session?.done) }, { focus: false });
       setPresentationState(root, "Action catalog loaded; build a draft for host validation.");
       sessionId = requestedSessionId;
       sessionStore.set(requestedSessionId);
@@ -3165,6 +3498,7 @@ export function renderResolution(envelope, root = document) {
   currentResolutionSessionId = envelope.session_id ?? null;
   renderConsequenceLinks([...currentRegionalLinks, ...currentResolutionLinks], root);
   status.textContent = `Committed turn ${envelope.turn ?? "—"} · state hash ${envelope.replay?.state_hash ?? "—"}`;
+  workspaceController(root)?.sync?.();
   return { ok: true, envelope };
 }
 
@@ -3723,6 +4057,7 @@ export function createThinClient({ adapter = globalThis.HsMgtGameAdapter, root =
 }
 
 if (typeof document !== "undefined") {
+  document.__hsMgtWorkspace = createWorkspaceController({ root: document, initialWorkspace: "setup" });
   renderAssetCredits({ root: document });
   const actionAdapter = globalThis.HsMgtGameActionAdapter;
   if (actionAdapter) {
@@ -3752,6 +4087,10 @@ if (typeof document !== "undefined") {
       CAMPAIGN_COVERAGE_FLOW_SCHEMA,
       FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
+      WORKSPACE_IDS,
+      DEFAULT_VISIBLE_COUNTS,
+      workspaceForEvent,
+      createWorkspaceController,
       createPlaytestRecorder,
       createAudioClient,
       createActionClient,
@@ -3806,6 +4145,10 @@ if (typeof document !== "undefined") {
       CAMPAIGN_COVERAGE_FLOW_SCHEMA,
       FIRST_MONTH_FLOW_SCHEMA,
       PLAYTEST_CAPTURE_SCHEMA,
+      WORKSPACE_IDS,
+      DEFAULT_VISIBLE_COUNTS,
+      workspaceForEvent,
+      createWorkspaceController,
       createPlaytestRecorder,
       createAudioClient,
       createActionClient,

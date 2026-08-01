@@ -15,6 +15,7 @@
     "gui/consequence-links.mjs",
     "gui/facility-components.mjs",
     "gui/first-month.mjs",
+    "gui/workspace.mjs",
     "gui/metric-visualizations.mjs",
     "gui/music-stem-contract.mjs",
     "gui/operational-overlays.mjs",

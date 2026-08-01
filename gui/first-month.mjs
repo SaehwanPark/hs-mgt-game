@@ -77,6 +77,8 @@ const DEFAULT_STATE = Object.freeze({
   submitted: false,
   resolutionVisible: false,
   refreshed: false,
+  briefingReviewed: false,
+  resolutionReviewed: false,
 });
 
 function safeDraftCount(value) {
@@ -86,16 +88,16 @@ function safeDraftCount(value) {
 export function firstMonthStageFor(state = {}) {
   if (state.flow === "campaign-coverage") {
     if (!state.sessionLoaded) return "start";
-    if (!state.coverageLoaded) return "inspect";
+    if (!state.coverageLoaded || !state.briefingReviewed) return "inspect";
     if (!state.decisionSubmitted) return "choose";
-    if (!state.refreshed) return "review";
+    if (!state.refreshed || !state.resolutionReviewed) return "review";
     return "continue";
   }
   const draftCount = safeDraftCount(state.draftCount);
   if (!state.sessionLoaded) return "start";
-  if (!state.actionCatalogLoaded) return "inspect";
+  if (!state.actionCatalogLoaded || !state.briefingReviewed) return "inspect";
   if (state.submitted) {
-    if (!state.resolutionVisible || !state.refreshed) return "resolution";
+    if (!state.resolutionVisible || !state.refreshed || !state.resolutionReviewed) return "resolution";
     return "continue";
   }
   if (draftCount < 2) return "draft";
@@ -130,12 +132,18 @@ export function createFirstMonthFlow({ root = globalThis.document } = {}) {
     const list = root?.querySelector?.("#first-month-flow-list");
     const currentNode = root?.querySelector?.("#first-month-flow-state");
     const detailNode = root?.querySelector?.("#first-month-flow-detail");
+    const continueButton = root?.querySelector?.("#briefing-continue");
     const stageId = firstMonthStageFor(state);
     const stages = stagesFor(state);
     const currentIndex = stages.findIndex((stage) => stage.id === stageId);
     const current = stages[currentIndex] ?? stages[0];
     if (currentNode) currentNode.textContent = `${current.label} · ${currentIndex + 1} of ${stages.length}`;
     if (detailNode) detailNode.textContent = `${current.detail} This rail reports presentation handoffs; the host owns commands and outcomes.`;
+    if (continueButton) {
+      const ready = Boolean(state.sessionLoaded) && ["inspect", "draft", "validate", "submit", "choose"].includes(stageId);
+      continueButton.disabled = !ready;
+      continueButton.textContent = state.flow === "campaign-coverage" ? "Continue to campaign decision" : "Continue to decisions";
+    }
     if (!list) return { ok: false, code: "first_month_flow_surface_missing", stage: current };
 
     list.replaceChildren();

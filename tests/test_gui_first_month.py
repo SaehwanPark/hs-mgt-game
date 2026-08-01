@@ -33,12 +33,12 @@ class GuiFirstMonthTests(unittest.TestCase):
       const states = [
         [{}, "start"],
         [{ sessionLoaded: true }, "inspect"],
-        [{ sessionLoaded: true, actionCatalogLoaded: true }, "draft"],
-        [{ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2 }, "validate"],
-        [{ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2, validated: true }, "submit"],
-        [{ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2, validated: true, submitted: true }, "resolution"],
-        [{ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 0, submitted: true, resolutionVisible: true, refreshed: true }, "continue"],
-        [{ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2, validated: true, submitted: true, resolutionVisible: true, refreshed: true }, "continue"],
+        [{ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true }, "draft"],
+        [{ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2 }, "validate"],
+        [{ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2, validated: true }, "submit"],
+        [{ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2, validated: true, submitted: true }, "resolution"],
+        [{ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 0, submitted: true, resolutionVisible: true, refreshed: true, resolutionReviewed: true }, "continue"],
+        [{ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2, validated: true, submitted: true, resolutionVisible: true, refreshed: true, resolutionReviewed: true }, "continue"],
       ];
       for (const [state, expectedStage] of states) {
         if (firstMonthStageFor(state) !== expectedStage) process.exit(10);
@@ -46,15 +46,15 @@ class GuiFirstMonthTests(unittest.TestCase):
       const campaignStates = [
         [{ flow: "campaign-coverage" }, "start"],
         [{ flow: "campaign-coverage", sessionLoaded: true }, "inspect"],
-        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true }, "choose"],
-        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, decisionSubmitted: true }, "review"],
-        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, decisionSubmitted: true, refreshed: true }, "continue"],
+        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, briefingReviewed: true }, "choose"],
+        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, briefingReviewed: true, decisionSubmitted: true }, "review"],
+        [{ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, briefingReviewed: true, decisionSubmitted: true, refreshed: true, resolutionReviewed: true }, "continue"],
       ];
       for (const [state, expectedStage] of campaignStates) {
         if (firstMonthStageFor(state) !== expectedStage) process.exit(20);
       }
-      if (firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2, validated: true, submitted: true, resolutionVisible: true }) !== "resolution") process.exit(11);
-      if (firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: -2 }) !== "draft") process.exit(12);
+      if (firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2, validated: true, submitted: true, resolutionVisible: true }) !== "resolution") process.exit(11);
+      if (firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: -2 }) !== "inspect") process.exit(12);
       console.log(JSON.stringify({ schema: FIRST_MONTH_FLOW_SCHEMA, stages: expected }));
     '''
     result = subprocess.run(
@@ -90,7 +90,7 @@ class GuiFirstMonthTests(unittest.TestCase):
       ]);
       const root = { querySelector(selector) { return nodes.get(selector) ?? null; }, ownerDocument: globalThis.document };
       const flow = createFirstMonthFlow({ root });
-      flow.update({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2 });
+      flow.update({ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2 });
       const list = nodes.get("#first-month-flow-list");
       if (list.children.length !== 7) process.exit(1);
       const states = list.children.map((item) => item.dataset.state);
@@ -98,7 +98,7 @@ class GuiFirstMonthTests(unittest.TestCase):
       if (list.children[3]["aria-current"] !== "step") process.exit(3);
       if (!nodes.get("#first-month-flow-state").textContent.toLowerCase().includes("validate")) process.exit(4);
       if (!nodes.get("#first-month-flow-detail").textContent.includes("host")) process.exit(5);
-      flow.update({ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true });
+      flow.update({ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, briefingReviewed: true });
       if (list.children.length !== 5 || flow.stage.id !== "choose") process.exit(6);
       if (!nodes.get("#first-month-flow-state").textContent.includes("5")) process.exit(7);
       console.log(JSON.stringify({ stage: "validate", campaignStage: flow.stage.id, states }));
@@ -218,6 +218,7 @@ class GuiFirstMonthTests(unittest.TestCase):
       }
       async function prepare(client, root) {
         await client.load("session-1");
+        client.firstMonthFlow.update({ briefingReviewed: true });
         const forms = root.querySelector("#action-builder").children.filter((child) => child.tagName === "FORM");
         for (const form of forms) form.dispatch("submit", { preventDefault() {} });
       }
@@ -229,12 +230,13 @@ class GuiFirstMonthTests(unittest.TestCase):
       root.querySelector("#session-difficulty").value = "normal";
       const client = createActionClient({ adapter: adapterFor(calls), root });
       await client.sessionLauncher.start({ preventDefault() {} });
-      if (client.firstMonthFlow.stage.id !== "draft") process.exit(1);
+      if (client.firstMonthFlow.stage.id !== "inspect") process.exit(1);
       await prepare(client, root);
       if (client.firstMonthFlow.stage.id !== "validate" || client.drafts.length !== 2) process.exit(2);
       await client.validate();
       if (client.firstMonthFlow.stage.id !== "submit") process.exit(3);
       await client.submit();
+      client.firstMonthFlow.update({ resolutionReviewed: true });
       if (client.firstMonthFlow.stage.id !== "continue") process.exit(4);
       if (JSON.stringify(calls) !== JSON.stringify(["start", "presentation", "catalog", "presentation", "catalog", "validate", "submit", "resolution", "presentation"])) process.exit(5);
 

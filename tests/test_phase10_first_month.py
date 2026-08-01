@@ -136,11 +136,11 @@ class Phase10FirstMonthTests(unittest.TestCase):
       const stages = [
         firstMonthStageFor({}),
         firstMonthStageFor({ sessionLoaded: true }),
-        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true }),
-        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2 }),
-        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2, validated: true }),
-        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, draftCount: 2, validated: true, submitted: true }),
-        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, submitted: true, resolutionVisible: true, refreshed: true }),
+        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true }),
+        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2 }),
+        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2, validated: true }),
+        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, draftCount: 2, validated: true, submitted: true }),
+        firstMonthStageFor({ sessionLoaded: true, actionCatalogLoaded: true, briefingReviewed: true, submitted: true, resolutionVisible: true, refreshed: true, resolutionReviewed: true }),
       ];
       const expected = ['start', 'inspect', 'draft', 'validate', 'submit', 'resolution', 'continue'];
       if (FIRST_MONTH_FLOW_SCHEMA !== 'competitive-first-month-v1' || JSON.stringify(stages) !== JSON.stringify(expected)) process.exit(1);

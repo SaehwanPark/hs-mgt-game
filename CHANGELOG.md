@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.14.1] - 2026-08-01
+
+- Replaced the all-at-once GUI page with a progressive Setup/Brief/Decide/
+  Resolve/Review task workspace over unchanged host contracts.
+- Added explicit briefing/resolution review handoffs, bounded host-ordered
+  collections, responsive wrapping, 125% Large Text, 44px targets, utility and
+  contextual drawers, and text-equivalent visual-token help.
+- Registered the workspace module in embedded/offline delivery and added
+  focused controller/flow/accessibility coverage.
+- Human cognitive-load/accessibility/usability validation, browser/device
+  certification, and conditional generated artwork remain pending; no
+  simulation or persistence semantics changed.
+
 ## [0.13.110] - 2026-08-01
 
 - Extended the bounded Firefox/Marionette smoke through all five stabilization

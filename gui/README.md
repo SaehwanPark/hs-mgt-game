@@ -23,6 +23,30 @@ does not block the action rail.
 Opening `gui/index.html` directly or through a generic static server intentionally
 shows fixture/demo mode; it cannot start a live scenario by itself.
 
+## Task workspace and progressive disclosure
+
+The shell presents one task workspace at a time: Setup, Brief, Decide, Resolve,
+and Review. Header metrics, source-linked signals, uncertainty, host status,
+costs, and written equivalents remain rendered from the existing host envelopes;
+navigation changes presentation state only. Start/load and refreshed nonterminal
+sessions open Brief, accepted submissions open Resolve, and terminal sessions
+open Review. The current task strip exposes the primary handoff and keeps the
+full first-session sequence behind an accessible disclosure.
+
+Long collections use host order and bounded defaults (three signals/actors/
+processes, six actions, and five history rows). A visible total and a
+“Show remaining” disclosure retain the rest without local ranking. The regional
+board is full-width on supported tablet/desktop layouts and moves behind a
+native disclosure below 768px, where entity cards remain the default review
+surface. Settings, audio, credits, and advanced session controls live in a
+keyboard-safe utility dialog; selected entities and visual-token explanations
+use the same contextual drawer with text fallbacks.
+
+This redesign is technically verified by static, host-contract, loading, and
+offline checks. Human cognitive-load, clarity, consequence-comprehension, and
+accessibility validation remain pending the authorized five-group pilot; no
+generated artwork is included until that evidence gate is met.
+
 ## SVG rendering proof
 
 Open `gui/svg-proof.html` directly or through a static server to inspect the

@@ -457,18 +457,23 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
 
       const client = createActionClient({ adapter: adapterFor(), root: makeRoot() });
       await client.load("coverage-1");
+      client.firstMonthFlow.update({ briefingReviewed: true });
       if (client.firstMonthFlow.stage.id !== "choose") process.exit(1);
       const accepted = await client.campaignCoverage.submit("assess");
-      if (!accepted.ok || client.firstMonthFlow.stage.id !== "continue") process.exit(2);
+      if (!accepted.ok || client.firstMonthFlow.stage.id !== "review") process.exit(2);
+      client.firstMonthFlow.update({ resolutionReviewed: true });
+      if (client.firstMonthFlow.stage.id !== "continue") process.exit(6);
 
       const rejectedClient = createActionClient({ adapter: adapterFor({ reject: true }), root: makeRoot() });
       await rejectedClient.load("coverage-1");
+      rejectedClient.firstMonthFlow.update({ briefingReviewed: true });
       const rejected = await rejectedClient.campaignCoverage.submit("assess");
       if (rejected.ok || rejectedClient.firstMonthFlow.stage.id !== "choose") process.exit(3);
 
       const malformedAdapter = adapterFor();
       const malformedClient = createActionClient({ adapter: malformedAdapter, root: makeRoot() });
       await malformedClient.load("coverage-1");
+      malformedClient.firstMonthFlow.update({ briefingReviewed: true });
       malformedAdapter.malformed = true;
       const malformed = await malformedClient.campaignCoverage.load("coverage-1");
       if (malformed.ok || malformedClient.firstMonthFlow.stage.id !== "choose") process.exit(4);
@@ -478,6 +483,7 @@ class Phase12LiveCampaignCoverageTests(unittest.TestCase):
         root: makeRoot(),
       });
       await refreshFailureClient.load("coverage-1");
+      refreshFailureClient.firstMonthFlow.update({ briefingReviewed: true });
       const refreshFailure = await refreshFailureClient.campaignCoverage.submit("assess");
       if (refreshFailure.ok || refreshFailureClient.firstMonthFlow.stage.id !== "choose") process.exit(5);
       console.log(JSON.stringify({ accepted: client.firstMonthFlow.stage.id, rejected: rejectedClient.firstMonthFlow.stage.id, malformed: malformedClient.firstMonthFlow.stage.id, refreshFailure: refreshFailureClient.firstMonthFlow.stage.id }));

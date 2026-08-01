@@ -24,8 +24,8 @@ class OfflineAvailabilityTests(unittest.TestCase):
     report = self.checker.build_report(ROOT, self.document)
     self.assertEqual(report["status"], "pass")
     self.assertEqual(report["schema_version"], "offline-policy-report-v1")
-    self.assertEqual(report["resource_count"], 23)
-    self.assertEqual(report["route_count"], 24)
+    self.assertEqual(report["resource_count"], 24)
+    self.assertEqual(report["route_count"], 25)
     self.assertEqual(report["loading_policy_status"], "pass")
 
   def test_cli_emits_green_json_report(self):
@@ -175,7 +175,7 @@ class OfflineAvailabilityTests(unittest.TestCase):
     finally:
       self.checker._loading_document = original
     self.assertEqual(report["status"], "fail")
-    self.assertEqual(report["resource_count"], 23)
+    self.assertEqual(report["resource_count"], 24)
 
   def test_malformed_loading_file_shape_returns_structured_failure(self):
     original = self.checker._loading_document
@@ -185,7 +185,7 @@ class OfflineAvailabilityTests(unittest.TestCase):
     finally:
       self.checker._loading_document = original
     self.assertEqual(report["status"], "fail")
-    self.assertEqual(report["resource_count"], 23)
+    self.assertEqual(report["resource_count"], 24)
 
 
 if __name__ == "__main__":

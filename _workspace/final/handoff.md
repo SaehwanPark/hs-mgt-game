@@ -3339,6 +3339,51 @@ debrief/educational review, content/resemblance/clinical review, competitive
 campaign human coverage, browser/device certification, revision decisions, and
 campaign expansion approval remain pending and promotion-blocking.
 
+---
+
+## GUI task-workspace redesign v0.14.1
+
+Implemented a presentation-only Setup/Brief/Decide/Resolve/Review shell with
+explicit review acknowledgements, bounded host-ordered collections, responsive
+wrapping, 125% Large Text, utility/context drawers, and text-equivalent
+visual-token help. Embedded/offline delivery lists include the new module, and
+host contracts remain unchanged.
+
+Technical verification is required before merge; the authorized five-group
+pilot, browser/device layout certification, and any generated artwork remain
+open gates. No human usability, accessibility, educational, or cognitive-load
+claim is made from automated evidence.
+
+### Verification addendum
+
+The final tree passes 939 Python tests, Rust formatting/clippy/tests, Node
+syntax, release/documentation/loading/offline/device checks, and embedded GUI
+smoke for the shell, new workspace module, and host session-start endpoint.
+The authorized human pilot and real-browser/device layout matrix remain
+pending; no PR3 artwork was generated.
+
+### Screenshot follow-up
+
+The visible-information/uncertainty badge collapse shown in the follow-up
+screenshot is corrected in `gui/index.html`: labels no longer use one-character
+wrapping, timeline rows reserve readable marker/status tracks, and narrow
+layouts stack the status text. This remains technically verified only; browser
+pixel certification and human usability evidence are still pending.
+
+The second screenshot follow-up also separates long actor status summaries from
+badge styling and stabilizes overlay marker tracks. No host or persistence
+contract changed; browser and human validation remain pending.
+
+The targeted browser reproduction identified one remaining `auto` grid-track
+collapse for long uncertainty values. The regional overlay list now uses two
+flexible tracks, so the marker, heading, and host-provided value retain
+word-sized wrapping at `1024×768`. This is targeted browser evidence only; the
+cross-browser matrix and authorized human pilot remain pending.
+
+Verification refresh: 941 Python tests, Node syntax, release/documentation,
+loading/offline, device-proxy (`444994` / `445000` bytes), Rust formatting,
+clippy, and Rust tests all pass.
+
 # Final Handoff — Firefox all-campaign full-transition smoke v0.13.110
 
 ## Status

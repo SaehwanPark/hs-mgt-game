@@ -593,3 +593,15 @@ A feature that fails these questions should usually be deferred.
 > Build a transparent strategic system in which institutions act on incomplete information, policies alter incentives and constraints, and outcomes emerge through understandable causal mechanisms.
 
 The project should prioritize a small number of deeply coherent interactions over broad but shallow coverage. Its success will depend not on simulating everything, but on making complex health-policy dynamics playable, inspectable, and debatable.
+
+## 30. Progressive task presentation
+
+The GUI should present one player task at a time and reveal additional detail
+through explicit, reversible navigation or disclosure. Progressive presentation
+may reduce default density, but it must never remove actor-visible source,
+uncertainty, missingness, cost, legality, history, written equivalents, or
+host-owned consequences. Navigation and acknowledgement state are ephemeral
+presentation state; commands, deterministic transitions, replay, checkpoints,
+and debrief semantics remain host-authoritative. Icons and visual tokens may
+supplement repeated labels only when a persistent legend, accessible name, and
+text explanation remain available.

@@ -4,7 +4,7 @@ Health Policy Strategy Game is a strategy simulation about leading a fictional
 nonprofit US health system through financial pressure, workforce constraints,
 payer negotiations, policy oversight, market competition, and community trust.
 
-The current public milestone is a playable Rust prototype at v0.13.110.
+The current public milestone is a playable Rust prototype at v0.14.1.
 
 Health-policy outcomes are not direct levers here. Other institutions respond
 to your choices based on their own authority, incentives, information, and
@@ -59,6 +59,11 @@ Keep that terminal running and open the printed URL, normally
 
 Opening `gui/index.html` directly shows demo data; it does not start a live
 scenario.
+
+The GUI uses a progressive Setup/Brief/Decide/Resolve/Review workspace with
+host-ordered disclosures and text-first source/uncertainty fallbacks. This
+technical redesign remains pending the authorized human usability and
+accessibility pilot; it does not certify browser/device ergonomics.
 
 See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for the complete
 first month, settings, alternate ports, and troubleshooting.
