@@ -337,6 +337,16 @@ pub fn remove_gui_session_save(path: &Path, session_id: &str) -> Result<(), Stri
 
 pub fn remove_gui_session_checkpoint(path: &Path, session_id: &str) -> Result<(), String> {
   let checkpoint_path = gui_session_checkpoint_path(path, session_id)?;
+  if let Err(error) = remove_gui_session_save(path, session_id)
+    && path.is_file()
+  {
+    fs::remove_file(path).map_err(|remove_error| {
+      format!(
+        "unable to remove invalid legacy GUI save at {}: {remove_error} (original cleanup error: {error})",
+        path.display()
+      )
+    })?;
+  }
   if checkpoint_path.is_file() {
     fs::remove_file(&checkpoint_path).map_err(|error| {
       format!(
@@ -345,7 +355,6 @@ pub fn remove_gui_session_checkpoint(path: &Path, session_id: &str) -> Result<()
       )
     })?;
   }
-  remove_gui_session_save(path, session_id)?;
   if let Some(archive_dir) = checkpoint_path.parent()
     && let Err(error) = fs::remove_dir(archive_dir)
     && !matches!(
@@ -568,6 +577,43 @@ mod tests {
     assert!(matches!(restored, GuiSessionSave::Stabilization(_)));
     remove_gui_session_checkpoint(&path, "session-legacy").expect("remove legacy checkpoint");
     assert!(!path.exists());
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn malformed_legacy_checkpoint_does_not_block_archive_cleanup() {
+    let directory = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-legacy-invalid-{}",
+      std::process::id()
+    ));
+    let path = directory.join("gui.save");
+    let checkpoint_path = gui_session_checkpoint_path(&path, "session-invalid")
+      .expect("invalid legacy test checkpoint path");
+    let ruleset = default_ruleset();
+    let save = SessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      experience_mode: ExperienceMode::Standard,
+      history: History {
+        genesis: genesis_state(),
+        transitions: Vec::new(),
+      },
+      next_turn: 1,
+    };
+    write_stabilization_session_save(&checkpoint_path, "session-invalid", &save)
+      .expect("archive checkpoint");
+    fs::write(&path, "{not-json").expect("malformed legacy checkpoint");
+
+    remove_gui_session_checkpoint(&path, "session-invalid")
+      .expect("malformed legacy residue must not block cleanup");
+    assert!(!path.exists());
+    assert!(!checkpoint_path.exists());
+    assert!(
+      !checkpoint_path
+        .parent()
+        .expect("archive directory")
+        .exists()
+    );
     let _ = fs::remove_dir(&directory);
   }
 
