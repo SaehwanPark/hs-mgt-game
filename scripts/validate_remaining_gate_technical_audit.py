@@ -93,7 +93,7 @@ EXPECTED_ROADMAP_MARKERS = {
   "pilot-evaluation": "Run structured first-time-user evaluation.",
   "revision-decisions": "Record revision decisions.",
   "expansion-decision": "Approve or reject expansion to full campaign coverage.",
-  "browser-device-certification": "cross-browser/device certification",
+  "browser-device-certification": "coverage, durable persistence, cross-browser/device certification, and human educational/accessibility gates remain open.",
 }
 NON_CHECKBOX_ROADMAP_MARKERS = {"browser-device-certification"}
 ALLOWED_HUMAN_STATUSES = {
@@ -165,7 +165,9 @@ def validate_audit(audit: object) -> None:
     _require(isinstance(marker["text"], str) and marker["text"], "roadmap marker text is required")
     _require(EXPECTED_ROADMAP_MARKERS.get(marker["id"]) == marker["text"], f"roadmap marker contract drifted: {marker['id']}")
     if marker["id"] in NON_CHECKBOX_ROADMAP_MARKERS:
-      _require(marker["text"] in roadmap_text, f"roadmap marker is missing: {marker['id']}")
+      normalized_roadmap = " ".join(roadmap_text.split())
+      normalized_marker = " ".join(marker["text"].split())
+      _require(normalized_marker in normalized_roadmap, f"roadmap marker is missing: {marker['id']}")
     else:
       checkbox_marker = f"- [ ] {marker['text']}"
       _require(

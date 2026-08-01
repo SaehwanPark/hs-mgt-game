@@ -33,7 +33,7 @@
       {"id": "pilot-evaluation", "text": "Run structured first-time-user evaluation."},
       {"id": "revision-decisions", "text": "Record revision decisions."},
       {"id": "expansion-decision", "text": "Approve or reject expansion to full campaign coverage."},
-      {"id": "browser-device-certification", "text": "cross-browser/device certification"}
+      {"id": "browser-device-certification", "text": "coverage, durable persistence, cross-browser/device certification, and human educational/accessibility gates remain open."}
     ]
   },
   "technical_checks": [

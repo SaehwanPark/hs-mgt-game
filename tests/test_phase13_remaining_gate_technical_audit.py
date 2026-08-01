@@ -65,6 +65,16 @@ class Phase13RemainingGateTechnicalAuditTests(unittest.TestCase):
     with self.assertRaisesRegex(ValueError, "roadmap path must be relative"):
       self.validator.validate_audit(audit)
 
+    audit = copy.deepcopy(self.audit)
+    browser_marker = next(
+      marker
+      for marker in audit["roadmap_contract"]["open_item_markers"]
+      if marker["id"] == "browser-device-certification"
+    )
+    browser_marker["text"] = "cross-browser/device certification"
+    with self.assertRaisesRegex(ValueError, "roadmap marker contract drifted"):
+      self.validator.validate_audit(audit)
+
   def test_validator_rejects_status_promotion_and_type_coercion(self):
     audit = copy.deepcopy(self.audit)
     audit["gates"][0]["human_status"] = "approved"
