@@ -7738,6 +7738,24 @@ The target is recorded in
 `_workspace/178_implementation_plan_visual-audio-phase13-1-device-evidence-sync-v0.13.100.md`
 and `_workspace/00_input/request-summary-v0.13.100.md`.
 
+### Visual/audio consolidated remaining-gate audit refresh (v0.13.101)
+
+The consolidated remaining-gate audit is refreshed to v0.13.101 and now
+indexes the current runtime capability, first-session/audio,
+terminal-debrief, and emulated device evidence packets in a dedicated
+source-bound technical check.
+
+The packet continues to map all unchecked roadmap markers to eight pending,
+promotion-blocking human/runtime gates. Technical implementation gaps remain
+false, human/runtime gates remain true, and approval/revision/expansion fields
+remain null. This change does not establish human, educational, accessibility,
+audio, legal, clinical, browser/device, expansion, or public-release findings.
+
+The target is recorded in
+`_workspace/179_implementation_plan_visual-audio-phase13-gate-audit-refresh-v0.13.101.md`,
+`_workspace/00_input/request-summary-v0.13.101.md`, and
+`docs/evaluation/phase13-remaining-gate-technical-audit.json`.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path
