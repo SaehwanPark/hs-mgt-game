@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.106] - 2026-08-01
+
+- Made browser-refresh resume policy explicit and source-bound: only a stored
+  opaque session ID may trigger one host-owned durable restore attempt.
+- Manual session loads remain explicit and do not hydrate an unknown ID;
+  transient failures preserve the ID for retry and confirmed unknown sessions
+  clear it.
+- Synchronized the emulated low-power source-byte proxy to 410,175 bytes under
+  a 411,000-byte limit; this remains a proxy and not device certification.
+- No browser save serialization, artifact parsing, replay regeneration, human
+  review, runtime certification, or public-release approval is claimed.
+
 ## [0.13.105] - 2026-08-01
 
 - Added a host-validated `GET /api/v1/sessions/{session_id}/save-artifact`
@@ -10,8 +22,8 @@
   serialize, load, or store the save artifact as game state.
 - The bounded low-power source-byte proxy measures 409,599 bytes under its
   410,000-byte limit; this remains an emulated proxy, not device certification.
-- Actual automatic resume, replay regeneration, human/runtime certification,
-  provenance, and release gates remain open.
+- The automatic-resume policy is now source-bound; replay regeneration,
+  human/runtime certification, provenance, and release gates remain open.
 
 ## [0.13.104] - 2026-08-01
 

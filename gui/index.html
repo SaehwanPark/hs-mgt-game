@@ -557,7 +557,7 @@
               <input id="session-checkpoint-reference-file" type="file" accept="application/json,.json" />
             </label><button type="button" id="session-checkpoint-reference-import">Import reference</button></div><p id="session-checkpoint-status" role="status">Save contents remain host-only; references contain metadata only. Valid entries can download a host-generated save file.</p></section>
           <p class="session-launch-status" id="session-launch-status" role="status" aria-live="polite">A configured host adapter can start or load a session.</p>
-          <p class="session-launch-status">After each accepted GUI decision, the host requests an autosave through the same host-only checkpoint path. Browser refresh recovery keeps only the opaque session ID; explicit Save host checkpoint remains available as a manual retry.</p>
+          <p class="session-launch-status">After each accepted GUI decision, the host requests an autosave through the same host-only checkpoint path. After a browser refresh, recovery may make one host restore attempt using only the stored opaque session ID; manual Load and Restore remain explicit. Explicit Save host checkpoint remains available as a manual retry.</p>
         </div>
       </section>
 

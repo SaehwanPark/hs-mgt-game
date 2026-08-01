@@ -1,28 +1,30 @@
-# Final Handoff — Host save-artifact download bridge v0.13.105
+# Final Handoff — Browser-refresh automatic resume policy v0.13.106
 
 ## Status
 
-The v0.13.105 implementation is in progress on its temporary branch; the
+The v0.13.106 implementation is in progress on its temporary branch; the
 single required medium-effort reviewer and PR loop remain.
 
 ## Target result
 
-- Add `GET /api/v1/sessions/{session_id}/save-artifact` for host-validated
-  archive/legacy checkpoint bytes with a safe attachment filename.
-- Add **Download host save** to validated discovery entries while preserving
-  the selected storage source and keeping the browser download opaque.
+- Make `gui-session-resume-policy-v1` explicit for browser-refresh recovery.
+- Permit one host-owned restore attempt only for the stored opaque session ID;
+  keep manual loads explicit and preserve or clear the ID according to the
+  bounded transient/unknown-session policy.
 - Preserve host authority, replay validation, immutable history, and all
-  existing transition, save, restore, reference, and discovery paths.
+  existing transition, save, restore, reference, discovery, and artifact
+  download paths.
 
 ## Verification
 
-- 388 Rust tests, Clippy with warnings denied, 934 Python tests, formatting,
+- 388 Rust tests, Clippy with warnings denied, 936 Python tests, formatting,
   CLI help, documentation links, release metadata, asset/security/release
   checks, offline/loading/browser/audio/raster/visual-audio contracts, and
   remaining-gate audit validation pass.
-- The bounded low-power proxy measures 409,599 bytes under its 410,000-byte
+- The bounded low-power proxy measures 410,175 bytes under its 411,000-byte
   limit; this remains an emulated proxy, not device certification.
-- Focused tests cover archive/legacy discovery ordering and invalid counting,
+- Focused tests cover the one-attempt browser-refresh resume policy, manual
+  load non-recovery, archive/legacy discovery ordering and invalid counting,
   malformed archive shadowing with legacy fallback, archive file and directory
   symlink rejection with legacy fallback, live route metadata privacy, and
   browser picker validation/manual-load-only behavior, deterministic reference
@@ -31,9 +33,9 @@ single required medium-effort reviewer and PR loop remain.
 
 ## Review boundary and remaining work
 
-The remaining PR handoff is to complete review, merge the v0.13.105 PR, delete
+The remaining PR handoff is to complete review, merge the v0.13.106 PR, delete
 its temporary branch locally and remotely, verify clean `main`, and select the
-next unmet roadmap slice. Automatic resume policy, replay regeneration,
+next unmet roadmap slice. Replay regeneration,
 screenshots, human accessibility/educational review, browser/device
 certification, provenance, and public-release gates remain open.
 

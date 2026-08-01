@@ -356,7 +356,7 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       "ACTIVE_SESSION_STORAGE_KEY",
       "createSessionIdStorage",
       "const storedSessionId = client.sessionStore.get()",
-      "client.load(initialSessionId)",
+      "client.load(initialSessionId, { automaticResume",
       "isUnknownSessionResult",
       "sessionStore.clear()",
       "host process",
@@ -372,7 +372,33 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     ):
       self.assertNotIn(forbidden, self.app)
 
-  def test_action_client_retries_host_load_after_unknown_live_session(self):
+  def test_resume_policy_is_opaque_bounded_and_manual_load_explicit(self):
+    result = self.run_node(r'''
+      import { SESSION_RESUME_POLICY } from "./gui/app.mjs";
+      console.log(JSON.stringify(SESSION_RESUME_POLICY));
+    ''')
+    self.assertEqual(
+      result,
+      {
+        "schema_version": "gui-session-resume-policy-v1",
+        "automatic_source": "browser-refresh-opaque-session-id",
+        "max_host_restore_attempts": 1,
+        "stored_value": "opaque-session-id-only",
+        "manual_load_auto_restore": False,
+        "transient_failure_preserves_id": True,
+        "unknown_session_clears_id": True,
+      },
+    )
+    for marker in (
+      "SESSION_RESUME_POLICY",
+      "gui-session-resume-policy-v1",
+      "automatic_source",
+      "max_host_restore_attempts",
+      "automaticResume: !actionAdapter.sessionId && Boolean(storedSessionId)",
+    ):
+      self.assertIn(marker, self.app)
+
+  def test_action_client_refresh_recovery_is_one_attempt_and_manual_load_is_explicit(self):
     result = self.run_node(r'''
       function node() {
         return {
@@ -406,18 +432,25 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
         campaign: null,
         async getPresentation() { calls.push("presentation"); if (!this.sessionId) throw new Error("unknown session 'session-7'"); return presentation; },
         async loadSession(sessionId) { calls.push("load"); this.sessionId = sessionId; this.campaign = "competitive-regional-v1"; return { schema_version: "competitive-save-v1", operation: "loaded", session_id: sessionId, campaign: "competitive-regional-v1", seed: 42, transition_count: 0, latest_state_hash: null }; },
-        async getActionCatalog() { calls.push("catalog"); return { schema_version: "competitive-actions-v1", turn: 1, actions: [] }; },
+        async getActionCatalog() { calls.push("catalog"); if (!this.sessionId) throw new Error("unknown session 'session-8'"); return { schema_version: "competitive-actions-v1", turn: 1, actions: [] }; },
         async validateTurn() { return { valid: true, previews: [], errors: [] }; },
       };
       const values = new Map();
       const storage = { getItem(key) { return values.get(key) ?? null; }, setItem(key, value) { values.set(key, value); }, removeItem(key) { values.delete(key); } };
       const client = createActionClient({ adapter, root, storage });
-      const result = await client.load("session-7");
-      console.log(JSON.stringify({ ok: result.ok, calls, sessionId: client.sessionStore.get() }));
+      const result = await client.load("session-7", { automaticResume: true });
+      adapter.sessionId = null;
+      const manual = await client.load("session-8");
+      console.log(JSON.stringify({ ok: result.ok, calls, manualCode: manual.code, sessionId: client.sessionStore.get() }));
     ''')
     self.assertEqual(
       result,
-      {"ok": True, "calls": ["presentation", "load", "presentation", "catalog"], "sessionId": "session-7"},
+      {
+        "ok": True,
+        "calls": ["presentation", "load", "presentation", "catalog", "presentation"],
+        "manualCode": "action_adapter_error",
+        "sessionId": "session-7",
+      },
     )
 
   def test_durable_recovery_remains_host_only(self):
@@ -433,7 +466,7 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       "gui-stabilization-save-v1",
       "gui-affiliation-save-v1",
       "Recovering durable host checkpoint",
-      "allowDurableRecovery",
+      "automaticResume",
       "loadSession(requestedSessionId)",
       "competitive-save-v1",
     ):

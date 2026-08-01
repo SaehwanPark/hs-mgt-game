@@ -212,6 +212,15 @@ export const CHECKPOINT_REFERENCE_SCHEMA = "gui-checkpoint-reference-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 export const ACTIVE_SESSION_STORAGE_KEY = "hs-mgt-active-session-id";
+export const SESSION_RESUME_POLICY = Object.freeze({
+  schema_version: "gui-session-resume-policy-v1",
+  automatic_source: "browser-refresh-opaque-session-id",
+  max_host_restore_attempts: 1,
+  stored_value: "opaque-session-id-only",
+  manual_load_auto_restore: false,
+  transient_failure_preserves_id: true,
+  unknown_session_clears_id: true,
+});
 let selectedEntityId = null;
 let selectedBoardId = null;
 let currentMapEntities = [];
@@ -2876,8 +2885,9 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     return result;
   }
 
-  // Action-client load also owns one host-only durable-checkpoint retry.
-  async function load(nextSessionId = sessionId, allowDurableRecovery = true) {
+  // Action-client load owns an explicitly requested, one-attempt host-only
+  // durable-checkpoint retry for the browser-refresh resume path.
+  async function load(nextSessionId = sessionId, { automaticResume = false } = {}) {
     const requestedSessionId = String(nextSessionId ?? "").trim();
     const replacingSession = Boolean(sessionId && requestedSessionId && requestedSessionId !== sessionId);
     configureRecovery(root, () => load(requestedSessionId), recorder);
@@ -3001,14 +3011,14 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       return { ok: true, catalog };
     } catch (error) {
       if (
-        allowDurableRecovery
+        automaticResume
         && isUnknownSessionResult(error)
         && typeof adapter?.loadSession === "function"
       ) {
         try {
           sessionLaunchStatus(root, `Recovering durable host checkpoint ${requestedSessionId}…`);
           await adapter.loadSession(requestedSessionId);
-          return load(requestedSessionId, false);
+          return load(requestedSessionId);
         } catch (restoreError) {
           error = restoreError;
         }
@@ -3720,7 +3730,7 @@ if (typeof document !== "undefined") {
       if (!actionAdapter.sessionId) {
         sessionLaunchStatus(document, `Recovering host session ${initialSessionId} after browser refresh…`);
       }
-      client.load(initialSessionId).then((result) => {
+      client.load(initialSessionId, { automaticResume: !actionAdapter.sessionId && Boolean(storedSessionId) }).then((result) => {
         if (!result?.ok && isUnknownSessionResult(result)) {
           client.sessionStore.clear();
           sessionLaunchStatus(document, "The stored host session is no longer available; start or load a current session.");

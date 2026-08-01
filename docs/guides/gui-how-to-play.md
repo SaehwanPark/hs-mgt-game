@@ -183,11 +183,14 @@ session**. You can also copy a session ID displayed by the current GUI and enter
 it manually. For
 `competitive-regional-v1`, `stabilization-v1`, or `regional-affiliation-v1`,
 each accepted decision requests autosave; select **Save host checkpoint** before
-stopping the host if you want an explicit retry. A browser refresh or manual
-load after a restart attempts that host checkpoint once when the opaque ID
-matches an archived checkpoint file, then refreshes the ordinary
-presentation/campaign/action/history/replay reads. Without a successful
-checkpoint, stopping or restarting the host invalidates the live session ID.
+stopping the host if you want an explicit retry. After a browser refresh, the
+client may attempt that host checkpoint once when the stored opaque ID matches
+an archived checkpoint file, then refreshes the ordinary
+presentation/campaign/action/history/replay reads. Manual Load and Restore
+remain explicit and do not automatically hydrate an unknown manually entered
+ID. Transient refresh failures preserve the stored ID for retry; a confirmed
+unknown session clears it. Without a successful checkpoint, stopping or
+restarting the host invalidates the live session ID.
 
 Each discovered entry also offers **Export reference**. The resulting
 `gui-checkpoint-reference-v1` JSON file contains only the opaque ID, campaign,
@@ -258,10 +261,12 @@ shown.
 
 ### An existing session ID is unknown
 
-The ID may belong to a different host, may have no explicit competitive
-checkpoint, or may be typed incorrectly. The GUI attempts one host checkpoint
-load after an unknown live-session response. If that also fails, start a new
-session or enter a matching saved ID; no replacement session is created.
+The ID may belong to a different host, may have no explicit checkpoint, or may
+be typed incorrectly. Manual Load remains explicit and does not automatically
+hydrate an unknown ID. Only a browser-refresh recovery with a stored opaque ID
+attempts one host checkpoint load after an unknown live-session response. If
+that also fails, start a new session or enter a matching saved ID; no
+replacement session is created.
 
 ### The browser was refreshed
 

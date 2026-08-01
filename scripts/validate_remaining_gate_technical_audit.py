@@ -48,7 +48,7 @@ DECISION_FIELDS = {
 }
 EXPECTED_SCHEMA = "phase13-remaining-gate-technical-audit-v1"
 EXPECTED_STATUS = "complete-technical-audit-pending-human-gates"
-EXPECTED_PACKAGE_VERSION = "0.13.105"
+EXPECTED_PACKAGE_VERSION = "0.13.106"
 EXPECTED_TEST_SOURCE = "tests/test_phase13_remaining_gate_technical_audit.py"
 EXPECTED_TECHNICAL_CHECKS = {
   "current-release-coverage",
@@ -60,6 +60,7 @@ EXPECTED_TECHNICAL_CHECKS = {
   "checkpoint-discovery",
   "checkpoint-reference-transfer",
   "checkpoint-artifact-download",
+  "automatic-resume-policy",
 }
 EXPECTED_GATES = {
   "asset-provenance-and-portrait-review",
