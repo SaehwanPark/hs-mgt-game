@@ -47,7 +47,10 @@ description: Route Health Policy Strategy Game work through repo-specific resear
 5. For generic implementation quality, use global skills rather than creating
    local duplicates.
 6. Treat roadmap items as sequencing guidance, not authorization. Do not
-   promote or implement a milestone beyond the user's bounded request.
+   promote or implement a milestone beyond the user's bounded request. Advance
+   bounded technical slices from automated evidence; participant studies,
+   approvals, and human review are optional external feedback, never routine
+   stop gates.
 7. Preserve handoff files named in the team spec when the task spans more than
    one phase.
 8. Finish with a concise handoff that lists changed files, verification, known
@@ -68,6 +71,9 @@ description: Route Health Policy Strategy Game work through repo-specific resear
   the user explicitly asks for future-facing design.
 - Presentation work must trace semantic output to actor-visible sources and
   preserve mute, reduced-motion, missing-asset, and unknown-data fallbacks.
+- Presentation progression must record agent-executable entry/exit criteria,
+  evidence artifacts, and claim limits. Uncertain assets fail closed to a
+  registered generic fallback.
 - Code-producing tasks must run focused verification such as `cargo fmt` and
   `cargo test` when Rust files are changed.
 

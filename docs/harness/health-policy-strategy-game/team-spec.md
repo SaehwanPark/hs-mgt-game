@@ -52,12 +52,14 @@ project-specific visual/audio asset governance as defined by this project.
 
 ## Chosen Architecture
 
-Pattern: Pipeline with an Expert Pool and Producer-Reviewer gates.
+Pattern: Pipeline with an Expert Pool and producer/automated-evidence checkpoints.
 
 Reason: the roadmap requires ordered work. Research and assumptions feed
 conceptual design; conceptual design feeds game and educational design; those
-feed the deterministic technical prototype; implementation is reviewed against
-domain, reproducibility, and educational criteria.
+feed the deterministic technical prototype; implementation is checked against
+domain, reproducibility, and educational criteria. Technical checks are the
+progression mechanism; human studies, approvals, and sign-offs are optional
+external feedback rather than routine stop gates.
 
 The orchestrator selects the simulation/domain track, presentation track, or
 both. Each track has a producer and an explicit project-specific reviewer.
@@ -78,7 +80,8 @@ before synthesis.
 
 Generic implementation and code review are intentionally not local roles. When
 Rust code is changed, use the relevant global skills alongside the local domain
-QA gate.
+QA checks. A local QA `pass` establishes only bounded technical conformance and
+must state human-evidence and legal-review limits.
 
 ## Phase Order
 
@@ -154,8 +157,9 @@ QA gate.
   audit causality, accessibility equivalents, fallbacks, provenance, rights,
   browser authority, and replay isolation.
 - Output files: `_workspace/03_presentation_qa.md`.
-- Completion criteria: review returns `pass`, `fix`, or `redo` with evidence and
-  explicit human-evaluation and legal-review limits.
+- Completion criteria: automated/agent review returns `pass`, `fix`, or `redo`
+  with evidence and explicit human-evaluation and legal-review limits. Human
+  evaluation is optional follow-up, not a promotion gate.
 
 ### Phase 5: Final Handoff
 
@@ -204,14 +208,14 @@ Use deterministic names:
   add an unresolved evidence question instead of fabricating certainty.
 - Scope pressure: defer broad mechanisms unless they are necessary for the
   current roadmap phase or first vertical slice.
-- Reviewer status `fix`: make targeted revisions, then rerun the applicable QA
-  reviewer once.
+- Reviewer status `fix`: make targeted revisions, then rerun the applicable
+  automated/agent QA checks. Human review is not required to continue.
 - Reviewer status `redo`: return to the relevant evidence, mechanism, or
   presentation-contract phase and preserve the failed artifact for comparison.
 - Presentation scope without authorization: document the proposed contract or
   harness only when requested; do not create assets or start a roadmap milestone.
-- Missing or conflicting asset rights: block release use, preserve the source
-  record for audit, and use an approved generic fallback.
+- Missing or conflicting asset rights: exclude the asset from release, preserve
+  the source record for audit, and use a registered generic fallback.
 - Conflicting domain assumptions: document both positions and choose the
   narrower reversible abstraction for the current slice.
 

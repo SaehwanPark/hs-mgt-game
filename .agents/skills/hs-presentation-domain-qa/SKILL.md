@@ -26,7 +26,8 @@ description: Review Health Policy Strategy Game visual, audio, GUI, and asset wo
 ## Workflow
 
 1. Compare the result with the request, explicit authorization, presentation
-   contract, and named roadmap milestone. Flag unrequested milestone promotion.
+   contract, and named roadmap milestone. Flag unrequested milestone promotion
+   and run the documented automated evidence set.
 2. Trace every meaningful visual, motion, and audio signal to actor-visible host
    data or committed history. Check observation timing, missingness, and safe
    unknown fallbacks; reject client-inferred severity, intent, or outcomes.
@@ -43,8 +44,9 @@ description: Review Health Policy Strategy Game visual, audio, GUI, and asset wo
 6. Confirm presentation state never enters commands, transition evaluation,
    stochastic inputs, state hashes, or authoritative replay. Verify graceful
    behavior when data, assets, audio, or browser capabilities are unavailable.
-7. Return `pass`, `fix`, or `redo`. A `pass` must still state evidence limits;
-   one targeted revision and re-review is the default maximum before escalation.
+7. Return `pass`, `fix`, or `redo`. A `pass` must still state evidence limits.
+   Agents may revise and re-run the checks; optional human or legal feedback is
+   recorded as a limit or follow-up, not a technical stop gate.
 
 ## Outputs
 
@@ -68,6 +70,8 @@ Write `_workspace/03_presentation_qa.md` with these sections:
   instead of being duplicated here.
 - Approval means only that the bounded project contract passed; it does not
   establish usability, learning, calibration, balance, or policy validity.
+- Asset uncertainty fails closed to exclusion and a registered generic fallback;
+  no reviewer is asked to guess provenance, identity, resemblance, or rights.
 
 ## References
 

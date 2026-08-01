@@ -1,11 +1,35 @@
 # MCP Playtesting Guide
 
-This guide describes how to run automated and interactive gameplay playtests of the Health Policy Strategy Game using the Model Context Protocol (MCP) interface and the provided Python tooling. It is the operational runbook for the active [`AI-Agent Playtest Protocol`](../validation/playtesting.md).
+This guide describes how to run automated gameplay evidence of the Health Policy
+Strategy Game using the Model Context Protocol (MCP) interface, the loopback GUI
+host, and the provided Python tooling. It is the operational runbook for the
+active [`AI-Agent Playtest Protocol`](../validation/playtesting.md).
+
+## Current operating rule (v0.14.2)
+
+Use agents or scripted policies by default across `stabilization-v1`,
+`competitive-regional-v1`, and `regional-affiliation-v1`. The Rust host owns
+session truth, validation, action ordering, transitions, history/replay,
+debriefs, and durable checkpoints; the GUI and MCP clients consume the same
+actor-visible projections. Chromium evergreen desktop is the default GUI target,
+with the Codex in-app browser used for development inspection. Firefox,
+WebKit/Safari, mobile, and legacy browsers are deferred and non-certified.
+
+Human sessions are optional external feedback. They can inform a separately
+authorized research or product decision, but they do not gate technical
+progression. Automated evidence does not prove human learning, lived
+accessibility, legal clearance, calibration, balance, or policy validity.
+
+The versioned run notes below preserve historical evidence and command examples;
+they do not create current roadmap gates. Prefer the current routes, schemas,
+and campaign coverage documented in `ARCHITECTURE.md`.
 
 ## Architecture Overview
 
 The playtesting harness decouples the simulation logic from the player client:
-1. **MCP Server:** The Rust executable `hs-mgt-game-mcp` exposes tools over stdio using JSON-RPC 2.0. It keeps session state in memory.
+1. **MCP/GUI host:** The Rust executables expose bounded stdio and loopback HTTP
+   tools using JSON-RPC/JSON DTOs. The host owns `GameSessionStore`, durable
+   checkpoint discovery/restoration, and session state.
 2. **Python Client Wrapper:** Located in `scripts/play_game.py`. It starts the MCP server as a subprocess, performs the initialize handshake, and exposes high-level Python wrappers for:
    - Starting a campaign session (`start_session`)
    - Submitting commands and advancing turns (`submit_turn`)
@@ -14,8 +38,8 @@ The playtesting harness decouples the simulation logic from the player client:
 ## Running Automated Playtests
 
 We have automated four scripted profiles (Fiscal Caution, Capacity Growth,
-Balanced Strategy, and Naive First-Time) across both the stabilization and
-competitive campaign previews. Competitive scripts submit commands across the
+Balanced Strategy, and Naive First-Time) across the stabilization, competitive,
+and regional-affiliation campaign previews. Competitive scripts submit commands across the
 24-month campaign and include newer service-line, public-payer, staffing,
 monitoring, and commitment actions. Treat these runs as simulated-player
 evidence; they do not measure actual human learning or classroom effectiveness.
@@ -360,8 +384,9 @@ commands only from player-facing docs, current MCP observations, and the
 `legal_commands` hints returned by the server.
 
 1. Use seed `42` unless the findings question requires seed variation.
-2. Run both current campaigns: `stabilization-v1` and
-   `competitive-regional-v1` with normal difficulty.
+2. Run all current campaigns: `stabilization-v1`,
+   `competitive-regional-v1`, and `regional-affiliation-v1` with normal
+   difficulty where supported.
 3. Record the agent profile or persona, observations shown, legal command hints,
    submitted command text, validation errors and retries, transition hashes,
    final debrief, and the agent's causal explanation after reading the history

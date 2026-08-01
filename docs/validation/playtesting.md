@@ -1,15 +1,17 @@
 # Playtesting Protocol
 
-**Status:** Active Phase 7 validation protocol  
+**Status:** Active agent-playtest and technical evidence protocol
 **Audience:** Contributors, domain reviewers, agent-playtest operators, and future facilitators
-**Version:** v0.11.9 (governed by ADR-0009)
+**Version:** v0.14.2 (governed by ADR-0009 and ADR-0014)
 
-This protocol replaces planned recruitment of external human playtesters for the
-current validation path because recruitment and participant-study costs are not
-feasible for this personal project. It uses AI agents or sub-agents to play the bounded
-campaign slices through the local MCP interface, then synthesizes reproducible
+This protocol uses AI agents or sub-agents as the default technical path to play
+bounded campaign slices through the local MCP or loopback GUI host, then synthesizes reproducible
 evidence about command comprehension, strategic diversity, pacing proxies,
 exploit risk, causal transparency, and debrief coherence.
+
+Human sessions and participant studies are optional external feedback. They may
+inform a later product or research decision, but they are not required to promote
+a technical slice and never serve as an automated stop gate.
 
 Agent playtests are not human-subjects research, classroom learning evaluation,
 or policy validation. They can show how simulated players navigate the game
@@ -22,9 +24,11 @@ human cognitive load, or real-world policy effects.
 | --- | --- | --- |
 | `stabilization-v1` | Five-turn playable slice | First-pass comprehension, tradeoffs, and debrief coherence |
 | `competitive-regional-v1` | 24-month campaign | Competitive command comprehension, simultaneous rival pressure, and monthly tradeoffs |
+| `regional-affiliation-v1` | Six-stage affiliation slice | Campaign coverage, milestone disclosure, and debrief continuity |
 
 Medicare and Medicaid strategic actors (beyond standard integration), empirical
-calibration, and human learning-outcome measurement remain outside this protocol.
+calibration, lived accessibility, and human learning-outcome measurement remain
+outside this protocol.
 
 ## Required Harness
 
@@ -50,6 +54,10 @@ acceptable evidence only when its artifact records:
 - actor-visible observations and legal command hints seen by the agent;
 - submitted commands, validation failures, transition history, and final debrief;
 - synthesis notes that separate observed run behavior from interpretation.
+
+For GUI presentation slices, also record the browser target, host route, fallback
+mode, and whether the artifact was inspected in Chromium evergreen or the Codex
+in-app browser. Do not treat a browser screenshot as evidence of human usability.
 
 ## Agent Profiles
 
