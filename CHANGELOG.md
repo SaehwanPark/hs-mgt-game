@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.102] - 2026-08-01
+
+- Added host-owned per-session GUI checkpoint archive files so concurrent
+  competitive, stabilization, and regional-affiliation checkpoints survive
+  host restart without replacing one another.
+- Preserved opaque browser session-ID recovery and legacy single-file loading;
+  no browser serialization or simulation behavior changed.
+
 ## [0.13.101] - 2026-08-01
 
 - Refreshed the consolidated remaining-gate technical audit to current

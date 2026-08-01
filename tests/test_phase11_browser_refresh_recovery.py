@@ -308,7 +308,7 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     coverage = self.ledger["cross_campaign_checkpoint_identity"]
     self.assertEqual(
       coverage["status"],
-      "complete-cross-campaign-latest-checkpoint-identity",
+      "complete-cross-campaign-per-session-archive-identity",
     )
     self.assertEqual(
       coverage["checkpoint_schemas"],
@@ -319,7 +319,11 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
       ],
     )
     self.assertEqual(
-      coverage["replacement_sequence"],
+      coverage["archive_directory_suffix"],
+      ".checkpoints",
+    )
+    self.assertEqual(
+      coverage["archived_campaigns"],
       [
         "competitive-regional-v1",
         "stabilization-v1",
@@ -328,18 +332,22 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     )
     self.assertEqual(
       coverage["test_source"],
-      "src/mcp/session.rs: fn durable_checkpoint_replacement_preserves_cross_campaign_identity",
+      "src/mcp/session.rs: fn durable_checkpoint_archive_preserves_cross_campaign_identity",
     )
     for marker in (
-      "fn durable_checkpoint_replacement_preserves_cross_campaign_identity",
+      "fn durable_checkpoint_archive_preserves_cross_campaign_identity",
       "checkpoint_missing",
       "gui-competitive-save-v1",
       "gui-stabilization-save-v1",
       "gui-affiliation-save-v1",
+      "gui_session_checkpoint_path",
+      "load_gui_session_checkpoint",
+      "remove_gui_session_checkpoint",
+      ".checkpoints",
       "end_session(EndSessionRequest",
     ):
       self.assertIn(marker, self.session + self.persistence)
-    self.assertTrue(any("archive" in item.lower() for item in coverage["limits"]))
+    self.assertTrue(any("browser serialization" in item.lower() for item in coverage["limits"]))
 
 
 if __name__ == "__main__":

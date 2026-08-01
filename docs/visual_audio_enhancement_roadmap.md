@@ -2376,9 +2376,9 @@ human-review, cross-browser/device, provenance/legal, or public-release gates.
 - [x] Current cross-campaign latest-checkpoint identity covered. Evidence:
   `cross_campaign_checkpoint_identity` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
-  `src/mcp/session.rs: fn durable_checkpoint_replacement_preserves_cross_campaign_identity`;
-  browser serialization, multi-checkpoint archives, and broader save/load/
-  replay evidence remain open.
+  `src/mcp/session.rs: fn durable_checkpoint_archive_preserves_cross_campaign_identity`;
+  browser serialization, checkpoint discovery, and broader save/load/replay
+  evidence remain open.
 - [x] Current full-campaign host audio-state coverage covered. Evidence:
   `full_campaign_audio_state_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
@@ -3742,7 +3742,7 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 ## Milestone 13.1: Release candidate audit
 
 **Status:** Current source-checkout technical evidence is recorded through
-v0.13.101. Product/content review, public-release approval, full-campaign
+v0.13.102. Product/content review, public-release approval, full-campaign
 coverage, durable persistence, cross-browser/device certification, and human
 educational/accessibility gates remain open.
 
@@ -4740,6 +4740,28 @@ The target is recorded in
 `_workspace/179_implementation_plan_visual-audio-phase13-gate-audit-refresh-v0.13.101.md`,
 `_workspace/00_input/request-summary-v0.13.101.md`, and
 `docs/evaluation/phase13-remaining-gate-technical-audit.json`.
+
+### v0.13.102 per-session durable GUI checkpoint archive
+
+- The Phase 11.1 host checkpoint boundary now writes each explicit competitive,
+  stabilization, and regional-affiliation GUI checkpoint to a separate
+  `.checkpoints` archive file keyed by the validated opaque session ID.
+- Fresh hosts can recover concurrent campaign checkpoints independently, and
+  ending one recovered session removes only its matching archive file. The
+  prior single-file checkpoint remains a read/remove migration fallback.
+- The consolidated remaining-gate audit is current at v0.13.102 and includes
+  the archive validator/test as source-bound technical preparation; its eight
+  human/runtime gates remain fail-closed.
+- This closes host-owned per-session archive continuity only. Browser save
+  serialization, checkpoint discovery UI, replay regeneration, broader
+  persistence, human accessibility/educational review, browser/device
+  certification, and public-release gates remain open.
+
+The target is recorded in
+`_workspace/180_implementation_plan_phase11-per-session-durable-checkpoints-v0.13.102.md`,
+`_workspace/00_input/request-summary-v0.13.102.md`,
+`docs/evaluation/phase11.1-campaign-coverage-ledger.json`, and the host
+persistence/session tests.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

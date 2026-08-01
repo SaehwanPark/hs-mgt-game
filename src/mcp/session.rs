@@ -26,8 +26,9 @@ use crate::scenario::{
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
 use super::persistence::{
-  GuiSessionSave, load_gui_session_save, remove_gui_session_save, write_affiliation_session_save,
-  write_competitive_session_save, write_stabilization_session_save,
+  GuiSessionSave, gui_session_checkpoint_path, load_gui_session_checkpoint,
+  remove_gui_session_checkpoint, write_affiliation_session_save, write_competitive_session_save,
+  write_stabilization_session_save,
 };
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
@@ -491,21 +492,23 @@ impl GameSessionStore {
       )));
     };
     if let Some(path) = &self.durable_gui_save_path {
+      let checkpoint_path = gui_session_checkpoint_path(path, &request.session_id)
+        .map_err(checkpoint_persistence_error)?;
       match &session {
         GameSession::Competitive(competitive) => write_competitive_session_save(
-          path,
+          &checkpoint_path,
           &request.session_id,
           &competitive_session_save(competitive),
         )
         .map_err(checkpoint_persistence_error)?,
         GameSession::Stabilization(stabilization) => write_stabilization_session_save(
-          path,
+          &checkpoint_path,
           &request.session_id,
           &stabilization_session_save(stabilization),
         )
         .map_err(checkpoint_persistence_error)?,
         GameSession::Affiliation(affiliation) => write_affiliation_session_save(
-          path,
+          &checkpoint_path,
           &request.session_id,
           &affiliation_session_save(affiliation),
         )
@@ -865,7 +868,8 @@ impl GameSessionStore {
         ) && self.checkpoints.contains_key(&request.session_id)
       });
     if durable_gui_checkpoint && let Some(path) = &self.durable_gui_save_path {
-      remove_gui_session_save(path, &request.session_id).map_err(checkpoint_persistence_error)?;
+      remove_gui_session_checkpoint(path, &request.session_id)
+        .map_err(checkpoint_persistence_error)?;
     }
     let Some(mut session) = self.sessions.remove(&request.session_id) else {
       return Err(error_message(format!(
@@ -956,7 +960,7 @@ impl GameSessionStore {
     let Some(path) = &self.durable_gui_save_path else {
       return Ok(false);
     };
-    let Some(save) = load_gui_session_save(
+    let Some(save) = load_gui_session_checkpoint(
       path,
       session_id,
       &default_competitive_ruleset(),
@@ -2046,7 +2050,9 @@ mod tests {
       })
       .expect("durable save");
     assert_eq!(saved.transition_count, 1);
-    assert!(path.is_file());
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &session_id).expect("durable checkpoint path");
+    assert!(checkpoint_path.is_file());
 
     let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
     let loaded = restarted
@@ -2236,8 +2242,18 @@ mod tests {
         session_id: live.session_id,
       })
       .expect("end colliding live session");
-    assert!(path.is_file(), "unclaimed durable checkpoint must remain");
-    let _ = std::fs::remove_file(path);
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &original_id).expect("durable checkpoint path");
+    assert!(
+      checkpoint_path.is_file(),
+      "unclaimed durable checkpoint must remain"
+    );
+    let archive_dir = checkpoint_path
+      .parent()
+      .expect("checkpoint archive directory")
+      .to_path_buf();
+    let _ = std::fs::remove_file(checkpoint_path);
+    let _ = std::fs::remove_dir(archive_dir);
   }
 
   #[test]
@@ -2261,7 +2277,9 @@ mod tests {
       })
       .expect("durable stabilization save");
     assert_eq!(saved.transition_count, 1);
-    assert!(path.is_file());
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &session_id).expect("durable checkpoint path");
+    assert!(checkpoint_path.is_file());
 
     let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
     let loaded = restarted
@@ -2328,7 +2346,9 @@ mod tests {
       })
       .expect("durable stabilization stage-two save");
     assert_eq!(saved.transition_count, 2);
-    assert!(path.is_file());
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &session_id).expect("durable checkpoint path");
+    assert!(checkpoint_path.is_file());
 
     let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
     let loaded = restarted
@@ -2448,8 +2468,18 @@ mod tests {
         session_id: live.session_id,
       })
       .expect("end colliding live session");
-    assert!(path.is_file(), "unclaimed durable checkpoint must remain");
-    let _ = std::fs::remove_file(path);
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &original_id).expect("durable checkpoint path");
+    assert!(
+      checkpoint_path.is_file(),
+      "unclaimed durable checkpoint must remain"
+    );
+    let archive_dir = checkpoint_path
+      .parent()
+      .expect("checkpoint archive directory")
+      .to_path_buf();
+    let _ = std::fs::remove_file(checkpoint_path);
+    let _ = std::fs::remove_dir(archive_dir);
   }
 
   #[test]
@@ -2473,7 +2503,9 @@ mod tests {
       })
       .expect("durable affiliation save");
     assert_eq!(saved.transition_count, 1);
-    assert!(path.is_file());
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &session_id).expect("durable checkpoint path");
+    assert!(checkpoint_path.is_file());
 
     let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
     let loaded = restarted
@@ -2541,7 +2573,9 @@ mod tests {
       })
       .expect("durable affiliation stage-three save");
     assert_eq!(saved.transition_count, 3);
-    assert!(path.is_file());
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &session_id).expect("durable checkpoint path");
+    assert!(checkpoint_path.is_file());
 
     let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
     let loaded = restarted
@@ -2621,7 +2655,7 @@ mod tests {
   }
 
   #[test]
-  fn durable_checkpoint_replacement_preserves_cross_campaign_identity() {
+  fn durable_checkpoint_archive_preserves_cross_campaign_identity() {
     let path = std::env::temp_dir().join(format!(
       "hs-mgt-game-durable-cross-campaign-{}.save",
       std::process::id()
@@ -2654,98 +2688,100 @@ mod tests {
       .save_session(SaveSessionRequest {
         session_id: stabilization_id.clone(),
       })
-      .expect("stabilization checkpoint replacement");
+      .expect("stabilization checkpoint");
     assert_eq!(stabilization_saved.campaign, "stabilization-v1");
 
-    let mut stabilization_host = GameSessionStore::with_competitive_persistence(path.clone());
-    let competitive_live = start(&mut stabilization_host, "competitive-regional-v1");
-    assert_eq!(competitive_live.session_id, competitive_id);
-    let replaced_competitive = stabilization_host
-      .load_session(LoadSessionRequest {
-        session_id: competitive_id.clone(),
-      })
-      .expect_err("replaced competitive checkpoint must not hydrate");
-    assert_eq!(
-      replaced_competitive.code.as_deref(),
-      Some("checkpoint_missing")
-    );
-    stabilization_host
-      .end_session(EndSessionRequest {
-        session_id: competitive_id.clone(),
-      })
-      .expect("end competitive placeholder");
-
-    let stabilization_live = start(&mut stabilization_host, "stabilization-v1");
-    assert_eq!(stabilization_live.session_id, stabilization_id);
-    stabilization_host
-      .end_session(EndSessionRequest {
-        session_id: stabilization_id.clone(),
-      })
-      .expect("end stabilization placeholder before hydration");
-    let loaded_stabilization = stabilization_host
-      .load_session(LoadSessionRequest {
-        session_id: stabilization_id.clone(),
-      })
-      .expect("latest stabilization checkpoint must hydrate");
-    assert_eq!(loaded_stabilization.campaign, "stabilization-v1");
-    assert_eq!(loaded_stabilization.transition_count, 1);
-
-    let affiliation = start(&mut stabilization_host, "regional-affiliation-v1");
+    let affiliation = start(&mut writer, "regional-affiliation-v1");
     let affiliation_id = affiliation.session_id.clone();
-    stabilization_host
+    writer
       .submit_turn(SubmitTurnRequest {
         session_id: affiliation_id.clone(),
         command_text: "assess".to_string(),
       })
       .expect("affiliation checkpoint transition");
-    let affiliation_saved = stabilization_host
+    let affiliation_saved = writer
       .save_session(SaveSessionRequest {
         session_id: affiliation_id.clone(),
       })
-      .expect("affiliation checkpoint replacement");
+      .expect("affiliation checkpoint");
     assert_eq!(affiliation_saved.campaign, "regional-affiliation-v1");
 
-    let mut affiliation_host = GameSessionStore::with_competitive_persistence(path.clone());
-    let competitive_placeholder = start(&mut affiliation_host, "competitive-regional-v1");
-    assert_eq!(competitive_placeholder.session_id, competitive_id);
-    let stabilization_placeholder = start(&mut affiliation_host, "stabilization-v1");
-    assert_eq!(stabilization_placeholder.session_id, stabilization_id);
-    let replaced_stabilization = affiliation_host
+    let mut restarted = GameSessionStore::with_competitive_persistence(path.clone());
+    let competitive_live = start(&mut restarted, "competitive-regional-v1");
+    assert_eq!(competitive_live.session_id, competitive_id);
+    let live_competitive = restarted
+      .load_session(LoadSessionRequest {
+        session_id: competitive_id.clone(),
+      })
+      .expect_err("a live competitive session must not be overwritten");
+    assert_eq!(live_competitive.code.as_deref(), Some("checkpoint_missing"));
+    restarted
+      .end_session(EndSessionRequest {
+        session_id: competitive_id.clone(),
+      })
+      .expect("end competitive placeholder before hydration");
+    let loaded_competitive = restarted
+      .load_session(LoadSessionRequest {
+        session_id: competitive_id.clone(),
+      })
+      .expect("competitive checkpoint must hydrate");
+    assert_eq!(loaded_competitive.campaign, "competitive-regional-v1");
+    assert_eq!(loaded_competitive.transition_count, 1);
+    restarted
+      .end_session(EndSessionRequest {
+        session_id: competitive_id,
+      })
+      .expect("end recovered competitive session");
+
+    let stabilization_live = start(&mut restarted, "stabilization-v1");
+    assert_eq!(stabilization_live.session_id, stabilization_id);
+    restarted
+      .end_session(EndSessionRequest {
+        session_id: stabilization_id.clone(),
+      })
+      .expect("end stabilization placeholder before hydration");
+    let loaded_stabilization = restarted
       .load_session(LoadSessionRequest {
         session_id: stabilization_id.clone(),
       })
-      .expect_err("replaced stabilization checkpoint must not hydrate");
-    assert_eq!(
-      replaced_stabilization.code.as_deref(),
-      Some("checkpoint_missing")
-    );
-    affiliation_host
+      .expect("stabilization checkpoint must hydrate");
+    assert_eq!(loaded_stabilization.campaign, "stabilization-v1");
+    assert_eq!(loaded_stabilization.transition_count, 1);
+    let affiliation_checkpoint =
+      gui_session_checkpoint_path(&path, &affiliation_id).expect("affiliation checkpoint path");
+    let archive_dir = affiliation_checkpoint
+      .parent()
+      .expect("checkpoint archive directory")
+      .to_path_buf();
+    assert!(affiliation_checkpoint.is_file());
+    restarted
       .end_session(EndSessionRequest {
         session_id: stabilization_id,
       })
-      .expect("end stabilization placeholder");
+      .expect("end recovered stabilization session");
 
-    let affiliation_placeholder = start(&mut affiliation_host, "regional-affiliation-v1");
+    let affiliation_placeholder = start(&mut restarted, "regional-affiliation-v1");
     assert_eq!(affiliation_placeholder.session_id, affiliation_id);
-    affiliation_host
+    restarted
       .end_session(EndSessionRequest {
         session_id: affiliation_id.clone(),
       })
       .expect("end affiliation placeholder before hydration");
-    let loaded_affiliation = affiliation_host
+    let loaded_affiliation = restarted
       .load_session(LoadSessionRequest {
         session_id: affiliation_id.clone(),
       })
-      .expect("latest affiliation checkpoint must hydrate");
+      .expect("affiliation checkpoint must hydrate");
     assert_eq!(loaded_affiliation.campaign, "regional-affiliation-v1");
     assert_eq!(loaded_affiliation.transition_count, 1);
 
-    affiliation_host
+    restarted
       .end_session(EndSessionRequest {
         session_id: affiliation_id,
       })
-      .expect("end latest recovered campaign");
+      .expect("end recovered affiliation session");
     assert!(!path.exists());
+    assert!(!archive_dir.exists());
   }
 
   #[test]
@@ -2789,8 +2825,18 @@ mod tests {
         session_id: live.session_id,
       })
       .expect("end colliding live session");
-    assert!(path.is_file(), "unclaimed durable checkpoint must remain");
-    let _ = std::fs::remove_file(path);
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, &original_id).expect("durable checkpoint path");
+    assert!(
+      checkpoint_path.is_file(),
+      "unclaimed durable checkpoint must remain"
+    );
+    let archive_dir = checkpoint_path
+      .parent()
+      .expect("checkpoint archive directory")
+      .to_path_buf();
+    let _ = std::fs::remove_file(checkpoint_path);
+    let _ = std::fs::remove_dir(archive_dir);
   }
 
   #[test]

@@ -14,7 +14,7 @@ pub use action::{
 pub use campaign_coverage::{CAMPAIGN_COVERAGE_SCHEMA_VERSION, CampaignCoverageEnvelope};
 pub use persistence::{
   GUI_AFFILIATION_SAVE_SCHEMA_VERSION, GUI_COMPETITIVE_SAVE_SCHEMA_VERSION,
-  GUI_STABILIZATION_SAVE_SCHEMA_VERSION,
+  GUI_STABILIZATION_SAVE_SCHEMA_VERSION, gui_session_checkpoint_path,
 };
 pub use presentation::{PRESENTATION_SCHEMA_VERSION, ReadOnlyPresentationEnvelope};
 pub use regional_world::{REGIONAL_WORLD_SCHEMA_VERSION, RegionalWorldEnvelope};

@@ -3292,3 +3292,44 @@ Asset provenance/portrait review, audio and first-session evaluation,
 debrief/educational review, content/resemblance/clinical review, competitive
 campaign human coverage, browser/device certification, revision decisions, and
 campaign expansion approval remain pending and promotion-blocking.
+
+# Final Handoff — Per-session durable GUI checkpoint archive v0.13.102
+
+## Status
+
+The v0.13.102 persistence slice is implemented on
+`codex/phase11-per-session-checkpoints-v0.13.102` and reviewed in PR #349. It
+adds host-owned per-session GUI checkpoint archives without promoting any
+browser, replay, human, device, or release gate.
+
+## Evidence
+
+- Plan: `_workspace/180_implementation_plan_phase11-per-session-durable-checkpoints-v0.13.102.md`.
+- Request summary: `_workspace/00_input/request-summary-v0.13.102.md`.
+- Per-session archive and legacy fallback: `src/mcp/persistence.rs` and
+  `src/mcp/session.rs`.
+- Campaign coverage ledger and consolidated technical audit are synchronized
+  to v0.13.102; the audit still preserves all eight promotion-blocking gates.
+
+## Verification
+
+- Full Python suite: 924 tests pass.
+- Serial Rust suite: 379 tests pass.
+- Clippy, formatting, CLI smoke, release metadata, asset/audio, browser,
+  offline/loading/device, documentation-link, and audit checks pass.
+- Regression coverage proves independent competitive, stabilization, and
+  regional-affiliation archive recovery, opaque session-ID validation, legacy
+  fallback, and malformed legacy cleanup.
+
+## Review outcome
+
+Exactly one medium-effort code reviewer was used for PR #349. The reviewer
+found one Medium legacy-cleanup failure mode and one Low handoff-documentation
+omission; both were corrected on this branch. No second reviewer was used.
+
+## Remaining gates
+
+Asset provenance/portrait review, audio and first-session evaluation,
+debrief/educational review, content/resemblance/clinical review, competitive
+campaign human coverage, browser/device certification, revision decisions, and
+campaign expansion approval remain pending and promotion-blocking.

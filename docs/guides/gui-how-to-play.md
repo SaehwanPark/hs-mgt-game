@@ -86,9 +86,9 @@ After each accepted GUI decision, the host automatically requests a checkpoint
 through the same host-only path. The GUI reports the committed transition count
 when autosave succeeds; if it fails, the committed session remains active and
 the written status gives the error. **Save host checkpoint** remains available
-as a manual retry. The host stores one latest checkpoint for the selected
-campaign; after a host restart, enter the same opaque session ID and choose
-**Load existing session** or **Restore host checkpoint**. The browser never
+as a manual retry. The host stores one checkpoint file per opaque session ID in
+its sibling archive; after a host restart, enter the same opaque session ID and
+choose **Load existing session** or **Restore host checkpoint**. The browser never
 receives the saved artifact, and a missing or colliding checkpoint is reported
 as a recoverable error.
 
@@ -178,18 +178,17 @@ session ID**, then select **Load existing session**. For
 each accepted decision requests autosave; select **Save host checkpoint** before
 stopping the host if you want an explicit retry. A browser refresh or manual
 load after a restart attempts that host checkpoint once when the opaque ID
-matches the saved file, then refreshes the ordinary
+matches an archived checkpoint file, then refreshes the ordinary
 presentation/campaign/action/history/replay reads. Without a successful
 checkpoint, stopping or restarting the host invalidates the live session ID.
 
 ## Stop the GUI
 
 Return to the server terminal and press Ctrl-C. All in-memory GUI sessions end
-when the process stops; the latest autosaved competitive, stabilization, or
-regional-affiliation checkpoint remains in the printed host application-config
-path until the recovered session is ended or replaced by a later save. The
-configured path stores one latest checkpoint; it is not an archive for multiple
-sessions.
+when the process stops; each autosaved competitive, stabilization, or
+regional-affiliation checkpoint remains in the host application's sibling
+checkpoint archive until that recovered session is ended. Older single-file
+checkpoints remain readable as a migration fallback.
 
 ## Use a different port
 

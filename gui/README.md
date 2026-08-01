@@ -404,11 +404,13 @@ history, replay, and regional-world views; failed operations preserve the
 current view. The loopback GUI host also writes an explicit competitive,
 stabilization, or regional-affiliation checkpoint to its application-config
 save path, wrapping the existing `CompetitiveSessionSave`, `SessionSave`, or
-`AffiliationReplayArtifact` artifact with the opaque session ID. After a host
-restart, a browser refresh may request the existing host `loadSession` route
-once after an unknown live-session read, then repeat the same actor-visible
-reads. The browser never receives or serializes the save artifact, and the path
-stores one latest explicit checkpoint.
+`AffiliationReplayArtifact` artifact with the opaque session ID. Each explicit
+checkpoint is written to a separate host-owned file in a sibling
+`.checkpoints` archive keyed by that opaque ID; older single-file checkpoints
+remain loadable as a migration fallback. After a host restart, a browser
+refresh may request the existing host `loadSession` route once after an
+unknown live-session read, then repeat the same actor-visible reads. The
+browser never receives or serializes the save artifact.
 
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a

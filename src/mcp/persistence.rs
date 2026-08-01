@@ -17,6 +17,7 @@ use crate::model::{
 pub const GUI_COMPETITIVE_SAVE_SCHEMA_VERSION: &str = "gui-competitive-save-v1";
 pub const GUI_STABILIZATION_SAVE_SCHEMA_VERSION: &str = "gui-stabilization-save-v1";
 pub const GUI_AFFILIATION_SAVE_SCHEMA_VERSION: &str = "gui-affiliation-save-v1";
+const GUI_CHECKPOINT_ARCHIVE_SUFFIX: &str = ".checkpoints";
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct GuiCompetitiveSessionSave {
@@ -122,6 +123,31 @@ fn write_gui_save_text(path: &Path, text: &str) -> Result<(), String> {
   }
   fs::rename(&temporary_path, path)
     .map_err(|error| format!("unable to replace GUI save at {}: {error}", path.display()))
+}
+
+pub fn gui_session_checkpoint_path(
+  path: &Path,
+  session_id: &str,
+) -> Result<std::path::PathBuf, String> {
+  if session_id.is_empty()
+    || !session_id
+      .bytes()
+      .all(|byte| byte.is_ascii_alphanumeric() || byte == b'-' || byte == b'_')
+  {
+    return Err(format!(
+      "invalid GUI session ID for checkpoint path: '{session_id}'"
+    ));
+  }
+  let file_name = path
+    .file_name()
+    .and_then(|name| name.to_str())
+    .filter(|name| !name.is_empty())
+    .ok_or_else(|| format!("GUI save path has no file name: {}", path.display()))?;
+  Ok(
+    path
+      .with_file_name(format!("{file_name}{GUI_CHECKPOINT_ARCHIVE_SUFFIX}"))
+      .join(format!("{session_id}.save")),
+  )
 }
 
 pub fn load_competitive_session_save(
@@ -253,22 +279,83 @@ pub fn load_gui_session_save(
   }
 }
 
-pub fn remove_gui_session_save(path: &Path, session_id: &str) -> Result<(), String> {
+pub fn load_gui_session_checkpoint(
+  path: &Path,
+  session_id: &str,
+  competitive_ruleset: &CompetitiveRuleset,
+  stabilization_ruleset: &Ruleset,
+  affiliation_ruleset: &AffiliationRuleset,
+) -> Result<Option<GuiSessionSave>, String> {
+  let checkpoint_path = gui_session_checkpoint_path(path, session_id)?;
+  if checkpoint_path.is_file() {
+    return load_gui_session_save(
+      &checkpoint_path,
+      session_id,
+      competitive_ruleset,
+      stabilization_ruleset,
+      affiliation_ruleset,
+    );
+  }
+  load_gui_session_save(
+    path,
+    session_id,
+    competitive_ruleset,
+    stabilization_ruleset,
+    affiliation_ruleset,
+  )
+}
+
+#[derive(Debug)]
+enum GuiSessionSaveRemovalError {
+  Io(String),
+  InvalidContent(String),
+}
+
+impl std::fmt::Display for GuiSessionSaveRemovalError {
+  fn fmt(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+    match self {
+      Self::Io(message) | Self::InvalidContent(message) => formatter.write_str(message),
+    }
+  }
+}
+
+fn remove_gui_session_save(
+  path: &Path,
+  session_id: &str,
+) -> Result<(), GuiSessionSaveRemovalError> {
   if !path.is_file() {
     return Ok(());
   }
-  let text = fs::read_to_string(path)
-    .map_err(|error| format!("unable to read GUI save at {}: {error}", path.display()))?;
-  let value: serde_json::Value = serde_json::from_str(&text)
-    .map_err(|error| format!("GUI save parse error at {}: {error}", path.display()))?;
+  let text = fs::read_to_string(path).map_err(|error| {
+    GuiSessionSaveRemovalError::Io(format!(
+      "unable to read GUI save at {}: {error}",
+      path.display()
+    ))
+  })?;
+  let value: serde_json::Value = serde_json::from_str(&text).map_err(|error| {
+    GuiSessionSaveRemovalError::InvalidContent(format!(
+      "GUI save parse error at {}: {error}",
+      path.display()
+    ))
+  })?;
   let schema = value
     .get("schema_version")
     .and_then(serde_json::Value::as_str)
-    .ok_or_else(|| format!("GUI save at {} has no schema version", path.display()))?;
+    .ok_or_else(|| {
+      GuiSessionSaveRemovalError::InvalidContent(format!(
+        "GUI save at {} has no schema version",
+        path.display()
+      ))
+    })?;
   let stored_session_id = value
     .get("session_id")
     .and_then(serde_json::Value::as_str)
-    .ok_or_else(|| format!("GUI save at {} has no session ID", path.display()))?;
+    .ok_or_else(|| {
+      GuiSessionSaveRemovalError::InvalidContent(format!(
+        "GUI save at {} has no session ID",
+        path.display()
+      ))
+    })?;
   if stored_session_id == session_id
     && matches!(
       schema,
@@ -277,8 +364,51 @@ pub fn remove_gui_session_save(path: &Path, session_id: &str) -> Result<(), Stri
         | GUI_AFFILIATION_SAVE_SCHEMA_VERSION
     )
   {
-    fs::remove_file(path)
-      .map_err(|error| format!("unable to remove GUI save at {}: {error}", path.display()))?;
+    fs::remove_file(path).map_err(|error| {
+      GuiSessionSaveRemovalError::Io(format!(
+        "unable to remove GUI save at {}: {error}",
+        path.display()
+      ))
+    })?;
+  }
+  Ok(())
+}
+
+pub fn remove_gui_session_checkpoint(path: &Path, session_id: &str) -> Result<(), String> {
+  let checkpoint_path = gui_session_checkpoint_path(path, session_id)?;
+  if let Err(error) = remove_gui_session_save(path, session_id) {
+    match error {
+      GuiSessionSaveRemovalError::InvalidContent(error) if path.is_file() => {
+        fs::remove_file(path).map_err(|remove_error| {
+          format!(
+            "unable to remove invalid legacy GUI save at {}: {remove_error} (original cleanup error: {error})",
+            path.display()
+          )
+        })?;
+      }
+      GuiSessionSaveRemovalError::Io(error) => return Err(error),
+      GuiSessionSaveRemovalError::InvalidContent(error) => return Err(error),
+    }
+  }
+  if checkpoint_path.is_file() {
+    fs::remove_file(&checkpoint_path).map_err(|error| {
+      format!(
+        "unable to remove GUI checkpoint at {}: {error}",
+        checkpoint_path.display()
+      )
+    })?;
+  }
+  if let Some(archive_dir) = checkpoint_path.parent()
+    && let Err(error) = fs::remove_dir(archive_dir)
+    && !matches!(
+      error.kind(),
+      std::io::ErrorKind::NotFound | std::io::ErrorKind::DirectoryNotEmpty
+    )
+  {
+    return Err(format!(
+      "unable to remove empty GUI checkpoint archive {}: {error}",
+      archive_dir.display()
+    ));
   }
   Ok(())
 }
@@ -396,6 +526,180 @@ mod tests {
     assert!(!path.exists());
     let _ = fs::remove_file(&path);
     let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn gui_checkpoint_archive_keeps_session_files_independent() {
+    let directory =
+      std::env::temp_dir().join(format!("hs-mgt-game-gui-archive-{}", std::process::id()));
+    let path = directory.join("gui.save");
+    let ruleset = default_ruleset();
+    let first = SessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      experience_mode: ExperienceMode::Standard,
+      history: History {
+        genesis: genesis_state(),
+        transitions: Vec::new(),
+      },
+      next_turn: 1,
+    };
+    let mut second = first.clone();
+    second.seed = 43;
+    let first_path = gui_session_checkpoint_path(&path, "session-1").expect("first path");
+    let second_path = gui_session_checkpoint_path(&path, "session-2").expect("second path");
+    write_stabilization_session_save(&first_path, "session-1", &first).expect("first checkpoint");
+    write_stabilization_session_save(&second_path, "session-2", &second)
+      .expect("second checkpoint");
+    assert_ne!(first_path, second_path);
+    assert!(first_path.is_file());
+    assert!(second_path.is_file());
+
+    let restored_first = load_gui_session_checkpoint(
+      &path,
+      "session-1",
+      &default_competitive_ruleset(),
+      &ruleset,
+      &default_affiliation_ruleset(),
+    )
+    .expect("first archive read")
+    .expect("first archive");
+    let restored_second = load_gui_session_checkpoint(
+      &path,
+      "session-2",
+      &default_competitive_ruleset(),
+      &ruleset,
+      &default_affiliation_ruleset(),
+    )
+    .expect("second archive read")
+    .expect("second archive");
+    let GuiSessionSave::Stabilization(restored_first) = restored_first else {
+      panic!("first archive campaign");
+    };
+    let GuiSessionSave::Stabilization(restored_second) = restored_second else {
+      panic!("second archive campaign");
+    };
+    assert_eq!(restored_first.seed, 42);
+    assert_eq!(restored_second.seed, 43);
+
+    remove_gui_session_checkpoint(&path, "session-1").expect("remove first checkpoint");
+    assert!(!first_path.exists());
+    assert!(second_path.is_file());
+    remove_gui_session_checkpoint(&path, "session-2").expect("remove second checkpoint");
+    assert!(!second_path.exists());
+    assert!(!path.with_file_name("gui.save.checkpoints").exists());
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn legacy_single_file_checkpoint_remains_a_read_fallback() {
+    let directory =
+      std::env::temp_dir().join(format!("hs-mgt-game-gui-legacy-{}", std::process::id()));
+    let path = directory.join("gui.save");
+    let ruleset = default_ruleset();
+    let save = SessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      experience_mode: ExperienceMode::Standard,
+      history: History {
+        genesis: genesis_state(),
+        transitions: Vec::new(),
+      },
+      next_turn: 1,
+    };
+    write_stabilization_session_save(&path, "session-legacy", &save).expect("legacy checkpoint");
+    let restored = load_gui_session_checkpoint(
+      &path,
+      "session-legacy",
+      &default_competitive_ruleset(),
+      &ruleset,
+      &default_affiliation_ruleset(),
+    )
+    .expect("legacy checkpoint read")
+    .expect("legacy checkpoint");
+    assert!(matches!(restored, GuiSessionSave::Stabilization(_)));
+    remove_gui_session_checkpoint(&path, "session-legacy").expect("remove legacy checkpoint");
+    assert!(!path.exists());
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn malformed_legacy_checkpoint_does_not_block_archive_cleanup() {
+    let directory = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-legacy-invalid-{}",
+      std::process::id()
+    ));
+    let path = directory.join("gui.save");
+    let checkpoint_path = gui_session_checkpoint_path(&path, "session-invalid")
+      .expect("invalid legacy test checkpoint path");
+    let ruleset = default_ruleset();
+    let save = SessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      experience_mode: ExperienceMode::Standard,
+      history: History {
+        genesis: genesis_state(),
+        transitions: Vec::new(),
+      },
+      next_turn: 1,
+    };
+    write_stabilization_session_save(&checkpoint_path, "session-invalid", &save)
+      .expect("archive checkpoint");
+    fs::write(&path, "{not-json").expect("malformed legacy checkpoint");
+
+    remove_gui_session_checkpoint(&path, "session-invalid")
+      .expect("malformed legacy residue must not block cleanup");
+    assert!(!path.exists());
+    assert!(!checkpoint_path.exists());
+    assert!(
+      !checkpoint_path
+        .parent()
+        .expect("archive directory")
+        .exists()
+    );
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn checkpoint_cleanup_preserves_valid_legacy_checkpoint_for_other_session() {
+    let directory = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-legacy-other-{}",
+      std::process::id()
+    ));
+    let path = directory.join("gui.save");
+    let checkpoint_path =
+      gui_session_checkpoint_path(&path, "session-target").expect("target checkpoint path");
+    let ruleset = default_ruleset();
+    let save = SessionSave {
+      ruleset_version: ruleset.version.to_string(),
+      seed: 42,
+      experience_mode: ExperienceMode::Standard,
+      history: History {
+        genesis: genesis_state(),
+        transitions: Vec::new(),
+      },
+      next_turn: 1,
+    };
+    write_stabilization_session_save(&checkpoint_path, "session-target", &save)
+      .expect("archive checkpoint");
+    write_stabilization_session_save(&path, "session-other", &save)
+      .expect("other legacy checkpoint");
+
+    remove_gui_session_checkpoint(&path, "session-target")
+      .expect("target cleanup must preserve other legacy checkpoint");
+    assert!(!checkpoint_path.exists());
+    assert!(path.is_file());
+    remove_gui_session_save(&path, "session-other").expect("other legacy cleanup");
+    assert!(!path.exists());
+    let _ = fs::remove_dir(&directory);
+  }
+
+  #[test]
+  fn checkpoint_archive_rejects_path_unsafe_session_ids() {
+    let path = std::env::temp_dir().join("hs-mgt-game-gui-safe-id.save");
+    let error = gui_session_checkpoint_path(&path, "../escape").expect_err("unsafe ID");
+    assert!(error.contains("invalid GUI session ID"));
+    let _ = fs::remove_file(path);
   }
 
   #[test]

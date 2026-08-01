@@ -3755,3 +3755,18 @@ separate gates.
 - Prevention: re-run the consolidated audit after each evidence packet merge;
   update source indexes without converting technical preparation into human or
   release approval.
+
+# Keep Durable GUI Checkpoints Per Session
+
+- Context: the GUI host stored every campaign's explicit checkpoint in one
+  latest-file slot, so saving a second campaign replaced the first campaign's
+  durable recovery artifact.
+- Risk: a restart could preserve the host authority boundary while silently
+  losing a valid checkpoint that still had an opaque session ID in browser
+  storage.
+- Resolution: write each validated session ID to a sibling `.checkpoints`
+  archive file, hydrate the matching file first, and retain the old single
+  file as a migration fallback.
+- Prevention: test concurrent campaign saves, live-ID collision behavior,
+  per-session cleanup, legacy reads, and path-safe session IDs whenever host
+  persistence changes.

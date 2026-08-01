@@ -504,7 +504,7 @@
     ],
     "boundary": "The host owns file I/O, true state, history, hashes, stochastic inputs, hydration, and transitions; the browser receives only the existing save metadata and actor-visible projections.",
     "limits": [
-      "The configured application path stores one latest explicit competitive checkpoint; a later save replaces it.",
+      "The configured application path now stores one archive file per opaque session ID; browser serialization and checkpoint discovery remain outside this slice.",
       "No autosave, browser serialization, replay regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
@@ -538,7 +538,7 @@
       "No browser save artifact, client state serialization, or new route/schema is introduced."
     ],
     "limits": [
-      "This closes competitive host checkpoint continuation only; browser serialization and cross-campaign durable continuity remain open.",
+      "This closes competitive host checkpoint continuation and per-session archive continuity; browser serialization and broader durable save/load/replay evidence remain open.",
       "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
     ]
   },
@@ -596,44 +596,45 @@
       "No browser save artifact, client state serialization, or new route/schema is introduced."
     ],
     "limits": [
-      "This closes regional-affiliation host checkpoint continuation only; browser serialization, cross-campaign durable continuity, and broader persistence evidence remain open.",
+      "This closes regional-affiliation host checkpoint continuation and per-session archive continuity; browser serialization and broader persistence evidence remain open.",
       "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
     ]
   },
   "cross_campaign_checkpoint_identity": {
-    "status": "complete-cross-campaign-latest-checkpoint-identity",
+    "status": "complete-cross-campaign-per-session-archive-identity",
     "checkpoint_schemas": [
       "gui-competitive-save-v1",
       "gui-stabilization-save-v1",
       "gui-affiliation-save-v1"
     ],
-    "replacement_sequence": [
+    "archive_directory_suffix": ".checkpoints",
+    "archived_campaigns": [
       "competitive-regional-v1",
       "stabilization-v1",
       "regional-affiliation-v1"
     ],
     "host_source": "src/mcp/session.rs: save_session + load_session + end_session + hydrate_durable_session",
-    "test_source": "src/mcp/session.rs: fn durable_checkpoint_replacement_preserves_cross_campaign_identity",
+    "test_source": "src/mcp/session.rs: fn durable_checkpoint_archive_preserves_cross_campaign_identity",
     "fresh_host_recovery": [
-      "replaced competitive ID returns checkpoint_missing after stabilization replaces the single durable wrapper",
-      "matching stabilization ID hydrates the gui-stabilization-save-v1 wrapper",
-      "replaced stabilization ID returns checkpoint_missing after regional affiliation replaces the wrapper",
-      "matching regional-affiliation ID hydrates the gui-affiliation-save-v1 wrapper"
+      "a live session with a colliding ID is never overwritten",
+      "competitive-regional-v1 hydrates from its own gui-competitive-save-v1 archive file",
+      "stabilization-v1 hydrates from its own gui-stabilization-save-v1 archive file",
+      "regional-affiliation-v1 hydrates from its own gui-affiliation-save-v1 archive file"
     ],
     "continuity_behavior": [
-      "Each accepted campaign save replaces the one configured latest checkpoint path rather than creating an archive.",
-      "Fresh hosts hydrate only the newest wrapper when both opaque session ID and campaign wrapper match.",
-      "The latest loaded SaveEnvelope reports regional-affiliation-v1 and one committed transition.",
-      "Ending the recovered latest session removes the matching checkpoint file."
+      "Each accepted campaign save writes a separate archive file keyed by the validated opaque session ID.",
+      "Fresh hosts hydrate a matching archive file without replacing another campaign's checkpoint.",
+      "Ending one recovered session removes only its archive file; the other campaign files remain.",
+      "The last removed archive cleans up the empty archive directory."
     ],
-    "boundary": "The host owns wrapper replacement, campaign identity, checkpoint verification, hydration, transitions, history, replay, and cleanup; the browser retains only opaque session IDs and supplied metadata.",
+    "boundary": "The host owns archive paths, wrapper serialization, campaign identity, checkpoint verification, hydration, transitions, history, replay, and cleanup; the browser retains only opaque session IDs and supplied metadata.",
     "evidence": [
-      "The Rust session regression writes competitive, stabilization, and regional-affiliation saves sequentially on one path.",
-      "Fresh host placeholders exercise checkpoint_missing for each replaced ID and matching hydration for the latest wrapper.",
-      "No archive, browser save artifact, client state serialization, or new route/schema is introduced."
+      "The Rust session regression writes competitive, stabilization, and regional-affiliation saves concurrently and hydrates each after a fresh-host placeholder is ended.",
+      "Persistence tests cover distinct archive paths, independent removal, legacy single-file fallback, and path-safe session IDs.",
+      "No browser save artifact, client state serialization, or new route/schema is introduced."
     ],
     "limits": [
-      "This closes latest-wrapper cross-campaign identity only; browser serialization, multi-checkpoint archive design, and broader save/load/replay evidence remain open.",
+      "This closes host-owned per-session archive continuity only; browser serialization, checkpoint discovery UI, and broader save/load/replay evidence remain open.",
       "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
     ]
   },
@@ -687,7 +688,7 @@
       "No new route/schema, simulation rule, stochastic input, asset, audio file, or browser authority is introduced."
     ],
     "limits": [
-      "This closes technical host audio-state continuity only; browser serialization, multi-checkpoint archives, broader full-campaign save/load/replay evidence, and human listening/accessibility review remain open.",
+      "This closes technical host audio-state continuity only; browser serialization, broader full-campaign save/load/replay evidence, and human listening/accessibility review remain open.",
       "It does not establish screenshots, pixel-level visual quality, device performance, provenance/legal approval, educational benefit, or public release."
     ]
   },
@@ -728,7 +729,7 @@
       "No new route/schema, simulation rule, checkpoint archive, browser serialization, asset, audio file, or browser authority is introduced."
     ],
     "limits": [
-      "This closes host read continuity only; browser serialization, multi-checkpoint archives, human replay/accessibility/educational review, screenshots, provenance/legal approval, and public release remain open."
+      "This closes host read continuity only; browser serialization, human replay/accessibility/educational review, screenshots, provenance/legal approval, and public release remain open."
     ]
   },
   "full_campaign_browser_coverage_rendering": {
@@ -821,7 +822,7 @@
     ],
     "boundary": "The host owns file I/O, replay verification, true state, history, hashes, hydration, and transitions; the browser reuses existing actor-visible reads and stores only the opaque session ID.",
     "limits": [
-      "The configured application path stores one latest explicit checkpoint; a later stabilization or competitive save replaces it.",
+      "The configured application path stores one archive file per opaque session ID; browser serialization and checkpoint discovery remain outside this slice.",
       "No autosave, browser serialization, replay regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
@@ -847,7 +848,7 @@
     ],
     "boundary": "The host owns file I/O, replay verification, true state, history, hashes, hydration, and transitions; the browser reuses existing actor-visible reads and stores only the opaque session ID.",
     "limits": [
-      "The configured application path stores one latest explicit checkpoint; a later campaign save replaces it.",
+      "The configured application path stores one archive file per opaque session ID; browser serialization and checkpoint discovery remain outside this slice.",
       "No autosave, browser serialization, replay regeneration, screenshot, device, accessibility, educational, legal, or public-release claim is made."
     ],
     "evidence": [
@@ -871,7 +872,7 @@
     ],
     "boundary": "The host owns checkpoint serialization, verification, file I/O, history, hashes, and continuation; the browser invokes only the existing save adapter after an accepted host response.",
     "limits": [
-      "Autosave stores one latest host checkpoint through the configured application path; it is not an archive or browser persistence layer.",
+      "Autosave stores one host checkpoint per opaque session ID through the configured archive; browser serialization and checkpoint discovery remain outside this slice.",
       "No full-campaign screenshot, human accessibility/educational, device/browser, provenance/legal, or public-release claim is made."
     ],
     "evidence": [
@@ -1055,7 +1056,7 @@
   },
   "open_limits": [
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
-    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, latest-wrapper cross-campaign identity, full-campaign host audio-state continuity, full-campaign history/replay alignment, and fixture-level full-campaign renderer continuity are covered; browser serialization, multi-checkpoint archives, real-browser screenshots, broader durable save/load evidence, and human visual/listening/accessibility review remain open.",
+    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, per-session cross-campaign archive identity, full-campaign host audio-state continuity, full-campaign history/replay alignment, and fixture-level full-campaign renderer continuity are covered; browser serialization, checkpoint discovery, real-browser screenshots, broader durable save/load evidence, and human visual/listening/accessibility review remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."

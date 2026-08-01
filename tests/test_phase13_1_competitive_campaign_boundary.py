@@ -174,7 +174,7 @@ class Phase131CompetitiveCampaignBoundaryTests(unittest.TestCase):
       self.ledger["limits"],
       [
         "This closes the current repository-owned technical competitive-regional campaign boundary only.",
-        "It does not establish browser serialization, cross-campaign durable save/load/replay continuity, pixel-level full-campaign facility placement/use coverage quality, campaign-specific visual or audio quality, screenshot completeness, cross-browser/device certification, human comprehension, or educational effectiveness.",
+        "It does not establish browser serialization, broader durable save/load/replay continuity, pixel-level full-campaign facility placement/use coverage quality, campaign-specific visual or audio quality, screenshot completeness, cross-browser/device certification, human comprehension, or educational effectiveness.",
         "The broader Competitive campaign coverage complete roadmap item remains open for product/content review and structured human evaluation.",
       ],
     )
