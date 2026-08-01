@@ -26,9 +26,9 @@ use crate::scenario::{
 use crate::sim::{observe_for_human, observe_for_player, transition, validate_competitive_batch};
 
 use super::persistence::{
-  GuiSessionSave, gui_session_checkpoint_path, load_gui_session_checkpoint,
-  remove_gui_session_checkpoint, write_affiliation_session_save, write_competitive_session_save,
-  write_stabilization_session_save,
+  GuiCheckpointStorage, GuiSessionSave, discover_gui_session_checkpoints,
+  gui_session_checkpoint_path, load_gui_session_checkpoint, remove_gui_session_checkpoint,
+  write_affiliation_session_save, write_competitive_session_save, write_stabilization_session_save,
 };
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
@@ -36,6 +36,7 @@ pub const HISTORY_SCHEMA_VERSION: &str = "competitive-history-v1";
 pub const REPLAY_SCHEMA_VERSION: &str = "competitive-replay-v1";
 pub const SAVE_SCHEMA_VERSION: &str = "competitive-save-v1";
 pub const END_SESSION_SCHEMA_VERSION: &str = "competitive-end-session-v1";
+pub const CHECKPOINT_DISCOVERY_SCHEMA_VERSION: &str = "gui-checkpoint-discovery-v1";
 
 #[derive(Clone, Debug, Deserialize, JsonSchema, Serialize)]
 pub struct StartSessionRequest {
@@ -157,6 +158,22 @@ pub struct SaveEnvelope {
   pub seed: u64,
   pub transition_count: usize,
   pub latest_state_hash: Option<String>,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
+pub struct CheckpointDescriptor {
+  pub session_id: String,
+  pub campaign: String,
+  pub seed: u64,
+  pub transition_count: usize,
+  pub storage: String,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
+pub struct CheckpointDiscoveryEnvelope {
+  pub schema_version: String,
+  pub checkpoints: Vec<CheckpointDescriptor>,
+  pub invalid_entry_count: usize,
 }
 
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, JsonSchema)]
@@ -553,6 +570,62 @@ impl GameSessionStore {
       *session = snapshot;
     }
     self.save_envelope(&request.session_id, "loaded")
+  }
+
+  pub fn get_checkpoint_discovery(&self) -> Result<CheckpointDiscoveryEnvelope, McpErrorMessage> {
+    let Some(path) = &self.durable_gui_save_path else {
+      return Err(McpErrorMessage {
+        error: "GUI checkpoint discovery requires a configured host persistence path".to_string(),
+        code: Some("checkpoint_discovery_unavailable".to_string()),
+        resource_limit: None,
+        hint: Some("Start the loopback GUI host with its persistence path configured.".to_string()),
+      });
+    };
+    let discovery = discover_gui_session_checkpoints(
+      path,
+      &default_competitive_ruleset(),
+      &default_ruleset(),
+      &default_affiliation_ruleset(),
+    )
+    .map_err(checkpoint_persistence_error)?;
+    let checkpoints = discovery
+      .checkpoints
+      .into_iter()
+      .map(|checkpoint| {
+        let (campaign, seed, transition_count) = match checkpoint.save {
+          GuiSessionSave::Competitive(save) => (
+            CampaignId::CompetitiveRegionalV1.as_str().to_string(),
+            save.seed,
+            save.history.transitions.len(),
+          ),
+          GuiSessionSave::Stabilization(save) => (
+            CampaignId::StabilizationV1.as_str().to_string(),
+            save.seed,
+            save.history.transitions.len(),
+          ),
+          GuiSessionSave::Affiliation(save) => (
+            CampaignId::RegionalAffiliationV1.as_str().to_string(),
+            save.seed,
+            save.history.transitions.len(),
+          ),
+        };
+        CheckpointDescriptor {
+          session_id: checkpoint.session_id,
+          campaign,
+          seed,
+          transition_count,
+          storage: match checkpoint.storage {
+            GuiCheckpointStorage::Archive => "archive".to_string(),
+            GuiCheckpointStorage::Legacy => "legacy".to_string(),
+          },
+        }
+      })
+      .collect();
+    Ok(CheckpointDiscoveryEnvelope {
+      schema_version: CHECKPOINT_DISCOVERY_SCHEMA_VERSION.to_string(),
+      checkpoints,
+      invalid_entry_count: discovery.invalid_entry_count,
+    })
   }
 
   fn save_envelope(

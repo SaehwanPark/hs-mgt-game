@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.13.103] - 2026-08-01
+
+- Added host-owned `GET /api/v1/checkpoints` discovery for validated durable
+  GUI checkpoint metadata across all three launchable campaigns.
+- Added an accessible GUI checkpoint picker that fills the existing opaque
+  session-ID load flow without storing save artifacts in the browser.
+- Invalid checkpoint files are omitted and counted; valid legacy fallback
+  entries remain discoverable when not shadowed by an archive entry.
+- Browser serialization, automatic loading, replay regeneration, human/runtime
+  certification, and release gates remain open.
+
 ## [0.13.102] - 2026-08-01
 
 - Added host-owned per-session GUI checkpoint archive files so concurrent

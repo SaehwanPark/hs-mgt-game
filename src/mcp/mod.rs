@@ -24,6 +24,7 @@ pub use resolution::{
 };
 pub use server::{McpGameServer, run_stdio_server};
 pub use session::{
+  CHECKPOINT_DISCOVERY_SCHEMA_VERSION, CheckpointDescriptor, CheckpointDiscoveryEnvelope,
   EndSessionRequest, GameSessionStore, GetActionCatalogRequest, GetCampaignCoverageRequest,
   GetHistoryRequest, GetObservationRequest, GetPresentationRequest, GetRegionalWorldRequest,
   GetReplayRequest, GetResolutionRequest, HISTORY_SCHEMA_VERSION, HistoryEnvelope,

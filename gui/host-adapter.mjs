@@ -51,6 +51,10 @@ export function createLocalActionAdapter({ fetchImpl = globalThis.fetch } = {}) 
       return request(`${API_ROOT}/${encodeURIComponent(String(sessionId ?? "").trim())}`);
     },
 
+    async listCheckpoints() {
+      return request("/api/v1/checkpoints");
+    },
+
     async getCampaignCoverage(sessionId) {
       return request(sessionPath(sessionId, "campaign-coverage"));
     },

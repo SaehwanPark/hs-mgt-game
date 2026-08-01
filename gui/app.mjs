@@ -207,6 +207,7 @@ const HISTORY_SCHEMA = "competitive-history-v1";
 const HISTORY_CAMPAIGN = "competitive-regional-v1";
 const REPLAY_SCHEMA = "competitive-replay-v1";
 const SAVE_SCHEMA = "competitive-save-v1";
+const CHECKPOINT_DISCOVERY_SCHEMA = "gui-checkpoint-discovery-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 export const ACTIVE_SESSION_STORAGE_KEY = "hs-mgt-active-session-id";
@@ -1631,6 +1632,59 @@ export function validateSaveEnvelope(envelope) {
   return { ok: true, envelope };
 }
 
+const checkpointError = (code, message) => ({ ok: false, code, message });
+
+export function validateCheckpointDiscoveryEnvelope(envelope) {
+  if (!envelope || typeof envelope !== "object") return checkpointError("empty_checkpoint_discovery", "No checkpoint list was supplied.");
+  if (envelope.schema_version !== CHECKPOINT_DISCOVERY_SCHEMA) return checkpointError("unsupported_checkpoint_discovery_schema", "Unsupported checkpoint schema.");
+  if (!Array.isArray(envelope.checkpoints) || !Number.isInteger(envelope.invalid_entry_count) || envelope.invalid_entry_count < 0) {
+    return checkpointError("incomplete_checkpoint_discovery", "Checkpoint metadata is incomplete.");
+  }
+  if (envelope.checkpoints.some((checkpoint) => (
+    !checkpoint
+    || typeof checkpoint.session_id !== "string"
+    || !/^[A-Za-z0-9_-]+$/.test(checkpoint.session_id)
+    || !SESSION_LAUNCH_CAMPAIGNS.has(checkpoint.campaign)
+    || !Number.isSafeInteger(checkpoint.seed)
+    || checkpoint.seed < 0
+    || !Number.isInteger(checkpoint.transition_count)
+    || checkpoint.transition_count < 0
+    || !["archive", "legacy"].includes(checkpoint.storage)
+  ))) return checkpointError("invalid_checkpoint_discovery_entry", "Invalid checkpoint metadata.");
+  return { ok: true, envelope };
+}
+
+export function renderCheckpointDiscovery(envelope, root = document) {
+  const validation = validateCheckpointDiscoveryEnvelope(envelope);
+  const list = root.querySelector("#session-checkpoint-list");
+  const status = root.querySelector("#session-checkpoint-status");
+  if (!validation.ok) {
+    if (list) { list.replaceChildren(); emptyState(list, validation.message); }
+    if (status) status.textContent = validation.message;
+    return validation;
+  }
+  if (list) {
+    list.replaceChildren();
+    for (const checkpoint of envelope.checkpoints) {
+      const item = document.createElement("li");
+      const select = document.createElement("button");
+      select.textContent = `${sessionCampaignLabel(checkpoint.campaign)} · ${checkpoint.session_id} · ${checkpoint.transition_count} transitions · ${checkpoint.storage} · Use this session ID`;
+      select.addEventListener("click", () => {
+        const input = root.querySelector("#session-id");
+        if (input) input.value = checkpoint.session_id;
+        input?.focus?.();
+        if (status) status.textContent = `ID ${checkpoint.session_id} is ready to load.`;
+      });
+      item.append(select); list.append(item);
+    }
+    if (!envelope.checkpoints.length) emptyState(list, "No valid checkpoints found.");
+  }
+  if (status) status.textContent = envelope.invalid_entry_count
+    ? `${envelope.checkpoints.length} valid checkpoint(s); ${envelope.invalid_entry_count} invalid omitted.`
+    : `${envelope.checkpoints.length} valid checkpoint(s).`;
+  return { ok: true, envelope };
+}
+
 function renderObservationLines(observation, root) {
   const list = root.querySelector("#observation-list");
   list.replaceChildren();
@@ -1979,6 +2033,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
   const start = root.querySelector("#session-start");
   const existingId = root.querySelector("#session-id");
   const loadButton = root.querySelector("#session-load");
+  const discoveryButton = root.querySelector("#session-checkpoints-refresh");
   const campaign = root.querySelector("#session-campaign");
   const difficulty = root.querySelector("#session-difficulty");
   let busy = false;
@@ -1993,7 +2048,25 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
     busy = value;
     if (start) start.disabled = value;
     if (loadButton) loadButton.disabled = value;
+    if (discoveryButton) discoveryButton.disabled = value;
   };
+
+  async function refreshCheckpoints() {
+    if (!adapter || typeof adapter.listCheckpoints !== "function") {
+      return { ok: false, code: "checkpoint_discovery_adapter_missing", message: "Host adapter unavailable." };
+    }
+    setBusy(true);
+    try {
+      return renderCheckpointDiscovery(await adapter.listCheckpoints(), root);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      const status = root.querySelector("#session-checkpoint-status");
+      if (status) status.textContent = `Checkpoint discovery failed; enter an ID manually: ${message}`;
+      return { ok: false, code: "checkpoint_discovery_error", message };
+    } finally {
+      setBusy(false);
+    }
+  }
 
   async function loadExisting(event) {
     event?.preventDefault?.();
@@ -2090,6 +2163,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
 
   form?.addEventListener("submit", startSession);
   loadButton?.addEventListener("click", loadExisting);
+  discoveryButton?.addEventListener("click", () => refreshCheckpoints());
   campaign?.addEventListener("change", updateCampaignControls);
   updateCampaignControls();
   const storedSessionId = sessionStore.get();
@@ -2099,7 +2173,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
   if (!adapter?.startSession) {
     sessionLaunchStatus(root, "Configure a host adapter to start or load a session; the demo fixture remains available.");
   }
-  return { start: startSession, load: loadExisting };
+  return { start: startSession, load: loadExisting, refreshCheckpoints };
 }
 
 export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document, recorder = null } = {}) {
@@ -3477,6 +3551,8 @@ if (typeof document !== "undefined") {
       createHistoryClient,
       createReplayClient,
       createCheckpointClient,
+      validateCheckpointDiscoveryEnvelope,
+      renderCheckpointDiscovery,
       createReadOnlyClient,
       createThinClient,
       campaignMusicStateId,
