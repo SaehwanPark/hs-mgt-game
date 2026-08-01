@@ -3895,3 +3895,18 @@ separate gates.
   ordinary workspace navigation remains presentation-only.
 - Prevention: test event mapping, visibility/focus boundaries, terminal
   routing, and failure/retry states independently from host transition tests.
+
+## Keep One Action Surface Host-Ordered (v0.14.2)
+
+- Context: competitive and campaign-coverage payloads exposed overlapping
+  decision/catalog/builder panels with different copy and interaction rules.
+- Risk: duplicate rows, stale validation, or client-side technical language can
+  make a presentation refactor look like a new authority boundary.
+- Resolution: normalize each host payload into one private action view model,
+  render a single-open card surface, keep the exact canonical command with its
+  draft, and let the host remain authoritative for validation, legality, cost,
+  uncertainty, and transition results.
+- Prevention: characterize one-card-per-host-action, focus/live-region recovery,
+  direct rejection preservation, hidden live technical controls, and the device
+  source budget before changing card or plan markup; record human usability as
+  pending until an authorized pilot exists.

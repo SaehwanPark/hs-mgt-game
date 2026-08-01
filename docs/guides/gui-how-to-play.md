@@ -14,10 +14,10 @@ MCP setup, a separate web server, or manual JavaScript adapter injection.
 - A local checkout of this repository.
 
 The launcher supports `competitive-regional-v1`, `stabilization-v1`, and
-`regional-affiliation-v1`. The competitive campaign uses its action catalog;
-the stabilization and regional-affiliation campaigns use the typed
-`campaign-coverage-v1` panel for host-shaped decisions. Custom scenarios still
-use `cargo run`.
+`regional-affiliation-v1`. All three campaigns use the shared `Actions`
+surface: competitive play drafts a `Monthly plan`, while stabilization and
+regional affiliation commit one decision directly. Custom scenarios still use
+`cargo run`.
 
 The host also exposes `campaign-coverage-v1` for a typed competitive read of
 the current player-visible metrics, public signals, process summaries, action
@@ -25,7 +25,7 @@ metadata, history, and terminal debrief. This read does not replace the
 competitive catalog/validation/submit sequence or reveal private rival state.
 In the normal competitive GUI it is split across the Brief, Decide, Resolve,
 and Review workspaces after start/load and accepted monthly refreshes; if that
-optional read is unavailable, the action rail remains usable.
+optional read is unavailable, the actions remain usable.
 
 For a first session, start with the documented Normal/seed-42 defaults, then
 use the task workspace to reveal one step at a time. Presentation settings are
@@ -72,11 +72,10 @@ rail. Competitive sessions track seven action handoffs:
 2. **Inspect:** read the executive briefing, regional market, selected-entity
    drawer, visible resources, capacity, workforce, payer, and rival signals,
    then choose **Continue to decisions** to acknowledge the brief.
-3. **Draft:** choose parameters in a contextual action form and add it locally.
-4. **Validate:** add at least two drafts, review their canonical commands, then
-   select **Validate draft with host**.
-5. **Submit:** if validation passes and you have not changed the draft, select
-   **Submit validated month**.
+3. **Draft:** open an action card, choose its parameters, and select **Add**.
+4. **Validate:** add the actions you need, then select **Check plan**.
+5. **Submit:** after the host accepts the unchanged plan, select **Commit
+   month**.
 6. **Resolution:** in **Resolve**, read, play, pause, skip, or review the
    committed monthly resolution. Skipping animation does not skip the game
    result.
@@ -85,9 +84,9 @@ rail. Competitive sessions track seven action handoffs:
 
 For stabilization and regional affiliation, the rail instead tracks five
 campaign-coverage handoffs: start/load, inspect the visible campaign envelope,
-explicitly continue to the host-shaped decision, review the committed stage in
-Resolve, and explicitly continue. These campaigns do not use the competitive
-local-draft or validation steps.
+choose a card in **Actions**, review the committed stage in Resolve, and
+explicitly continue. These campaigns do not use the competitive local-draft or
+validation steps.
 
 After each accepted GUI decision, the host automatically requests a checkpoint
 through the same host-only path. The GUI reports the committed transition count
@@ -102,9 +101,11 @@ and a missing or colliding checkpoint is reported as a recoverable error. An
 explicit **Download host save** action transfers only the host-validated file
 bytes to the user's download.
 
-Drafting does not advance time. Validation checks action points, cash, political
-capital, command syntax, and other host-owned constraints without committing the
-month. Editing or removing a validated draft requires validation again.
+Drafting does not advance time. **Check plan** asks the host to validate action
+points, cash, political capital, command syntax, and other host-owned
+constraints without committing the month. Editing or removing a validated
+draft requires validation again. **Details** exposes host-provided timing,
+rules, uncertainty, cost, canonical command template, and source.
 
 ## What the interface shows
 
@@ -288,8 +289,8 @@ observations, outcomes, hashes, or true state.
 The repository also has a bounded Firefox/Marionette smoke that exercises one
 explicit checkpoint save and one refresh against the live loopback host. It
 launches each of the three supported campaigns, runs the visible Hold path
-through all 24 competitive months, and runs the visible host-shaped coverage
-forms through the five stabilization and six regional-affiliation stages,
+through all 24 competitive months, and runs the visible unified action cards
+through the five stabilization and six regional-affiliation stages,
 including host autosaves, history/replay, and terminal debriefs. This is
 runtime evidence only; it does not certify Firefox support, alternative action
 values, WebKit, real hardware, audio decoding, or human accessibility/usability.

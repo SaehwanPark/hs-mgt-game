@@ -4376,3 +4376,35 @@ file-backed asset change is authorized. Automated and host-backed checks prove
 technical continuity only; the authorized five-group human pilot remains
 pending, so no usability, educational-effectiveness, accessibility,
 browser-certification, or cognitive-load claim is made.
+
+---
+
+# Request Summary — Unified draft contextual actions v0.14.2
+
+## Authorized outcome
+
+Consolidate competitive catalog/builder and campaign decision presentation into
+one concise `Actions` surface. Competitive campaigns draft a `Monthly plan`;
+stabilization and regional affiliation commit one decision from the same card
+primitive. Host APIs, simulation, persistence, canonical commands, and
+schemas remain unchanged.
+
+## Implemented scope
+
+- Host payloads normalize into a private action view model with ID, label,
+  parameters, technical details, source, and `draft`/`commit` mode.
+- Cards are host-ordered, collapsed by default, single-open, bounded to six
+  visible rows with overflow disclosure, and expose keyboard/tap/hover `Details`.
+- Competitive add/revise/save/remove flows preserve the host-generated batch;
+  edits clear validation and `Check plan` gates `Commit month`. Direct campaign
+  rejection preserves the expanded form and values.
+- Live play hides legacy CLI/legal controls; static/demo keeps them under
+  collapsed `Technical controls`. The inspection continuation appears only at
+  the inspect handoff, with focus and live-region recovery preserved.
+
+## Evidence limits and non-goals
+
+Automated and host-backed checks prove technical/interface continuity only. No
+human usability, accessibility, educational, browser/device certification, or
+cognitive-load claim is made. No host schema, simulation, persistence,
+dependency, asset, or broader workspace redesign is included.

@@ -782,7 +782,7 @@ console.log(JSON.stringify(resolved));
       "campaign-coverage-v1",
       "campaignMusicStateId",
       "campaignAudioCueIds",
-      "Use the competitive action rail",
+      "renderUnifiedActionSurface",
     ):
       self.assertIn(marker, self.app + json.dumps(coverage))
     for boundary in ("does not submit commands", "classify hidden state", "No new route/schema"):
@@ -842,10 +842,7 @@ console.log(JSON.stringify(resolved));
         if (!nodes.get("#campaign-role").textContent.includes(role)) process.exit(4);
         if (nodes.get("#campaign-history-list").children.length !== 1) process.exit(5);
         if (done && nodes.get("#campaign-debrief-list").children.length !== 1) process.exit(6);
-        if (!done) {
-          const form = nodes.get("#campaign-decision-list").children[0].children.find((child) => child.tagName === "FORM");
-          if (!form || !form.children[0].disabled) process.exit(7);
-        }
+        if (campaign === "competitive-regional-v1" && nodes.has("#campaign-decision-list")) process.exit(7);
       }
       console.log(JSON.stringify({ cases: cases.length, host_envelope_preserved: true, decisions_read_only: true }));
     '''

@@ -1278,7 +1278,33 @@ accessibility, educational-effectiveness, or browser/device certification. The
 authorized five-group pilot remains the gate for task-blocking refinements and
 any generated artwork; no generated assets are part of this slice.
 
-# 5. Recommended Immediate Next Steps
+# 5. Unified draft contextual actions (v0.14.2)
+
+Status: Technically verified; browser/device and authorized human review gates
+remain open.
+
+Done:
+
+- Replaced duplicate campaign-decision, catalog-preview, and builder panels
+  with the shared host-ordered `Actions` surface.
+- Added single-open cards, six-row overflow disclosure, accessible on-demand
+  `Details`, direct campaign submission, and competitive `Monthly plan`
+  revision/validation/commit behavior while preserving exact host commands.
+- Kept legal/CLI controls inside collapsed static/demo-only `Technical
+  controls`, hid them during live play, and synchronized the 445,000-byte
+  device proxy at 444,206 bytes.
+
+Not Yet Done:
+
+- Browser smoke/layout evidence remains technical only; no human usability,
+  accessibility, educational, or cognitive-load claim is made.
+
+Deferred / Non-Goals:
+
+- No host schema, simulation, persistence, command, transition, stochastic,
+  replay, debrief, dependency, asset, or broader workspace redesign change.
+
+# 6. Recommended Immediate Next Steps
 
 1. Keep the current campaigns, replay boundaries, assumptions, and contributor
    checks reproducible while the project waits for a concrete evidence gap.

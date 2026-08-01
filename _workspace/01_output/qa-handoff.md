@@ -83,3 +83,20 @@ word-sized heading and value wrapping. Device source remains within the
 The refreshed verification run passes all 941 Python tests plus Node syntax,
 release/documentation, loading/offline, device-proxy, formatting, clippy, and
 Rust test checks.
+
+## Unified draft contextual actions v0.14.2
+
+The QA target is one host-ordered `Actions` surface for all three campaign
+types, with competitive `Monthly plan` validation and direct-card submission.
+Review must preserve canonical batches, host authority, rejection recovery,
+Details accessibility, focus/live-region behavior, live technical-control
+visibility, and the 445,000-byte source proxy. Human usability/accessibility
+and browser/device certification remain open gates.
+
+Final handoff: PR #359 is open as a draft on
+`codex/gui-contextual-actions-v0.14.2` with passing CI. Three independent
+code-reviewer passes completed with no Critical/High findings; all lower-risk
+findings were resolved. The final device measurement is 444,206 bytes. The
+in-app browser matrix and keyboard/large-text/reduced-motion checks are
+technical evidence only; Firefox runtime smoke was unavailable because the
+executable is not installed, and no human pilot is claimed.

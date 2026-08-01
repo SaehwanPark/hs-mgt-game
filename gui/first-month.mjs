@@ -10,22 +10,22 @@ export const FIRST_MONTH_STAGES = Object.freeze([
   Object.freeze({
     id: "inspect",
     label: "Inspect the visible market",
-    detail: "Review the briefing, Riverside, facilities, workforce, capacity, payer, and public rival signals.",
+    detail: "Review the visible briefing and market signals.",
   }),
   Object.freeze({
     id: "draft",
-    label: "Draft contextual actions",
-    detail: "Choose host-catalogued actions and revise or remove local drafts before validation.",
+    label: "Build your plan",
+    detail: "Choose actions and adjust your plan before checking it.",
   }),
   Object.freeze({
     id: "validate",
-    label: "Review and validate",
-    detail: "Review at least two draft commands, costs, delays, constraints, and uncertainty through the host.",
+    label: "Check your plan",
+    detail: "Ask the host to check the current plan.",
   }),
   Object.freeze({
     id: "submit",
-    label: "Submit the unchanged batch",
-    detail: "Submit only the batch that the host marked valid; no local outcome is promised.",
+    label: "Commit month",
+    detail: "Commit the plan the host marked valid.",
   }),
   Object.freeze({
     id: "resolution",
@@ -48,12 +48,12 @@ export const CAMPAIGN_COVERAGE_STAGES = Object.freeze([
   Object.freeze({
     id: "inspect",
     label: "Inspect campaign coverage",
-    detail: "Read the host-owned briefing, visible stage, metrics, actors, processes, decisions, history, and debrief.",
+    detail: "Review the visible briefing, stage, and signals.",
   }),
   Object.freeze({
     id: "choose",
-    label: "Choose a host decision",
-    detail: "Select a visible campaign decision; the browser sends the unchanged command to the host.",
+    label: "Choose an action",
+    detail: "Select one visible campaign action.",
   }),
   Object.freeze({
     id: "review",
@@ -138,11 +138,12 @@ export function createFirstMonthFlow({ root = globalThis.document } = {}) {
     const currentIndex = stages.findIndex((stage) => stage.id === stageId);
     const current = stages[currentIndex] ?? stages[0];
     if (currentNode) currentNode.textContent = `${current.label} · ${currentIndex + 1} of ${stages.length}`;
-    if (detailNode) detailNode.textContent = `${current.detail} This rail reports presentation handoffs; the host owns commands and outcomes.`;
+    if (detailNode) detailNode.textContent = current.detail;
     if (continueButton) {
-      const ready = Boolean(state.sessionLoaded) && ["inspect", "draft", "validate", "submit", "choose"].includes(stageId);
+      const ready = Boolean(state.sessionLoaded) && stageId === "inspect";
+      continueButton.hidden = !ready;
       continueButton.disabled = !ready;
-      continueButton.textContent = state.flow === "campaign-coverage" ? "Continue to campaign decision" : "Continue to decisions";
+      continueButton.textContent = state.flow === "campaign-coverage" ? "Choose an action" : "Build your plan";
     }
     if (!list) return { ok: false, code: "first_month_flow_surface_missing", stage: current };
 

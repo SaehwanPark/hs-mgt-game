@@ -14,11 +14,12 @@ supports `competitive-regional-v1`, `stabilization-v1`, and
 troubleshooting are in [`docs/guides/gui-how-to-play.md`](../docs/guides/gui-how-to-play.md).
 
 The host-owned `campaign-coverage-v1` read is available for all three campaign
-IDs. Competitive decisions still use the catalog, host validation, and submit
-action path; the competitive coverage companion panel is read-only after
-normal start/load and accepted refreshes. Coverage does not reveal private
-rival state or add browser simulation authority, and a failed companion read
-does not block the action rail.
+IDs. All campaigns use the same `Actions` card surface: competitive play drafts
+a `Monthly plan`, while stabilization and regional affiliation commit one
+decision directly. Competitive validation and submit remain host-authoritative;
+the coverage companion panel is read-only after normal start/load and accepted
+refreshes. Coverage does not reveal private rival state or add browser
+simulation authority, and a failed companion read does not block the actions.
 
 Opening `gui/index.html` directly or through a generic static server intentionally
 shows fixture/demo mode; it cannot start a live scenario by itself.
@@ -46,6 +47,24 @@ This redesign is technically verified by static, host-contract, loading, and
 offline checks. Human cognitive-load, clarity, consequence-comprehension, and
 accessibility validation remain pending the authorized five-group pilot; no
 generated artwork is included until that evidence gate is met.
+
+## Unified Actions workspace
+
+Open **Actions** to see each host-provided action once. Cards start collapsed;
+open one card at a time, enter only the shown parameters, and use **Details**
+for host timing, rules, uncertainty, cost, canonical template, and source.
+Missing details are shown as unavailable rather than inferred.
+
+Competitive sessions place the draft beside the cards in **Monthly plan**.
+Use **Add**, **Revise**, **Save**, and **Remove** as needed; any edit requires
+**Check plan** again before **Commit month** becomes available. Stabilization and
+regional-affiliation sessions use the same cards with **Commit decision**.
+Rejected submissions keep the expanded card and entered values; every
+submission still uses the canonical command path.
+
+The collapsed **Technical controls** disclosure is available only in static or
+demo mode. Live host play keeps legal-command and free-form CLI controls hidden;
+the host remains the source of legality, cost, uncertainty, and transitions.
 
 ## SVG rendering proof
 
@@ -558,8 +577,8 @@ Phase 2/3/4/5/6/7/8/10/11/12/13 review checklist:
   overlays, follow navigation links, and confirm public-signal lag and missing
   private detail remain labeled.
 - load stabilization and regional-affiliation campaign coverage, confirm their
-  distinct role/stage/briefing/metric/actor/process surfaces, and submit a
-  host-shaped decision through the canonical command path.
+  distinct role/stage/briefing/metric/actor/process surfaces, and commit one
+  unified action-card decision through the canonical host path.
 - exercise a rejected campaign command, confirm the error is recoverable, and
   verify history/replay/debrief output remains host-sourced.
 - open onboarding/settings, toggle reduced motion and written equivalents,
@@ -586,8 +605,8 @@ Phase 2/3/4/5/6/7/8/10/11/12/13 review checklist:
   resolution, and refreshed presentation; confirm it reaches Continue only
   after both host reads succeed;
 - start stabilization or regional affiliation and confirm the rail changes to
-  campaign coverage: inspect, choose a host-shaped decision, review the
-  refreshed stage, and continue only after canonical host submission succeeds;
+  campaign coverage: inspect, choose an action card, review the refreshed
+  stage, and continue only after canonical host submission succeeds;
 - revise or remove a draft after validation and confirm the rail returns to its
   draft/validation handoff without limiting the existing draft controls; reject
   a host operation and confirm the current session and path remain recoverable.

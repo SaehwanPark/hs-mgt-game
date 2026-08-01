@@ -87,11 +87,11 @@ class GuiWorkspaceTests(unittest.TestCase):
 
   def test_visible_information_rows_preserve_word_sized_wraps(self):
     html = HTML.read_text(encoding="utf-8")
-    self.assertIn("overflow-wrap: break-word", html)
-    self.assertIn("grid-template-columns: max-content minmax(0, 1fr) minmax(8rem, 1fr)", html)
+    self.assertIn("overflow-wrap:break-word", html)
+    self.assertIn("grid-template-columns:max-content minmax(0,1fr) minmax(8rem,1fr)", html)
     self.assertIn("grid-template-columns:repeat(2,1fr)", html)
     self.assertIn(".visual-token--marker .visual-token-label{white-space:nowrap}", html)
-    self.assertIn(".timeline-row > .status { flex-basis: 100%; }", html)
+    self.assertIn(".timeline-row>.status{flex-basis:100%}", html)
 
   def test_long_actor_status_is_plain_text_not_a_badge(self):
     app = APP.read_text(encoding="utf-8")

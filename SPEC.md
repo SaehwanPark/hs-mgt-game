@@ -5662,6 +5662,30 @@ The Phase 1.3 audio direction standards and policy fixture proof are complete
 through v0.12.38. Broader production and human or educational evaluation remain
 separately gated Future work.
 
+### Unified draft contextual actions (v0.14.2)
+
+- Status: Technically verified; browser/device certification and authorized
+  human usability/accessibility review remain open.
+- `Actions` is the one presentation surface for competitive, stabilization, and
+  regional-affiliation host payloads. It normalizes host action IDs, labels,
+  parameters, technical details, source, and submission mode without changing
+  the `campaign-coverage-v1`, action-catalog, validation, or submit contracts.
+- Cards are host-ordered, collapsed by default, single-open, and bounded to six
+  visible rows with an overflow disclosure. `Details` exposes host-provided
+  timing, constraints, uncertainty, cost, canonical template, and source;
+  missing values remain explicitly unavailable.
+- Competitive campaigns use the `Monthly plan` column with human-readable
+  labels, revise/remove flows, stale-validation invalidation, host `Check plan`,
+  and gated `Commit month`. Direct campaigns use the same cards with
+  `Commit decision`; rejection preserves the open form and entered values.
+- Legacy command/legal controls exist only in collapsed `Technical controls` in
+  static/demo mode. Live play keeps them hidden; the browser never infers
+  legality, cost, outcomes, stochastic inputs, or transitions.
+- Focus restoration, live-region status, keyboard/tap details, narrow-screen
+  stacking, and the inspection-only continuation control are presentation
+  behavior. No simulation, persistence, schema, dependency, or asset pipeline
+  change is authorized by this slice.
+
 ### Browser compatibility evidence (v0.13.5)
 
 Status: Complete for the documented technical target; additional browser

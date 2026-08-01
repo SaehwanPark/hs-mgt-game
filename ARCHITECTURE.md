@@ -1388,6 +1388,30 @@ regional board and visual-token catalog remain text-equivalent, source-led, and
 dependency-free. Human cognitive-load/accessibility evidence and any generated
 asset decision remain pending the authorized pilot.
 
+## v0.14.2 unified action presentation boundary
+
+`gui/app.mjs` owns one private `Actions` view model for action-catalog and
+campaign-coverage payloads. The model carries only host-issued identity,
+human-readable labels, parameter descriptors, technical details, provenance,
+and `draft`/`commit` mode. `renderUnifiedActionSurface` renders the shared
+single-open card primitive; it does not calculate legality, cost, uncertainty,
+outcomes, or transitions.
+
+Competitive drafting keeps the exact host-generated canonical batch in the
+`Monthly plan` column. Any add, revise, replace, or remove clears validation;
+`Check plan` calls the existing host validator and `Commit month` submits only
+the unchanged validated command. Stabilization and affiliation map their
+current decisions to the same cards and call the existing host submit boundary
+directly. Rejected direct submissions leave the expanded card and values in
+place.
+
+The HTML surface uses native hidden state, a bounded six-card disclosure,
+accessible `Details` context help, live-region announcements, and a narrow
+layout that stacks the plan before cards. Technical CLI/legal controls remain a
+collapsed static/demo affordance and are hidden for live host play. This keeps
+authority, persistence, replay, and MCP schemas unchanged while removing
+duplicate presentation panels.
+
 ## Open Architectural Decisions
 
 - Durable replay artifact format: `replay-artifact-0.1.15` stores ruleset id,

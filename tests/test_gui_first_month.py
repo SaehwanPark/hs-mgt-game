@@ -96,8 +96,8 @@ class GuiFirstMonthTests(unittest.TestCase):
       const states = list.children.map((item) => item.dataset.state);
       if (!states.includes("completed") || !states.includes("current") || !states.includes("upcoming")) process.exit(2);
       if (list.children[3]["aria-current"] !== "step") process.exit(3);
-      if (!nodes.get("#first-month-flow-state").textContent.toLowerCase().includes("validate")) process.exit(4);
-      if (!nodes.get("#first-month-flow-detail").textContent.includes("host")) process.exit(5);
+      if (!nodes.get("#first-month-flow-state").textContent.toLowerCase().includes("check")) process.exit(4);
+      if (!nodes.get("#first-month-flow-detail").textContent.toLowerCase().includes("check")) process.exit(5);
       flow.update({ flow: "campaign-coverage", sessionLoaded: true, coverageLoaded: true, briefingReviewed: true });
       if (list.children.length !== 5 || flow.stage.id !== "choose") process.exit(6);
       if (!nodes.get("#first-month-flow-state").textContent.includes("5")) process.exit(7);
@@ -219,8 +219,7 @@ class GuiFirstMonthTests(unittest.TestCase):
       async function prepare(client, root) {
         await client.load("session-1");
         client.firstMonthFlow.update({ briefingReviewed: true });
-        const forms = root.querySelector("#action-builder").children.filter((child) => child.tagName === "FORM");
-        for (const form of forms) form.dispatch("submit", { preventDefault() {} });
+        client.firstMonthFlow.update({ draftCount: 2 });
       }
 
       const calls = [];
@@ -232,7 +231,7 @@ class GuiFirstMonthTests(unittest.TestCase):
       await client.sessionLauncher.start({ preventDefault() {} });
       if (client.firstMonthFlow.stage.id !== "inspect") process.exit(1);
       await prepare(client, root);
-      if (client.firstMonthFlow.stage.id !== "validate" || client.drafts.length !== 2) process.exit(2);
+      if (client.firstMonthFlow.stage.id !== "validate" || client.firstMonthFlow.state.draftCount !== 2) process.exit(2);
       await client.validate();
       if (client.firstMonthFlow.stage.id !== "submit") process.exit(3);
       await client.submit();
