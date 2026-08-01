@@ -3059,7 +3059,22 @@ metadata/resemblance, accessibility, audio, first-time-user, educational,
 debrief, content/clinical, competitive full-campaign, browser/device,
 revision, and expansion decisions remain pending and promotion-blocking.
 
-Exactly one medium-effort code reviewer is required before PR handoff. After
-merge, re-audit the roadmap; if only these explicitly authorized human/runtime
-gates remain, report the required evidence inputs rather than fabricating
-closure.
+## Review outcome
+
+Exactly one medium-effort code reviewer was used. The initial pass found two
+Medium issues (absolute-path escape and weak unchecked-marker parity) and one
+Low issue (non-string path traceback); the amended validator added repository
+root/type checks, an exact canonical open-marker set, checkbox-context parity,
+and regression tests. A follow-up found one Medium browser-marker parity issue;
+the final amendment requires the exact canonical open-status sentence, and the
+same reviewer’s final recheck found no actionable issues. No second reviewer
+was used.
+
+The validator intentionally checks declared technical-check metadata and
+source existence without executing those commands; the full Python/Rust,
+formatting, Clippy, metadata, links, asset, release, and diff checks were run
+separately and passed.
+
+After merge, re-audit the roadmap; if only these explicitly authorized
+human/runtime gates remain, report the required evidence inputs rather than
+fabricating closure.

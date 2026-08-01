@@ -714,7 +714,7 @@ Automated audit integrity is not human evidence or public-release approval.
 ## Verification evidence
 
 - `python3 -m unittest tests.test_phase13_remaining_gate_technical_audit` — pass.
-- Full Python suite: 898 tests — pass.
+- Full Python suite: 899 tests — pass.
 - Rust suite: 375 tests — pass.
 - Clippy, formatting, release metadata, documentation links, asset registry,
   release manifest, and diff checks — pass.
