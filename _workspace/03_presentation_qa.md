@@ -5968,3 +5968,35 @@ simulation, host, replay, policy, or release behavior was changed.
 - `python3 scripts/validate_first_session_audio_runtime_evidence.py` — pass.
 - Existing first-session, audio, low-distraction, browser/device, and Phase 13
   technical validators remain authoritative.
+
+# Presentation QA — Terminal-debrief runtime-boundary evidence v0.13.99
+
+## Status
+
+`pass` for the bounded technical terminal presentation correction. No human
+visual, accessibility, educational, audio-listening, browser/device, or
+public-release conclusion is recorded.
+
+## Findings
+
+- The live terminal observation identified an instructor-only appendix in the
+  player-facing end-session surface; the host projection now removes it while
+  preserving the separate CLI/instructor path.
+- The stale campaign-coverage placeholder is hidden after terminal end-session,
+  and onboarding selects the visible standard written debrief target.
+- Terminal history, final metadata, read-only controls, written fallback, and
+  audio-off status remain visible/source-bound without changing host authority.
+
+## Accessibility, privacy, and authority
+
+The correction preserves written history/debrief and does not depend on color,
+audio playback, hidden state, participant data, or browser-owned transitions.
+No playback/listening, lived accessibility, education, browser/device, or
+release claim is inferred from the technical observation.
+
+## Verification evidence
+
+- `python3 -m unittest tests.test_phase13_2_terminal_debrief_runtime_evidence` — pass.
+- `python3 -m unittest tests.test_phase11_live_debrief tests.test_phase13_2_debrief_visual_boundary` — pass.
+- The Rust player/instructor debrief separation regression remains
+  authoritative.

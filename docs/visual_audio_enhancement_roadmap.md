@@ -3742,7 +3742,7 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 ## Milestone 13.1: Release candidate audit
 
 **Status:** Current source-checkout technical evidence is recorded through
-v0.13.98. Product/content review, public-release approval, full-campaign
+v0.13.99. Product/content review, public-release approval, full-campaign
 coverage, durable persistence, cross-browser/device certification, and human
 educational/accessibility gates remain open.
 
@@ -4678,6 +4678,31 @@ The target and validator are recorded in
 `_workspace/176_implementation_plan_visual-audio-phase13-1-first-session-audio-runtime-evidence-v0.13.98.md`,
 `docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json`, and
 `scripts/validate_first_session_audio_runtime_evidence.py`.
+
+### v0.13.99 terminal-debrief runtime-boundary evidence
+
+- A live terminal-session observation exposed an instructor-only appendix in
+  the player-facing competitive end-session projection. The host path now uses
+  a player-safe terminal debrief while the CLI/instructor `competitive_debrief`
+  path remains available for its authorized review surface.
+- The terminal renderer now hides the stale campaign-coverage companion panel
+  after end-session and directs onboarding to the visible standard debrief
+  target. History, replay metadata, read-only controls, and written fallbacks
+  remain host-owned and actor-visible.
+- `docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`,
+  `scripts/validate_terminal_debrief_runtime_evidence.py`, and
+  `tests/test_phase13_2_terminal_debrief_runtime_evidence.py` bind the
+  observed one-month Hold session, exact terminal fields, source markers,
+  information boundary, and fail-closed human/release limits.
+- This is a technical projection correction and runtime evidence packet only.
+  Human visual debrief, educational, accessibility, audio listening,
+  browser/device, provenance, revision, expansion, and public-release gates
+  remain open; `Debrief visuals reviewed` remains unchecked.
+
+The target and validator are recorded in
+`_workspace/177_implementation_plan_visual-audio-phase13-2-terminal-debrief-runtime-evidence-v0.13.99.md`,
+`docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`, and
+`scripts/validate_terminal_debrief_runtime_evidence.py`.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 
