@@ -1,7 +1,7 @@
 {
   "schema_version": "phase13-remaining-gate-technical-audit-v1",
   "status": "complete-technical-audit-pending-human-gates",
-  "package_version": "0.13.106",
+  "package_version": "0.13.107",
   "roadmap_item": "Remaining visual/audio roadmap gates",
   "purpose": "Map every substantive unchecked visual/audio roadmap gate to source-bound technical evidence and the authorized human or runtime action still required, without fabricating a result or promoting release scope.",
   "roadmap_contract": {
@@ -96,6 +96,12 @@
       "status": "pass-source-bound-technical-preparation",
       "command": "python3 -m unittest tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_action_client_refresh_recovery_is_one_attempt_and_manual_load_is_explicit tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_resume_policy_is_opaque_bounded_and_manual_load_explicit",
       "sources": ["gui/app.mjs", "gui/host-adapter.mjs", "gui/index.html", "docs/guides/gui-how-to-play.md", "docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_phase11_browser_refresh_recovery.py"]
+    },
+    {
+      "id": "firefox-browser-refresh-resume-smoke",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "python3 scripts/check_firefox_runtime_smoke.py --url http://127.0.0.1:7878/",
+      "sources": ["scripts/check_firefox_runtime_smoke.py", "docs/evaluation/phase13.1-firefox-runtime-smoke-packet.json", "gui/app.mjs", "tests/test_phase13_1_firefox_runtime_smoke_packet.py"]
     }
   ],
   "gates": [
@@ -172,7 +178,7 @@
       "technical_status": "partial-source-bound-technical-preparation",
       "human_status": "pending-runtime-certification",
       "required_authority": "authorized browser/device test owner with real target environments",
-      "next_action": "run remaining Firefox/WebKit and real-device checks; do not promote the declared Chromium proxy",
+      "next_action": "run remaining Firefox full-campaign, WebKit, and real-device checks; do not promote the declared Chromium or bounded Firefox smoke evidence",
       "blocking_promotion": true,
       "sources": [
         "docs/evaluation/phase13.1-cross-browser-device-review-packet.json: \"firefox_runtime_certification_complete\": false",

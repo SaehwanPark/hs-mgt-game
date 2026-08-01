@@ -2,7 +2,7 @@
   "schema_version": "phase13.1-firefox-runtime-smoke-packet-v1",
   "status": "complete-firefox-host-backed-smoke-pending-matrix",
   "roadmap_item": "cross-browser/device certification",
-  "observed_on": "2026-07-31",
+  "observed_on": "2026-08-01",
   "probe": {
     "script": "scripts/check_firefox_runtime_smoke.py",
     "command": "python3 scripts/check_firefox_runtime_smoke.py --url http://127.0.0.1:7878/",
@@ -35,7 +35,16 @@
     "host_start": {
       "status": "competitive regional session loaded: session-1",
       "session": "session-1",
-      "demo_fixture": false
+      "demo_fixture": false,
+      "checkpoint_saved": true,
+      "stored_session_id": "session-1"
+    },
+    "browser_refresh_resume": {
+      "status": "Host session refreshed after browser refresh: session-1",
+      "session": "session-1",
+      "stored_session_id": "session-1",
+      "demo_fixture": false,
+      "ready": "complete"
     }
   },
   "safari_webkit_boundary": {
@@ -49,6 +58,7 @@
   "review_boundary": {
     "firefox_shell_runtime_smoke_complete": true,
     "firefox_host_backed_start_smoke_complete": true,
+    "firefox_browser_refresh_resume_smoke_complete": true,
     "firefox_full_campaign_certification_complete": false,
     "firefox_audio_decoder_review_complete": false,
     "webkit_runtime_certification_complete": false,
@@ -63,12 +73,16 @@
       "MarionetteClient",
       "WebDriver:NewSession",
       "WebDriver:Navigate",
+      "WebDriver:Refresh",
       "WebDriver:ExecuteScript",
       "WebDriver:DeleteSession",
       "validate_observations",
       "urlparse",
       "#session-start",
       "#session-launch-status",
+      "#session-save",
+      "hs-mgt-active-session-id",
+      "Host session refreshed after browser refresh",
       "document.readyState",
       "marionetteProtocol",
       "127.0.0.1"
@@ -86,7 +100,8 @@
     ]
   },
   "evidence_limits": [
-    "The Firefox result covers one headless shell load and one host-backed competitive session-start click.",
+    "The Firefox result covers one headless shell load, one host-backed competitive session start, one explicit host checkpoint save, and one browser-refresh session recovery.",
+    "The refresh result observes the live host path and opaque-ID retention; it does not simulate a stopped host or prove that the conditional durable-restore branch was invoked.",
     "The result does not certify Firefox full-campaign behavior, audio decoding, real hardware, or lived accessibility/usability.",
     "Safari/WebKit has no result because local remote automation permission is disabled.",
     "The canonical browser policy remains unchanged and no browser-support promotion is authorized.",

@@ -95,6 +95,7 @@ def validate_observations(
   url: str,
   browser: object,
   marionette_protocol: object,
+  resume: object | None = None,
 ) -> None:
   if not isinstance(shell, dict) or not isinstance(host, dict) or not isinstance(browser, dict):
     raise RuntimeError("Firefox runtime smoke observations must be objects")
@@ -136,6 +137,23 @@ def validate_observations(
     host_errors.append("demo fixture remained present after host start")
   if host_errors:
     raise RuntimeError("; ".join(host_errors))
+  if resume is not None:
+    if not isinstance(resume, dict):
+      raise RuntimeError("Firefox resume observation must be an object")
+    session = host.get("session")
+    resume_errors = []
+    if resume.get("status") != f"Host session refreshed after browser refresh: {session}":
+      resume_errors.append("browser refresh did not report the expected host refresh")
+    if resume.get("session") != session:
+      resume_errors.append("browser refresh changed the opaque session ID")
+    if resume.get("stored_session_id") != session:
+      resume_errors.append("browser refresh storage did not retain only the opaque session ID")
+    if resume.get("demo_fixture") is not False:
+      resume_errors.append("demo fixture remained present after browser refresh resume")
+    if resume.get("ready") != "complete":
+      resume_errors.append("browser refresh resume did not reach readyState=complete")
+    if resume_errors:
+      raise RuntimeError("; ".join(resume_errors))
 
 
 def _wait_for_port(host: str, port: int, timeout: float) -> None:
@@ -189,7 +207,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
       )
       session_id = created["sessionId"]
       capabilities = created["capabilities"]
-      client.command("WebDriver:Navigate", {"sessionId": session_id, "url": url})
+      client.command("WebDriver:Refresh", {"sessionId": session_id})
       time.sleep(0.5)
       shell = _execute(client, session_id, """
         return {
@@ -209,13 +227,33 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
           demo_fixture: document.body.innerText.includes('Demo fixture loaded')
         };
       """)
+      _execute(client, session_id, "document.querySelector('#session-save').click(); return true;")
+      time.sleep(0.5)
+      stored_session_id = _execute(
+        client,
+        session_id,
+        "return localStorage.getItem('hs-mgt-active-session-id');",
+      )
+      client.command("WebDriver:Navigate", {"sessionId": session_id, "url": url})
+      time.sleep(1.0)
+      resume = _execute(client, session_id, """
+        return {
+          status: document.querySelector('#session-launch-status')?.textContent || '',
+          session: document.querySelector('#session-id')?.value || '',
+          stored_session_id: localStorage.getItem('hs-mgt-active-session-id'),
+          demo_fixture: document.body.innerText.includes('Demo fixture loaded'),
+          ready: document.readyState
+        };
+      """)
+      host["checkpoint_saved"] = True
+      host["stored_session_id"] = stored_session_id
       browser = {
         "name": capabilities.get("browserName"),
         "version": capabilities.get("browserVersion"),
         "platform": capabilities.get("platformName"),
         "headless": capabilities.get("moz:headless"),
       }
-      validate_observations(shell, host, url, browser, hello.get("marionetteProtocol"))
+      validate_observations(shell, host, url, browser, hello.get("marionetteProtocol"), resume)
       client.command("WebDriver:DeleteSession", {"sessionId": session_id})
       session_id = None
       return {
@@ -225,6 +263,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
         "browser": browser,
         "shell": shell,
         "host_start": host,
+        "browser_refresh_resume": resume,
       }
     finally:
       if client is not None:

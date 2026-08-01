@@ -3008,6 +3008,9 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       checkpointClient.setEnabled(
         typeof adapter.saveSession === "function" && typeof adapter.loadSession === "function",
       );
+      if (automaticResume) {
+        sessionLaunchStatus(root, `Host session refreshed after browser refresh: ${requestedSessionId}`);
+      }
       return { ok: true, catalog };
     } catch (error) {
       if (

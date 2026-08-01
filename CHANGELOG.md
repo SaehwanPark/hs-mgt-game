@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.107] - 2026-08-01
+
+- Added a bounded Firefox/Marionette browser-refresh smoke for the GUI resume
+  policy: explicit host checkpoint save, one refresh, opaque ID retention, and
+  host-backed session refresh.
+- Kept Firefox support, full-campaign certification, WebKit, real-device,
+  human accessibility/usability, and public-release decisions pending.
+- Synchronized the emulated low-power source-byte proxy to 410,318 bytes under
+  a 411,000-byte limit; this remains a proxy and not device certification.
+- No simulation, replay, save-artifact, asset, audio, or browser-support-policy
+  behavior changed beyond the visible refresh-status contract.
+
 ## [0.13.106] - 2026-08-01
 
 - Made browser-refresh resume policy explicit and source-bound: only a stored

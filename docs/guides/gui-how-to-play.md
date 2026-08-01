@@ -278,6 +278,11 @@ Stale or unmatched IDs are cleared with written guidance, while transient
 failures preserve the ID for retry. Browser storage never contains commands,
 observations, outcomes, hashes, or true state.
 
+The repository also has a bounded Firefox/Marionette smoke that exercises one
+explicit checkpoint save and one refresh against the live loopback host. This
+is runtime evidence only; it does not certify Firefox full-campaign behavior,
+WebKit, real hardware, audio decoding, or human accessibility/usability.
+
 ### Audio is silent
 
 Select **Enable audio**, check browser/tab mute settings, raise Master and the
