@@ -1,22 +1,18 @@
-# Final Handoff — Checkpoint discovery read and GUI picker v0.13.103
+# Final Handoff — Browser-safe checkpoint reference transfer v0.13.104
 
 ## Status
 
 Implementation and full validation are complete on
-`codex/phase11-checkpoint-discovery-v0.13.103`; the single required
-medium-effort code reviewer has approved the implementation, and PR #350 is
-ready for merge and temporary-branch cleanup.
+the v0.13.104 implementation branch; the single required medium-effort code
+reviewer and PR loop remain.
 
 ## Target result
 
-- Expose validated durable GUI checkpoint metadata through
-  `GET /api/v1/checkpoints` using `gui-checkpoint-discovery-v1`.
-- Scan per-session archive and legacy fallback entries, omit and count invalid,
-  unsupported, mismatched, and unreadable candidates, shadow duplicate legacy
-  IDs with valid archive entries, and sort accepted IDs deterministically.
-- Add **Find saved checkpoints** to the browser. Selecting an entry fills the
-  existing opaque session-ID field without automatic loading or browser save
-  serialization.
+- Add deterministic `gui-checkpoint-reference-v1` browser JSON export/import
+  using only validated checkpoint discovery metadata.
+- Add explicit **Export reference** and **Import reference** controls. Import
+  fills the existing opaque session-ID field without automatic loading,
+  browser-storage writes, or host save-artifact access.
 - Preserve host authority, replay validation, immutable history, and all
   existing campaign transitions and load/restore paths.
 
@@ -26,20 +22,22 @@ ready for merge and temporary-branch cleanup.
   CLI help, documentation links, release metadata, asset/security/release
   checks, offline/loading/browser/audio/raster/visual-audio contracts, and
   remaining-gate audit validation pass.
-- The bounded low-power proxy measures 399,992 bytes under its existing
-  400,000-byte limit; this remains an emulated proxy, not device certification.
+- The bounded low-power proxy measures 406,565 bytes under its 410,000-byte
+  limit; this remains an emulated proxy, not device certification.
 - Focused tests cover archive/legacy discovery ordering and invalid counting,
   malformed archive shadowing with legacy fallback, archive file and directory
   symlink rejection with legacy fallback, live route metadata privacy, and
-  browser picker validation/manual-load-only behavior.
+  browser picker validation/manual-load-only behavior, deterministic reference
+  export, strict import validation, and no-load/no-storage import behavior.
 
 ## Review boundary and remaining work
 
-The remaining PR handoff is to merge PR #350, delete the temporary branch
-locally and remotely, verify clean `main`, and select the next unmet roadmap
-slice. Browser save serialization, automatic loading, replay regeneration,
-screenshots, human accessibility/educational review, browser/device
-certification, provenance, and public-release gates remain open.
+The remaining PR handoff is to create/merge the v0.13.104 PR, delete its
+temporary branch locally and remotely, verify clean `main`, and select the
+next unmet roadmap slice. Actual browser save-artifact serialization,
+automatic resume policy, replay regeneration, screenshots, human
+accessibility/educational review, browser/device certification, provenance,
+and public-release gates remain open.
 
 # Final Handoff — Competitive campaign-coverage envelope v0.13.69
 

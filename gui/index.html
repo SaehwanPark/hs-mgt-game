@@ -341,7 +341,7 @@
       .readiness-detail { color: var(--muted); font-size: .82rem; margin: .45rem 0 0; }
       .session-launch { border-top: 1px solid var(--line); display: grid; gap: .55rem; margin-top: var(--space-3); padding-top: var(--space-3); }
       .session-launch h3 { margin-bottom: 0; }
-      .session-launch-form, .session-load-form { align-items: end; display: flex; flex-wrap: wrap; gap: .55rem .8rem; }
+      .session-launch-form, .session-load-form, .session-checkpoint-transfer { align-items: end; display: flex; flex-wrap: wrap; gap: .55rem .8rem; }
       .session-launch-form label, .session-load-form label { color: var(--muted); display: grid; font-size: .78rem; gap: .18rem; }
       .session-launch-form input, .session-launch-form select, .session-load-form input { background: var(--panel); border: 1px solid #b9cbc8; border-radius: .4rem; color: var(--ink); min-width: 8rem; padding: .42rem .5rem; }
       .session-launch-form button, .session-load-form button { background: var(--teal); border: 0; border-radius: .45rem; color: white; font-weight: 750; padding: .5rem .7rem; }
@@ -553,7 +553,9 @@
             <button type="button" id="session-restore" disabled>Restore host checkpoint</button>
             <button type="button" id="session-end" disabled>End session and review debrief</button>
           </form>
-          <section class="session-launch" aria-labelledby="session-checkpoints-heading"><div class="panel-heading"><h4 id="session-checkpoints-heading">Saved checkpoints</h4><button type="button" id="session-checkpoints-refresh">Find saved checkpoints</button></div><ul id="session-checkpoint-list"></ul><p id="session-checkpoint-status" role="status">Save contents remain host-only</p></section>
+          <section class="session-launch" aria-labelledby="session-checkpoints-heading"><div class="panel-heading"><h4 id="session-checkpoints-heading">Saved checkpoints</h4><button type="button" id="session-checkpoints-refresh">Find saved checkpoints</button></div><ul id="session-checkpoint-list"></ul><div class="session-checkpoint-transfer"><label for="session-checkpoint-reference-file">Import checkpoint reference
+              <input id="session-checkpoint-reference-file" type="file" accept="application/json,.json" />
+            </label><button type="button" id="session-checkpoint-reference-import">Import reference</button></div><p id="session-checkpoint-status" role="status">Save contents remain host-only; references contain metadata only.</p></section>
           <p class="session-launch-status" id="session-launch-status" role="status" aria-live="polite">A configured host adapter can start or load a session.</p>
           <p class="session-launch-status">After each accepted GUI decision, the host requests an autosave through the same host-only checkpoint path. Browser refresh recovery keeps only the opaque session ID; explicit Save host checkpoint remains available as a manual retry.</p>
         </div>

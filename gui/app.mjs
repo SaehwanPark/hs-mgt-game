@@ -208,6 +208,7 @@ const HISTORY_CAMPAIGN = "competitive-regional-v1";
 const REPLAY_SCHEMA = "competitive-replay-v1";
 const SAVE_SCHEMA = "competitive-save-v1";
 const CHECKPOINT_DISCOVERY_SCHEMA = "gui-checkpoint-discovery-v1";
+export const CHECKPOINT_REFERENCE_SCHEMA = "gui-checkpoint-reference-v1";
 const REGIONAL_WORLD_SCHEMA = "competitive-regional-world-v1";
 const CAMPAIGN_COVERAGE_SCHEMA = "campaign-coverage-v1";
 export const ACTIVE_SESSION_STORAGE_KEY = "hs-mgt-active-session-id";
@@ -1654,6 +1655,125 @@ export function validateCheckpointDiscoveryEnvelope(envelope) {
   return { ok: true, envelope };
 }
 
+const CHECKPOINT_REFERENCE_FIELDS = [
+  "schema_version",
+  "session_id",
+  "campaign",
+  "seed",
+  "transition_count",
+  "storage",
+];
+
+function checkpointReferenceError(code, message) {
+  return { ok: false, code, message };
+}
+
+export function validateCheckpointReference(reference) {
+  if (!reference || typeof reference !== "object" || Array.isArray(reference)) {
+    return checkpointReferenceError("empty_checkpoint_reference", "No checkpoint reference was supplied.");
+  }
+  const keys = Object.keys(reference).sort();
+  if (JSON.stringify(keys) !== JSON.stringify([...CHECKPOINT_REFERENCE_FIELDS].sort())) {
+    return checkpointReferenceError("invalid_checkpoint_reference_fields", "Checkpoint references may contain metadata only.");
+  }
+  if (reference.schema_version !== CHECKPOINT_REFERENCE_SCHEMA) {
+    return checkpointReferenceError("unsupported_checkpoint_reference_schema", "Unsupported checkpoint reference schema.");
+  }
+  if (
+    typeof reference.session_id !== "string"
+    || !/^[A-Za-z0-9_-]+$/.test(reference.session_id)
+    || !SESSION_LAUNCH_CAMPAIGNS.has(reference.campaign)
+    || !Number.isSafeInteger(reference.seed)
+    || reference.seed < 0
+    || !Number.isSafeInteger(reference.transition_count)
+    || reference.transition_count < 0
+    || !["archive", "legacy"].includes(reference.storage)
+  ) {
+    return checkpointReferenceError("invalid_checkpoint_reference_entry", "Checkpoint reference metadata is invalid.");
+  }
+  return { ok: true, reference };
+}
+
+export function serializeCheckpointReference(reference) {
+  const validation = validateCheckpointReference(reference);
+  if (!validation.ok) return validation;
+  const stableReference = {
+    schema_version: CHECKPOINT_REFERENCE_SCHEMA,
+    session_id: reference.session_id,
+    campaign: reference.campaign,
+    seed: reference.seed,
+    transition_count: reference.transition_count,
+    storage: reference.storage,
+  };
+  return { ok: true, reference: stableReference, text: `${JSON.stringify(stableReference, null, 2)}\n` };
+}
+
+export function parseCheckpointReference(text) {
+  if (typeof text !== "string" || !text.trim()) {
+    return checkpointReferenceError("empty_checkpoint_reference", "The checkpoint reference file is empty.");
+  }
+  let reference;
+  try {
+    reference = JSON.parse(text);
+  } catch {
+    return checkpointReferenceError("invalid_checkpoint_reference_json", "The checkpoint reference is not valid JSON.");
+  }
+  return validateCheckpointReference(reference);
+}
+
+export function downloadCheckpointReference(reference, root = document) {
+  const serialized = serializeCheckpointReference(reference);
+  if (!serialized.ok) return serialized;
+  const documentRef = root?.ownerDocument ?? globalThis.document;
+  if (
+    typeof Blob !== "function"
+    || !documentRef?.createElement
+    || typeof globalThis.URL?.createObjectURL !== "function"
+  ) {
+    return checkpointReferenceError("checkpoint_reference_export_unavailable", "Checkpoint reference export is unavailable in this browser.");
+  }
+  const blob = new Blob([serialized.text], { type: "application/json" });
+  const objectUrl = globalThis.URL.createObjectURL(blob);
+  const link = documentRef.createElement("a");
+  const filename = `hs-mgt-checkpoint-${reference.session_id}.json`;
+  link.href = objectUrl;
+  link.download = filename;
+  link.setAttribute?.("aria-label", `Download checkpoint reference for ${reference.session_id}`);
+  try {
+    link.click?.();
+  } finally {
+    globalThis.URL.revokeObjectURL?.(objectUrl);
+  }
+  return { ok: true, reference: serialized.reference, text: serialized.text, filename };
+}
+
+export async function importCheckpointReference(file, root = document) {
+  const status = root.querySelector("#session-checkpoint-status");
+  if (!file || typeof file.text !== "function") {
+    const result = checkpointReferenceError("checkpoint_reference_file_missing", "Choose a checkpoint reference file first.");
+    if (status) status.textContent = result.message;
+    return result;
+  }
+  let text;
+  try {
+    text = await file.text();
+  } catch {
+    const result = checkpointReferenceError("checkpoint_reference_file_unreadable", "The checkpoint reference file could not be read.");
+    if (status) status.textContent = result.message;
+    return result;
+  }
+  const result = parseCheckpointReference(text);
+  if (!result.ok) {
+    if (status) status.textContent = `${result.message} Enter an ID manually or choose another reference.`;
+    return result;
+  }
+  const input = root.querySelector("#session-id");
+  if (input) input.value = result.reference.session_id;
+  input?.focus?.();
+  if (status) status.textContent = `Reference for ${result.reference.session_id} is ready to load; the host will validate the current checkpoint.`;
+  return result;
+}
+
 export function renderCheckpointDiscovery(envelope, root = document) {
   const validation = validateCheckpointDiscoveryEnvelope(envelope);
   const list = root.querySelector("#session-checkpoint-list");
@@ -1675,7 +1795,19 @@ export function renderCheckpointDiscovery(envelope, root = document) {
         input?.focus?.();
         if (status) status.textContent = `ID ${checkpoint.session_id} is ready to load.`;
       });
-      item.append(select); list.append(item);
+      const exportButton = document.createElement("button");
+      exportButton.type = "button";
+      exportButton.textContent = "Export reference";
+      exportButton.addEventListener("click", () => {
+        const result = downloadCheckpointReference({
+          schema_version: CHECKPOINT_REFERENCE_SCHEMA,
+          ...checkpoint,
+        }, root);
+        if (status) status.textContent = result.ok
+          ? `Checkpoint reference exported for ${checkpoint.session_id}. It contains metadata only.`
+          : result.message;
+      });
+      item.append(select, exportButton); list.append(item);
     }
     if (!envelope.checkpoints.length) emptyState(list, "No valid checkpoints found.");
   }
@@ -2034,6 +2166,8 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
   const existingId = root.querySelector("#session-id");
   const loadButton = root.querySelector("#session-load");
   const discoveryButton = root.querySelector("#session-checkpoints-refresh");
+  const referenceFile = root.querySelector("#session-checkpoint-reference-file");
+  const referenceImportButton = root.querySelector("#session-checkpoint-reference-import");
   const campaign = root.querySelector("#session-campaign");
   const difficulty = root.querySelector("#session-difficulty");
   let busy = false;
@@ -2049,6 +2183,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
     if (start) start.disabled = value;
     if (loadButton) loadButton.disabled = value;
     if (discoveryButton) discoveryButton.disabled = value;
+    if (referenceImportButton) referenceImportButton.disabled = value;
   };
 
   async function refreshCheckpoints() {
@@ -2164,6 +2299,15 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
   form?.addEventListener("submit", startSession);
   loadButton?.addEventListener("click", loadExisting);
   discoveryButton?.addEventListener("click", () => refreshCheckpoints());
+  referenceImportButton?.addEventListener("click", async () => {
+    if (busy) return;
+    setBusy(true);
+    try {
+      await importCheckpointReference(referenceFile?.files?.[0], root);
+    } finally {
+      setBusy(false);
+    }
+  });
   campaign?.addEventListener("change", updateCampaignControls);
   updateCampaignControls();
   const storedSessionId = sessionStore.get();
@@ -2173,7 +2317,7 @@ export function createSessionLauncher({ adapter, root = document, load, recorder
   if (!adapter?.startSession) {
     sessionLaunchStatus(root, "Configure a host adapter to start or load a session; the demo fixture remains available.");
   }
-  return { start: startSession, load: loadExisting, refreshCheckpoints };
+  return { start: startSession, load: loadExisting, refreshCheckpoints, importReference: () => importCheckpointReference(referenceFile?.files?.[0], root) };
 }
 
 export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAdapter, root = document, recorder = null } = {}) {
@@ -3551,7 +3695,13 @@ if (typeof document !== "undefined") {
       createHistoryClient,
       createReplayClient,
       createCheckpointClient,
+      CHECKPOINT_REFERENCE_SCHEMA,
       validateCheckpointDiscoveryEnvelope,
+      validateCheckpointReference,
+      serializeCheckpointReference,
+      parseCheckpointReference,
+      downloadCheckpointReference,
+      importCheckpointReference,
       renderCheckpointDiscovery,
       createReadOnlyClient,
       createThinClient,

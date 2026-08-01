@@ -76,6 +76,21 @@
   unknown-session cleanup, end cleanup, and authority-marker exclusions. Treat
   durable file or cross-process recovery as a separate host persistence design.
 
+## Keep Checkpoint Transfer as a Metadata Reference
+
+- Context: the host-owned checkpoint picker makes durable session IDs
+  discoverable, but users may need to move a recovery handle between browser
+  sessions.
+- Risk: exporting the save wrapper, history, hash, resolved inputs, or true
+  state would turn a convenience file into a second client persistence and
+  authority boundary.
+- Resolution: use a strict `gui-checkpoint-reference-v1` JSON contract with
+  only discovery metadata; export is deterministic, import fills the existing
+  ID field, and Load/Restore still invokes host validation explicitly.
+- Prevention: reject extra keys and save-shaped content, keep import free of
+  storage/load side effects, and state that the reference is informational
+  until the host accepts it.
+
 ## Keep Decision-Time Recovery Host-Sourced and Written
 
 - Context: core stabilization and affiliation transitions already retained the

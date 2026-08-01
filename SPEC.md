@@ -7791,6 +7791,24 @@ The target is recorded in
 `_workspace/181_implementation_plan_phase11-checkpoint-discovery-v0.13.103.md`,
 `_workspace/00_input/request-summary-v0.13.103.md`, and the Phase 11.1 ledger.
 
+### Browser-safe checkpoint reference transfer (v0.13.104)
+
+The GUI can export and import `gui-checkpoint-reference-v1` JSON containing
+only validated discovery metadata: opaque session ID, campaign, seed,
+committed-transition count, archive/legacy source, and schema version. Strict
+client validation rejects unsupported schemas, unsafe IDs, malformed values,
+extra fields, and save-shaped content. Import fills the existing session-ID
+control and leaves Load/Restore to the host; it does not auto-load, write
+browser storage, or receive a host save artifact. Host validation remains the
+authority for stale or missing references.
+
+This closes browser-safe reference transfer only. Actual browser save-artifact
+serialization, automatic resume policy, replay regeneration, screenshots,
+human review, browser/device certification, provenance/legal approval, and
+public release remain open. The target is recorded in
+`_workspace/182_implementation_plan_phase11-checkpoint-reference-v0.13.104.md`,
+`_workspace/00_input/request-summary-v0.13.104.md`, and the Phase 11.1 ledger.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

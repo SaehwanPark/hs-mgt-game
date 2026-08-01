@@ -40,7 +40,7 @@
     },
     {
       "id": "runtime-file-backed-load",
-      "pattern": "(?:fetch\\s*\\(|new\\s+URL\\s*\\(|(?:\\.(?:src|href)|\\[\\s*[\"'](?:src|href)[\"']\\s*\\])\\s*=|setAttribute\\s*\\(\\s*[\"'](?:src|href)[\"'])"
+      "pattern": "(?:fetch\\s*\\(|new\\s+URL\\s*\\(|(?:(?:\\.(?:src|href)|\\[\\s*[\"'](?:src|href)[\"']\\s*\\])(?!\\s*=\\s*objectUrl\\b)\\s*=|setAttribute\\s*\\(\\s*[\"'](?:src|href)[\"']))"
     }
   ],
   "future_asset_requirements": [

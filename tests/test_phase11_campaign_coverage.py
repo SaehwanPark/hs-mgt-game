@@ -233,7 +233,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "full_campaign_screenshot_inspection", "full_campaign_raster_screenshot_evidence", "event_cue_coverage", "debrief_view_coverage", "debrief_visual_review_packet", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "checkpoint_discovery", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "full_campaign_browser_coverage_rendering", "full_campaign_coverage_transport_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "full_campaign_screenshot_inspection", "full_campaign_raster_screenshot_evidence", "event_cue_coverage", "debrief_view_coverage", "debrief_visual_review_packet", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "checkpoint_discovery", "checkpoint_reference_transfer", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "full_campaign_browser_coverage_rendering", "full_campaign_coverage_transport_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -623,6 +623,25 @@ console.log(JSON.stringify(resolved));
       "test_checkpoint_boundary_does_not_add_browser_or_route_simulation_authority",
     ):
       self.assertIn(boundary, checkpoint_test + self.app + self.server + self.mcp_server + self.session + json.dumps(coverage))
+
+  def test_checkpoint_reference_transfer_is_metadata_only(self):
+    coverage = self.ledger["checkpoint_reference_transfer"]
+    self.assertEqual(coverage["status"], "complete-browser-safe-metadata-reference-transfer")
+    self.assertEqual(coverage["schema"], "gui-checkpoint-reference-v1")
+    self.assertEqual(
+      coverage["fields"],
+      ["schema_version", "session_id", "campaign", "seed", "transition_count", "storage"],
+    )
+    for marker in (
+      "serializeCheckpointReference",
+      "parseCheckpointReference",
+      "importCheckpointReference",
+      "downloadCheckpointReference",
+      "gui-checkpoint-reference-v1",
+    ):
+      self.assertIn(marker, self.app + self.html + json.dumps(coverage))
+    for forbidden in ("CompetitiveWorldState", "resolved_inputs", "effect_queue", "transition_competitive"):
+      self.assertNotIn(forbidden, self.app.split("export function serializeCheckpointReference", 1)[-1].split("export function parseCheckpointReference", 1)[0])
 
   def test_campaign_coverage_read_covers_all_launchable_campaigns(self):
     coverage = self.ledger["campaign_coverage_read_coverage"]
