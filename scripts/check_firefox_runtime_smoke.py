@@ -135,6 +135,10 @@ def validate_observations(
     host_errors.append("host did not return a non-empty opaque session ID")
   if host.get("demo_fixture") is not False:
     host_errors.append("demo fixture remained present after host start")
+  if host.get("checkpoint_saved") is not True:
+    host_errors.append("host checkpoint save did not report success")
+  if not isinstance(host.get("checkpoint_status"), str) or not host["checkpoint_status"].startswith("Host checkpoint saved at "):
+    host_errors.append("host checkpoint save status is missing")
   if host_errors:
     raise RuntimeError("; ".join(host_errors))
   if resume is not None:
@@ -207,7 +211,7 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
       )
       session_id = created["sessionId"]
       capabilities = created["capabilities"]
-      client.command("WebDriver:Refresh", {"sessionId": session_id})
+      client.command("WebDriver:Navigate", {"sessionId": session_id, "url": url})
       time.sleep(0.5)
       shell = _execute(client, session_id, """
         return {
@@ -229,12 +233,23 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
       """)
       _execute(client, session_id, "document.querySelector('#session-save').click(); return true;")
       time.sleep(0.5)
+      checkpoint_status = _execute(
+        client,
+        session_id,
+        "return document.querySelector('#session-launch-status')?.textContent || '';",
+      )
+      checkpoint_saved = (
+        isinstance(checkpoint_status, str)
+        and checkpoint_status.startswith("Host checkpoint saved at ")
+      )
+      if not checkpoint_saved:
+        raise RuntimeError("explicit host checkpoint save did not report success")
       stored_session_id = _execute(
         client,
         session_id,
         "return localStorage.getItem('hs-mgt-active-session-id');",
       )
-      client.command("WebDriver:Navigate", {"sessionId": session_id, "url": url})
+      client.command("WebDriver:Refresh", {"sessionId": session_id})
       time.sleep(1.0)
       resume = _execute(client, session_id, """
         return {
@@ -245,7 +260,8 @@ def run_probe(url: str = DEFAULT_URL, firefox_bin: str | None = None) -> dict:
           ready: document.readyState
         };
       """)
-      host["checkpoint_saved"] = True
+      host["checkpoint_saved"] = checkpoint_saved
+      host["checkpoint_status"] = checkpoint_status
       host["stored_session_id"] = stored_session_id
       browser = {
         "name": capabilities.get("browserName"),

@@ -24,6 +24,7 @@ EXPECTED_HOST_START = {
   "session": "session-1",
   "demo_fixture": False,
   "checkpoint_saved": True,
+  "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
   "stored_session_id": "session-1",
 }
 EXPECTED_RESUME = {

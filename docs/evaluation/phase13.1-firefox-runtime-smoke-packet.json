@@ -37,6 +37,7 @@
       "session": "session-1",
       "demo_fixture": false,
       "checkpoint_saved": true,
+      "checkpoint_status": "Host checkpoint saved at 0 committed transitions.",
       "stored_session_id": "session-1"
     },
     "browser_refresh_resume": {
@@ -82,6 +83,7 @@
       "#session-launch-status",
       "#session-save",
       "hs-mgt-active-session-id",
+      "Host checkpoint saved at",
       "Host session refreshed after browser refresh",
       "document.readyState",
       "marionetteProtocol",
@@ -100,7 +102,7 @@
     ]
   },
   "evidence_limits": [
-    "The Firefox result covers one headless shell load, one host-backed competitive session start, one explicit host checkpoint save, and one browser-refresh session recovery.",
+    "The Firefox result covers one headless shell load, one host-backed competitive session start, one explicitly verified host checkpoint save, and one browser-refresh session recovery.",
     "The refresh result observes the live host path and opaque-ID retention; it does not simulate a stopped host or prove that the conditional durable-restore branch was invoked.",
     "The result does not certify Firefox full-campaign behavior, audio decoding, real hardware, or lived accessibility/usability.",
     "Safari/WebKit has no result because local remote automation permission is disabled.",
