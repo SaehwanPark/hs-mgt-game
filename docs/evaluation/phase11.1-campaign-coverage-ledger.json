@@ -2,7 +2,7 @@
   "schema_version": "competitive-campaign-coverage-ledger-v1",
   "status": "bounded-technical-ledger",
   "campaign": "competitive-regional-v1",
-  "scope": "Committed presentation catalogs, bounded first-month continuity, 24-month competitive facility placement/use read continuity, the current live facility/operational-overlay/terminal-debrief/event-cue/music-state/history/replay/checkpoint bindings, and the current supported screenshot surface; not full-campaign raster or screenshot completion.",
+  "scope": "Committed presentation catalogs, bounded first-month continuity, 24-month competitive facility placement/use read continuity, the current live facility/operational-overlay/terminal-debrief/event-cue/music-state/history/replay/checkpoint/discovery bindings, and the current supported screenshot surface; not full-campaign raster or screenshot completion.",
   "catalogs": {
     "facilities": {
       "source": "gui/facility-components.mjs: FACILITY_COMPONENTS",
@@ -535,7 +535,7 @@
     "evidence": [
       "The Rust session regression compares the saved/loaded envelope at month 12 and terminal replay metadata at 24 transitions.",
       "The same regression compares terminal regional-world and campaign-coverage envelopes and verifies durable-file cleanup.",
-      "No browser save artifact, client state serialization, or new route/schema is introduced."
+      "No browser save artifact or client state serialization is introduced by this continuation slice; checkpoint metadata discovery is recorded separately."
     ],
     "limits": [
       "This closes competitive host checkpoint continuation and per-session archive continuity; browser serialization and broader durable save/load/replay evidence remain open.",
@@ -564,7 +564,7 @@
     "evidence": [
       "The Rust session regression compares saved/loaded metadata at stage 2 and each deterministic continuation hash through the terminal stage.",
       "The same regression compares terminal history, replay, and campaign-coverage envelopes and verifies durable-file cleanup.",
-      "No browser save artifact, client state serialization, or new route/schema is introduced."
+      "No browser save artifact or client state serialization is introduced by this continuation slice; checkpoint metadata discovery is recorded separately."
     ],
     "limits": [
       "This closes stabilization host checkpoint continuation only; regional-affiliation continuation, browser serialization, and broader cross-campaign persistence remain open.",
@@ -593,7 +593,7 @@
     "evidence": [
       "The Rust session regression compares saved/loaded metadata at stage 3 and each deterministic continuation hash through the terminal stage.",
       "The same regression compares terminal history, replay, and campaign-coverage envelopes and verifies durable-file cleanup.",
-      "No browser save artifact, client state serialization, or new route/schema is introduced."
+      "No browser save artifact or client state serialization is introduced by this continuation slice; checkpoint metadata discovery is recorded separately."
     ],
     "limits": [
       "This closes regional-affiliation host checkpoint continuation and per-session archive continuity; browser serialization and broader persistence evidence remain open.",
@@ -631,11 +631,50 @@
     "evidence": [
       "The Rust session regression writes competitive, stabilization, and regional-affiliation saves concurrently and hydrates each after a fresh-host placeholder is ended.",
       "Persistence tests cover distinct archive paths, independent removal, legacy single-file fallback, and path-safe session IDs.",
-      "No browser save artifact, client state serialization, or new route/schema is introduced."
+      "The browser receives only the typed discovery metadata route; save artifacts and client state serialization remain host-owned."
     ],
     "limits": [
-      "This closes host-owned per-session archive continuity only; browser serialization, checkpoint discovery UI, and broader save/load/replay evidence remain open.",
+      "This closes host-owned per-session archive continuity and metadata discovery only; browser serialization and broader save/load/replay evidence remain open.",
       "It does not establish screenshots, pixel-level visual quality, human accessibility/educational usefulness, provenance/legal approval, or public release."
+    ]
+  },
+  "checkpoint_discovery": {
+    "status": "complete-host-browser-metadata-discovery",
+    "schema": "gui-checkpoint-discovery-v1",
+    "route": "GET /api/v1/checkpoints",
+    "storage_sources": [
+      "archive",
+      "legacy"
+    ],
+    "metadata_fields": [
+      "session_id",
+      "campaign",
+      "seed",
+      "transition_count",
+      "storage"
+    ],
+    "host_source": "src/mcp/persistence.rs: discover_gui_session_checkpoints + src/mcp/session.rs: get_checkpoint_discovery",
+    "browser_source": "gui/host-adapter.mjs: listCheckpoints + gui/app.mjs: renderCheckpointDiscovery",
+    "test_source": [
+      "src/mcp/persistence.rs: fn checkpoint_discovery_orders_valid_entries_and_skips_invalid_files",
+      "src/mcp/persistence.rs: fn malformed_archive_shadows_discovery_but_load_falls_back_to_legacy",
+      "src/mcp/persistence.rs: fn checkpoint_discovery_rejects_archive_symlinks",
+      "src/mcp/persistence.rs: fn checkpoint_discovery_rejects_archive_directory_symlinks",
+      "src/gui_server.rs: fn live_transport_discovers_valid_checkpoint_metadata_without_save_contents",
+      "tests/test_phase11_browser_refresh_recovery.py: test_checkpoint_discovery_validates_metadata_and_only_fills_the_opaque_id"
+    ],
+    "behavior": [
+      "Valid archive entries are ordered by opaque session ID.",
+      "A valid legacy entry is included only when an archive entry does not shadow its session ID.",
+      "Invalid, unsupported, mismatched, and unreadable candidates are omitted and counted without exposing their contents.",
+      "An archive filename shadows a legacy ID even when its contents are invalid; a matching valid legacy file remains a manual-load fallback.",
+      "Archive file and directory symlinks are omitted and counted without reading their targets; matching valid legacy content remains a fallback.",
+      "Selecting a browser entry fills the existing opaque session-ID field without loading automatically."
+    ],
+    "boundary": "The host validates and summarizes durable wrappers; the browser renders metadata and reuses the existing load/restore path without storing save contents or creating transition authority.",
+    "limits": [
+      "This does not establish browser save serialization, automatic resume, replay regeneration, broader durable save/load evidence, screenshots, or human quality findings.",
+      "The route and picker are source-bound technical preparation only; browser/device certification, accessibility, educational, legal, and public-release gates remain open."
     ]
   },
   "full_campaign_audio_state_coverage": {
@@ -1056,7 +1095,7 @@
   },
   "open_limits": [
     "Pixel-level full competitive-campaign facility placement/use quality is not established by this bounded ledger; host-read continuity for the four player facility groups and eleven capacity metrics is covered, while broader asset quality and human gates remain open.",
-    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, per-session cross-campaign archive identity, full-campaign host audio-state continuity, full-campaign history/replay alignment, and fixture-level full-campaign renderer continuity are covered; browser serialization, checkpoint discovery, real-browser screenshots, broader durable save/load evidence, and human visual/listening/accessibility review remain open.",
+    "Competitive, stabilization, and regional-affiliation host checkpoint continuation now reaches each campaign endpoint from bounded mid-campaign restores, per-session cross-campaign archive identity, typed checkpoint metadata discovery, full-campaign host audio-state continuity, full-campaign history/replay alignment, and fixture-level full-campaign renderer continuity are covered; browser serialization, real-browser screenshots, broader durable save/load evidence, and human visual/listening/accessibility review remain open.",
     "Browser recovery after host restart is established when an autosave or explicit save created a matching competitive, stabilization, or regional-affiliation checkpoint and the same loopback host uses the configured file path.",
     "No screenshot suite, performance benchmark, low-power device test, browser compatibility matrix, or human quality finding is recorded.",
     "Catalog presence and fallback semantics do not establish asset quality, accessibility quality, audio usefulness, legal clearance, or educational benefit."

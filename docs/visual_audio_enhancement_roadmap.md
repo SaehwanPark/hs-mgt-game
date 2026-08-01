@@ -2377,8 +2377,9 @@ human-review, cross-browser/device, provenance/legal, or public-release gates.
   `cross_campaign_checkpoint_identity` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
   `src/mcp/session.rs: fn durable_checkpoint_archive_preserves_cross_campaign_identity`;
-  browser serialization, checkpoint discovery, and broader save/load/replay
-  evidence remain open.
+  browser serialization and broader save/load/replay evidence remain open;
+  typed host/browser checkpoint discovery is recorded in the separate
+  `checkpoint_discovery` ledger entry below.
 - [x] Current full-campaign host audio-state coverage covered. Evidence:
   `full_campaign_audio_state_coverage` in
   `docs/evaluation/phase11.1-campaign-coverage-ledger.json` and
@@ -4762,6 +4763,26 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.102.md`,
 `docs/evaluation/phase11.1-campaign-coverage-ledger.json`, and the host
 persistence/session tests.
+
+### v0.13.103 checkpoint discovery read and GUI picker
+
+- The loopback GUI host now exposes `gui-checkpoint-discovery-v1` at
+  `GET /api/v1/checkpoints`. It scans the per-session archive and valid legacy
+  fallback, validates candidates through existing host save/replay checks,
+  orders valid entries by opaque session ID, and counts omitted invalid files.
+- The GUI now provides **Find saved checkpoints** and a written metadata list
+  showing campaign, opaque ID, committed-transition count, and archive/legacy
+  source. Selecting an entry fills the existing ID field; the user still
+  chooses the existing load or restore control.
+- This closes host/browser checkpoint discovery only. Browser save
+  serialization, automatic loading, replay regeneration, broader persistence,
+  screenshots, human accessibility/educational review, browser/device
+  certification, and public-release gates remain open.
+
+The target is recorded in
+`_workspace/181_implementation_plan_phase11-checkpoint-discovery-v0.13.103.md`,
+`_workspace/00_input/request-summary-v0.13.103.md`, the Phase 11.1 ledger, and
+the typed host/browser tests.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 

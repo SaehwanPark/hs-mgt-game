@@ -1,7 +1,7 @@
 {
   "schema_version": "phase13-remaining-gate-technical-audit-v1",
   "status": "complete-technical-audit-pending-human-gates",
-  "package_version": "0.13.102",
+  "package_version": "0.13.103",
   "roadmap_item": "Remaining visual/audio roadmap gates",
   "purpose": "Map every substantive unchecked visual/audio roadmap gate to source-bound technical evidence and the authorized human or runtime action still required, without fabricating a result or promoting release scope.",
   "roadmap_contract": {
@@ -72,6 +72,12 @@
       "status": "pass-source-bound-technical-preparation",
       "command": "cargo test mcp::persistence::tests::gui_checkpoint_archive_keeps_session_files_independent && cargo test mcp::session::tests::durable_checkpoint_archive_preserves_cross_campaign_identity && python3 -m unittest tests.test_phase11_browser_refresh_recovery",
       "sources": ["src/mcp/persistence.rs", "src/mcp/session.rs", "src/gui_server.rs", "gui/README.md", "docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_phase11_browser_refresh_recovery.py"]
+    },
+    {
+      "id": "checkpoint-discovery",
+      "status": "pass-source-bound-technical-preparation",
+      "command": "cargo test mcp::persistence::tests::checkpoint_discovery_orders_valid_entries_and_skips_invalid_files && cargo test mcp::persistence::tests::malformed_archive_shadows_discovery_but_load_falls_back_to_legacy && cargo test mcp::persistence::tests::checkpoint_discovery_rejects_archive_symlinks && cargo test mcp::persistence::tests::checkpoint_discovery_rejects_archive_directory_symlinks && cargo test gui_server::tests::live_transport_discovers_valid_checkpoint_metadata_without_save_contents && python3 -m unittest tests.test_phase11_browser_refresh_recovery.BrowserRefreshRecoveryTests.test_checkpoint_discovery_validates_metadata_and_only_fills_the_opaque_id",
+      "sources": ["src/mcp/persistence.rs", "src/mcp/session.rs", "src/gui_server.rs", "gui/host-adapter.mjs", "gui/app.mjs", "gui/index.html", "docs/evaluation/phase11.1-campaign-coverage-ledger.json", "tests/test_phase11_browser_refresh_recovery.py"]
     }
   ],
   "gates": [

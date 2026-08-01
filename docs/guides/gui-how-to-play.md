@@ -87,10 +87,11 @@ through the same host-only path. The GUI reports the committed transition count
 when autosave succeeds; if it fails, the committed session remains active and
 the written status gives the error. **Save host checkpoint** remains available
 as a manual retry. The host stores one checkpoint file per opaque session ID in
-its sibling archive; after a host restart, enter the same opaque session ID and
-choose **Load existing session** or **Restore host checkpoint**. The browser never
-receives the saved artifact, and a missing or colliding checkpoint is reported
-as a recoverable error.
+its sibling archive; after a host restart, choose **Find saved checkpoints** to
+inspect validated metadata, select **Use this session ID**, and then choose
+**Load existing session** or **Restore host checkpoint**. Manual opaque-ID entry
+remains available. The browser never receives the saved artifact, and a missing
+or colliding checkpoint is reported as a recoverable error.
 
 Drafting does not advance time. Validation checks action points, cash, political
 capital, command syntax, and other host-owned constraints without committing the
@@ -172,8 +173,12 @@ policy authority.
 
 ## Load an existing session
 
-Copy a session ID displayed by the current GUI and enter it under **Existing
-session ID**, then select **Load existing session**. For
+Choose **Find saved checkpoints** under **Saved host checkpoints** to request a
+host-owned metadata list. The list shows campaign, opaque session ID, committed
+transition count, and whether the entry is from the current archive or the
+legacy fallback. Select **Use this session ID**, then choose **Load existing
+session**. You can also copy a session ID displayed by the current GUI and enter
+it manually. For
 `competitive-regional-v1`, `stabilization-v1`, or `regional-affiliation-v1`,
 each accepted decision requests autosave; select **Save host checkpoint** before
 stopping the host if you want an explicit retry. A browser refresh or manual

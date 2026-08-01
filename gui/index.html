@@ -553,6 +553,7 @@
             <button type="button" id="session-restore" disabled>Restore host checkpoint</button>
             <button type="button" id="session-end" disabled>End session and review debrief</button>
           </form>
+          <section class="session-launch" aria-labelledby="session-checkpoints-heading"><div class="panel-heading"><h4 id="session-checkpoints-heading">Saved checkpoints</h4><button type="button" id="session-checkpoints-refresh">Find saved checkpoints</button></div><ul id="session-checkpoint-list"></ul><p id="session-checkpoint-status" role="status">Save contents remain host-only</p></section>
           <p class="session-launch-status" id="session-launch-status" role="status" aria-live="polite">A configured host adapter can start or load a session.</p>
           <p class="session-launch-status">After each accepted GUI decision, the host requests an autosave through the same host-only checkpoint path. Browser refresh recovery keeps only the opaque session ID; explicit Save host checkpoint remains available as a manual retry.</p>
         </div>

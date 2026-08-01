@@ -123,6 +123,7 @@ fn gui_router_with_persistence(path: std::path::PathBuf) -> Router {
 
 fn gui_router_with_state(state: GuiState) -> Router {
   Router::new()
+    .route("/api/v1/checkpoints", get(list_checkpoints))
     .route("/api/v1/sessions", post(start_session))
     .route("/api/v1/sessions/{session_id}", get(get_session))
     .route(
@@ -157,6 +158,10 @@ fn gui_router_with_state(state: GuiState) -> Router {
     .route("/api/v1/sessions/{session_id}/end", post(end_session))
     .fallback(get(static_asset))
     .with_state(state)
+}
+
+async fn list_checkpoints(State(state): State<GuiState>) -> Response {
+  with_store(&state, |store| store.get_checkpoint_discovery())
 }
 
 async fn start_session(
@@ -768,6 +773,57 @@ mod tests {
     .await;
     assert_eq!(status, 404, "{body}");
 
+    server.abort();
+  }
+
+  #[tokio::test]
+  async fn live_transport_discovers_valid_checkpoint_metadata_without_save_contents() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-discovery-transport-{}.save",
+      std::process::id()
+    ));
+    let (address, server) = test_server_with_persistence(path.clone()).await;
+    let (status, body) = request(
+      address,
+      "POST",
+      "/api/v1/sessions",
+      Some(r#"{"campaign":"competitive-regional-v1","seed":42,"difficulty":"normal"}"#),
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let session_id = serde_json::from_str::<serde_json::Value>(&body).unwrap()["session_id"]
+      .as_str()
+      .unwrap()
+      .to_string();
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/save"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+
+    let (status, body) = request(address, "GET", "/api/v1/checkpoints", None).await;
+    assert_eq!(status, 200, "{body}");
+    let discovery: serde_json::Value = serde_json::from_str(&body).unwrap();
+    assert_eq!(discovery["schema_version"], "gui-checkpoint-discovery-v1");
+    assert_eq!(discovery["invalid_entry_count"], 0);
+    let checkpoint = &discovery["checkpoints"].as_array().unwrap()[0];
+    assert_eq!(checkpoint["session_id"], session_id);
+    assert_eq!(checkpoint["campaign"], "competitive-regional-v1");
+    assert_eq!(checkpoint["storage"], "archive");
+    assert_eq!(checkpoint["transition_count"], 0);
+    assert!(checkpoint.get("save").is_none());
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/end"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    assert!(!path.exists());
     server.abort();
   }
 

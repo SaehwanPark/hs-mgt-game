@@ -7775,6 +7775,22 @@ The target is recorded in
 `_workspace/00_input/request-summary-v0.13.102.md`, and
 `docs/evaluation/phase11.1-campaign-coverage-ledger.json`.
 
+### Checkpoint discovery read and GUI picker (v0.13.103)
+
+The loopback GUI host now exposes `gui-checkpoint-discovery-v1` at
+`GET /api/v1/checkpoints`. It scans the host-owned per-session archive and the
+valid legacy fallback, validates candidates through the existing save/replay
+checks, returns deterministic metadata only, and counts omitted invalid files.
+The browser's **Find saved checkpoints** control renders campaign, opaque ID,
+transition count, and storage source; selecting an entry fills the existing
+manual load field without loading automatically.
+
+This does not add browser save serialization, automatic resume, replay
+regeneration, simulation authority, or human/browser/device/release evidence.
+The target is recorded in
+`_workspace/181_implementation_plan_phase11-checkpoint-discovery-v0.13.103.md`,
+`_workspace/00_input/request-summary-v0.13.103.md`, and the Phase 11.1 ledger.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path

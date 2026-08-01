@@ -12,6 +12,7 @@ LEDGER = ROOT / "docs" / "evaluation" / "phase11.1-campaign-coverage-ledger.json
 SERVER = ROOT / "src" / "gui_server.rs"
 SESSION = ROOT / "src" / "mcp" / "session.rs"
 PERSISTENCE = ROOT / "src" / "mcp" / "persistence.rs"
+ADAPTER = ROOT / "gui" / "host-adapter.mjs"
 
 
 class BrowserRefreshRecoveryTests(unittest.TestCase):
@@ -24,6 +25,7 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     cls.server = SERVER.read_text(encoding="utf-8")
     cls.session = SESSION.read_text(encoding="utf-8")
     cls.persistence = PERSISTENCE.read_text(encoding="utf-8")
+    cls.adapter = ADAPTER.read_text(encoding="utf-8")
 
   def run_node(self, script):
     result = subprocess.run(
@@ -114,6 +116,36 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
         "status": "unknown session 'session-existing'",
       },
     )
+
+  def test_checkpoint_discovery_validates_metadata_and_only_fills_the_opaque_id(self):
+    result = self.run_node(r'''
+      import { renderCheckpointDiscovery, validateCheckpointDiscoveryEnvelope } from "./gui/app.mjs";
+      const input = { value: "" };
+      const list = { children: [], replaceChildren(...items) { this.children = items; }, append(...items) { this.children.push(...items); } };
+      const status = { textContent: "" };
+      const root = { querySelector(selector) { return { "#session-checkpoint-list": list, "#session-checkpoint-status": status, "#session-id": input }[selector] ?? null; } };
+      globalThis.document = { createElement(tag) { return { tag, children: [], textContent: "", append(...items) { this.children.push(...items); }, addEventListener(_type, handler) { this.handler = handler; } }; } };
+      const envelope = { schema_version: "gui-checkpoint-discovery-v1", invalid_entry_count: 0, checkpoints: [{ session_id: "session-7", campaign: "stabilization-v1", seed: 42, transition_count: 2, storage: "archive" }] };
+      const rendered = renderCheckpointDiscovery(envelope, root);
+      const initialStatus = status.textContent;
+      list.children[0].children[0].handler();
+      const invalid = validateCheckpointDiscoveryEnvelope({ ...envelope, checkpoints: [{ ...envelope.checkpoints[0], storage: "raw-save" }] });
+      console.log(JSON.stringify({ rendered: rendered.ok, input: input.value, initialStatus, status: status.textContent, invalid: invalid.code }));
+    ''')
+    self.assertEqual(result["rendered"], True)
+    self.assertEqual(result["input"], "session-7")
+    self.assertIn("valid checkpoint", result["initialStatus"])
+    self.assertIn("ready to load", result["status"])
+    self.assertEqual(result["invalid"], "invalid_checkpoint_discovery_entry")
+    self.assertIn("listCheckpoints", self.adapter)
+    self.assertIn('request("/api/v1/checkpoints")', self.adapter)
+    self.assertIn('"/api/v1/checkpoints"', self.server)
+    self.assertIn("get_checkpoint_discovery", self.session)
+    self.assertIn("discover_gui_session_checkpoints", self.persistence)
+    self.assertIn("gui-checkpoint-discovery-v1", self.session)
+    self.assertIn("session-checkpoints-refresh", self.html)
+    self.assertIn("session-checkpoint-list", self.html)
+    self.assertIn("Save contents remain host-only", self.html)
 
   def test_refresh_contract_and_authority_boundary_are_explicit(self):
     for marker in (
@@ -348,6 +380,37 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     ):
       self.assertIn(marker, self.session + self.persistence)
     self.assertTrue(any("browser serialization" in item.lower() for item in coverage["limits"]))
+
+  def test_checkpoint_discovery_is_typed_metadata_only(self):
+    coverage = self.ledger["checkpoint_discovery"]
+    self.assertEqual(coverage["status"], "complete-host-browser-metadata-discovery")
+    self.assertEqual(coverage["schema"], "gui-checkpoint-discovery-v1")
+    self.assertEqual(coverage["route"], "GET /api/v1/checkpoints")
+    self.assertEqual(coverage["storage_sources"], ["archive", "legacy"])
+    self.assertEqual(
+      coverage["metadata_fields"],
+      ["session_id", "campaign", "seed", "transition_count", "storage"],
+    )
+    for marker in (
+      "discover_gui_session_checkpoints",
+      "get_checkpoint_discovery",
+      "listCheckpoints",
+      "renderCheckpointDiscovery",
+      "session-checkpoints-refresh",
+      "Use this session ID",
+      "gui-checkpoint-discovery-v1",
+    ):
+      self.assertIn(
+        marker,
+        self.persistence + self.session + self.adapter + self.app + self.html + json.dumps(coverage),
+      )
+    for boundary in (
+      "without exposing their contents",
+      "without loading automatically",
+      "Save contents remain host-only",
+      "browser save serialization",
+    ):
+      self.assertIn(boundary, json.dumps(coverage) + self.html)
 
 
 if __name__ == "__main__":

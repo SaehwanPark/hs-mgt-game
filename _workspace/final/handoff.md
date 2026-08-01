@@ -1,3 +1,46 @@
+# Final Handoff — Checkpoint discovery read and GUI picker v0.13.103
+
+## Status
+
+Implementation and full validation are complete on
+`codex/phase11-checkpoint-discovery-v0.13.103`; the single required
+medium-effort code reviewer has approved the implementation, and PR #350 is
+ready for merge and temporary-branch cleanup.
+
+## Target result
+
+- Expose validated durable GUI checkpoint metadata through
+  `GET /api/v1/checkpoints` using `gui-checkpoint-discovery-v1`.
+- Scan per-session archive and legacy fallback entries, omit and count invalid,
+  unsupported, mismatched, and unreadable candidates, shadow duplicate legacy
+  IDs with valid archive entries, and sort accepted IDs deterministically.
+- Add **Find saved checkpoints** to the browser. Selecting an entry fills the
+  existing opaque session-ID field without automatic loading or browser save
+  serialization.
+- Preserve host authority, replay validation, immutable history, and all
+  existing campaign transitions and load/restore paths.
+
+## Verification
+
+- 386 Rust tests, Clippy with warnings denied, 926 Python tests, formatting,
+  CLI help, documentation links, release metadata, asset/security/release
+  checks, offline/loading/browser/audio/raster/visual-audio contracts, and
+  remaining-gate audit validation pass.
+- The bounded low-power proxy measures 399,992 bytes under its existing
+  400,000-byte limit; this remains an emulated proxy, not device certification.
+- Focused tests cover archive/legacy discovery ordering and invalid counting,
+  malformed archive shadowing with legacy fallback, archive file and directory
+  symlink rejection with legacy fallback, live route metadata privacy, and
+  browser picker validation/manual-load-only behavior.
+
+## Review boundary and remaining work
+
+The remaining PR handoff is to merge PR #350, delete the temporary branch
+locally and remotely, verify clean `main`, and select the next unmet roadmap
+slice. Browser save serialization, automatic loading, replay regeneration,
+screenshots, human accessibility/educational review, browser/device
+certification, provenance, and public-release gates remain open.
+
 # Final Handoff — Competitive campaign-coverage envelope v0.13.69
 
 ## Status

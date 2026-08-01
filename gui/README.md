@@ -407,10 +407,14 @@ save path, wrapping the existing `CompetitiveSessionSave`, `SessionSave`, or
 `AffiliationReplayArtifact` artifact with the opaque session ID. Each explicit
 checkpoint is written to a separate host-owned file in a sibling
 `.checkpoints` archive keyed by that opaque ID; older single-file checkpoints
-remain loadable as a migration fallback. After a host restart, a browser
-refresh may request the existing host `loadSession` route once after an
-unknown live-session read, then repeat the same actor-visible reads. The
-browser never receives or serializes the save artifact.
+remain loadable as a migration fallback. `GET /api/v1/checkpoints` and the
+**Find saved checkpoints** control expose only validated session metadata
+(campaign, opaque ID, seed, transition count, and archive/legacy source); an
+entry fills the existing ID field but never loads automatically. After a host
+restart, a browser refresh may request the existing host `loadSession` route
+once after an unknown live-session read, then repeat the same actor-visible
+reads. The browser never receives or serializes the save artifact, and invalid
+checkpoint files are omitted from discovery.
 
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a

@@ -3770,3 +3770,18 @@ separate gates.
 - Prevention: test concurrent campaign saves, live-ID collision behavior,
   per-session cleanup, legacy reads, and path-safe session IDs whenever host
   persistence changes.
+
+# Discover Checkpoints Through Validated Metadata
+
+- Context: once per-session archives existed, the browser needed a way to find
+  opaque IDs without receiving host save contents or guessing which campaign a
+  file represented.
+- Risk: a discovery scan could leak serialized state, treat malformed or
+  unsupported files as usable, or make directory iteration order appear stable.
+- Resolution: validate each archive and legacy candidate through the existing
+  host save/replay checks, return only campaign/seed/count/source metadata,
+  count omitted candidates, shadow a legacy entry with a valid archive of the
+  same ID, and sort the accepted descriptors by opaque ID before rendering.
+- Prevention: keep discovery observational and manual-load-only; test
+  malformed, mismatched, unreadable, legacy, shadowed, and path-unsafe entries
+  whenever checkpoint storage or its browser picker changes.
