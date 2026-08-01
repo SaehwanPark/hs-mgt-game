@@ -48,7 +48,7 @@ pub enum GuiSessionSave {
   Affiliation(AffiliationReplayArtifact),
 }
 
-#[derive(Clone, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum GuiCheckpointStorage {
   Archive,
   Legacy,
@@ -331,6 +331,53 @@ pub fn load_gui_session_checkpoint(
     stabilization_ruleset,
     affiliation_ruleset,
   )
+}
+
+pub fn read_gui_session_checkpoint_artifact(
+  path: &Path,
+  session_id: &str,
+  storage: GuiCheckpointStorage,
+  competitive_ruleset: &CompetitiveRuleset,
+  stabilization_ruleset: &Ruleset,
+  affiliation_ruleset: &AffiliationRuleset,
+) -> Result<Option<Vec<u8>>, String> {
+  let candidate = match storage {
+    GuiCheckpointStorage::Archive => gui_session_checkpoint_path(path, session_id)?,
+    GuiCheckpointStorage::Legacy => path.to_path_buf(),
+  };
+  let metadata = match fs::symlink_metadata(&candidate) {
+    Ok(metadata) => metadata,
+    Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+    Err(error) => {
+      return Err(format!(
+        "unable to inspect GUI checkpoint artifact {}: {error}",
+        candidate.display()
+      ));
+    }
+  };
+  if metadata.file_type().is_symlink() || !metadata.is_file() {
+    return Err(format!(
+      "GUI checkpoint artifact is not a regular file: {}",
+      candidate.display()
+    ));
+  }
+  if load_gui_session_save(
+    &candidate,
+    session_id,
+    competitive_ruleset,
+    stabilization_ruleset,
+    affiliation_ruleset,
+  )?
+  .is_none()
+  {
+    return Ok(None);
+  }
+  fs::read(&candidate).map(Some).map_err(|error| {
+    format!(
+      "unable to read GUI checkpoint artifact {}: {error}",
+      candidate.display()
+    )
+  })
 }
 
 pub fn discover_gui_session_checkpoints(

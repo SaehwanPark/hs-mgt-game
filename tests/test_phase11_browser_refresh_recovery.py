@@ -186,6 +186,56 @@ class BrowserRefreshRecoveryTests(unittest.TestCase):
     self.assertEqual(result["extra"], "invalid_checkpoint_reference_fields")
     self.assertEqual(result["malformed"], "invalid_checkpoint_reference_json")
 
+  def test_host_save_artifact_download_is_manual_and_opaque(self):
+    result = self.run_node(r'''
+      import { downloadHostCheckpointArtifact } from "./gui/app.mjs";
+      const events = [];
+      globalThis.Blob = class { constructor(parts, options) { this.parts = parts; this.type = options.type; } };
+      globalThis.URL = {
+        createObjectURL(blob) { events.push(["create", blob.type]); return "blob:host-save"; },
+        revokeObjectURL(url) { events.push(["revoke", url]); },
+      };
+      const link = {
+        setAttribute(name, value) { this[name] = value; },
+        click() { events.push(["click", this.download, this.href]); },
+      };
+      const root = { ownerDocument: { createElement() { return link; } } };
+      let loadCalls = 0;
+      const adapter = {
+        async downloadCheckpointArtifact(sessionId, storage) {
+          events.push(["request", sessionId, storage]);
+          return { blob: new Blob(["opaque-host-save"], { type: "application/octet-stream" }), filename: "hs-mgt-checkpoint-session-7.save" };
+        },
+        async loadSession() { loadCalls += 1; },
+      };
+      const result = await downloadHostCheckpointArtifact({
+        adapter,
+        checkpoint: { session_id: "session-7", storage: "archive" },
+        root,
+      });
+      console.log(JSON.stringify({ ok: result.ok, filename: result.filename, events, loadCalls }));
+    ''')
+    self.assertEqual(result["ok"], True)
+    self.assertEqual(result["filename"], "hs-mgt-checkpoint-session-7.save")
+    self.assertEqual(result["loadCalls"], 0)
+    self.assertEqual(result["events"], [
+      ["request", "session-7", "archive"],
+      ["create", "application/octet-stream"],
+      ["click", "hs-mgt-checkpoint-session-7.save", "blob:host-save"],
+      ["revoke", "blob:host-save"],
+    ])
+    for marker in (
+      "downloadCheckpointArtifact",
+      "/save-artifact",
+      "Download host save",
+      "read_checkpoint_artifact",
+      "read_gui_session_checkpoint_artifact",
+    ):
+      self.assertIn(marker, self.adapter + self.app + self.server + self.session + self.persistence)
+    for forbidden in ("serializeState", "submit_turn", "localStorage", "sessionStorage"):
+      helper = self.app.split("export async function downloadHostCheckpointArtifact", 1)[-1].split("export function createSessionLauncher", 1)[0]
+      self.assertNotIn(forbidden, helper)
+
   def test_checkpoint_reference_import_fills_id_without_loading_or_storage(self):
     result = self.run_node(r'''
       import {

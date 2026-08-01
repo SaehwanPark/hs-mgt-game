@@ -27,8 +27,9 @@ use crate::sim::{observe_for_human, observe_for_player, transition, validate_com
 
 use super::persistence::{
   GuiCheckpointStorage, GuiSessionSave, discover_gui_session_checkpoints,
-  gui_session_checkpoint_path, load_gui_session_checkpoint, remove_gui_session_checkpoint,
-  write_affiliation_session_save, write_competitive_session_save, write_stabilization_session_save,
+  gui_session_checkpoint_path, load_gui_session_checkpoint, read_gui_session_checkpoint_artifact,
+  remove_gui_session_checkpoint, write_affiliation_session_save, write_competitive_session_save,
+  write_stabilization_session_save,
 };
 
 pub(crate) const COMPETITIVE_MONTH_LIMIT: u32 = 24;
@@ -625,6 +626,69 @@ impl GameSessionStore {
       schema_version: CHECKPOINT_DISCOVERY_SCHEMA_VERSION.to_string(),
       checkpoints,
       invalid_entry_count: discovery.invalid_entry_count,
+    })
+  }
+
+  pub fn read_checkpoint_artifact(
+    &self,
+    session_id: &str,
+    storage: Option<&str>,
+  ) -> Result<Vec<u8>, McpErrorMessage> {
+    let Some(path) = &self.durable_gui_save_path else {
+      return Err(McpErrorMessage {
+        error: "GUI checkpoint artifact download requires a configured host persistence path"
+          .to_string(),
+        code: Some("checkpoint_artifact_unavailable".to_string()),
+        resource_limit: None,
+        hint: Some("Start the loopback GUI host with its persistence path configured.".to_string()),
+      });
+    };
+    let requested_storage = match storage {
+      None => None,
+      Some("archive") => Some(GuiCheckpointStorage::Archive),
+      Some("legacy") => Some(GuiCheckpointStorage::Legacy),
+      Some(other) => {
+        return Err(McpErrorMessage {
+          error: format!("unsupported checkpoint artifact storage '{other}'"),
+          code: Some("invalid_checkpoint_artifact_storage".to_string()),
+          resource_limit: None,
+          hint: Some("Use storage=archive or storage=legacy.".to_string()),
+        });
+      }
+    };
+    let discovery = discover_gui_session_checkpoints(
+      path,
+      &default_competitive_ruleset(),
+      &default_ruleset(),
+      &default_affiliation_ruleset(),
+    )
+    .map_err(checkpoint_persistence_error)?;
+    let checkpoint = discovery.checkpoints.into_iter().find(|checkpoint| {
+      checkpoint.session_id == session_id
+        && requested_storage.is_none_or(|storage| checkpoint.storage == storage)
+    });
+    let Some(checkpoint) = checkpoint else {
+      return Err(McpErrorMessage {
+        error: format!("no valid checkpoint artifact for session '{session_id}'"),
+        code: Some("checkpoint_missing".to_string()),
+        resource_limit: None,
+        hint: Some("Save a host checkpoint before downloading it.".to_string()),
+      });
+    };
+    read_gui_session_checkpoint_artifact(
+      path,
+      session_id,
+      checkpoint.storage,
+      &default_competitive_ruleset(),
+      &default_ruleset(),
+      &default_affiliation_ruleset(),
+    )
+    .map_err(checkpoint_persistence_error)?
+    .ok_or_else(|| McpErrorMessage {
+      error: format!("checkpoint artifact disappeared for session '{session_id}'"),
+      code: Some("checkpoint_missing".to_string()),
+      resource_limit: None,
+      hint: Some("Save a host checkpoint before downloading it.".to_string()),
     })
   }
 

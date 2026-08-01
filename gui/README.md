@@ -413,8 +413,10 @@ remain loadable as a migration fallback. `GET /api/v1/checkpoints` and the
 entry fills the existing ID field but never loads automatically. After a host
 restart, a browser refresh may request the existing host `loadSession` route
 once after an unknown live-session read, then repeat the same actor-visible
-reads. The browser never receives or serializes the save artifact, and invalid
-checkpoint files are omitted from discovery.
+reads. The browser never serializes or loads the save artifact; invalid
+checkpoint files are omitted from discovery. An explicit Download host save
+request is the only path that transfers validated bytes to the user's file
+download.
 
 Each discovered entry can export a deterministic `gui-checkpoint-reference-v1`
 JSON file, and the Saved checkpoints panel can import one. A reference contains
@@ -422,6 +424,13 @@ only the discovery metadata and fills the existing opaque session-ID control;
 it never loads automatically, writes browser storage, or carries host save
 contents, history, hashes, resolved inputs, or true state. The host still
 validates the current checkpoint when the user chooses Load or Restore.
+
+Each validated discovered entry also exposes **Download host save**. The host
+revalidates the selected archive or legacy checkpoint and serves the existing
+save bytes as an attachment; the browser only performs the user-requested
+download and does not serialize, parse, load, or store the artifact as game
+state. A failed download leaves the current session active and reports a
+written recovery message.
 
 When supplied, `getRegionalWorld(sessionId)` returns
 `schema_version: "competitive-regional-world-v1"`. The page renders a

@@ -3800,3 +3800,14 @@ separate gates.
 - Prevention: keep discovery observational and manual-load-only; test
   malformed, mismatched, unreadable, legacy, shadowed, and path-unsafe entries
   whenever checkpoint storage or its browser picker changes.
+## Keep Host Save Downloads Opaque (v0.13.105)
+
+- Context: the host already owns validated checkpoint files, while the GUI
+  needed a user-facing way to download an existing save artifact.
+- Risk: allowing the browser to deserialize or synthesize the file would move
+  true state, history, or serialization authority into the presentation layer.
+- Resolution: validate the selected archive/legacy file on the host and serve
+  its exact bytes as an attachment; let the browser create only a transient
+  download object URL and never inspect, load, or store the artifact.
+- Prevention: preserve explicit storage-source selection, reject unsafe paths
+  and invalid content, and keep automatic resume/replay regeneration separate.

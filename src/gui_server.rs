@@ -1,6 +1,7 @@
 use std::net::SocketAddr;
 use std::sync::{Arc, Mutex};
 
+use axum::body::Body;
 use axum::extract::{Path, Query, State};
 use axum::http::{StatusCode, Uri, header};
 use axum::response::{IntoResponse, Response};
@@ -55,6 +56,11 @@ struct CommandBody {
 #[derive(Debug, Default, Deserialize)]
 struct ResolutionQuery {
   turn: Option<u32>,
+}
+
+#[derive(Debug, Default, Deserialize)]
+struct CheckpointArtifactQuery {
+  storage: Option<String>,
 }
 
 pub fn parse_bind_args(args: impl IntoIterator<Item = String>) -> Result<SocketAddr, String> {
@@ -124,6 +130,10 @@ fn gui_router_with_persistence(path: std::path::PathBuf) -> Router {
 fn gui_router_with_state(state: GuiState) -> Router {
   Router::new()
     .route("/api/v1/checkpoints", get(list_checkpoints))
+    .route(
+      "/api/v1/sessions/{session_id}/save-artifact",
+      get(download_checkpoint_artifact),
+    )
     .route("/api/v1/sessions", post(start_session))
     .route("/api/v1/sessions/{session_id}", get(get_session))
     .route(
@@ -162,6 +172,32 @@ fn gui_router_with_state(state: GuiState) -> Router {
 
 async fn list_checkpoints(State(state): State<GuiState>) -> Response {
   with_store(&state, |store| store.get_checkpoint_discovery())
+}
+
+async fn download_checkpoint_artifact(
+  State(state): State<GuiState>,
+  Path(session_id): Path<String>,
+  Query(query): Query<CheckpointArtifactQuery>,
+) -> Response {
+  let artifact = match state.store.lock() {
+    Ok(store) => store.read_checkpoint_artifact(&session_id, query.storage.as_deref()),
+    Err(_) => {
+      return store_lock_error_response();
+    }
+  };
+  match artifact {
+    Ok(bytes) => Response::builder()
+      .status(StatusCode::OK)
+      .header(header::CONTENT_TYPE, "application/octet-stream")
+      .header(
+        header::CONTENT_DISPOSITION,
+        format!("attachment; filename=\"hs-mgt-checkpoint-{session_id}.save\""),
+      )
+      .body(Body::from(bytes))
+      .expect("valid checkpoint artifact response headers")
+      .into_response(),
+    Err(error) => checkpoint_artifact_error_response(error),
+  }
 }
 
 async fn start_session(
@@ -327,26 +363,41 @@ where
   match state.store.lock() {
     Ok(mut store) => match run(&mut store) {
       Ok(value) => Json(value).into_response(),
-      Err(error) => {
-        let status = if error.error.starts_with("unknown session") {
-          StatusCode::NOT_FOUND
-        } else {
-          StatusCode::BAD_REQUEST
-        };
-        (status, Json(error)).into_response()
-      }
+      Err(error) => error_response(error),
     },
-    Err(_) => (
-      StatusCode::INTERNAL_SERVER_ERROR,
-      Json(McpErrorMessage {
-        error: "GUI session store lock failed".to_string(),
-        code: Some("session_store_unavailable".to_string()),
-        resource_limit: None,
-        hint: None,
-      }),
-    )
-      .into_response(),
+    Err(_) => store_lock_error_response(),
   }
+}
+
+fn error_response(error: McpErrorMessage) -> Response {
+  let status = if error.error.starts_with("unknown session") {
+    StatusCode::NOT_FOUND
+  } else {
+    StatusCode::BAD_REQUEST
+  };
+  (status, Json(error)).into_response()
+}
+
+fn checkpoint_artifact_error_response(error: McpErrorMessage) -> Response {
+  let status = if error.code.as_deref() == Some("checkpoint_missing") {
+    StatusCode::NOT_FOUND
+  } else {
+    StatusCode::BAD_REQUEST
+  };
+  (status, Json(error)).into_response()
+}
+
+fn store_lock_error_response() -> Response {
+  (
+    StatusCode::INTERNAL_SERVER_ERROR,
+    Json(McpErrorMessage {
+      error: "GUI session store lock failed".to_string(),
+      code: Some("session_store_unavailable".to_string()),
+      resource_limit: None,
+      hint: None,
+    }),
+  )
+    .into_response()
 }
 
 async fn static_asset(uri: Uri) -> Response {
@@ -533,6 +584,16 @@ mod tests {
     path: &str,
     body: Option<&str>,
   ) -> (u16, String) {
+    let (status, _headers, body) = request_with_headers(address, method, path, body).await;
+    (status, body)
+  }
+
+  async fn request_with_headers(
+    address: SocketAddr,
+    method: &str,
+    path: &str,
+    body: Option<&str>,
+  ) -> (u16, String, String) {
     let body = body.unwrap_or("");
     let mut stream = tokio::net::TcpStream::connect(address).await.unwrap();
     let request = format!(
@@ -550,7 +611,7 @@ mod tests {
       .unwrap()
       .parse::<u16>()
       .unwrap();
-    (status, body.to_string())
+    (status, head.to_string(), body.to_string())
   }
 
   #[tokio::test]
@@ -815,6 +876,81 @@ mod tests {
     assert_eq!(checkpoint["storage"], "archive");
     assert_eq!(checkpoint["transition_count"], 0);
     assert!(checkpoint.get("save").is_none());
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/end"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    assert!(!path.exists());
+    server.abort();
+  }
+
+  #[tokio::test]
+  async fn live_transport_downloads_only_a_host_validated_checkpoint_artifact() {
+    let path = std::env::temp_dir().join(format!(
+      "hs-mgt-game-gui-artifact-transport-{}.save",
+      std::process::id()
+    ));
+    let (address, server) = test_server_with_persistence(path.clone()).await;
+    let (status, body) = request(
+      address,
+      "POST",
+      "/api/v1/sessions",
+      Some(r#"{"campaign":"competitive-regional-v1","seed":42,"difficulty":"normal"}"#),
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+    let session_id = serde_json::from_str::<serde_json::Value>(&body).unwrap()["session_id"]
+      .as_str()
+      .unwrap()
+      .to_string();
+    let (status, body) = request(
+      address,
+      "POST",
+      &format!("/api/v1/sessions/{session_id}/save"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{body}");
+
+    let (status, headers, artifact) = request_with_headers(
+      address,
+      "GET",
+      &format!("/api/v1/sessions/{session_id}/save-artifact?storage=archive"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 200, "{artifact}");
+    assert!(headers.contains("content-type: application/octet-stream"));
+    assert!(headers.contains(&format!(
+      "content-disposition: attachment; filename=\"hs-mgt-checkpoint-{session_id}.save\""
+    )));
+    assert!(artifact.contains("gui-competitive-save-v1"));
+    assert!(artifact.contains(&format!("\"session_id\": \"{session_id}\"")));
+
+    let (status, body) = request(
+      address,
+      "GET",
+      &format!("/api/v1/sessions/{session_id}/save-artifact?storage=legacy"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 404, "{body}");
+    assert!(body.contains("checkpoint_missing"));
+
+    let (status, body) = request(
+      address,
+      "GET",
+      &format!("/api/v1/sessions/{session_id}/save-artifact?storage=other"),
+      None,
+    )
+    .await;
+    assert_eq!(status, 400, "{body}");
+    assert!(body.contains("invalid_checkpoint_artifact_storage"));
+
     let (status, body) = request(
       address,
       "POST",

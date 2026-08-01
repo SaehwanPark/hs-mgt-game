@@ -188,6 +188,7 @@ class Phase11CampaignCoverageTests(unittest.TestCase):
     cls.server = (ROOT / "src" / "gui_server.rs").read_text(encoding="utf-8")
     cls.mcp_server = MCP_SERVER.read_text(encoding="utf-8")
     cls.session = (ROOT / "src" / "mcp" / "session.rs").read_text(encoding="utf-8")
+    cls.persistence = (ROOT / "src" / "mcp" / "persistence.rs").read_text(encoding="utf-8")
     roadmap = ROADMAP.read_text(encoding="utf-8")
     cls.phase11_1 = roadmap.split("## Milestone 11.1:", 1)[1].split("## Milestone 11.2:", 1)[0]
     result = subprocess.run(
@@ -233,7 +234,7 @@ console.log(JSON.stringify(resolved));
   def test_ledger_shape_and_catalog_ids_match_live_modules(self):
     self.assertEqual(
       set(self.ledger),
-      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "full_campaign_screenshot_inspection", "full_campaign_raster_screenshot_evidence", "event_cue_coverage", "debrief_view_coverage", "debrief_visual_review_packet", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "checkpoint_discovery", "checkpoint_reference_transfer", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "full_campaign_browser_coverage_rendering", "full_campaign_coverage_transport_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
+      {"schema_version", "status", "campaign", "scope", "catalogs", "facility_asset_coverage", "facility_placement_use_coverage", "asset_registry_coverage", "screenshot_coverage", "full_campaign_screenshot_inspection", "full_campaign_raster_screenshot_evidence", "event_cue_coverage", "debrief_view_coverage", "debrief_visual_review_packet", "checkpoint_view_coverage", "durable_checkpoint_coverage", "full_campaign_checkpoint_continuity", "full_stabilization_checkpoint_continuity", "full_affiliation_checkpoint_continuity", "cross_campaign_checkpoint_identity", "checkpoint_discovery", "checkpoint_reference_transfer", "checkpoint_artifact_download", "full_campaign_audio_state_coverage", "full_campaign_replay_continuity", "full_campaign_browser_coverage_rendering", "full_campaign_coverage_transport_continuity", "durable_stabilization_checkpoint_coverage", "durable_affiliation_checkpoint_coverage", "autosave_coverage", "campaign_coverage_read_coverage", "replay_view_coverage", "music_state_coverage", "history_view_coverage", "browser_refresh_coverage", "continuity", "fallbacks", "open_limits"},
     )
     self.assertEqual(self.ledger["schema_version"], "competitive-campaign-coverage-ledger-v1")
     self.assertEqual(self.ledger["status"], "bounded-technical-ledger")
@@ -642,6 +643,27 @@ console.log(JSON.stringify(resolved));
       self.assertIn(marker, self.app + self.html + json.dumps(coverage))
     for forbidden in ("CompetitiveWorldState", "resolved_inputs", "effect_queue", "transition_competitive"):
       self.assertNotIn(forbidden, self.app.split("export function serializeCheckpointReference", 1)[-1].split("export function parseCheckpointReference", 1)[0])
+
+  def test_checkpoint_artifact_download_is_host_validated_and_opaque(self):
+    coverage = self.ledger["checkpoint_artifact_download"]
+    self.assertEqual(coverage["status"], "complete-host-validated-opaque-artifact-download")
+    self.assertEqual(coverage["schema"], "host-save-artifact-download-v1")
+    self.assertEqual(coverage["storage_sources"], ["archive", "legacy"])
+    for marker in (
+      "save-artifact",
+      "downloadCheckpointArtifact",
+      "downloadHostCheckpointArtifact",
+      "read_checkpoint_artifact",
+      "read_gui_session_checkpoint_artifact",
+      "Download host save",
+    ):
+      self.assertIn(marker, self.server + self.session + self.persistence + self.adapter + self.app + self.html + json.dumps(coverage))
+    for boundary in (
+      "exact existing bytes",
+      "never deserializes, loads, stores",
+      "browser is only a manual opaque download surface",
+    ):
+      self.assertIn(boundary, json.dumps(coverage))
 
   def test_campaign_coverage_read_covers_all_launchable_campaigns(self):
     coverage = self.ledger["campaign_coverage_read_coverage"]

@@ -7809,6 +7809,25 @@ public release remain open. The target is recorded in
 `_workspace/182_implementation_plan_phase11-checkpoint-reference-v0.13.104.md`,
 `_workspace/00_input/request-summary-v0.13.104.md`, and the Phase 11.1 ledger.
 
+### Host save-artifact download bridge (v0.13.105)
+
+The loopback GUI host now exposes `GET
+/api/v1/sessions/{session_id}/save-artifact`. It revalidates the selected
+archive or legacy checkpoint through the existing host save loaders and serves
+the exact validated bytes as a safe attachment. Unsupported storage selectors,
+unsafe IDs, missing or mismatched entries, symlinks, unsupported schemas, and
+invalid contents fail closed.
+
+The Saved checkpoints picker exposes **Download host save** for each validated
+entry and preserves the entry's archive/legacy source. The browser uses a
+transient download object URL only; it does not serialize, parse, load, store,
+or treat the artifact as game state. This closes host-validated artifact
+download only. Automatic resume, replay regeneration, screenshots, human
+review, browser/device certification, provenance/legal approval, and public
+release remain open. The target is recorded in
+`_workspace/183_implementation_plan_phase11-save-artifact-download-v0.13.105.md`,
+`_workspace/00_input/request-summary-v0.13.105.md`, and the Phase 11.1 ledger.
+
 ### Visual/audio pilot evidence-intake packet (v0.13.90)
 
 The Phase 13.2 packet makes the open first-time-user pilot evidence path
