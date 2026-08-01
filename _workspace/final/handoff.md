@@ -3120,3 +3120,44 @@ Firefox/WebKit certification, real hardware/performance, human accessibility
 and usability, audio quality, educational/debrief review, provenance/legal and
 resemblance review, clinical/policy review, revision decisions, campaign
 expansion, and public-release approval remain pending and promotion-blocking.
+
+# Final Handoff — First-session/audio runtime-boundary evidence v0.13.98
+
+## Status
+
+The v0.13.98 first-session/audio runtime-boundary slice is implemented on
+`codex/phase13-1-first-session-audio-runtime-evidence-v0.13.98` and is ready
+for merge after PR #345 review.
+
+## Evidence
+
+- Packet: `docs/evaluation/phase13.1-first-session-audio-runtime-evidence.json`.
+- Validator: `scripts/validate_first_session_audio_runtime_evidence.py`.
+- Test: `tests/test_phase13_1_first_session_audio_runtime_evidence.py`.
+- Plan: `_workspace/176_implementation_plan_visual-audio-phase13-1-first-session-audio-runtime-evidence-v0.13.98.md`.
+- Fresh Chromium 150.0.0.0 loopback smoke observed a host-owned competitive
+  session, the complete seven-stage first-session rail, independent settings,
+  low-distraction behavior, cues-only mode, mute fallback, and written
+  equivalents.
+
+## Verification
+
+- Full Python suite: 916 tests pass.
+- Serial Rust suite: 375 tests pass.
+- Formatting, Clippy, release metadata, asset registry/release, browser
+  compatibility, device-performance, remaining-gate audit, and diff checks
+  pass.
+
+## Review outcome
+
+Exactly one medium-effort code reviewer was used for PR #345. The reviewer
+found no actionable issues and confirmed the evidence boundary. No second
+reviewer was used.
+
+## Remaining gates
+
+Participant first-use, listening/audio quality, human accessibility and
+usability, Firefox/WebKit certification, educational/debrief review,
+provenance/legal and resemblance review, clinical/policy review, revision
+decisions, campaign expansion, and public-release approval remain pending and
+promotion-blocking.
