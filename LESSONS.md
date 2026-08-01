@@ -3726,3 +3726,18 @@ separate gates.
 - Prevention: treat player and instructor projections as separate contracts;
   validate information boundaries and visible terminal targets together rather
   than assuming a shared formatter is safe for every endpoint.
+
+# Regenerate Measurements After Every Source-Bound Renderer Change
+
+- Context: the terminal renderer correction passed its focused and full checks,
+  but its final cross-campaign guard changed the canonical GUI source byte total
+  after the first merge, leaving the emulated device evidence stale.
+- Risk: source-bound evidence can fail on the next clean checkout even when the
+  functional behavior is correct, or stale measurements can be mistaken for a
+  current performance result.
+- Resolution: the post-merge audit recomputed the live-source total, updated the
+  policy/review packet/test fixture, and kept the proxy limit and certification
+  boundaries unchanged.
+- Prevention: run generated asset, device, and release projection checks after
+  the final renderer diff; treat every byte-count mismatch as evidence drift,
+  not as a reason to loosen the bound or claim device quality.

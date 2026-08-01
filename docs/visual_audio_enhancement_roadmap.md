@@ -3742,7 +3742,7 @@ Prepare a stable visual/audio release suitable for public use, contributor revie
 ## Milestone 13.1: Release candidate audit
 
 **Status:** Current source-checkout technical evidence is recorded through
-v0.13.99. Product/content review, public-release approval, full-campaign
+v0.13.100. Product/content review, public-release approval, full-campaign
 coverage, durable persistence, cross-browser/device certification, and human
 educational/accessibility gates remain open.
 
@@ -4704,6 +4704,24 @@ The target and validator are recorded in
 `_workspace/177_implementation_plan_visual-audio-phase13-2-terminal-debrief-runtime-evidence-v0.13.99.md`,
 `docs/evaluation/phase13.2-terminal-debrief-runtime-evidence.json`, and
 `scripts/validate_terminal_debrief_runtime_evidence.py`.
+
+### v0.13.100 generated device-evidence synchronization
+
+- The post-merge re-audit found that the final v0.13.99 cross-campaign
+  renderer guard changed the canonical GUI source byte total without updating
+  the existing emulated device-performance measurement.
+- `assets/device-performance-policy.json`,
+  `docs/evaluation/phase13.1-cross-browser-device-review-packet.json`, and
+  their tests now bind the current 395667-byte live-source total while keeping
+  the existing 400000-byte proxy limit.
+- Package and generated asset-credit projections are synchronized to v0.13.100
+  for this follow-up PR-equivalent maintenance change. This does not certify
+  hardware, browsers, accessibility, audio, education, or public release and
+  does not close `Debrief visuals reviewed`.
+
+The target is recorded in
+`_workspace/178_implementation_plan_visual-audio-phase13-1-device-evidence-sync-v0.13.100.md`
+and `_workspace/00_input/request-summary-v0.13.100.md`.
 
 ### v0.13.69 current competitive campaign-coverage envelope
 
