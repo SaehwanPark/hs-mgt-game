@@ -2,7 +2,7 @@
 
 **Status:** Active GUI delivery queue
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.10
+**Code baseline:** v0.14.11
 **Owner:** repository agents and maintainers
 
 This is the current visual/audio work queue for the host-backed GUI. It replaces
@@ -37,6 +37,9 @@ change.
   existing signed deltas and keep malformed values unavailable. Visible
   institutional response items remain target-free and host-sourced, with the
   approved reported-status token reused for emphasis.
+- AI-agent playtest captures retain host-reported history/hash evidence after a
+  committed visible-envelope refresh; the analyzer keeps missing history as a
+  revision finding.
 - Chromium evergreen desktop is the default end-user target. The Codex in-app
   browser is a development inspection surface. Firefox, WebKit/Safari, mobile,
   legacy browsers, and real-device certification are deferred and non-certified.

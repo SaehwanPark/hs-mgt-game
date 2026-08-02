@@ -98,6 +98,19 @@ def issue(issue_class: str, message: str, lane: str) -> dict[str, str]:
   return {"class": issue_class, "message": message, "evidence_lane": lane}
 
 
+def complete_history_event(event: Any) -> bool:
+  return (
+    isinstance(event, dict)
+    and event.get("type") == "history_observed"
+    and type(event.get("turn")) is int
+    and event["turn"] > 0
+    and isinstance(event.get("state_hash"), str)
+    and bool(event["state_hash"].strip())
+    and type(event.get("transition_count")) is int
+    and event["transition_count"] > 0
+  )
+
+
 def validate_capture(capture: Any) -> dict[str, Any]:
   issues = []
   if not isinstance(capture, dict):
@@ -196,7 +209,7 @@ def validate_capture(capture: Any) -> dict[str, Any]:
     issues.append(issue("task_incomplete", "No task_completed event was captured.", "interface_task_proxy"))
 
   command_count = sum(event.get("type") == "command_submitted" for event in events if isinstance(event, dict))
-  history_count = sum(event.get("type") == "history_observed" for event in events if isinstance(event, dict))
+  history_count = sum(complete_history_event(event) for event in events)
   semantic_count = sum(event.get("type") == "semantic_snapshot" for event in events if isinstance(event, dict))
   invalid = any(entry["class"] in {"capture_invalid", "unsupported_schema"} for entry in issues)
   return {

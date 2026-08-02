@@ -5684,3 +5684,28 @@ Focused source and visual tests must cover both insertion paths or their
 deterministic guards. Passing checks establish a browser-safe DOM fallback only;
 they do not establish cross-engine certification, human comprehension, lived
 accessibility, or policy calibration.
+
+---
+
+# Presentation Contract — Playtest history evidence closure v0.14.11
+
+## Goal and authorization
+
+Keep committed playtest evidence paired with the host's visible history
+projection. This is an evidence-capture contract only; it does not add player
+information or browser authority.
+
+## Source and fallback ledger
+
+| Evidence element | Authorized source | Fallback/diagnostic | Prohibited inference |
+| --- | --- | --- | --- |
+| Transition turn | Existing visible envelope history entry | Missing history remains a revision finding | No turn inferred from command text |
+| State hash | Existing visible envelope history/replay metadata | Missing hash remains unavailable | No hash generated in the browser |
+| Transition count | Existing visible envelope replay metadata/history length | Missing count remains unavailable | No commit inferred from local submission |
+
+## Verification and limits
+
+Focused recorder and analyzer tests must cover both complete and missing-history
+captures. Passing checks establish technical evidence retention only; they do
+not establish strategic quality, human comprehension, learning, lived
+accessibility, or policy validity.

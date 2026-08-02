@@ -4708,3 +4708,40 @@ cleanup.
 Passing checks establish only deterministic DOM insertion fallback behavior.
 They do not establish cross-engine certification, human comprehension, lived
 accessibility, or policy calibration.
+
+---
+
+# Request Summary — Playtest history evidence closure v0.14.11
+
+## Authorized outcome
+
+Close the concrete AI-agent validation finding where a stabilization
+first-decision capture records a submitted command without the host's committed
+history/hash observation.
+
+## Target slice
+
+- Preserve the existing host-envelope history turn, state hash, and transition
+  count in the playtest recorder after a committed visible refresh.
+- Complete the stabilization matrix fixture with that host history event.
+- Keep the analyzer's `command_without_history` finding active for incomplete
+  captures so evidence is never inferred from a local command event.
+
+## Non-goals
+
+- No new route, DTO/schema, simulation rule, persistence/replay format, asset,
+  audio cue, campaign, browser-support target, or browser authority.
+- No inference of commit status, strategic quality, human experience, or policy
+  validity.
+
+## Validation target
+
+Focused recorder and analyzer tests; full Rust/Python/documentation, asset,
+browser-default, and presentation checks; one medium-effort reviewer; PR,
+merge, and temporary-branch cleanup before selecting the next slice.
+
+## Evidence limits
+
+Passing checks establish only that host-reported history evidence is retained
+and missing evidence is diagnosed. They do not establish human comprehension,
+learning, lived accessibility, legal clearance, calibration, or policy validity.

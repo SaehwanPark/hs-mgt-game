@@ -3803,3 +3803,45 @@ legal/provenance clearance, policy calibration, or public release readiness.
 
 The current emulated device proxy measures 449,603 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Final Handoff — Playtest history evidence closure v0.14.11
+
+## Status
+
+The GUI playtest evidence gap is closed for the current stabilization matrix:
+the accepted decision capture includes the host-reported transition turn,
+state hash, and transition count. A synthetic incomplete capture still produces
+the prioritized `command_without_history` diagnostic.
+
+## Changed-file groups
+
+- Evidence capture and regression coverage: `gui/app.mjs`,
+  `tests/test_gui_playtest.py`, `tests/test_gui_playtest_analysis.py`, and the
+  stabilization playtest fixture.
+- Current core/release docs and generated asset metadata synchronized to
+  v0.14.11.
+- Durable v0.14.11 request, implementation plan, presentation contract, QA,
+  handoff, and lessons artifacts.
+
+## Verification
+
+- 952 Python tests, 388 Rust library tests plus integration/doc tests, Node
+  syntax, Clippy with warnings denied, formatting, and diff checks pass.
+- The five-capture GUI playtest matrix has no revision findings; an explicit
+  missing or partial-history regression still emits `command_without_history`,
+  and only a valid turn, non-empty state hash, and positive transition count
+  can satisfy the strategic-trace evidence lane.
+- Documentation currentness/links, release metadata, generated credits,
+  asset/security/release, browser compatibility, offline/loading, audio,
+  raster, visual/audio, and device-proxy checks pass. The current proxy reports
+  449,610 live-source bytes under the 450,000-byte limit.
+
+## Evidence limits
+
+This slice establishes only retention and diagnosis of host-reported playtest
+history evidence. It does not establish strategic quality, human comprehension,
+learning, lived accessibility, legal/provenance clearance, calibration,
+policy validity, browser/device certification, or public-release readiness.
+
+The current emulated device proxy measures 449,610 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.

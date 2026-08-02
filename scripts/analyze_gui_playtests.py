@@ -126,6 +126,10 @@ def build_record(path: Path, capture: Any, validation: dict[str, Any]) -> dict[s
     "task_evidence_valid": task_evidence_valid,
     "session": {dimension: session.get(dimension) for dimension in SESSION_DIMENSIONS},
     "event_counts": {event_type: counts.get(event_type, 0) for event_type in EVENT_TYPES if counts.get(event_type, 0)},
+    "complete_history_count": sum(
+      complete_history_event(event)
+      for event in (capture.get("events", []) if isinstance(capture, dict) else [])
+    ),
     "failure_classes": sorted({
       event.get("class")
       for event in (capture.get("events", []) if isinstance(capture, dict) else [])
@@ -147,6 +151,19 @@ def finding(priority: int, category: str, capture: str, code: str, evidence: str
     "hypothesis": hypothesis,
     "evidence_limit": limit,
   }
+
+
+def complete_history_event(event: Any) -> bool:
+  return (
+    isinstance(event, dict)
+    and event.get("type") == "history_observed"
+    and type(event.get("turn")) is int
+    and event["turn"] > 0
+    and isinstance(event.get("state_hash"), str)
+    and bool(event["state_hash"].strip())
+    and type(event.get("transition_count")) is int
+    and event["transition_count"] > 0
+  )
 
 
 def revision_findings(record: dict[str, Any], validation: dict[str, Any]) -> list[dict[str, Any]]:
@@ -199,7 +216,7 @@ def revision_findings(record: dict[str, Any], validation: dict[str, Any]) -> lis
   if (
     record["task_evidence_valid"]
     and record["event_counts"].get("command_submitted", 0)
-    and not record["event_counts"].get("history_observed", 0)
+    and record["complete_history_count"] == 0
     and not failures & {"adapter_error", "submit_rejected"}
   ):
     findings.append(finding(
@@ -207,7 +224,7 @@ def revision_findings(record: dict[str, Any], validation: dict[str, Any]) -> lis
       "evidence_completeness",
       capture,
       "command_without_history",
-      "A command_submitted event has no history_observed event.",
+      "A command_submitted event has no complete history_observed event with turn, state hash, and transition count.",
       "Retain committed history/hash evidence when a task includes a submission.",
       "The analyzer cannot infer whether the command committed or was only locally attempted.",
     ))
