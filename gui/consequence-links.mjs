@@ -9,8 +9,12 @@ function text(value, fallback = "Unavailable") {
 }
 
 function positiveInteger(value) {
-  const number = Number(value);
-  return Number.isSafeInteger(number) && number > 0 ? number : null;
+  if (typeof value !== "number" || !Number.isSafeInteger(value) || value <= 0) return null;
+  return value;
+}
+
+function nonEmptyString(value) {
+  return typeof value === "string" && value.trim() ? value.trim() : "";
 }
 
 export function consequenceLinkContext(link = {}) {
@@ -21,7 +25,7 @@ export function consequenceLinkContext(link = {}) {
     : turn != null
       ? `Turn ${turn}`
       : "Timing unavailable";
-  const hash = text(link.state_hash, "");
+  const hash = nonEmptyString(link.state_hash);
   return `${timing} · ${hash ? `Replay state hash ${hash}` : "Replay context unavailable"}`;
 }
 

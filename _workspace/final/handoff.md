@@ -3704,3 +3704,6 @@ The context line is derived only from existing actor-visible fields. Automated
 evidence cannot establish human comprehension, learning, lived accessibility,
 causal validity, replay certification, legal/provenance clearance, or public
 release readiness.
+
+The current emulated device proxy measures 447,393 live-source bytes under the
+448,000-byte limit; this remains a proxy, not hardware certification.

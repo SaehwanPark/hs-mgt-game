@@ -6373,3 +6373,6 @@ or invalid values remain explicit unavailable text.
 - Focused/full tests and presentation audits are technical evidence only; they
   do not establish human comprehension, learning, lived accessibility, causal
   validity, replay certification, or browser/device certification.
+
+The current emulated device proxy measures 447,393 live-source bytes under the
+448,000-byte limit; this remains a proxy, not hardware certification.

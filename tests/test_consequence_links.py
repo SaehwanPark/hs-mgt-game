@@ -76,6 +76,8 @@ class ConsequenceLinkTests(unittest.TestCase):
       if (consequenceLinkContext({ observed_month: 2, turn: 4, state_hash: 'hash-4' }) !== 'Observed month 2 · Replay state hash hash-4') process.exit(1);
       if (consequenceLinkContext({ turn: 4 }) !== 'Turn 4 · Replay context unavailable') process.exit(2);
       if (consequenceLinkContext({ turn: 'invalid', state_hash: '   ' }) !== 'Timing unavailable · Replay context unavailable') process.exit(3);
+      if (consequenceLinkContext({ observed_month: true, turn: [], state_hash: 123 }) !== 'Timing unavailable · Replay context unavailable') process.exit(4);
+      if (consequenceLinkContext({ observed_month: [2], turn: 4, state_hash: {} }) !== 'Turn 4 · Replay context unavailable') process.exit(5);
       console.log('pass');
       """
     )
