@@ -88,6 +88,15 @@ promotion gates and remain future work only in their dated evidence records.
 - No host route/schema, simulation, persistence, replay, asset, audio, or
   browser-support boundary changed.
 
+### Consequence timing and replay context (v0.14.6)
+
+- Visible consequence links render existing observed-month/turn and replay
+  state-hash context with deterministic unavailable fallbacks.
+- Source labels, target focus, information boundaries, and private-state
+  exclusions remain unchanged; no causal certainty or future outcome is added.
+- No host route/schema, simulation, persistence, replay, asset, audio, or
+  browser-support boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is

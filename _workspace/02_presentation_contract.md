@@ -5529,3 +5529,35 @@ Focused flow and session-handoff tests must prove terminal rendering and reset
 on a nonterminal load; the full presentation and Rust checks remain green. This
 establishes technical synchronization only, not human comprehension, learning,
 lived accessibility, debrief quality, or browser/device certification.
+
+---
+
+# Presentation Contract — Consequence timing and replay context v0.14.6
+
+## Goal and authorization
+
+Expose timing and replay-location context already carried by visible
+consequence-link objects. The renderer may format `observed_month`, `turn`, and
+`state_hash`; it may not create new host data or infer causality.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Missing/invalid fallback | Prohibited inference |
+| --- | --- | --- | --- |
+| Public signal timing | Existing `observed_month` | `Timing unavailable` | No future date or private event timing |
+| Process/effect timing | Existing `turn` | `Timing unavailable` | No turn-count extrapolation |
+| Replay location | Existing non-empty `state_hash` | `Replay context unavailable` | No generated or hidden hash |
+
+## Accessibility and authority
+
+Context is written text adjacent to the existing detail/source and does not
+depend on color, audio, motion, or an asset. Existing source labels, board focus,
+information-boundary copy, mute/reduced-motion behavior, and stale/missing-data
+recovery remain unchanged. History and replay remain host-owned.
+
+## Verification and limits
+
+Focused formatter and renderer tests must cover populated, missing, and invalid
+fields. Passing checks establish only deterministic rendering of existing
+actor-visible context, not human comprehension, learning, lived accessibility,
+causal validity, or replay certification.

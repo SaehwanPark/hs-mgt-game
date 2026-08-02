@@ -8,6 +8,27 @@ function text(value, fallback = "Unavailable") {
   return normalized || fallback;
 }
 
+function positiveInteger(value) {
+  if (typeof value !== "number" || !Number.isSafeInteger(value) || value <= 0) return null;
+  return value;
+}
+
+function nonEmptyString(value) {
+  return typeof value === "string" && value.trim() ? value.trim() : "";
+}
+
+export function consequenceLinkContext(link = {}) {
+  const observedMonth = positiveInteger(link.observed_month);
+  const turn = positiveInteger(link.turn);
+  const timing = observedMonth != null
+    ? `Observed month ${observedMonth}`
+    : turn != null
+      ? `Turn ${turn}`
+      : "Timing unavailable";
+  const hash = nonEmptyString(link.state_hash);
+  return `${timing} · ${hash ? `Replay state hash ${hash}` : "Replay context unavailable"}`;
+}
+
 function stableId(value, fallback) {
   const normalized = text(value, fallback)
     .toLowerCase()

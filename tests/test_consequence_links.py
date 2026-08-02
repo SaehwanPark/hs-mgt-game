@@ -69,6 +69,21 @@ class ConsequenceLinkTests(unittest.TestCase):
     self.assertEqual(result.returncode, 0, result.stderr)
     self.assertEqual(result.stdout.strip(), "pass")
 
+  def test_context_formatter_preserves_timing_and_explicit_replay_fallbacks(self):
+    result = run_node(
+      """
+      import { consequenceLinkContext } from './gui/consequence-links.mjs';
+      if (consequenceLinkContext({ observed_month: 2, turn: 4, state_hash: 'hash-4' }) !== 'Observed month 2 · Replay state hash hash-4') process.exit(1);
+      if (consequenceLinkContext({ turn: 4 }) !== 'Turn 4 · Replay context unavailable') process.exit(2);
+      if (consequenceLinkContext({ turn: 'invalid', state_hash: '   ' }) !== 'Timing unavailable · Replay context unavailable') process.exit(3);
+      if (consequenceLinkContext({ observed_month: true, turn: [], state_hash: 123 }) !== 'Timing unavailable · Replay context unavailable') process.exit(4);
+      if (consequenceLinkContext({ observed_month: [2], turn: 4, state_hash: {} }) !== 'Turn 4 · Replay context unavailable') process.exit(5);
+      console.log('pass');
+      """
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(result.stdout.strip(), "pass")
+
   def test_replay_sequence_keeps_historical_turns_and_hashes(self):
     result = run_node(
       """
@@ -89,6 +104,7 @@ class ConsequenceLinkTests(unittest.TestCase):
     for marker in (
       "regionalWorldConsequenceLinks",
       "resolutionConsequenceLinks",
+      "consequenceLinkContext",
       "renderConsequenceLinks",
       "currentResolutionSessionId",
       "presentationSessionId",

@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.6] - 2026-08-02
+
+- Show existing timing and replay state-hash context on visible consequence
+  links, with deterministic unavailable fallbacks.
+- Preserve source, target-focus, information-boundary, and host-authority
+  behavior; no route, schema, simulation, persistence, asset, audio, or browser
+  scope changed.
+
 ## [0.14.5] - 2026-08-02
 
 - Add an explicit final-debrief state to the shared first-session task rail for
