@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.12] - 2026-08-02
+
+- Record the bounded GUI-first technical checkpoint as complete through
+  v0.14.11 and keep future presentation work gap-gated.
+- Preserve explicit limits: no human-evidence, policy-validity, calibration,
+  legal, or browser-support expansion is implied.
+
 ## [0.14.11] - 2026-08-02
 
 - Preserve complete host-reported history/hash/count evidence in committed GUI

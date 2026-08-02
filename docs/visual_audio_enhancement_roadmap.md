@@ -2,8 +2,15 @@
 
 **Status:** Active GUI delivery queue
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.11
+**Code baseline:** v0.14.12
 **Owner:** repository agents and maintainers
+
+## Current technical checkpoint
+
+The bounded GUI-first presentation baseline is complete through v0.14.11.
+Future work remains conditional on a reproducible evidence gap; this checkpoint
+does not establish human comprehension, lived accessibility, legal clearance,
+calibration, balance, or policy validity.
 
 This is the current visual/audio work queue for the host-backed GUI. It replaces
 the former completion diary with a small set of executable tracks. The Rust

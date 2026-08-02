@@ -1,6 +1,6 @@
 # GUI executive desktop and adapter reference
 
-**Current status (v0.14.11):** The loopback Axum host is the active GUI surface
+**Current status (v0.14.12):** The loopback Axum host is the active GUI surface
 for all three campaigns. The host owns actions, transitions, history/replay,
 debriefs, and durable checkpoint discovery/restoration; this browser client is
 presentation-only. The shared task rail labels terminal sessions as
@@ -12,6 +12,8 @@ institutional response items with the registered reported-status token.
 Playtest captures retain host-reported history/hash evidence after committed
 visible-envelope refreshes; missing history remains a recoverable evidence
 finding.
+The current bounded GUI-first technical checkpoint is complete; future changes
+remain evidence-gated.
 Codex in-app browser inspection is development evidence. Firefox,
 WebKit/Safari, mobile, and legacy browsers are deferred and non-certified.
 

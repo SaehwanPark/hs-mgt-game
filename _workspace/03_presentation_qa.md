@@ -6482,3 +6482,22 @@ decision, while an explicit regression case preserves the analyzer's
 
 The current emulated device proxy measures 449,610 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Presentation QA — GUI-first technical checkpoint v0.14.12
+
+## Status
+
+Pass for the documentation-only checkpoint. The v0.14.11 bounded slices have
+current source, contract, analyzer, asset, browser-default, and device evidence;
+future work is explicitly gap-gated.
+
+## Findings and limits
+
+- The checkpoint summarizes existing technical evidence and changes no runtime
+  authority, route, schema, simulation, persistence, replay, asset, audio,
+  campaign, or browser-support boundary.
+- The ranked Future queue remains available for a new reproducible gap; no
+  feature breadth is inferred from historical phase documents.
+- Automated evidence cannot establish human comprehension, learning, lived
+  accessibility, legal clearance, calibration, balance, policy validity, or
+  public-release readiness.

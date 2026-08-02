@@ -4745,3 +4745,40 @@ merge, and temporary-branch cleanup before selecting the next slice.
 Passing checks establish only that host-reported history evidence is retained
 and missing evidence is diagnosed. They do not establish human comprehension,
 learning, lived accessibility, legal clearance, calibration, or policy validity.
+
+---
+
+# Request Summary — GUI-first technical checkpoint v0.14.12
+
+## Authorized outcome
+
+Record that the bounded GUI-first baseline through v0.14.11 satisfies its
+current technical exit checks, while keeping future work conditional on a new
+reproducible evidence gap.
+
+## Target slice
+
+- synchronize current core documents and generated release metadata;
+- summarize completed workspace, consequence, registered-signal,
+  Chromium-hardening, and agent-native validation slices;
+- preserve explicit limits and the ranked Future queue.
+
+## Non-goals
+
+- No runtime, simulation, route/schema, persistence, replay, asset, audio,
+  campaign, browser-support, or human-evidence change.
+- No new feature is promoted without a reproducible AI-agent trace, authoring
+  failure, debrief mismatch, domain-QA finding, accessibility-mode failure, or
+  release-check finding.
+
+## Validation target
+
+Release metadata, documentation currentness/links, generated credits, existing
+Rust/Python/JavaScript checks, one medium-effort reviewer, and authorized
+PR/merge/temporary-branch cleanup.
+
+## Evidence limits
+
+This checkpoint records technical coverage only. It does not establish human
+comprehension, learning, lived accessibility, legal clearance, calibration,
+balance, policy validity, or non-default browser/device support.

@@ -5,7 +5,7 @@ leading a fictional nonprofit US health system through financial pressure,
 workforce constraints, payer negotiations, policy oversight, market
 competition, and community trust.
 
-The current public milestone is a playable Rust prototype at v0.14.11. The
+The current public milestone is a playable Rust prototype at v0.14.12. The
 simulation remains the authority for commands, observations, transitions,
 history, replay, checkpoints, and debriefs. The CLI is the reference interface;
 the loopback GUI is the active presentation-development surface over the same
@@ -18,6 +18,8 @@ registered status-token emphasis.
 The AI-agent playtest recorder also retains host-reported history/hash evidence
 after committed visible-envelope refreshes; missing history remains an explicit
 revision finding rather than being inferred.
+The current bounded GUI-first technical checkpoint is complete; future
+presentation work remains gap-gated and does not imply human-evidence closure.
 
 ![Terminal view of the game's executive report and competitive command entry](https://i.imgur.com/gfmOO3O.png)
 

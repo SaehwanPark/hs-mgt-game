@@ -3845,3 +3845,33 @@ policy validity, browser/device certification, or public-release readiness.
 
 The current emulated device proxy measures 449,610 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Final Handoff — GUI-first technical checkpoint v0.14.12
+
+## Status
+
+The current bounded GUI-first technical checkpoint is recorded as complete
+through v0.14.11. Workspace handoffs, consequence legibility, registered
+signals, Chromium-safe insertion, and complete playtest history evidence all
+have current automated evidence. No new implementation slice is promoted until
+another reproducible gap appears.
+
+## Changed-file groups
+
+- Canonical current documents: README, SPEC, ARCHITECTURE, proposal, roadmap,
+  visual/audio roadmap, and GUI README.
+- Release metadata: Cargo versions, changelog, generated asset credits/notices,
+  and the release metadata expectation.
+- Durable v0.14.12 request, implementation plan, presentation contract, QA, and
+  handoff artifacts.
+
+## Verification and limits
+
+- Existing v0.14.11 technical evidence remains valid: 952 Python tests, 388
+  Rust library tests plus integration/doc tests, Node syntax, Clippy, formatting,
+  documentation/asset/browser/device checks, and a clean five-capture playtest
+  matrix.
+- This checkpoint does not establish human usability, learning, lived
+  accessibility, legal/provenance clearance, calibration, balance, policy
+  validity, non-default browser/device certification, or public-release
+  readiness.
