@@ -817,7 +817,7 @@
       "creation_method": "hand-authored deterministic actor-visible consequence-link projection",
       "license": "project-generated",
       "modifications": "None; local links preserve host sources, timing, hashes, missingness, and public-observation boundaries.",
-      "original_hash": "sha256:5d8fe7bc4e3405f11e6fff097b1e4f299e6a0fa0b27006e5b794b29496e9fdbd",
+      "original_hash": "sha256:c3276862feb5c10431e46750c2e64dcc0afc523e97912f880dbc06152b87d037",
       "release_hash": null,
       "attribution_text": "Generated in this repository; no third-party asset.",
       "accessible_equivalent": "Visible consequence label, detail, source, turn/hash context, and optional board focus control",

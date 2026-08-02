@@ -2,7 +2,7 @@
 
 **Status:** Active GUI delivery queue
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.6
+**Code baseline:** v0.14.7
 **Owner:** repository agents and maintainers
 
 This is the current visual/audio work queue for the host-backed GUI. It replaces
@@ -33,7 +33,8 @@ change.
 - The shared current-task rail labels terminal host sessions as final-debrief
   review and resets that label on a nonterminal load.
 - Visible consequence links expose existing timing and replay-hash context;
-  missing values remain explicitly unavailable.
+  missing values remain explicitly unavailable. Committed-effect links expose
+  existing signed deltas and keep malformed values unavailable.
 - Chromium evergreen desktop is the default end-user target. The Codex in-app
   browser is a development inspection surface. Firefox, WebKit/Safari, mobile,
   legacy browsers, and real-device certification are deferred and non-certified.

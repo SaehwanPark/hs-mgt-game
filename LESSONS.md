@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Display effect direction from the host field
+
+- Context: committed-effect links already carried a host `delta`, but the
+  shared card showed only metric/detail prose.
+- Risk: snapshot arithmetic or inferred labels could expose a causal claim or
+  silently turn missing data into a direction.
+- Resolution: format only strict numeric deltas, write explicit signed text,
+  and keep regional links delta-free with a malformed-data fallback.
+- Prevention: test positive, negative, zero, missing, and non-primitive values
+  before adding emphasis to consequence cards.
+
 ## Consequence context must come from link fields
 
 - Context: consequence links already carried observed month, turn, and replay

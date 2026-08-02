@@ -3707,3 +3707,27 @@ release readiness.
 
 The current emulated device proxy measures 447,393 live-source bytes under the
 448,000-byte limit; this remains a proxy, not hardware certification.
+
+# Final Handoff — Committed effect delta legibility v0.14.7
+
+## Status
+
+Planned bounded slice: committed-effect consequence links will show the
+existing host delta as signed written text, with `Delta unavailable` for
+malformed or missing values and no delta line for signal/process links.
+
+## Changed-file groups
+
+- Presentation/runtime: `gui/consequence-links.mjs`, `gui/app.mjs`, and
+  consequence-link tests.
+- Current core/release docs and synchronized provenance/device evidence.
+- Durable planning/contract/QA/handoff artifacts for v0.14.7.
+
+## Evidence limits
+
+The delta line is presentation-only and does not prove human comprehension,
+learning, lived accessibility, causal validity, legal/provenance clearance,
+policy calibration, or browser/device certification.
+
+The current emulated device proxy measures 447,925 live-source bytes under the
+448,000-byte limit; this remains a proxy, not hardware certification.

@@ -84,6 +84,23 @@ class ConsequenceLinkTests(unittest.TestCase):
     self.assertEqual(result.returncode, 0, result.stderr)
     self.assertEqual(result.stdout.strip(), "pass")
 
+  def test_delta_formatter_is_signed_and_fail_closed(self):
+    result = run_node(
+      """
+      import { consequenceLinkDelta } from './gui/consequence-links.mjs';
+      if (consequenceLinkDelta({ kind: 'committed-effect', delta: 4 }) !== 'Delta +4') process.exit(1);
+      if (consequenceLinkDelta({ kind: 'committed-effect', delta: -2 }) !== 'Delta -2') process.exit(2);
+      if (consequenceLinkDelta({ kind: 'committed-effect', delta: 0 }) !== 'Delta 0') process.exit(3);
+      if (consequenceLinkDelta({ kind: 'committed-effect' }) !== 'Delta unavailable') process.exit(4);
+      if (consequenceLinkDelta({ kind: 'committed-effect', delta: true }) !== 'Delta unavailable') process.exit(5);
+      if (consequenceLinkDelta({ kind: 'committed-effect', delta: [] }) !== 'Delta unavailable') process.exit(6);
+      if (consequenceLinkDelta({ kind: 'visible-process', delta: 9 }) !== '') process.exit(7);
+      console.log('pass');
+      """
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(result.stdout.strip(), "pass")
+
   def test_replay_sequence_keeps_historical_turns_and_hashes(self):
     result = run_node(
       """
@@ -105,7 +122,9 @@ class ConsequenceLinkTests(unittest.TestCase):
       "regionalWorldConsequenceLinks",
       "resolutionConsequenceLinks",
       "consequenceLinkContext",
+      "consequenceLinkDelta",
       "renderConsequenceLinks",
+      "consequence-delta",
       "currentResolutionSessionId",
       "presentationSessionId",
       "regionalSessionId",

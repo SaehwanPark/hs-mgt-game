@@ -29,6 +29,13 @@ export function consequenceLinkContext(link = {}) {
   return `${timing} · ${hash ? `Replay state hash ${hash}` : "Replay context unavailable"}`;
 }
 
+export function consequenceLinkDelta(link = {}) {
+  if (link.kind !== "committed-effect") return "";
+  const delta = link.delta;
+  if (typeof delta !== "number" || !Number.isSafeInteger(delta)) return "Delta unavailable";
+  return `Delta ${delta > 0 ? "+" : ""}${delta}`;
+}
+
 function stableId(value, fallback) {
   const normalized = text(value, fallback)
     .toLowerCase()

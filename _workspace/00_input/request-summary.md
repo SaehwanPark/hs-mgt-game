@@ -4554,3 +4554,43 @@ exactly one medium-effort code review; authorized PR/merge and branch cleanup.
 Passing checks establish only that existing actor-visible context is rendered
 with deterministic text fallbacks. They do not establish human comprehension,
 learning, lived accessibility, causal validity, or replay certification.
+
+---
+
+# Request Summary — Committed effect delta legibility v0.14.7
+
+## Authorized outcome
+
+Advance the consequence-legibility queue with one bounded presentation change:
+visible committed-effect links should state the host-reported metric delta in
+written text so the player can distinguish direction and zero change without
+reconstructing it from detail prose.
+
+## Target slice
+
+- Format the existing `ResolutionEffect.delta` carried by committed-effect
+  links as `Delta +N`, `Delta -N`, or `Delta 0`.
+- Use an explicit `Delta unavailable` fallback for missing or malformed effect
+  deltas; regional signals and processes do not receive an unrelated delta.
+- Preserve source labels, timing/replay context, board focus, information
+  boundaries, and host authority.
+
+## Non-goals
+
+- No new route, DTO/schema, simulation rule, persistence/replay format, asset,
+  audio cue, campaign, or browser-support target.
+- No inferred causality, metric ranking, private rival action, true-state value,
+  or future outcome.
+
+## Validation target
+
+Focused consequence-link and renderer tests for positive, negative, zero,
+missing, and malformed deltas; full Rust/Python/documentation, asset,
+browser-default, and presentation checks; exactly one medium-effort code
+review; authorized PR/merge and branch cleanup.
+
+## Evidence limits
+
+Passing checks establish only deterministic formatting of an existing
+actor-visible effect delta. They do not establish human comprehension,
+learning, lived accessibility, causal validity, or policy calibration.

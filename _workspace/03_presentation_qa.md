@@ -6376,3 +6376,25 @@ or invalid values remain explicit unavailable text.
 
 The current emulated device proxy measures 447,393 live-source bytes under the
 448,000-byte limit; this remains a proxy, not hardware certification.
+
+# Presentation QA — Committed effect delta legibility v0.14.7
+
+## Status
+
+Planned bounded slice: committed-effect links will expose only the existing
+host delta with deterministic signed text and an explicit malformed-data
+fallback. No new host authority or causal claim is authorized.
+
+## Findings and limits
+
+- Regional signals/processes remain delta-free; no fabricated metric change is
+  shown for them.
+- The delta line is written text and preserves existing source, timing/hash,
+  board focus, information-boundary, mute, reduced-motion, and stale-data
+  behavior.
+- Automated evidence can establish source-bound formatting and boundary
+  preservation only; it cannot establish comprehension, learning, lived
+  accessibility, causal validity, or policy calibration.
+
+The current emulated device proxy measures 447,925 live-source bytes under the
+448,000-byte limit; this remains a proxy, not hardware certification.

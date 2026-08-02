@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.7] - 2026-08-02
+
+- Show existing signed `ResolutionEffect.delta` values on committed-effect
+  consequence links, with `Delta unavailable` for malformed or missing values.
+- Keep regional signals/processes delta-free and preserve timing, replay-hash,
+  source, focus, information-boundary, and host-authority behavior.
+
+
 ## [0.14.6] - 2026-08-02
 
 - Show existing timing and replay state-hash context on visible consequence
