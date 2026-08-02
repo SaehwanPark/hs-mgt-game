@@ -78,6 +78,16 @@ promotion gates and remain future work only in their dated evidence records.
 - No host route/schema, simulation, persistence, replay, asset, audio, or
   browser-support boundary changed.
 
+### Terminal task handoff (v0.14.5)
+
+- The shared first-session task rail now renders an explicit final-debrief
+  state when an existing host terminal signal or end-session result moves the
+  workspace to Review.
+- A nonterminal session load clears the terminal task state; no terminality is
+  inferred from local turn counts or hidden presentation content.
+- No host route/schema, simulation, persistence, replay, asset, audio, or
+  browser-support boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is

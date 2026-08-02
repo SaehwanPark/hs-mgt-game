@@ -9,7 +9,7 @@
 
 ## Current Implementation Checkpoint
 
-As of 2026-08-02 (v0.14.4), the proposal has progressed beyond its initial concept and
+As of 2026-08-02 (v0.14.5), the proposal has progressed beyond its initial concept and
 vertical-slice stages into a playable, evidence-gated prototype. The repository
 contains three deterministic campaign paths:
 
@@ -22,7 +22,8 @@ for bounded agent playtesting, replay and state-hash verification, scenario
 loading, durable checkpoint discovery/restoration, educational debriefs, and a
 loopback Axum GUI host over the shared action surface. The GUI presents all three
 campaigns through the Setup/Brief/Decide/Resolve/Review workspace while leaving
-the Rust session store and action ordering authoritative. Current numerical
+the Rust session store and action ordering authoritative. The shared task rail
+uses the host terminal signal to label final history/debrief review. Current numerical
 mechanisms remain documented game abstractions rather than calibrated forecasts,
 and AI-agent playtests remain gameplay and explanation evidence rather than
 evidence of human learning.

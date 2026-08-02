@@ -5496,3 +5496,36 @@ navigation boundary, not human comprehension or lived accessibility.
   support, or campaign change.
 - Open: human task clarity, cognitive load, and device/browser certification
   remain optional external evidence and deferred gates.
+
+---
+
+# Presentation Contract — Terminal task handoff v0.14.5
+
+## Goal and authorization
+
+When the host-backed session reaches a terminal state, make the shared
+current-task rail say that the next task is final history/debrief review. This
+is a browser-local presentation state driven by the existing host terminal
+field; it does not add an authority surface.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Prohibited inference |
+| --- | --- | --- |
+| Final-debrief task | Existing `session.done` terminal field or validated end-session envelope | Do not infer terminality from turn count, hidden content, or local navigation |
+| Reset wording | Existing nonterminal session-load envelope | Do not preserve stale terminal wording across sessions |
+
+## Accessibility, fallback, and authority
+
+The final task is text-first and appears in the existing ordered flow list; no
+color, audio, motion, asset, or new control is required. Review routing,
+history, replay, checkpoints, commands, and debrief content remain host-owned.
+Existing mute, reduced-motion, scaling, missing-data, retry, and keyboard
+fallbacks remain unchanged.
+
+## Verification and evidence limits
+
+Focused flow and session-handoff tests must prove terminal rendering and reset
+on a nonterminal load; the full presentation and Rust checks remain green. This
+establishes technical synchronization only, not human comprehension, learning,
+lived accessibility, debrief quality, or browser/device certification.
