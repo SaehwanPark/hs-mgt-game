@@ -5598,3 +5598,38 @@ Focused tests cover positive, negative, zero, missing, and malformed values.
 Passing checks establish only deterministic display of actor-visible delta data,
 not human comprehension, learning, lived accessibility, causal validity, or
 policy calibration.
+
+---
+
+# Presentation Contract — Visible institutional response links v0.14.8
+
+## Goal and authorization
+
+Expose existing visible institutional response items from the host resolution
+step in the consequence-link panel. The renderer may format only the existing
+response strings and source/replay fields; it may not infer intent or outcome.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Missing/invalid fallback | Prohibited inference |
+| --- | --- | --- | --- |
+| Response text | Existing `ResolutionStep{id:"responses"}.items` | `No visible institutional responses.` | No hidden actor action or intent |
+| Response source | Existing response-step `source` | `Host response source unavailable.` | No new provenance claim |
+| Response replay location | Existing envelope `turn` and `replay.state_hash` | Existing timing/hash fallbacks | No generated or future sequence |
+
+Response links have no target id or effect delta and must not fabricate board
+focus or metric change controls.
+
+## Accessibility and authority
+
+Responses are written text adjacent to existing detail/context/source; no color,
+audio, motion, or asset is required. Existing effect links, focus behavior,
+information-boundary copy, mute/reduced-motion behavior, and stale/missing-data
+recovery remain unchanged. Response generation and history remain host-owned.
+
+## Verification and limits
+
+Focused tests cover ordered items, absent/present-empty/malformed steps, and
+replay/source fallbacks. Passing checks establish only deterministic rendering
+of actor-visible response text, not comprehension, learning, lived
+accessibility, actor-intent validity, or policy calibration.

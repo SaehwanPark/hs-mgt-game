@@ -6398,3 +6398,24 @@ fallback. No new host authority or causal claim is authorized.
 
 The current emulated device proxy measures 447,925 live-source bytes under the
 448,000-byte limit; this remains a proxy, not hardware certification.
+
+# Presentation QA — Visible institutional response links v0.14.8
+
+## Status
+
+Planned bounded slice: existing host response-step items will appear as
+actor-visible consequence links with deterministic empty/malformed fallbacks;
+no new host authority or actor-intent claim is authorized.
+
+## Findings and limits
+
+- Response links remain target-free and delta-free; board focus and effect
+  direction are not fabricated.
+- Source, timing/hash, information-boundary, mute, reduced-motion, and stale
+  data behavior remain inherited from the existing consequence renderer.
+- Automated evidence can establish projection and boundary preservation only;
+  it cannot establish comprehension, learning, lived accessibility, causal
+  validity, or policy calibration.
+
+The current emulated device proxy measures 449,234 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.

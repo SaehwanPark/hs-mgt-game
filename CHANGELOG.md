@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.8] - 2026-08-02
+
+- Project existing visible institutional response-step items into target-free,
+  source/replay-linked consequence cards.
+- Preserve empty/malformed fallbacks, effect deltas, information boundaries,
+  and host authority without inferring actor intent or future outcomes.
+
+
 ## [0.14.7] - 2026-08-02
 
 - Show existing signed `ResolutionEffect.delta` values on committed-effect

@@ -107,6 +107,15 @@ promotion gates and remain future work only in their dated evidence records.
 - No host route/schema, simulation, persistence, replay, asset, audio, or
   browser-support boundary changed.
 
+### Visible institutional response links (v0.14.8)
+
+- Existing response-step items are projected as target-free, delta-free
+  consequence links with host source and replay context.
+- Absent response steps produce no fabricated card; present empty or malformed
+  items use written unavailable detail while private actor intent remains hidden.
+- No host route/schema, simulation, persistence, replay, asset, audio, or
+  browser-support boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is
