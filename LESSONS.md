@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Keep playtest commits paired with host history evidence
+
+- Context: a stabilization playtest fixture recorded an accepted command and
+  completion without the host's committed history/hash observation.
+- Risk: an agent could mistake a local submission event for a committed
+  transition, weakening the strategic-trace evidence lane.
+- Resolution: record visible host-envelope history after refresh, keep the
+  matrix fixture complete, and retain `command_without_history` as a diagnostic
+  when an artifact omits the evidence.
+- Prevention: test both the complete capture and the analyzer's missing-history
+  finding; never infer commit status from a command event alone.
+
 ## Preserve token order when DOM helpers are constrained
 
 - Context: response-token insertion used `Element.prepend`, which is standard in

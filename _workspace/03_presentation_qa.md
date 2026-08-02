@@ -6459,3 +6459,26 @@ no browser-support expansion is authorized.
 
 The current emulated device proxy measures 449,603 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Presentation QA — Playtest history evidence closure v0.14.11
+
+## Status
+
+Pass for the bounded technical evidence contract. The stabilization matrix
+capture now includes the host-reported history/hash event after its accepted
+decision, while an explicit regression case preserves the analyzer's
+`command_without_history` finding for incomplete artifacts.
+
+## Findings and limits
+
+- The recorder reads only existing visible-envelope history/replay fields; it
+  does not generate hashes, infer commits, or expose true state.
+- Event ordering, capture schema, campaign coverage, and private-state filters
+  remain unchanged; no route, simulation, persistence, replay, asset, audio, or
+  browser-support boundary changed.
+- Automated evidence cannot establish human comprehension, learning, lived
+  accessibility, legal clearance, policy calibration, or public-release
+  readiness.
+
+The current emulated device proxy measures 449,610 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.

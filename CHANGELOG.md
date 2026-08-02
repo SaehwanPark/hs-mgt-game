@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.11] - 2026-08-02
+
+- Preserve host-reported history/hash evidence in committed GUI playtest
+  captures and add a regression guard for the visible-envelope recorder path.
+- Keep missing history as an explicit analyzer finding; no simulation, route,
+  schema, persistence, replay, or browser-authority boundary changes.
+
 ## [0.14.10] - 2026-08-02
 
 - Keep registered response-token insertion ordered with an `insertBefore`

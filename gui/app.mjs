@@ -411,7 +411,7 @@ function renderOnboarding(envelope, root, recorder) {
   recorder?.recordSnapshot(root);
 }
 
-function recordVisibleEnvelope(recorder, envelope) {
+export function recordVisibleEnvelope(recorder, envelope) {
   if (!recorder || !envelope) return;
   const session = envelope.session ?? {};
   recorder.record("session_loaded", {

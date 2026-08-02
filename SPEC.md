@@ -134,6 +134,17 @@ promotion gates and remain future work only in their dated evidence records.
 - No host route/schema, simulation, persistence, replay, asset, audio, or
   campaign boundary changed.
 
+### Playtest history evidence closure (v0.14.11)
+
+- The visible-envelope recorder path is regression-tested to preserve a
+  host-reported transition turn, state hash, and transition count after a
+  committed decision refresh.
+- The stabilization first-decision matrix capture now includes its committed
+  history observation; the analyzer still reports `command_without_history`
+  when a capture omits that evidence.
+- No host route/schema, simulation, persistence, replay, asset, audio, or
+  browser-authority boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is

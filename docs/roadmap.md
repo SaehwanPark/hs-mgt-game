@@ -2,7 +2,7 @@
 
 **Status:** Canonical current direction
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.10
+**Code baseline:** v0.14.11
 
 This roadmap is the short current queue. Historical phase plans, release
 journals, and evidence packets remain in `docs/history/`, `_workspace/`, and
@@ -26,6 +26,9 @@ written unavailable fallbacks; committed-effect links also show existing signed
 deltas with explicit malformed-data wording; the same panel now carries
 host-reported visible institutional responses without inferred targets; these
 cards reuse the approved reported-status token.
+AI-agent playtest captures now retain host-reported history/hash evidence after
+a committed visible-envelope refresh; missing history remains an explicit
+analyzer finding rather than an inferred commit.
 
 The current release is technically playable but is not a calibrated forecast,
 measured learning intervention, lived-accessibility result, legal clearance,

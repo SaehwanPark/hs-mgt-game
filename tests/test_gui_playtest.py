@@ -78,6 +78,32 @@ class GuiPlaytestTests(unittest.TestCase):
     self.assertEqual(capture["events"][0]["sequence"], 0)
     self.assertNotIn("raw_payload", capture["events"][0])
 
+  def test_visible_host_envelope_records_committed_history_for_playtest_evidence(self):
+    script = r'''
+      import { createPlaytestRecorder } from "./gui/playtest.mjs";
+      import { recordVisibleEnvelope } from "./gui/app.mjs";
+      const recorder = createPlaytestRecorder({ metadata: { campaign: "stabilization-v1", role: "first-time", task: "complete-first-decision" } });
+      recordVisibleEnvelope(recorder, {
+        schema_version: "campaign-coverage-v1",
+        session: { campaign: "stabilization-v1", turn: 2 },
+        history: [{ turn: 1, state_hash: "hash-stabilization-1" }],
+        replay: { transition_count: 1 },
+      });
+      const capture = recorder.capture();
+      const history = capture.events.find((event) => event.type === "history_observed");
+      if (!history || history.turn !== 1 || history.state_hash !== "hash-stabilization-1" || history.transition_count !== 1) process.exit(1);
+      console.log(JSON.stringify(history));
+    '''
+    result = subprocess.run(
+      ["node", "--input-type=module", "-e", script],
+      capture_output=True,
+      text=True,
+      cwd=ROOT,
+      check=False,
+    )
+    self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+    self.assertEqual(json.loads(result.stdout)["state_hash"], "hash-stabilization-1")
+
   def test_diagnostics_accept_fixture_and_reject_forbidden_fields(self):
     capture = json.loads(FIXTURE.read_text(encoding="utf-8"))
     result = DIAGNOSTICS.validate_capture(capture)

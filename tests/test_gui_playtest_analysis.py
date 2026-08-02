@@ -32,10 +32,21 @@ class GuiPlaytestAnalysisTests(unittest.TestCase):
       "recovery-check",
       "strategy-review",
     ])
+    self.assertEqual(report["revision_findings"], [])
+
+  def test_command_without_history_remains_a_prioritized_finding(self):
+    source = FIXTURE_DIR / "stabilization_evidence_gap_seed45.json"
+    capture = json.loads(source.read_text(encoding="utf-8"))
+    capture["events"] = [event for event in capture["events"] if event["type"] != "history_observed"]
+    for sequence, event in enumerate(capture["events"]):
+      event["sequence"] = sequence
+    with tempfile.TemporaryDirectory() as directory:
+      path = Path(directory) / "missing-history.json"
+      path.write_text(json.dumps(capture), encoding="utf-8")
+      report = ANALYZER.analyze_paths([path])
     self.assertEqual(len(report["revision_findings"]), 1)
     self.assertEqual(report["revision_findings"][0]["priority"], 2)
     self.assertEqual(report["revision_findings"][0]["code"], "command_without_history")
-    self.assertNotIn("affiliation_recovery_check_seed44.json", report["revision_findings"][0]["capture"])
 
   def test_same_inputs_have_byte_stable_cli_output(self):
     first = subprocess.run(
