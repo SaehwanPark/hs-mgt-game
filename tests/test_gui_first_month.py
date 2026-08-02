@@ -194,11 +194,12 @@ class GuiFirstMonthTests(unittest.TestCase):
         effects: [],
         replay: {},
       };
-      function adapterFor(calls, rejectSubmit = false) {
+      function adapterFor(calls, rejectSubmit = false, terminalOnLoad = false, terminalOnSubmit = false) {
         return {
           sessionId: "session-1",
+          terminal: terminalOnLoad,
           async startSession() { calls.push("start"); return { session_id: "session-1" }; },
-          async getPresentation() { calls.push("presentation"); return presentation; },
+          async getPresentation() { calls.push("presentation"); return { ...presentation, session: { ...presentation.session, done: this.terminal } }; },
           async getActionCatalog() {
             calls.push("catalog");
             return {
@@ -217,6 +218,7 @@ class GuiFirstMonthTests(unittest.TestCase):
           async submitTurn() {
             calls.push("submit");
             if (rejectSubmit) throw new Error("host rejected batch");
+            if (terminalOnSubmit) this.terminal = true;
             return { latest_transition: { turn: 1 } };
           },
           async getResolution() { calls.push("resolution"); return resolution; },
@@ -243,7 +245,22 @@ class GuiFirstMonthTests(unittest.TestCase):
       await client.submit();
       client.firstMonthFlow.update({ resolutionReviewed: true });
       if (client.firstMonthFlow.stage.id !== "continue") process.exit(4);
-      if (JSON.stringify(calls) !== JSON.stringify(["start", "presentation", "catalog", "presentation", "catalog", "validate", "submit", "resolution", "presentation"])) process.exit(5);
+      if (root.querySelector("#action-builder").hidden || root.querySelector("#validate-actions").disabled) process.exit(5);
+      if (JSON.stringify(calls) !== JSON.stringify(["start", "presentation", "catalog", "presentation", "catalog", "validate", "submit", "resolution", "presentation"])) process.exit(11);
+
+      const terminalLoadRoot = makeRoot();
+      const terminalLoadClient = createActionClient({ adapter: adapterFor([], false, true), root: terminalLoadRoot });
+      await terminalLoadClient.load("session-1");
+      if (terminalLoadClient.firstMonthFlow.stage.id !== "terminal") process.exit(6);
+      if (!terminalLoadRoot.querySelector("#action-builder").hidden || !terminalLoadRoot.querySelector("#validate-actions").disabled) process.exit(7);
+
+      const terminalCommitRoot = makeRoot();
+      const terminalCommitClient = createActionClient({ adapter: adapterFor([], false, false, true), root: terminalCommitRoot });
+      await prepare(terminalCommitClient, terminalCommitRoot);
+      await terminalCommitClient.validate();
+      const terminalCommit = await terminalCommitClient.submit();
+      if (!terminalCommit.ok || terminalCommitClient.firstMonthFlow.stage.id !== "terminal") process.exit(8);
+      if (!terminalCommitRoot.querySelector("#action-builder").hidden || !terminalCommitRoot.querySelector("#validate-actions").disabled) process.exit(9);
 
       const failureCalls = [];
       const failureRoot = makeRoot();
@@ -251,7 +268,7 @@ class GuiFirstMonthTests(unittest.TestCase):
       await prepare(failureClient, failureRoot);
       await failureClient.validate();
       const rejected = await failureClient.submit();
-      if (rejected.ok || failureClient.firstMonthFlow.stage.id !== "submit") process.exit(6);
+      if (rejected.ok || failureClient.firstMonthFlow.stage.id !== "submit") process.exit(10);
       console.log(JSON.stringify({ calls, failureCalls, stage: failureClient.firstMonthFlow.stage.id }));
     '''
     result = subprocess.run(

@@ -3677,5 +3677,5 @@ learning, lived accessibility, debrief quality, calibration, policy validity,
 legal/provenance clearance, browser/device certification, or public release
 readiness.
 
-The device proxy measures 446,202 live-source bytes under a 447,000-byte
+The device proxy measures 446,524 live-source bytes under a 447,000-byte
 limit. This is an emulated budget check, not device certification.
