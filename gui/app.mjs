@@ -363,8 +363,8 @@ function bindSkipNavigation(root) {
   if (!link || !target || link.__hsMgtSkipNavigationBound) return;
   link.__hsMgtSkipNavigationBound = true;
   link.addEventListener("click", () => {
-    workspaceEvent(root, "session_loaded", { focus: false });
-    target.focus?.({ preventScroll: true });
+    const result = workspaceController(root)?.setWorkspace?.("brief", { focus: false });
+    if (result?.ok) target.focus?.({ preventScroll: true });
   });
 }
 

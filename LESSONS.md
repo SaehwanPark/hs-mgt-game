@@ -3934,7 +3934,7 @@ separate gates.
 - Risk: a technically correct GUI slice can appear broken or silently exceed
   the declared low-power proxy if the evidence artifact is left stale.
 - Resolution: re-run `scripts/check_device_performance.py`, synchronize the
-  policy and current review packet to 445,106 measured bytes under a 446,000
+  policy and current review packet to 445,346 measured bytes under a 446,000
   byte limit, and keep the result labeled emulated rather than hardware
   certification.
 - Prevention: treat source-byte evidence as part of every live-GUI change's

@@ -6326,7 +6326,7 @@ through the existing task strip.
 - Documentation currentness/links, release metadata, generated credits,
   asset/security/release, browser compatibility, offline/loading, audio,
   raster, visual/audio, and device-proxy checks pass. The emulated proxy is
-  synchronized at 445,106 source bytes under a 446,000-byte limit.
+  synchronized at 445,346 source bytes under a 446,000-byte limit.
 
 ## Evidence limits
 

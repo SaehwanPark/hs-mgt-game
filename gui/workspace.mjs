@@ -137,7 +137,9 @@ export function createWorkspaceController({
 
   function goForEvent(event, options = {}) {
     const next = workspaceForEvent(event, activeWorkspace);
-    unlockThrough(next);
+    const type = typeof event === "string" ? event : event?.type ?? event?.event;
+    if (type === "session_loaded" || type === "session_missing") highestUnlockedIndex = workspaceIndex(next);
+    else unlockThrough(next);
     return setWorkspace(next, options);
   }
 

@@ -3639,7 +3639,7 @@ remain.
 - Documentation currentness/links, release metadata, generated credits,
   asset/security/release, browser compatibility, offline/loading, audio,
   raster, visual/audio, and device-proxy checks pass.
-- Device proxy source evidence is 445,106 bytes under a 446,000-byte limit; it
+- Device proxy source evidence is 445,346 bytes under a 446,000-byte limit; it
   remains an emulated proxy and not hardware certification.
 
 ## Review boundary and remaining limits

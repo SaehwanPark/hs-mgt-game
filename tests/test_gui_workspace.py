@@ -80,6 +80,8 @@ class GuiWorkspaceTests(unittest.TestCase):
       if (!controller.setWorkspace("resolve", { focus: false }).ok) process.exit(7);
       controller.goForEvent({ type: "session_loaded", done: true }, { focus: false });
       if (!controller.setWorkspace("review", { focus: false }).ok || !controller.setWorkspace("brief", { focus: false }).ok) process.exit(8);
+      controller.goForEvent({ type: "session_loaded", done: false }, { focus: false });
+      if (controller.setWorkspace("review", { focus: false }).ok) process.exit(9);
       console.log("ok");
     '''
     result = subprocess.run(
@@ -101,7 +103,11 @@ class GuiWorkspaceTests(unittest.TestCase):
     self.assertIn('aria-label="Presentation sections"', html)
     workspace = WORKSPACE.read_text(encoding="utf-8")
     self.assertIn('node.disabled = locked;', workspace)
-    self.assertIn('node.disabled = locked;', workspace)
+
+  def test_skip_navigation_does_not_unlock_future_workspace(self):
+    app = APP.read_text(encoding="utf-8")
+    self.assertIn('workspaceController(root)?.setWorkspace?.("brief", { focus: false })', app)
+    self.assertNotIn('workspaceEvent(root, "session_loaded", { focus: false });', app)
 
   def test_visible_information_rows_preserve_word_sized_wraps(self):
     html = HTML.read_text(encoding="utf-8")
