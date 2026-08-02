@@ -48,6 +48,18 @@ class GuiPlaytestAnalysisTests(unittest.TestCase):
     self.assertEqual(report["revision_findings"][0]["priority"], 2)
     self.assertEqual(report["revision_findings"][0]["code"], "command_without_history")
 
+  def test_partial_history_remains_a_prioritized_finding(self):
+    source = FIXTURE_DIR / "stabilization_evidence_gap_seed45.json"
+    capture = json.loads(source.read_text(encoding="utf-8"))
+    history = next(event for event in capture["events"] if event["type"] == "history_observed")
+    history.pop("state_hash")
+    with tempfile.TemporaryDirectory() as directory:
+      path = Path(directory) / "partial-history.json"
+      path.write_text(json.dumps(capture), encoding="utf-8")
+      report = ANALYZER.analyze_paths([path])
+    self.assertEqual(len(report["revision_findings"]), 1)
+    self.assertEqual(report["revision_findings"][0]["code"], "command_without_history")
+
   def test_same_inputs_have_byte_stable_cli_output(self):
     first = subprocess.run(
       ["python3", str(SCRIPT), str(FIXTURE_DIR)],

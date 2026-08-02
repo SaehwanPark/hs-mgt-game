@@ -3825,10 +3825,12 @@ the prioritized `command_without_history` diagnostic.
 
 ## Verification
 
-- 951 Python tests, 388 Rust library tests plus integration/doc tests, Node
+- 952 Python tests, 388 Rust library tests plus integration/doc tests, Node
   syntax, Clippy with warnings denied, formatting, and diff checks pass.
 - The five-capture GUI playtest matrix has no revision findings; an explicit
-  missing-history regression still emits `command_without_history`.
+  missing or partial-history regression still emits `command_without_history`,
+  and only a valid turn, non-empty state hash, and positive transition count
+  can satisfy the strategic-trace evidence lane.
 - Documentation currentness/links, release metadata, generated credits,
   asset/security/release, browser compatibility, offline/loading, audio,
   raster, visual/audio, and device-proxy checks pass. The current proxy reports
