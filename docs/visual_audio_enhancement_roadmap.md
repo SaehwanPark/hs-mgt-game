@@ -2,7 +2,7 @@
 
 **Status:** Active GUI delivery queue
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.9
+**Code baseline:** v0.14.10
 **Owner:** repository agents and maintainers
 
 This is the current visual/audio work queue for the host-backed GUI. It replaces

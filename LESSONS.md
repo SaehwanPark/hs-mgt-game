@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Preserve token order when DOM helpers are constrained
+
+- Context: response-token insertion used `Element.prepend`, which is standard in
+  the default browser but may be absent in a constrained test DOM.
+- Risk: a missing helper could drop the registered token or change the heading
+  order while leaving written response content apparently intact.
+- Resolution: keep `prepend` for the normal path and fall back to
+  `insertBefore(token, firstChild)` with the same node and semantics.
+- Prevention: test insertion guards as source contracts while keeping browser
+  certification scope explicit.
+
 ## Reuse registered visual tokens before adding assets
 
 - Context: response cards needed a category cue, while the approved runtime

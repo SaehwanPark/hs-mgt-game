@@ -1,6 +1,6 @@
 # GUI executive desktop and adapter reference
 
-**Current status (v0.14.9):** The loopback Axum host is the active GUI surface
+**Current status (v0.14.10):** The loopback Axum host is the active GUI surface
 for all three campaigns. The host owns actions, transitions, history/replay,
 debriefs, and durable checkpoint discovery/restoration; this browser client is
 presentation-only. The shared task rail labels terminal sessions as

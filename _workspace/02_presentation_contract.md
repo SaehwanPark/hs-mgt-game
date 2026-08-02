@@ -5660,3 +5660,27 @@ Focused tests must prove catalog identity, accessible text/equivalent markers,
 and response-only wiring. Passing checks establish reuse of a registered
 presentation token, not human comprehension, learning, lived accessibility,
 legal clearance, or policy calibration.
+
+---
+
+# Presentation Contract — Browser-safe response token insertion v0.14.10
+
+## Goal and authorization
+
+Keep the approved reported-status token before a visible-response title across
+the normal Chromium DOM and a constrained DOM harness. The fallback changes
+only insertion mechanics; it does not change content, semantics, or authority.
+
+## Source and fallback ledger
+
+| Element | Primary path | Fallback | Prohibited change |
+| --- | --- | --- | --- |
+| Response status token order | `heading.prepend(token)` | `heading.insertBefore(token, heading.firstChild)` | No new engine claim or content rewrite |
+| Response text/context | Existing link fields | Existing renderer fallbacks | No host inference |
+
+## Verification and limits
+
+Focused source and visual tests must cover both insertion paths or their
+deterministic guards. Passing checks establish a browser-safe DOM fallback only;
+they do not establish cross-engine certification, human comprehension, lived
+accessibility, or policy calibration.

@@ -4671,3 +4671,40 @@ medium-effort code review; authorized PR/merge and branch cleanup.
 Passing checks establish only that an approved registered token is reused with
 written equivalents. They do not establish human comprehension, learning,
 lived accessibility, legal clearance, or policy calibration.
+
+---
+
+# Request Summary — Browser-safe response token insertion v0.14.10
+
+## Authorized outcome
+
+Advance Chromium-default hardening with one bounded standards-based fallback:
+registered response tokens must insert before the response title even when a
+constrained DOM harness lacks `Element.prepend`.
+
+## Target slice
+
+- Keep the current `prepend` path for evergreen Chromium.
+- Add an `insertBefore` fallback that preserves heading order and text
+  equivalents when `prepend` is unavailable.
+- Keep all response/effect content, source/replay context, visual registry,
+  focus behavior, and host boundaries unchanged.
+
+## Non-goals
+
+- No new engine support claim, route, DTO/schema, simulation rule,
+  persistence/replay format, asset/audio, campaign, or mobile/legacy/WebKit/
+  Firefox certification.
+
+## Validation target
+
+Focused renderer-source and visual-catalog tests; browser compatibility,
+offline/loading/device, full Rust/Python/documentation, asset, and presentation
+checks; exactly one medium-effort code review; authorized PR/merge and branch
+cleanup.
+
+## Evidence limits
+
+Passing checks establish only deterministic DOM insertion fallback behavior.
+They do not establish cross-engine certification, human comprehension, lived
+accessibility, or policy calibration.

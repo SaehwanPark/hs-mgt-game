@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.10] - 2026-08-02
+
+- Keep registered response-token insertion ordered with an `insertBefore`
+  fallback when constrained DOM harnesses lack `Element.prepend`.
+- Preserve Chromium-default scope and all existing response, source, replay,
+  focus, accessibility, and host-authority behavior.
+
+
 ## [0.14.9] - 2026-08-02
 
 - Reuse the approved `status-reported` runtime visual token on visible

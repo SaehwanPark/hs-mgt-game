@@ -3779,3 +3779,27 @@ or browser/device certification.
 
 The current emulated device proxy measures 449,418 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Final Handoff — Browser-safe response token insertion v0.14.10
+
+## Status
+
+Planned bounded slice: response-token headings retain Chromium `prepend` and
+use a deterministic `insertBefore` fallback when unavailable. No content,
+registry, asset, audio, host, or browser-engine scope changes.
+
+## Changed-file groups
+
+- Presentation/runtime and focused tests: `gui/app.mjs` and consequence/visual
+  source-contract tests.
+- Current core/release docs and synchronized device evidence.
+- Durable v0.14.10 request, implementation plan, contract, QA, and handoff.
+
+## Evidence limits
+
+This fallback establishes only deterministic DOM insertion behavior. It does not
+prove cross-engine certification, human comprehension, lived accessibility,
+legal/provenance clearance, policy calibration, or public release readiness.
+
+The current emulated device proxy measures 449,603 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.
