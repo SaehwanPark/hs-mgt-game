@@ -16,7 +16,7 @@
     "network": "loopback-only"
   },
   "limits": {
-    "live_source_bytes": 447000,
+    "live_source_bytes": 448000,
     "dom_elements": 900,
     "svg_elements": 8,
     "shell_reload_ms": 1000,
@@ -28,7 +28,7 @@
       "width": 1024,
       "height": 768
     },
-    "live_source_bytes": 446498,
+    "live_source_bytes": 447272,
     "dom_elements": 818,
     "svg_elements": 4,
     "shell_reload_samples_ms": [

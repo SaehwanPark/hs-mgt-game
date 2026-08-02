@@ -2,7 +2,7 @@
 
 **Status:** Canonical current direction
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.5
+**Code baseline:** v0.14.6
 
 This roadmap is the short current queue. Historical phase plans, release
 journals, and evidence packets remain in `docs/history/`, `_workspace/`, and
@@ -21,6 +21,8 @@ owns reversible presentation state only. Future workspace tabs remain disabled
 until their existing host/session handoff event makes the visible task ready;
 Setup and prior workspaces remain reviewable. The current-task rail switches to
 final-debrief wording when the host reports a terminal session.
+Visible consequence links now show existing timing and replay-hash context with
+written unavailable fallbacks.
 
 The current release is technically playable but is not a calibrated forecast,
 measured learning intervention, lived-accessibility result, legal clearance,

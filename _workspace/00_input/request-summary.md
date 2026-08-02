@@ -4515,3 +4515,42 @@ review; authorized PR/merge and temporary-branch cleanup.
 Passing checks establish only technical task-rail synchronization with an
 actor-visible host terminal signal. They do not establish human comprehension,
 learning, lived accessibility, debrief quality, or browser/device certification.
+
+---
+
+# Request Summary — Consequence timing and replay context v0.14.6
+
+## Authorized outcome
+
+Advance the consequence-legibility queue with one bounded presentation change:
+visible consequence links should show their existing timing and, when supplied
+by the host, replay state-hash context so a player can locate a consequence in
+the committed sequence without inferring a future outcome.
+
+## Target slice
+
+- Render a text-first context line for each existing regional signal/process or
+  committed resolution effect.
+- Use the existing `turn`, `observed_month`, and `state_hash` fields only;
+  missing or invalid values render explicit unavailable wording.
+- Preserve source labels, information-boundary copy, board focus behavior, and
+  actor-visible/private-state boundaries.
+
+## Non-goals
+
+- No new route, DTO/schema, simulation rule, persistence/replay format, asset,
+  audio cue, campaign, or browser-support target.
+- No inferred causal certainty, hidden rival action, true-state metric, or
+  future outcome.
+
+## Validation target
+
+Focused consequence-link and GUI renderer tests for timing/hash fallbacks;
+full Rust/Python/documentation, asset, browser-default, and presentation checks;
+exactly one medium-effort code review; authorized PR/merge and branch cleanup.
+
+## Evidence limits
+
+Passing checks establish only that existing actor-visible context is rendered
+with deterministic text fallbacks. They do not establish human comprehension,
+learning, lived accessibility, causal validity, or replay certification.

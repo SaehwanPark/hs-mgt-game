@@ -3677,5 +3677,30 @@ learning, lived accessibility, debrief quality, calibration, policy validity,
 legal/provenance clearance, browser/device certification, or public release
 readiness.
 
-The device proxy measures 446,498 live-source bytes under a 447,000-byte
+The device proxy measures 447,272 live-source bytes under a 448,000-byte
 limit. This is an emulated budget check, not device certification.
+
+# Final Handoff — Consequence timing and replay context v0.14.6
+
+## Status
+
+Visible consequence links now include deterministic timing and existing replay
+state-hash context. Missing or invalid values use written unavailable fallbacks;
+source, target focus, information boundaries, and host authority are preserved.
+
+## Changed-file groups
+
+- Presentation/runtime: `gui/consequence-links.mjs`, `gui/app.mjs`, and focused
+  consequence-link tests.
+- Current core/release docs: README, SPEC, ARCHITECTURE, proposal, roadmap,
+  visual/audio roadmap, GUI README, changelog, Cargo versions, and generated
+  credits.
+- Durable evidence: v0.14.6 request summary, implementation plan, contract,
+  QA, and this handoff.
+
+## Evidence limits
+
+The context line is derived only from existing actor-visible fields. Automated
+evidence cannot establish human comprehension, learning, lived accessibility,
+causal validity, replay certification, legal/provenance clearance, or public
+release readiness.

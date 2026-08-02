@@ -1,7 +1,7 @@
 import { AUDIO_CATALOG, createAudioClient, visibleEventCues } from "./audio.mjs";
 import { ASSET_CREDITS } from "./asset-credits.mjs";
 import { renderAssetCredits } from "./asset-credits-renderer.mjs";
-import { consequenceLinksForTarget, regionalWorldConsequenceLinks, resolutionConsequenceLinks } from "./consequence-links.mjs";
+import { consequenceLinkContext, consequenceLinksForTarget, regionalWorldConsequenceLinks, resolutionConsequenceLinks } from "./consequence-links.mjs";
 import { facilityComponentFor } from "./facility-components.mjs";
 import { CAMPAIGN_COVERAGE_FLOW_SCHEMA, FIRST_MONTH_FLOW_SCHEMA, createFirstMonthFlow } from "./first-month.mjs";
 import { PLAYTEST_CAPTURE_SCHEMA, createPlaytestRecorder } from "./playtest.mjs";
@@ -860,7 +860,10 @@ function renderConsequenceLinks(links, root) {
     }
     const detail = document.createElement("p");
     detail.textContent = String(link.detail ?? "No visible consequence detail available.");
-    item.append(heading, detail);
+    const context = document.createElement("small");
+    context.className = "consequence-context";
+    context.textContent = consequenceLinkContext(link);
+    item.append(heading, detail, context);
     appendSource(item, link.source);
     list.append(item);
   }

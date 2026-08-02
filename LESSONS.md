@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Consequence context must come from link fields
+
+- Context: consequence links already carried observed month, turn, and replay
+  state hash, but the renderer showed only detail and source text.
+- Risk: adding inferred timing or causal prose would blur actor-visible and
+  private-state boundaries.
+- Resolution: format only existing link fields and make missing or invalid
+  timing/hash values explicitly unavailable.
+- Prevention: test both populated and malformed link context before adding
+  visual emphasis.
+
 ## Terminal review must update the task rail
 
 - Context: an existing host event can move the GUI into terminal Review while

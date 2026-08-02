@@ -6353,5 +6353,23 @@ Review, and a nonterminal session load clears that wording.
   the technical evidence. Human comprehension, learning, lived accessibility,
   debrief quality, calibration, and browser/device certification remain
   unestablished.
-- The emulated device proxy measures 446,498 live-source bytes under the
-  updated 447,000-byte limit; this remains a proxy, not hardware certification.
+- The emulated device proxy measures 447,272 live-source bytes under the
+  updated 448,000-byte limit; this remains a proxy, not hardware certification.
+
+# Presentation QA — Consequence timing and replay context v0.14.6
+
+## Status
+
+Pass for the bounded consequence-context contract. Visible links now show
+existing observed-month/turn timing and host replay-hash context, while missing
+or invalid values remain explicit unavailable text.
+
+## Findings and limits
+
+- No new host field, route, schema, asset, audio signal, or causal claim was
+  introduced; private rival detail remains unavailable.
+- Existing source labels, target focus, information-boundary text, and all
+  campaign projections remain unchanged.
+- Focused/full tests and presentation audits are technical evidence only; they
+  do not establish human comprehension, learning, lived accessibility, causal
+  validity, replay certification, or browser/device certification.
