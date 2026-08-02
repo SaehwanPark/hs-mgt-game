@@ -6353,5 +6353,5 @@ Review, and a nonterminal session load clears that wording.
   the technical evidence. Human comprehension, learning, lived accessibility,
   debrief quality, calibration, and browser/device certification remain
   unestablished.
-- The emulated device proxy measures 446,524 live-source bytes under the
+- The emulated device proxy measures 446,498 live-source bytes under the
   updated 447,000-byte limit; this remains a proxy, not hardware certification.
