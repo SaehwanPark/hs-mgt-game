@@ -5709,3 +5709,30 @@ Focused recorder and analyzer tests must cover both complete and missing-history
 captures. Passing checks establish technical evidence retention only; they do
 not establish strategic quality, human comprehension, learning, lived
 accessibility, or policy validity.
+
+---
+
+# Presentation Contract — GUI-first technical checkpoint v0.14.12
+
+## Goal and authorization
+
+Record the current bounded presentation baseline as technically complete without
+promoting human or policy claims. The ranked Future queue remains conditional on
+new evidence.
+
+## Checkpoint ledger
+
+| Track | Verified bounded baseline | Boundary retained |
+| --- | --- | --- |
+| Workspace task quality | Event-gated Setup/Brief/Decide/Resolve/Review handoffs and terminal reset | Host owns task readiness and transitions |
+| Consequence legibility | Timing, replay context, signed deltas, target-free responses, and registered status token | No inferred causality or private intent |
+| Registered signals | Existing token reuse with written and fallback equivalents | No unverified asset/audio provenance |
+| Chromium hardening | Deterministic token insertion fallback | No new engine certification |
+| Agent-native validation | Complete host history evidence and missing/partial diagnostics | No human-study or policy-validity claim |
+
+## Verification and limits
+
+The release and repository checks establish technical traceability only. They do
+not establish human comprehension, learning, lived accessibility, legal
+clearance, calibration, balance, policy validity, or non-default browser/device
+support.

@@ -2,7 +2,7 @@
 
 **Status:** Canonical current direction
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.11
+**Code baseline:** v0.14.12
 
 This roadmap is the short current queue. Historical phase plans, release
 journals, and evidence packets remain in `docs/history/`, `_workspace/`, and
@@ -34,6 +34,20 @@ The current release is technically playable but is not a calibrated forecast,
 measured learning intervention, lived-accessibility result, legal clearance,
 policy validation, or balance certification. Those claims remain unestablished;
 their uncertainty does not block technical GUI progress.
+
+## Current technical checkpoint
+
+The bounded GUI-first baseline is complete through v0.14.11: workspace task
+handoffs, consequence timing/delta/response legibility, registered response
+signals, Chromium-safe token insertion, and complete playtest history evidence
+all satisfy their current automated exit checks. This closes the present
+technical checkpoint without claiming human usability, learning, lived
+accessibility, legal clearance, calibration, or policy validity.
+
+Future work remains gap-gated. A new slice requires a reproducible AI-agent
+trace, authoring failure, debrief mismatch, domain-QA finding, accessibility-mode
+failure, or release-check finding; absent that evidence, no broader feature or
+browser-support expansion is promoted.
 
 ## Development sequence
 

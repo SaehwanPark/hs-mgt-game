@@ -147,9 +147,14 @@ promotion gates and remain future work only in their dated evidence records.
 
 ## Present
 
-The documentation baseline is complete for this release. Present work is
-limited to the ranked GUI-first Future queue below; each item advances through
-agent-executable evidence and automated/domain QA rather than a human stop gate.
+The documentation baseline and the bounded GUI-first technical checkpoint are
+complete through v0.14.11. Present work is limited to gap-gated refinement from
+the Future queue below; each item advances through agent-executable evidence and
+automated/domain QA rather than a human stop gate.
+
+The checkpoint does not establish human usability, learning, lived
+accessibility, legal clearance, calibration, balance, policy validity, or
+non-default browser/device support.
 
 ## Future
 
