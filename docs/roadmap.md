@@ -2,7 +2,7 @@
 
 **Status:** Canonical current direction
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.7
+**Code baseline:** v0.14.8
 
 This roadmap is the short current queue. Historical phase plans, release
 journals, and evidence packets remain in `docs/history/`, `_workspace/`, and
@@ -23,7 +23,8 @@ Setup and prior workspaces remain reviewable. The current-task rail switches to
 final-debrief wording when the host reports a terminal session.
 Visible consequence links now show existing timing and replay-hash context with
 written unavailable fallbacks; committed-effect links also show existing signed
-deltas with explicit malformed-data wording.
+deltas with explicit malformed-data wording; the same panel now carries
+host-reported visible institutional responses without inferred targets.
 
 The current release is technically playable but is not a calibrated forecast,
 measured learning intervention, lived-accessibility result, legal clearance,

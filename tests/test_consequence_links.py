@@ -69,6 +69,28 @@ class ConsequenceLinkTests(unittest.TestCase):
     self.assertEqual(result.returncode, 0, result.stderr)
     self.assertEqual(result.stdout.strip(), "pass")
 
+  def test_response_links_preserve_order_and_public_boundary(self):
+    result = run_node(
+      """
+      import { resolutionResponseLinks } from './gui/consequence-links.mjs';
+      const links = resolutionResponseLinks({
+        schema_version: 'competitive-resolution-v1',
+        turn: 3,
+        steps: [{ id: 'responses', source: 'TransitionSummary.events', items: ['Payer response reported', 'Workforce response reported'] }],
+        replay: { state_hash: 'hash-3' },
+      });
+      if (links.length !== 2 || links[0].detail !== 'Payer response reported' || links[1].detail !== 'Workforce response reported') process.exit(1);
+      if (links.some((link) => link.target_id || link.delta !== undefined)) process.exit(2);
+      if (!links.every((link) => link.turn === 3 && link.state_hash === 'hash-3' && link.information_boundary.includes('actor intent'))) process.exit(3);
+      const fallback = resolutionResponseLinks({ schema_version: 'competitive-resolution-v1', turn: 4, steps: [{ id: 'responses', items: [true, {}, '   '] }], replay: {} });
+      if (fallback.length !== 1 || fallback[0].detail !== 'No visible institutional responses.' || fallback[0].source !== 'Host response source unavailable.') process.exit(4);
+      if (resolutionResponseLinks({ schema_version: 'competitive-resolution-v1', steps: [{ id: 'operations', items: ['not a response'] }] }).length !== 0) process.exit(5);
+      console.log('pass');
+      """
+    )
+    self.assertEqual(result.returncode, 0, result.stderr)
+    self.assertEqual(result.stdout.strip(), "pass")
+
   def test_context_formatter_preserves_timing_and_explicit_replay_fallbacks(self):
     result = run_node(
       """
@@ -123,6 +145,7 @@ class ConsequenceLinkTests(unittest.TestCase):
       "resolutionConsequenceLinks",
       "consequenceLinkContext",
       "consequenceLinkDelta",
+      "resolutionResponseLinks",
       "renderConsequenceLinks",
       "consequence-delta",
       "currentResolutionSessionId",

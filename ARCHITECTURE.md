@@ -1,7 +1,7 @@
 # Architecture
 
 Last Reviewed: 2026-08-02
-Status: Verified against v0.14.7 source and tests
+Status: Verified against v0.14.8 source and tests
 
 The project is a deterministic Rust simulation with CLI, MCP, and loopback
 browser presentation interfaces. The host/core owns simulation truth and

@@ -107,9 +107,33 @@ export function resolutionConsequenceLinks(envelope = {}) {
   })).sort(sortLinks);
 }
 
+export function resolutionResponseLinks(envelope = {}) {
+  if (envelope.schema_version !== RESOLUTION_SCHEMA) return [];
+  const responseStep = Array.isArray(envelope.steps)
+    ? envelope.steps.find((step) => step?.id === "responses")
+    : null;
+  if (!responseStep) return [];
+  const responseItems = Array.isArray(responseStep.items)
+    ? responseStep.items.map((item) => nonEmptyString(item)).filter(Boolean)
+    : [];
+  const details = responseItems.length ? responseItems : ["No visible institutional responses."];
+  const source = nonEmptyString(responseStep.source) || "Host response source unavailable.";
+  return details.map((detail, index) => ({
+    id: stableId(`response-${envelope.turn}-${index}-${detail}`, `visible-response-${index + 1}`),
+    kind: "visible-response",
+    label: "Visible institutional response",
+    detail,
+    turn: envelope.turn,
+    state_hash: envelope.replay?.state_hash,
+    source,
+    information_boundary: "Host-reported visible response; actor intent, private rival action, and future outcome remain unavailable.",
+  })).sort(sortLinks);
+}
+
 export function composeConsequenceLinks({ regionalWorld, resolution } = {}) {
   return [
     ...regionalWorldConsequenceLinks(regionalWorld),
+    ...resolutionResponseLinks(resolution),
     ...resolutionConsequenceLinks(resolution),
   ].sort(sortLinks);
 }
@@ -125,6 +149,9 @@ export function replayConsequenceSequence(resolutions = []) {
     .map((resolution) => Object.freeze({
       turn: resolution.turn,
       state_hash: resolution.replay?.state_hash,
-      links: Object.freeze(resolutionConsequenceLinks(resolution)),
+      links: Object.freeze([
+        ...resolutionResponseLinks(resolution),
+        ...resolutionConsequenceLinks(resolution),
+      ]),
     }));
 }

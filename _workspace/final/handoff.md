@@ -3731,3 +3731,27 @@ policy calibration, or browser/device certification.
 
 The current emulated device proxy measures 447,925 live-source bytes under the
 448,000-byte limit; this remains a proxy, not hardware certification.
+
+# Final Handoff — Visible institutional response links v0.14.8
+
+## Status
+
+Planned bounded slice: response-step items from the existing host resolution
+envelope will appear as target-free, delta-free consequence links with
+deterministic source/replay context and written empty/malformed fallbacks.
+
+## Changed-file groups
+
+- Presentation/runtime: `gui/consequence-links.mjs`, `gui/app.mjs`, and
+  consequence-link tests.
+- Current core/release docs and synchronized provenance/device evidence.
+- Durable planning/contract/QA/handoff artifacts for v0.14.8.
+
+## Evidence limits
+
+The response link is presentation-only and does not prove human comprehension,
+learning, lived accessibility, actor-intent validity, legal/provenance
+clearance, policy calibration, or browser/device certification.
+
+The current emulated device proxy measures 449,209 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.

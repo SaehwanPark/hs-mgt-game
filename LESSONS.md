@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Link actor responses without fabricating targets
+
+- Context: host resolution steps already expose visible institutional response
+  strings, but consequence links only represented effects.
+- Risk: attaching a response to a board entity or metric would imply private
+  actor intent, target ownership, or causal severity not present in the DTO.
+- Resolution: project only the `responses` step items as target-free,
+  delta-free links with host source/replay context and explicit fallbacks.
+- Prevention: test absent, empty, malformed, and ordered response steps before
+  wiring them into shared consequence rendering.
+
 ## Display effect direction from the host field
 
 - Context: committed-effect links already carried a host `delta`, but the

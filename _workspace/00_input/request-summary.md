@@ -4594,3 +4594,42 @@ review; authorized PR/merge and branch cleanup.
 Passing checks establish only deterministic formatting of an existing
 actor-visible effect delta. They do not establish human comprehension,
 learning, lived accessibility, causal validity, or policy calibration.
+
+---
+
+# Request Summary — Visible institutional response links v0.14.8
+
+## Authorized outcome
+
+Advance the consequence-legibility queue with one bounded presentation change:
+surface existing host-reported visible institutional response items as linked
+consequence cards alongside committed effects.
+
+## Target slice
+
+- Project only the existing `ResolutionStep` with `id: responses` into
+  actor-visible response links, preserving host order and replay context.
+- Use a written fallback when the response step is present but empty or
+  malformed; do not fabricate a response when the step is absent.
+- Preserve effect deltas, timing/hash context, source labels, board focus, and
+  private-state boundaries.
+
+## Non-goals
+
+- No new route, DTO/schema, simulation rule, persistence/replay format, asset,
+  audio cue, campaign, or browser-support target.
+- No inferred actor intent, private rival action, severity, causal certainty,
+  or future outcome.
+
+## Validation target
+
+Focused response-link and renderer tests for ordered response items, empty and
+malformed fallbacks, replay context, and boundary text; full Rust/Python/
+documentation, asset, browser-default, and presentation checks; exactly one
+medium-effort code review; authorized PR/merge and branch cleanup.
+
+## Evidence limits
+
+Passing checks establish only deterministic rendering of an existing public
+response projection. They do not establish human comprehension, learning,
+lived accessibility, actor-intent validity, or policy calibration.
