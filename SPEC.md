@@ -125,6 +125,15 @@ promotion gates and remain future work only in their dated evidence records.
 - No host route/schema, simulation, persistence, replay, or browser-support
   boundary changed.
 
+### Browser-safe response token insertion (v0.14.10)
+
+- Response-token headings keep the normal `prepend` path and use a deterministic
+  `insertBefore` fallback when the DOM helper is unavailable.
+- Content, token semantics, focus, accessibility equivalents, source/replay,
+  and browser scope remain unchanged; no new engine is certified.
+- No host route/schema, simulation, persistence, replay, asset, audio, or
+  campaign boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is

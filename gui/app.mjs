@@ -652,6 +652,11 @@ function createVisualToken(entry, role = "marker", root = document) {
   return node;
 }
 
+function prependOrInsertBefore(parent, node) {
+  if (typeof parent.prepend === "function") parent.prepend(node);
+  else parent.insertBefore(node, parent.firstChild);
+}
+
 function appendSource(parent, source) {
   if (!source) return;
   const node = document.createElement("small");
@@ -844,7 +849,7 @@ function renderConsequenceLinks(links, root) {
     heading.append(title);
     if (link.kind === "visible-response") {
       const reported = visualStatusFor("reported");
-      if (reported) heading.prepend(createVisualToken(reported, "status", root));
+      if (reported) prependOrInsertBefore(heading, createVisualToken(reported, "status", root));
     }
     if (link.target_id && currentMapEntities.some((entity) => entity.id === link.target_id)) {
       const focus = document.createElement("button");

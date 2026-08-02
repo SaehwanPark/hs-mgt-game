@@ -6439,3 +6439,23 @@ provenance is introduced.
 
 The current emulated device proxy measures 449,418 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Presentation QA — Browser-safe response token insertion v0.14.10
+
+## Status
+
+Planned bounded slice: response-token insertion keeps the normal Chromium
+`prepend` path and adds an `insertBefore` fallback for constrained DOM harnesses;
+no browser-support expansion is authorized.
+
+## Findings and limits
+
+- Token order, label, symbol, tooltip, text equivalent, source/replay context,
+  focus, and information boundaries remain unchanged.
+- The fallback is standards-based presentation mechanics, not Firefox/WebKit,
+  mobile, legacy, or real-device certification.
+- Automated evidence cannot establish cross-engine reliability, comprehension,
+  lived accessibility, legal clearance, or policy calibration.
+
+The current emulated device proxy measures 449,603 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.

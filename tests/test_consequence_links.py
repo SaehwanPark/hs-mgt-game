@@ -153,6 +153,8 @@ class ConsequenceLinkTests(unittest.TestCase):
       "link.kind === \"visible-response\"",
       "visualStatusFor(\"reported\")",
       "createVisualToken(reported, \"status\", root)",
+      "function prependOrInsertBefore(parent, node)",
+      "parent.insertBefore(node, parent.firstChild)",
       "currentResolutionSessionId",
       "presentationSessionId",
       "regionalSessionId",
