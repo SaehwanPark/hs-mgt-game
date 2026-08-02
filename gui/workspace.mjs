@@ -63,13 +63,20 @@ function setDialogOpen(dialog, open) {
   }
 }
 
+const workspaceIndex = (workspace) => WORKSPACE_IDS.indexOf(workspace);
+
 export function createWorkspaceController({
   root = globalThis.document,
   initialWorkspace = "setup",
 } = {}) {
   let activeWorkspace = normalizeWorkspace(initialWorkspace, "setup");
+  let highestUnlockedIndex = workspaceIndex(activeWorkspace);
   let lastFocus = null;
   const subscribers = new Set();
+
+  const unlockThrough = (workspace) => {
+    highestUnlockedIndex = Math.max(highestUnlockedIndex, workspaceIndex(workspace));
+  };
 
   function sync() {
     for (const node of queryAll(root, "[data-workspace]")) {
@@ -89,9 +96,16 @@ export function createWorkspaceController({
       if (ready && areas.length) node.hidden = !areas.includes(activeWorkspace);
     }
     for (const node of queryAll(root, "[data-workspace-nav]")) {
-      const current = node.dataset.workspaceTarget === activeWorkspace;
-      if (current) node.setAttribute?.("aria-current", "page");
+      const workspace = normalizeWorkspace(node.dataset?.workspaceTarget, "setup");
+      const locked = workspaceIndex(workspace) > highestUnlockedIndex;
+      if (workspace === activeWorkspace) node.setAttribute?.("aria-current", "page");
       else node.removeAttribute?.("aria-current");
+      node.disabled = locked;
+      if (locked) {
+        node.setAttribute?.("aria-label", `${workspace} locked — finish the previous step first.`);
+      } else {
+        node.removeAttribute?.("aria-label");
+      }
     }
   }
 
@@ -102,6 +116,14 @@ export function createWorkspaceController({
   function setWorkspace(nextWorkspace, { focus = true, reason = "navigation" } = {}) {
     const next = normalizeWorkspace(nextWorkspace, activeWorkspace);
     const previous = activeWorkspace;
+    if (reason !== "navigation" && workspaceIndex(next) <= highestUnlockedIndex + 1) unlockThrough(next);
+    if (workspaceIndex(next) > highestUnlockedIndex) {
+      sync();
+      return {
+        ok: false,
+        code: "workspace_locked",
+      };
+    }
     if (focus) lastFocus = root?.activeElement ?? lastFocus;
     activeWorkspace = next;
     sync();
@@ -114,7 +136,9 @@ export function createWorkspaceController({
   }
 
   function goForEvent(event, options = {}) {
-    return setWorkspace(workspaceForEvent(event, activeWorkspace), options);
+    const next = workspaceForEvent(event, activeWorkspace);
+    unlockThrough(next);
+    return setWorkspace(next, options);
   }
 
   function subscribe(listener) {

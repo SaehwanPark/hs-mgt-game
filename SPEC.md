@@ -67,6 +67,16 @@ promotion gates and remain future work only in their dated evidence records.
   enforce document roles, current GUI facts, browser scope, and human-evidence
   claim limits.
 
+### Progressive workspace navigation gating (v0.14.4)
+
+- Future GUI workspaces are disabled until the existing host/session event
+  unlocks their visible task handoff; Setup and already-unlocked workspaces
+  remain reviewable.
+- Native disabled semantics, written requirements, and event-order regression
+  tests protect keyboard/focus and presentation-only authority boundaries.
+- No host route/schema, simulation, persistence, replay, asset, audio, or
+  browser-support boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is

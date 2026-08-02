@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.14.4] - 2026-08-02
+
+- Gated future Setup/Brief/Decide/Resolve/Review navigation until the existing
+  host-backed task event unlocks that workspace, while keeping Setup and prior
+  workspaces available for review.
+- Added native disabled/accessible labels and regression coverage for event
+  ordering, handoff controls, terminal review, and locked-navigation safety.
+- No simulation, host route/schema, persistence, replay, asset, audio, or
+  browser-support boundary changed; human usability and lived accessibility
+  remain unestablished.
+
 ## [0.14.3] - 2026-08-01
 
 - Aligned maintained project documents and SDD files with the current

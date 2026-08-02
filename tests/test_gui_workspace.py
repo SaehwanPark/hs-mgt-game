@@ -68,8 +68,18 @@ class GuiWorkspaceTests(unittest.TestCase):
       };
       const controller = createWorkspaceController({ root });
       if (setup.hidden || !brief.hidden || !decide.hidden) process.exit(1);
-      controller.setWorkspace("decide", { focus: false });
-      if (decide.hidden || !brief.hidden || !navDecide.attributes["aria-current"] || navBrief.attributes["aria-current"]) process.exit(2);
+      if (!navDecide.disabled || !navDecide.attributes["aria-label"]) process.exit(2);
+      const locked = controller.setWorkspace("decide", { focus: false });
+      if (locked.ok || locked.code !== "workspace_locked" || controller.activeWorkspace !== "setup") process.exit(3);
+      controller.goForEvent("session_loaded", { focus: false });
+      if (!navDecide.disabled || !navDecide.attributes["aria-label"]) process.exit(4);
+      controller.setWorkspace("decide", { focus: false, reason: "briefing-reviewed" });
+      if (decide.hidden || !brief.hidden || !navDecide.attributes["aria-current"] || navBrief.attributes["aria-current"]) process.exit(6);
+      if (controller.setWorkspace("resolve", { focus: false }).ok) process.exit(5);
+      controller.goForEvent("transition_committed", { focus: false });
+      if (!controller.setWorkspace("resolve", { focus: false }).ok) process.exit(7);
+      controller.goForEvent({ type: "session_loaded", done: true }, { focus: false });
+      if (!controller.setWorkspace("review", { focus: false }).ok || !controller.setWorkspace("brief", { focus: false }).ok) process.exit(8);
       console.log("ok");
     '''
     result = subprocess.run(
@@ -84,6 +94,14 @@ class GuiWorkspaceTests(unittest.TestCase):
   def test_module_parses(self):
     result = subprocess.run(["node", "--check", str(WORKSPACE)], capture_output=True, text=True, check=False)
     self.assertEqual(result.returncode, 0, result.stderr)
+
+  def test_navigation_contract_uses_native_disabled_semantics(self):
+    html = HTML.read_text(encoding="utf-8")
+    self.assertIn('data-workspace-nav="true"', html)
+    self.assertIn('aria-label="Presentation sections"', html)
+    workspace = WORKSPACE.read_text(encoding="utf-8")
+    self.assertIn('node.disabled = locked;', workspace)
+    self.assertIn('node.disabled = locked;', workspace)
 
   def test_visible_information_rows_preserve_word_sized_wraps(self):
     html = HTML.read_text(encoding="utf-8")

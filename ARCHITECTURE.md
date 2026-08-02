@@ -1,7 +1,7 @@
 # Architecture
 
-Last Reviewed: 2026-08-01
-Status: Verified against v0.14.3 source and tests
+Last Reviewed: 2026-08-02
+Status: Verified against v0.14.4 source and tests
 
 The project is a deterministic Rust simulation with CLI, MCP, and loopback
 browser presentation interfaces. The host/core owns simulation truth and
@@ -79,7 +79,9 @@ presentation preferences.
 `gui/host-adapter.mjs` is the transport boundary. `gui/app.mjs` coordinates
 session reads, actions, resolution, history/replay, checkpoint recovery, and
 presentation state. `gui/workspace.mjs` owns task navigation and acknowledgement
-state. Other modules render regional-world, semantic containers, visual/audio
+state, including event-unlocked future-workspace navigation while leaving prior
+workspaces reviewable. Other modules render regional-world, semantic containers,
+visual/audio
 catalogs, motion, and fallbacks.
 
 `assets/` separates source, generated, registry, and release paths. Registry,

@@ -9,7 +9,7 @@
 
 ## Current Implementation Checkpoint
 
-As of 2026-08-01 (v0.14.3), the proposal has progressed beyond its initial concept and
+As of 2026-08-02 (v0.14.4), the proposal has progressed beyond its initial concept and
 vertical-slice stages into a playable, evidence-gated prototype. The repository
 contains three deterministic campaign paths:
 
