@@ -3925,3 +3925,17 @@ separate gates.
 - Prevention: run `scripts/check_documentation_currentness.py` in CI and keep
   Chromium-default, fail-closed asset, host-authority, replay/checkpoint, and
   optional-human-feedback boundaries synchronized with source and tests.
+
+## Re-measure the Emulated Device Proxy After Live GUI Source Changes (v0.14.4)
+
+- Context: adding event-gated navigation changed the live module byte count,
+  while the device-performance contract intentionally compares source bytes to
+  a captured measurement and fails closed on drift.
+- Risk: a technically correct GUI slice can appear broken or silently exceed
+  the declared low-power proxy if the evidence artifact is left stale.
+- Resolution: re-run `scripts/check_device_performance.py`, synchronize the
+  policy and current review packet to 445,346 measured bytes under a 446,000
+  byte limit, and keep the result labeled emulated rather than hardware
+  certification.
+- Prevention: treat source-byte evidence as part of every live-GUI change's
+  validation and update only the current policy/packet, not historical reports.

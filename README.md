@@ -5,7 +5,7 @@ leading a fictional nonprofit US health system through financial pressure,
 workforce constraints, payer negotiations, policy oversight, market
 competition, and community trust.
 
-The current public milestone is a playable Rust prototype at v0.14.3. The
+The current public milestone is a playable Rust prototype at v0.14.4. The
 simulation remains the authority for commands, observations, transitions,
 history, replay, checkpoints, and debriefs. The CLI is the reference interface;
 the loopback GUI is the active presentation-development surface over the same
@@ -52,8 +52,9 @@ Keep that terminal running and open the printed URL, normally
 **Start competitive session** for the recommended first GUI session.
 
 The GUI uses a progressive Setup/Brief/Decide/Resolve/Review workspace with
-host-ordered actions, host-owned checkpoints, replay/history reads, and
-text-first source/uncertainty fallbacks. `gui/index.html` opened directly shows
+host-ordered actions, event-gated future workspace navigation, host-owned
+checkpoints, replay/history reads, and text-first source/uncertainty fallbacks.
+`gui/index.html` opened directly shows
 demo data; it does not start a live scenario.
 
 The declared default browser target is Chromium evergreen desktop. The Codex in-app browser

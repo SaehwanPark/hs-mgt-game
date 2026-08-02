@@ -1,8 +1,8 @@
 # Visual and Audio Enhancement Roadmap
 
 **Status:** Active GUI delivery queue
-**Reviewed:** 2026-08-01
-**Code baseline:** v0.14.3
+**Reviewed:** 2026-08-02
+**Code baseline:** v0.14.4
 **Owner:** repository agents and maintainers
 
 This is the current visual/audio work queue for the host-backed GUI. It replaces
@@ -65,8 +65,9 @@ smoke artifact when the change affects layout or interaction.
 
 **Exit criteria:** All supported campaigns retain a complete task path; refresh,
 back/forward, retry, mute, reduced-motion, keyboard/focus, and text fallbacks
-remain safe; no browser-owned mutation or hidden-state leak is introduced; the
-focused tests and documentation currentness checker pass.
+remain safe; future workspace navigation is disabled until its existing
+host/session handoff event; no browser-owned mutation or hidden-state leak is
+introduced; the focused tests and documentation currentness checker pass.
 
 ### 2. Consequence legibility
 

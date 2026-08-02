@@ -5435,3 +5435,64 @@ boundaries, not active promotion gates.
 
 No new DTO, route, asset, audio file, simulation rule, browser engine, or
 instructor authority surface is introduced.
+# Presentation Contract — Progressive workspace navigation gating v0.14.4
+
+## Goal and Authorization
+
+Keep the existing Setup/Brief/Decide/Resolve/Review shell aligned with the
+host-backed task sequence by gating only future workspace navigation in the
+browser-local controller. This is a presentation-only interaction slice; it
+does not add a route, field, command, or host state.
+
+## Player Questions and Consequences
+
+The player question is: “Which workspace is ready for the next task, and which
+earlier work can I revisit?” Current and completed workspaces remain available;
+future workspaces are visibly unavailable until the existing host/session event
+makes their actor-visible content ready.
+
+## Actor-Visible Source Ledger
+
+| Semantic element | Authorized source | Timing/missingness | Prohibited inference |
+| --- | --- | --- | --- |
+| Workspace unlock | Existing `workspaceForEvent` event type and local controller state | Unlocks on successful host/session event; initial state is Setup only | Do not infer readiness from DOM content, timers, or hidden state |
+| Navigation availability | Local ordered workspace IDs and unlock set | Locked future buttons are disabled with written handoff guidance | Do not submit, validate, or mutate a host session |
+| Current/completed review | Local active workspace and unlock set | Previous stages remain reachable after unlock | Do not imply that revisiting changes history or reopens a decision |
+
+## Visual, Motion, and Audio Semantics
+
+Use native disabled buttons and written labels; no new color, motion, audio cue,
+asset, or severity signal is introduced. Existing focus and workspace heading
+behavior remains unchanged for successful navigation.
+
+## Accessibility and Fallbacks
+
+Native `disabled` semantics remove locked navigation from keyboard activation;
+the accessible label states the required visible handoff. Current/previous
+workspaces remain keyboard reachable. Reduced motion, large text, audio-off,
+missing-data, and recovery paths do not depend on the gating presentation.
+
+## Authority, History, and Replay Boundaries
+
+The host remains authoritative for session readiness, legality, transitions,
+history, replay, persistence, and debriefs. The browser only gates navigation
+based on already-received event routing and cannot enter commands, hashes,
+replay rows, or authoritative state.
+
+## Asset Provenance and Release Requirements
+
+No asset, audio file, registry entry, or release derivative is added or changed.
+
+## Verification and Evidence Limits
+
+Focused tests must prove initial locks, event-order unlocks, back navigation,
+terminal review unlock, and locked-navigation non-mutation. Full repository and
+presentation checks must remain green. These checks establish only the technical
+navigation boundary, not human comprehension or lived accessibility.
+
+## Non-Goals and Open Questions
+
+- No route/schema, simulation, persistence, replay, action, asset/audio, browser
+  support, or campaign change.
+- Open: human task clarity, cognitive load, and device/browser certification
+  remain optional external evidence and deferred gates.

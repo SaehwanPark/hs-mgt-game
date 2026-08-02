@@ -6296,3 +6296,41 @@ policy; and links, versioning, tests, churn, and historical preservation. The
 MCP persistence, campaign-coverage wording, scenario-format, asset-admission,
 role-classification, and stale-reference findings were corrected or explicitly
 bounded as historical evidence. No Critical or High finding remains.
+
+# Presentation QA — Progressive workspace navigation gating v0.14.4
+
+## Status
+
+Pass for the bounded technical navigation contract. `gui/workspace.mjs` gates
+only future workspace tabs from the existing event sequence; Setup and prior
+workspaces remain reviewable, and the primary handoff controls still route
+through the existing task strip.
+
+## Findings
+
+- Information and causality: no new semantic claim or host field is rendered;
+  locked labels describe only a local presentation requirement.
+- Accessibility and fallback: locked tabs use native `disabled` semantics and
+  a written accessible label; successful navigation keeps existing focus,
+  reduced-motion, text, and recovery behavior.
+- Authority and replay: no command, validation, transition, persistence,
+  history, replay, true-state, or resolved-input path is touched.
+- Provenance and rights: no asset, audio file, registry entry, or release
+  derivative changed.
+
+## Verification evidence
+
+- Focused workspace/controller tests and Node syntax checks pass.
+- Full Python suite: 946 tests pass; Rust suite: 388 library tests plus
+  integration/doc tests pass; Clippy and formatting pass.
+- Documentation currentness/links, release metadata, generated credits,
+  asset/security/release, browser compatibility, offline/loading, audio,
+  raster, visual/audio, and device-proxy checks pass. The emulated proxy is
+  synchronized at 445,346 source bytes under a 446,000-byte limit.
+
+## Evidence limits
+
+This pass establishes technical event-order and authority conformance only. It
+does not establish human comprehension, cognitive load, lived accessibility,
+learning, browser/device certification, legal/provenance clearance, or public
+release readiness.

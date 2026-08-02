@@ -1,6 +1,6 @@
 # GUI executive desktop and adapter reference
 
-**Current status (v0.14.3):** The loopback Axum host is the active GUI surface
+**Current status (v0.14.4):** The loopback Axum host is the active GUI surface
 for all three campaigns. The host owns actions, transitions, history/replay,
 debriefs, and durable checkpoint discovery/restoration; this browser client is
 presentation-only. Chromium evergreen desktop is the default end-user target;
@@ -41,7 +41,9 @@ shows fixture/demo mode; it cannot start a live scenario by itself.
 The shell presents one task workspace at a time: Setup, Brief, Decide, Resolve,
 and Review. Header metrics, source-linked signals, uncertainty, host status,
 costs, and written equivalents remain rendered from the existing host envelopes;
-navigation changes presentation state only. Start/load and refreshed nonterminal
+navigation changes presentation state only. Future workspace navigation is
+disabled until the existing host/session handoff event unlocks it; Setup and
+already-unlocked workspaces remain available for review. Start/load and refreshed nonterminal
 sessions open Brief, accepted submissions open Resolve, and terminal sessions
 open Review. The current task strip exposes the primary handoff and keeps the
 full first-session sequence behind an accessible disclosure.

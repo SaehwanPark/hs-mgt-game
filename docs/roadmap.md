@@ -1,8 +1,8 @@
 # Health Policy Strategy Game Roadmap
 
 **Status:** Canonical current direction
-**Reviewed:** 2026-08-01
-**Code baseline:** v0.14.3
+**Reviewed:** 2026-08-02
+**Code baseline:** v0.14.4
 
 This roadmap is the short current queue. Historical phase plans, release
 journals, and evidence packets remain in `docs/history/`, `_workspace/`, and
@@ -17,7 +17,9 @@ focus: it presents stabilization, competitive regional-market, and regional-
 affiliation campaigns through a shared Setup/Brief/Decide/Resolve/Review
 workspace. The host owns validation, action ordering, transitions, history,
 replay, debriefs, checkpoint discovery, and durable restoration. The browser
-owns reversible presentation state only.
+owns reversible presentation state only. Future workspace tabs remain disabled
+until their existing host/session handoff event makes the visible task ready;
+Setup and prior workspaces remain reviewable.
 
 The current release is technically playable but is not a calibrated forecast,
 measured learning intervention, lived-accessibility result, legal clearance,

@@ -3612,3 +3612,41 @@ boundaries, AI-native progression, accessibility/provenance, browser scope,
 links, versioning, tests, churn, and historical preservation. Findings were
 fixed or explicitly bounded as historical evidence; no unresolved Critical or
 High findings remain. The draft PR is intentionally unmerged.
+
+# Final Handoff — Progressive workspace navigation gating v0.14.4
+
+## Status
+
+The implementation and sole medium-effort code review are complete on
+`codex/gui-workspace-navigation-v0.14.4`; the reviewer found and the follow-up
+fixed one Medium cross-session unlock leak, then re-reviewed with no actionable
+issues. Future workspace tabs are disabled until the existing host/session
+handoff event unlocks them; Setup and previously unlocked workspaces remain
+available for review. PR handoff is open; merge and branch cleanup remain.
+
+## Changed-file groups
+
+- GUI behavior/tests: `gui/workspace.mjs` and `tests/test_gui_workspace.py`.
+- Current core docs and release metadata: README, SPEC, ARCHITECTURE, proposal,
+  roadmap, visual/audio roadmap, GUI README, changelog, Cargo versions, and
+  generated asset credits/device proxy evidence.
+- Durable planning/contract artifacts: the v0.14.4 request summary,
+  implementation plan, presentation contract, and this handoff.
+
+## Verification
+
+- 946 Python tests, 388 Rust library tests plus integration/doc tests, Node
+  syntax, Clippy with warnings denied, and formatting pass.
+- Documentation currentness/links, release metadata, generated credits,
+  asset/security/release, browser compatibility, offline/loading, audio,
+  raster, visual/audio, and device-proxy checks pass.
+- Device proxy source evidence is 445,346 bytes under a 446,000-byte limit; it
+  remains an emulated proxy and not hardware certification.
+
+## Review boundary and remaining limits
+
+The sole medium-effort code reviewer reviewed the complete diff and updated
+device-proxy evidence after the session-boundary fix and found no actionable
+issues. This technical slice does not prove
+human usability, lived accessibility, learning, calibration, balance,
+provenance/legal clearance, browser/device certification, or public release.
