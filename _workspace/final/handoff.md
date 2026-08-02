@@ -3753,5 +3753,5 @@ The response link is presentation-only and does not prove human comprehension,
 learning, lived accessibility, actor-intent validity, legal/provenance
 clearance, policy calibration, or browser/device certification.
 
-The current emulated device proxy measures 449,209 live-source bytes under the
+The current emulated device proxy measures 449,234 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.

@@ -6417,5 +6417,5 @@ no new host authority or actor-intent claim is authorized.
   it cannot establish comprehension, learning, lived accessibility, causal
   validity, or policy calibration.
 
-The current emulated device proxy measures 449,209 live-source bytes under the
+The current emulated device proxy measures 449,234 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.

@@ -113,10 +113,10 @@ export function resolutionResponseLinks(envelope = {}) {
     ? envelope.steps.find((step) => step?.id === "responses")
     : null;
   if (!responseStep) return [];
-  const responseItems = Array.isArray(responseStep.items)
-    ? responseStep.items.map((item) => nonEmptyString(item)).filter(Boolean)
-    : [];
-  const details = responseItems.length ? responseItems : ["No visible institutional responses."];
+  const responseItems = Array.isArray(responseStep.items) ? responseStep.items : [];
+  const details = responseItems.length
+    ? responseItems.map((item) => nonEmptyString(item) || "No visible institutional responses.")
+    : ["No visible institutional responses."];
   const source = nonEmptyString(responseStep.source) || "Host response source unavailable.";
   return details.map((detail, index) => ({
     id: stableId(`response-${envelope.turn}-${index}-${detail}`, `visible-response-${index + 1}`),
