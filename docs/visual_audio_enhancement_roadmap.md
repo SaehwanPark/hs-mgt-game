@@ -2,7 +2,7 @@
 
 **Status:** Active GUI delivery queue
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.8
+**Code baseline:** v0.14.9
 **Owner:** repository agents and maintainers
 
 This is the current visual/audio work queue for the host-backed GUI. It replaces
@@ -35,7 +35,8 @@ change.
 - Visible consequence links expose existing timing and replay-hash context;
   missing values remain explicitly unavailable. Committed-effect links expose
   existing signed deltas and keep malformed values unavailable. Visible
-  institutional response items remain target-free and host-sourced.
+  institutional response items remain target-free and host-sourced, with the
+  approved reported-status token reused for emphasis.
 - Chromium evergreen desktop is the default end-user target. The Codex in-app
   browser is a development inspection surface. Firefox, WebKit/Safari, mobile,
   legacy browsers, and real-device certification are deferred and non-certified.

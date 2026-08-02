@@ -4633,3 +4633,41 @@ medium-effort code review; authorized PR/merge and branch cleanup.
 Passing checks establish only deterministic rendering of an existing public
 response projection. They do not establish human comprehension, learning,
 lived accessibility, actor-intent validity, or policy calibration.
+
+---
+
+# Request Summary — Registered response status token v0.14.9
+
+## Authorized outcome
+
+Advance the registered visual/audio queue with one bounded emphasis change:
+visible institutional response links should reuse the approved runtime
+`status-reported` token so the response category is legible without color or
+new asset provenance.
+
+## Target slice
+
+- Add the existing registered reported-status token to response-link headings.
+- Keep the response text, source, timing/replay context, target-free boundary,
+  and keyboard/text equivalents intact.
+- Reuse the existing visual catalog and generic fallback; do not add a new
+  raster, SVG, audio file, release asset, or third-party dependency.
+
+## Non-goals
+
+- No new route, DTO/schema, simulation rule, persistence/replay format, asset
+  registry entry, audio cue, campaign, or browser-support target.
+- No color-only meaning, actor-intent inference, causal certainty, or future
+  outcome claim.
+
+## Validation target
+
+Focused consequence/rendering and visual-catalog tests; full Rust/Python/
+documentation, asset, browser-default, and presentation checks; exactly one
+medium-effort code review; authorized PR/merge and branch cleanup.
+
+## Evidence limits
+
+Passing checks establish only that an approved registered token is reused with
+written equivalents. They do not establish human comprehension, learning,
+lived accessibility, legal clearance, or policy calibration.

@@ -1,6 +1,6 @@
 # GUI executive desktop and adapter reference
 
-**Current status (v0.14.8):** The loopback Axum host is the active GUI surface
+**Current status (v0.14.9):** The loopback Axum host is the active GUI surface
 for all three campaigns. The host owns actions, transitions, history/replay,
 debriefs, and durable checkpoint discovery/restoration; this browser client is
 presentation-only. The shared task rail labels terminal sessions as
@@ -8,7 +8,7 @@ final-debrief review and resets on a nonterminal load. Chromium evergreen deskto
 is the default end-user target;
 visible consequence links retain host timing and replay-hash context with
 written fallbacks, show existing committed-effect deltas, and carry visible
-institutional response items.
+institutional response items with the registered reported-status token.
 Codex in-app browser inspection is development evidence. Firefox,
 WebKit/Safari, mobile, and legacy browsers are deferred and non-certified.
 

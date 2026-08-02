@@ -3755,3 +3755,27 @@ clearance, policy calibration, or browser/device certification.
 
 The current emulated device proxy measures 449,234 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Final Handoff — Registered response status token v0.14.9
+
+## Status
+
+Planned bounded slice: visible response links will reuse the approved
+`status-reported` token with existing label, symbol, tooltip, and written
+equivalent; no new asset, audio, route, or registry entry is added.
+
+## Changed-file groups
+
+- Presentation/runtime and focused tests: `gui/app.mjs`, visual-catalog
+  integration markers, and consequence-link GUI tests.
+- Current core/release docs and synchronized device evidence.
+- Durable v0.14.9 request, implementation plan, contract, QA, and handoff.
+
+## Evidence limits
+
+The token reuse is presentation-only and does not prove human comprehension,
+learning, lived accessibility, legal/provenance clearance, policy calibration,
+or browser/device certification.
+
+The current emulated device proxy measures 449,418 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.

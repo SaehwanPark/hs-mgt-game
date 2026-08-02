@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.9] - 2026-08-02
+
+- Reuse the approved `status-reported` runtime visual token on visible
+  institutional response links with existing text/symbol equivalents.
+- Add no new asset, audio, registry, host, simulation, persistence, replay, or
+  browser boundary.
+
+
 ## [0.14.8] - 2026-08-02
 
 - Project existing visible institutional response-step items into target-free,
