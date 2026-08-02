@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.14.5] - 2026-08-02
+
+- Add an explicit final-debrief state to the shared first-session task rail for
+  terminal host sessions and explicit End session results.
+- Reset terminal task wording on nonterminal session loads; no host route,
+  schema, simulation, persistence, replay, asset, audio, or browser scope
+  changed.
+
 ## [0.14.4] - 2026-08-02
 
 - Gated future Setup/Brief/Decide/Resolve/Review navigation until the existing

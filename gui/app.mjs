@@ -1427,7 +1427,7 @@ export function renderCampaignCoverage(envelope, root = document, onSubmit = nul
       (envelope.decisions ?? []).map(normalizeCampaignDecision),
       root,
       {
-        onSubmit: typeof onSubmit === "function"
+        onSubmit: typeof onSubmit === "function" && envelope.session?.done !== true
           ? (action, params, form, command, item) => onSubmit(command, action, params, form, item)
           : null,
         submissionMode: "commit",
@@ -2633,7 +2633,7 @@ export function renderEndSessionEnvelope(envelope, root = document) {
   return { ok: true, envelope };
 }
 
-async function endHostSession({ adapter, sessionId, root, recorder, audio }) {
+async function endHostSession({ adapter, sessionId, root, recorder, audio, firstMonthFlow }) {
   if (!adapter || typeof adapter.endSession !== "function") {
     const message = "No host end-session adapter configured; the current session remains active.";
     setPresentationState(root, message);
@@ -2660,6 +2660,7 @@ async function endHostSession({ adapter, sessionId, root, recorder, audio }) {
     clearRecovery(root);
     renderOnboarding(envelope, root, recorder);
     recordVisibleEnvelope(recorder, envelope);
+    firstMonthFlow?.update({ sessionLoaded: true, sessionDone: true, refreshed: true, resolutionReviewed: true });
     audio?.setMusicState("debrief");
     audio?.setAmbienceFromVisible({ campaign: envelope.campaign, done: true });
     return result;
@@ -2911,6 +2912,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
     setPresentationState(root, "Static fixture loaded; no live adapter configured");
     firstMonthFlow.update({
       sessionLoaded: true,
+      sessionDone: Boolean(fixture?.session?.done),
       briefingReviewed: false,
       resolutionReviewed: false,
       resolutionVisible: false,
@@ -2974,6 +2976,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
       if (result.ok) {
         firstMonthFlow.update({
           sessionLoaded: true,
+          sessionDone: Boolean(envelope?.session?.done),
           briefingReviewed: false,
           resolutionReviewed: false,
           resolutionVisible: false,
@@ -2994,7 +2997,7 @@ export function createReadOnlyClient({ adapter = globalThis.HsMgtGameReadOnlyAda
   }
 
   async function endSession() {
-    const result = await endHostSession({ adapter, sessionId, root, recorder, audio: audioClient });
+    const result = await endHostSession({ adapter, sessionId, root, recorder, audio: audioClient, firstMonthFlow });
     if (result.ok) {
       currentEnvelope = result.envelope;
       sessionId = null;
@@ -3131,6 +3134,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       firstMonthFlow.update({
         flow: "campaign-coverage",
         sessionLoaded: true,
+        sessionDone: Boolean(envelope?.session?.done),
         coverageLoaded: true,
         decisionSubmitted: true,
         refreshed: Boolean(envelope),
@@ -3284,6 +3288,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       submitted: true,
       resolutionVisible: false,
       refreshed: false,
+      sessionDone: false,
     });
     audioClient.playCue("ui.submit");
     let refreshMessage = "Committed response received from the host adapter.";
@@ -3345,9 +3350,11 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       if (actionState(root).actionEditing === "true") invalidateDraft();
     });
     setReadOnlyControls(root, true);
-    setActionControls(root, true);
+    setActionControls(root, !refreshedPresentationDone);
+    setEndSessionControl(root, typeof adapter.endSession === "function" && !refreshedPresentationDone);
     renderDraftState();
     renderValidation(null, root, drafts);
+    firstMonthFlow.update({ sessionDone: refreshedPresentationDone });
     workspaceEvent(root, refreshedPresentationDone ? "session_ended" : "transition_committed", { focus: false });
     setPresentationState(root, refreshMessage);
     return { ok: true, envelope: response };
@@ -3364,7 +3371,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     sessionStore.set(requestedSessionId);
     adapter.activateSession?.(requestedSessionId, result.envelope?.session?.campaign ?? null);
     actionState(root).actionSubmissionMode = "commit";
-    setActionControls(root, true);
+    const terminalSession = Boolean(result.envelope?.session?.done);
+    setActionControls(root, !terminalSession);
     renderDraftState();
     renderValidation(null, root, drafts);
     const actionMode = root.querySelector("#action-mode");
@@ -3372,6 +3380,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
     firstMonthFlow.update({
       flow: "campaign-coverage",
       sessionLoaded: true,
+      sessionDone: Boolean(result.envelope?.session?.done),
       actionCatalogLoaded: false,
       coverageLoaded: true,
       draftCount: 0,
@@ -3382,8 +3391,8 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       briefingReviewed: false,
       resolutionReviewed: false,
     });
-    workspaceEvent(root, { type: "session_loaded", done: Boolean(result.envelope?.session?.done) }, { focus: false });
-    setEndSessionControl(root, typeof adapter.endSession === "function");
+    workspaceEvent(root, { type: "session_loaded", done: terminalSession }, { focus: false });
+    setEndSessionControl(root, typeof adapter.endSession === "function" && !terminalSession);
     checkpointClient.setEnabled(
       typeof adapter.saveSession === "function" && typeof adapter.loadSession === "function",
     );
@@ -3446,6 +3455,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       if (!nextCatalog || nextCatalog.schema_version !== "competitive-actions-v1") {
         throw new Error("Unsupported action catalog schema.");
       }
+      const terminalSession = Boolean(presentation?.session?.done);
       if (typeof adapter.getPresentation === "function") {
         const validation = validateReadOnlyEnvelope(presentation);
         if (!validation.ok) {
@@ -3479,12 +3489,13 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
       renderActionCatalog(catalog, root, handleDraftSubmit, () => {
         if (actionState(root).actionEditing === "true") invalidateDraft();
       });
-      setActionControls(root, true);
+      setActionControls(root, !terminalSession);
       if (actionMode) actionMode.textContent = "Build your plan";
       renderDraftState();
       renderValidation(null, root, drafts);
       firstMonthFlow.update({
         sessionLoaded: true,
+        sessionDone: terminalSession,
         actionCatalogLoaded: true,
         draftCount: drafts.length,
         validated: false,
@@ -3494,12 +3505,12 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
         briefingReviewed: false,
         resolutionReviewed: false,
       });
-      workspaceEvent(root, { type: "session_loaded", done: Boolean(presentation?.session?.done) }, { focus: false });
+      workspaceEvent(root, { type: "session_loaded", done: terminalSession }, { focus: false });
       setPresentationState(root, "Actions loaded; build your plan.");
       sessionId = requestedSessionId;
       sessionStore.set(requestedSessionId);
       adapter.activateSession?.(requestedSessionId);
-      setEndSessionControl(root, typeof adapter.endSession === "function");
+      setEndSessionControl(root, typeof adapter.endSession === "function" && !terminalSession);
       checkpointClient.setEnabled(
         typeof adapter.saveSession === "function" && typeof adapter.loadSession === "function",
       );
@@ -3540,7 +3551,7 @@ export function createActionClient({ adapter = globalThis.HsMgtGameActionAdapter
   }
 
   async function endSession() {
-    const result = await endHostSession({ adapter, sessionId, root, recorder, audio: audioClient });
+    const result = await endHostSession({ adapter, sessionId, root, recorder, audio: audioClient, firstMonthFlow });
     if (result.ok) {
       drafts = [];
       validation = null;

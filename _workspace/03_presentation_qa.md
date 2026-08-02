@@ -6334,3 +6334,24 @@ This pass establishes technical event-order and authority conformance only. It
 does not establish human comprehension, cognitive load, lived accessibility,
 learning, browser/device certification, legal/provenance clearance, or public
 release readiness.
+
+# Presentation QA — Terminal task handoff v0.14.5
+
+## Status
+
+Pass for the bounded terminal task contract. The current-task rail now reports
+final-debrief review when existing host terminal data routes the workspace to
+Review, and a nonterminal session load clears that wording.
+
+## Findings and limits
+
+- The source is the actor-visible host terminal field or validated end-session
+  envelope; no hidden state, turn-count inference, or new route is used.
+- The terminal stage is text-first and shares the existing flow list, so no new
+  asset, audio, color, motion, or browser authority is introduced.
+- Focused tests, full tests, documentation currentness, and release checks are
+  the technical evidence. Human comprehension, learning, lived accessibility,
+  debrief quality, calibration, and browser/device certification remain
+  unestablished.
+- The emulated device proxy measures 446,498 live-source bytes under the
+  updated 447,000-byte limit; this remains a proxy, not hardware certification.

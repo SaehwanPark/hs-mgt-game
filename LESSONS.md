@@ -1,5 +1,17 @@
 # Lessons Learned
 
+## Terminal review must update the task rail
+
+- Context: an existing host event can move the GUI into terminal Review while
+  the browser-local current-task state still describes a monthly action.
+- Risk: the visible task rail can contradict the terminal history/debrief
+  surface even though the host and workspace controller are correct.
+- Resolution: keep terminal task wording as an explicit local flow state, drive
+  it only from the host terminal field/end-session envelope, and reset it on
+  every nonterminal load.
+- Prevention: test terminal rendering and cross-session reset together with
+  workspace routing, rather than treating Review visibility as sufficient.
+
 ## Keep Read Companions Separate from Mutation Rails
 
 - Context: the competitive GUI already has a validated action rail, while the

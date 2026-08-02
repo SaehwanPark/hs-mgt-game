@@ -2,7 +2,7 @@
 
 **Status:** Active GUI delivery queue
 **Reviewed:** 2026-08-02
-**Code baseline:** v0.14.4
+**Code baseline:** v0.14.5
 **Owner:** repository agents and maintainers
 
 This is the current visual/audio work queue for the host-backed GUI. It replaces
@@ -30,6 +30,8 @@ change.
 - Text-first, non-color, mute, reduced-motion, scaling, missing-data, and
   failure fallbacks are part of the contract. Unverified visual/audio assets are
   excluded and replaced by registered generic fallbacks.
+- The shared current-task rail labels terminal host sessions as final-debrief
+  review and resets that label on a nonterminal load.
 - Chromium evergreen desktop is the default end-user target. The Codex in-app
   browser is a development inspection surface. Firefox, WebKit/Safari, mobile,
   legacy browsers, and real-device certification are deferred and non-certified.

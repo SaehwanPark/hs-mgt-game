@@ -1,6 +1,12 @@
 export const FIRST_MONTH_FLOW_SCHEMA = "competitive-first-month-v1";
 export const CAMPAIGN_COVERAGE_FLOW_SCHEMA = "campaign-coverage-first-session-v1";
 
+const TERMINAL_STAGE = Object.freeze({
+  id: "terminal",
+  label: "Review the final debrief",
+  detail: "The host session ended; review committed history and debrief text before starting another session.",
+});
+
 export const FIRST_MONTH_STAGES = Object.freeze([
   Object.freeze({
     id: "start",
@@ -37,6 +43,7 @@ export const FIRST_MONTH_STAGES = Object.freeze([
     label: "Continue to the next observation",
     detail: "The next actor-visible observation is ready; the host remains authoritative for what changed.",
   }),
+  TERMINAL_STAGE,
 ]);
 
 export const CAMPAIGN_COVERAGE_STAGES = Object.freeze([
@@ -65,6 +72,7 @@ export const CAMPAIGN_COVERAGE_STAGES = Object.freeze([
     label: "Continue to the next stage",
     detail: "The next actor-visible campaign observation is ready; the host remains authoritative for what changed.",
   }),
+  TERMINAL_STAGE,
 ]);
 
 const DEFAULT_STATE = Object.freeze({
@@ -79,6 +87,7 @@ const DEFAULT_STATE = Object.freeze({
   refreshed: false,
   briefingReviewed: false,
   resolutionReviewed: false,
+  sessionDone: false,
 });
 
 function safeDraftCount(value) {
@@ -86,6 +95,7 @@ function safeDraftCount(value) {
 }
 
 export function firstMonthStageFor(state = {}) {
+  if (state.sessionDone) return "terminal";
   if (state.flow === "campaign-coverage") {
     if (!state.sessionLoaded) return "start";
     if (!state.coverageLoaded || !state.briefingReviewed) return "inspect";

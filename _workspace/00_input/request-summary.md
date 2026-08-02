@@ -4475,3 +4475,43 @@ one medium-effort code review; authorized PR/merge and temporary-branch cleanup.
 Passing checks establish only that navigation follows the declared event-driven
 task boundary and preserves presentation fallbacks. They do not establish human
 comprehension or accessibility in lived use.
+
+---
+
+# Request Summary — Terminal task handoff v0.14.5
+
+## Authorized outcome
+
+Continue the GUI-first workspace-task-quality queue with one bounded session
+boundary improvement: when the host reports a terminal session or the player
+explicitly ends a session, the shared “Current task” rail must identify the
+final history/debrief review instead of leaving a monthly action step active.
+
+## Target slice
+
+- Add a browser-local terminal task state to the existing competitive and
+  campaign-coverage first-session flow.
+- Set that state only from existing host/session terminal fields or the existing
+  end-session result; reset it when a new or nonterminal session is loaded.
+- Keep Review routing, history, replay, debrief, checkpoint, and all three
+  campaign host paths unchanged.
+
+## Non-goals
+
+- No new route, DTO/schema, simulation rule, persistence format, browser
+  storage, asset/audio signal, campaign, or browser-engine support.
+- No browser inference of terminality from hidden content, turn counts, or local
+  task state; only the existing host `session.done`/terminal envelope is used.
+
+## Validation target
+
+Focused first-month and workspace tests for terminal-state wording, reset on a
+nonterminal session, and end-session propagation; full Rust/Python/documentation,
+asset, browser-default, and presentation checks; exactly one medium-effort code
+review; authorized PR/merge and temporary-branch cleanup.
+
+## Evidence limits
+
+Passing checks establish only technical task-rail synchronization with an
+actor-visible host terminal signal. They do not establish human comprehension,
+learning, lived accessibility, debrief quality, or browser/device certification.

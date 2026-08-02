@@ -1,7 +1,7 @@
 # Architecture
 
 Last Reviewed: 2026-08-02
-Status: Verified against v0.14.4 source and tests
+Status: Verified against v0.14.5 source and tests
 
 The project is a deterministic Rust simulation with CLI, MCP, and loopback
 browser presentation interfaces. The host/core owns simulation truth and
@@ -80,7 +80,9 @@ presentation preferences.
 session reads, actions, resolution, history/replay, checkpoint recovery, and
 presentation state. `gui/workspace.mjs` owns task navigation and acknowledgement
 state, including event-unlocked future-workspace navigation while leaving prior
-workspaces reviewable. Other modules render regional-world, semantic containers,
+workspaces reviewable. The first-session flow mirrors the existing host terminal
+signal with final-debrief wording and resets that local state on nonterminal
+loads. Other modules render regional-world, semantic containers,
 visual/audio
 catalogs, motion, and fallbacks.
 

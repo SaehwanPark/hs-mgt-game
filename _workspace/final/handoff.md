@@ -3650,3 +3650,32 @@ device-proxy evidence after the session-boundary fix and found no actionable
 issues. This technical slice does not prove
 human usability, lived accessibility, learning, calibration, balance,
 provenance/legal clearance, browser/device certification, or public release.
+
+# Final Handoff — Terminal task handoff v0.14.5
+
+## Status
+
+The shared first-session rail now has a final-debrief task state for terminal
+host sessions and explicit End session results. Nonterminal loads reset the
+state before the next Setup/Brief/Decide/Resolve/Review sequence.
+
+## Changed-file groups
+
+- GUI flow and handoff wiring: `gui/first-month.mjs`, `gui/app.mjs`, and
+  `tests/test_gui_first_month.py`.
+- Current core/release docs: README, SPEC, ARCHITECTURE, proposal, roadmap,
+  visual/audio roadmap, GUI README, changelog, Cargo versions, and generated
+  asset credits.
+- Durable contract/evidence: v0.14.5 request summary, implementation plan,
+  presentation contract, QA, and this handoff.
+
+## Evidence limits
+
+The terminal wording is driven by existing host terminal data and is
+presentation-only. Automated evidence cannot establish human comprehension,
+learning, lived accessibility, debrief quality, calibration, policy validity,
+legal/provenance clearance, browser/device certification, or public release
+readiness.
+
+The device proxy measures 446,498 live-source bytes under a 447,000-byte
+limit. This is an emulated budget check, not device certification.
