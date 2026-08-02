@@ -5561,3 +5561,40 @@ Focused formatter and renderer tests must cover populated, missing, and invalid
 fields. Passing checks establish only deterministic rendering of existing
 actor-visible context, not human comprehension, learning, lived accessibility,
 causal validity, or replay certification.
+
+---
+
+# Presentation Contract — Committed effect delta legibility v0.14.7
+
+## Goal and authorization
+
+Make the existing host-reported delta on a committed resolution effect
+explicit in visible consequence links. The renderer may format only the
+existing numeric `delta`; it may not derive a metric change from snapshots or
+infer causality.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Missing/invalid fallback | Prohibited inference |
+| --- | --- | --- | --- |
+| Committed effect direction | Existing `ResolutionEffect.delta` copied to the link | `Delta unavailable` | No snapshot arithmetic or future outcome |
+| Positive delta | Existing finite safe integer greater than zero | `Delta unavailable` | No claim of benefit or optimality |
+| Negative/zero delta | Existing finite safe integer at or below zero | `Delta unavailable` | No severity ranking or causal certainty |
+
+Regional public-signal and visible-process links have no delta field and must
+not display a fabricated delta line.
+
+## Accessibility and authority
+
+The delta is written text adjacent to the existing label/detail/context/source;
+it does not depend on color, audio, motion, or an asset. Existing source labels,
+focus behavior, information-boundary copy, mute/reduced-motion behavior, and
+stale/missing-data recovery remain unchanged. History, replay, and effect
+generation remain host-owned.
+
+## Verification and limits
+
+Focused tests cover positive, negative, zero, missing, and malformed values.
+Passing checks establish only deterministic display of actor-visible delta data,
+not human comprehension, learning, lived accessibility, causal validity, or
+policy calibration.

@@ -97,6 +97,16 @@ promotion gates and remain future work only in their dated evidence records.
 - No host route/schema, simulation, persistence, replay, asset, audio, or
   browser-support boundary changed.
 
+### Committed effect delta legibility (v0.14.7)
+
+- Committed-effect consequence links render the existing host delta as signed
+  text, with an explicit unavailable fallback for malformed or missing values.
+- Regional signals and visible processes remain delta-free; timing, replay-hash,
+  source, target focus, information boundaries, and private-state exclusions
+  remain unchanged.
+- No host route/schema, simulation, persistence, replay, asset, audio, or
+  browser-support boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is
