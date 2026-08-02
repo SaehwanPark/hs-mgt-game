@@ -116,6 +116,15 @@ promotion gates and remain future work only in their dated evidence records.
 - No host route/schema, simulation, persistence, replay, asset, audio, or
   browser-support boundary changed.
 
+### Registered response status token (v0.14.9)
+
+- Visible response links reuse the approved runtime `status-reported` token
+  with its existing label, symbol, tooltip, source, and written equivalent.
+- Effects, regional signals, processes, response text, focus, and information
+  boundaries remain unchanged; no new asset or audio provenance is added.
+- No host route/schema, simulation, persistence, replay, or browser-support
+  boundary changed.
+
 ## Present
 
 The documentation baseline is complete for this release. Present work is

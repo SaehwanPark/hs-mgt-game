@@ -842,6 +842,10 @@ function renderConsequenceLinks(links, root) {
     const title = document.createElement("strong");
     title.textContent = String(link.label ?? "Visible consequence");
     heading.append(title);
+    if (link.kind === "visible-response") {
+      const reported = visualStatusFor("reported");
+      if (reported) heading.prepend(createVisualToken(reported, "status", root));
+    }
     if (link.target_id && currentMapEntities.some((entity) => entity.id === link.target_id)) {
       const focus = document.createElement("button");
       focus.type = "button";

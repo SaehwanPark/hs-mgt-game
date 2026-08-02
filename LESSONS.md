@@ -1,5 +1,16 @@
 # Lessons Learned
 
+## Reuse registered visual tokens before adding assets
+
+- Context: response cards needed a category cue, while the approved runtime
+  catalog already contained a `reported` status token with text equivalents.
+- Risk: adding a new image or audio cue would expand provenance, byte-budget,
+  and fallback obligations for no additional host information.
+- Resolution: reuse the registered token only for response links and preserve
+  its label, symbol, tooltip, source, and written equivalent.
+- Prevention: inspect the current catalog and registry before creating new
+  assets; treat generic fallbacks as part of the contract.
+
 ## Link actor responses without fabricating targets
 
 - Context: host resolution steps already expose visible institutional response

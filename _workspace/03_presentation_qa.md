@@ -6419,3 +6419,23 @@ no new host authority or actor-intent claim is authorized.
 
 The current emulated device proxy measures 449,234 live-source bytes under the
 450,000-byte limit; this remains a proxy, not hardware certification.
+
+# Presentation QA — Registered response status token v0.14.9
+
+## Status
+
+Planned bounded slice: response links will reuse the approved `status-reported`
+runtime token with its existing text/symbol equivalent; no new asset or audio
+provenance is introduced.
+
+## Findings and limits
+
+- Token wiring is response-only; effects, signals, processes, and target/focus
+  boundaries remain unchanged.
+- Native keyboard focus, written labels/tooltips, mute, reduced motion, and
+  missing-data fallbacks remain part of the existing token/card contract.
+- Automated evidence establishes registry/token reuse only; it cannot establish
+  comprehension, lived accessibility, legal clearance, or policy calibration.
+
+The current emulated device proxy measures 449,418 live-source bytes under the
+450,000-byte limit; this remains a proxy, not hardware certification.

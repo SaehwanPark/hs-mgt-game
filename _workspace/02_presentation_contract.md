@@ -5633,3 +5633,30 @@ Focused tests cover ordered items, absent/present-empty/malformed steps, and
 replay/source fallbacks. Passing checks establish only deterministic rendering
 of actor-visible response text, not comprehension, learning, lived
 accessibility, actor-intent validity, or policy calibration.
+
+---
+
+# Presentation Contract — Registered response status token v0.14.9
+
+## Goal and authorization
+
+Reuse the approved runtime `status-reported` visual token for visible
+institutional response links. No new asset, registry entry, audio signal, or
+host field is authorized.
+
+## Actor-visible source ledger
+
+| Semantic element | Authorized source | Accessible equivalent | Prohibited inference |
+| --- | --- | --- | --- |
+| Response category token | Existing `visualStatusFor("reported")` catalog entry | Existing `Reported` label, symbol, tooltip, and equivalent text | No color-only or intent meaning |
+| Response content | Existing response-link text/source/context | Existing written card content | No new actor outcome or target |
+
+The token is used only on `visible-response` links. Committed effects, regional
+signals, and processes retain their existing presentation.
+
+## Verification and limits
+
+Focused tests must prove catalog identity, accessible text/equivalent markers,
+and response-only wiring. Passing checks establish reuse of a registered
+presentation token, not human comprehension, learning, lived accessibility,
+legal clearance, or policy calibration.
