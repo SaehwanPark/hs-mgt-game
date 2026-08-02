@@ -3617,11 +3617,12 @@ High findings remain. The draft PR is intentionally unmerged.
 
 ## Status
 
-The implementation is complete on `codex/gui-workspace-navigation-v0.14.4`.
-Future workspace tabs are disabled until the existing host/session handoff
-event unlocks them; Setup and previously unlocked workspaces remain available
-for review. PR handoff, one medium-effort code review, merge, and branch cleanup
-remain.
+The implementation and sole medium-effort code review are complete on
+`codex/gui-workspace-navigation-v0.14.4`; the reviewer found and the follow-up
+fixed one Medium cross-session unlock leak, then re-reviewed with no actionable
+issues. Future workspace tabs are disabled until the existing host/session
+handoff event unlocks them; Setup and previously unlocked workspaces remain
+available for review. PR handoff is open; merge and branch cleanup remain.
 
 ## Changed-file groups
 
@@ -3634,7 +3635,7 @@ remain.
 
 ## Verification
 
-- 945 Python tests, 388 Rust library tests plus integration/doc tests, Node
+- 946 Python tests, 388 Rust library tests plus integration/doc tests, Node
   syntax, Clippy with warnings denied, and formatting pass.
 - Documentation currentness/links, release metadata, generated credits,
   asset/security/release, browser compatibility, offline/loading, audio,
@@ -3644,7 +3645,8 @@ remain.
 
 ## Review boundary and remaining limits
 
-The sole medium-effort code reviewer must review the complete diff and the
-updated device-proxy evidence before merge. This technical slice does not prove
+The sole medium-effort code reviewer reviewed the complete diff and updated
+device-proxy evidence after the session-boundary fix and found no actionable
+issues. This technical slice does not prove
 human usability, lived accessibility, learning, calibration, balance,
 provenance/legal clearance, browser/device certification, or public release.

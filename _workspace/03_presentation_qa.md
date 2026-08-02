@@ -6321,7 +6321,7 @@ through the existing task strip.
 ## Verification evidence
 
 - Focused workspace/controller tests and Node syntax checks pass.
-- Full Python suite: 945 tests pass; Rust suite: 388 library tests plus
+- Full Python suite: 946 tests pass; Rust suite: 388 library tests plus
   integration/doc tests pass; Clippy and formatting pass.
 - Documentation currentness/links, release metadata, generated credits,
   asset/security/release, browser compatibility, offline/loading, audio,

@@ -73,7 +73,8 @@ promotion gates and remain future work only in their dated evidence records.
   unlocks their visible task handoff; Setup and already-unlocked workspaces
   remain reviewable.
 - Native disabled semantics, written requirements, and event-order regression
-  tests protect keyboard/focus and presentation-only authority boundaries.
+  tests protect keyboard/focus and presentation-only authority boundaries;
+  session-boundary resets prevent stale terminal tabs from carrying forward.
 - No host route/schema, simulation, persistence, replay, asset, audio, or
   browser-support boundary changed.
 

@@ -6,7 +6,9 @@
   host-backed task event unlocks that workspace, while keeping Setup and prior
   workspaces available for review.
 - Added native disabled/accessible labels and regression coverage for event
-  ordering, handoff controls, terminal review, and locked-navigation safety.
+  ordering, handoff controls, terminal review, locked-navigation safety, and
+  per-session reset behavior; skip navigation no longer fabricates a session
+  load event.
 - No simulation, host route/schema, persistence, replay, asset, audio, or
   browser-support boundary changed; human usability and lived accessibility
   remain unestablished.
