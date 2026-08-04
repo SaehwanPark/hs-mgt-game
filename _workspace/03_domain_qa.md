@@ -828,3 +828,32 @@ or public-release readiness. Those remain authorized pending gates.
 - `python3 -m unittest tests.test_phase13_2_terminal_debrief_runtime_evidence` — pass.
 - Existing terminal/debrief visual-boundary tests and the Rust projection
   regression remain authoritative.
+
+---
+
+# Domain QA — player-first documentation v0.14.13
+
+## Status
+
+Pass for the bounded documentation and source-capture contract. The revised
+campaign descriptions match the live stabilization, competitive, and
+regional-affiliation surfaces inspected at seed `42`.
+
+## Findings
+
+- Campaigns are described as alternatives with no progress transfer. Competitive
+  retains 24 months, simultaneous local AI-rival actions, monthly AP planning,
+  lagged public signals, and difficulty tiers; affiliation retains six stages,
+  no AI rivals/difficulty, and its legal/valuation/antitrust/transaction
+  disclaimer.
+- The affiliation PNG was captured only after the host reported six committed
+  stages and a terminal Review debrief. Its decision-quality explanation keeps
+  actor utility/social welfare separate and does not expose hidden state.
+- Installation language remains source-only and does not imply installers,
+  binaries, certification, legal advice, or network multiplayer.
+
+## Limits
+
+This QA confirms source alignment and visible-boundary discipline only. It does
+not establish human usability, learning, accessibility, legal quality,
+calibration, policy validity, or cross-platform certification.
