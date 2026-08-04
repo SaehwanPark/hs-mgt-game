@@ -2,7 +2,9 @@
 
 The live browser GUI provides the competitive regional, stabilization, and
 regional-affiliation campaigns through a local Rust host. It does not require
-MCP setup, a separate web server, or manual JavaScript adapter injection.
+MCP setup, a separate web server, or manual JavaScript adapter injection. The
+recommended first session is the five-decision **Stabilization tutorial**;
+competitive and affiliation are separate alternatives.
 
 ## Requirements
 
@@ -28,10 +30,28 @@ In the normal competitive GUI it is split across the Brief, Decide, Resolve,
 and Review workspaces after start/load and accepted monthly refreshes; if that
 optional read is unavailable, the actions remain usable.
 
-For a first session, start with the documented Normal/seed-42 defaults, then
-use the task workspace to reveal one step at a time. Presentation settings are
-local browser preferences; they do not change commands, host validation,
-simulation outcomes, or replay history.
+For a first session, choose `stabilization-v1`, seed `42`, and no difficulty.
+Use the task workspace to reveal one visible action at a time. Presentation
+settings are local browser preferences; they do not change commands, host
+validation, simulation outcomes, or replay history.
+
+## Campaign choices
+
+The campaigns are alternatives rather than sequential chapters; progress and
+checkpoints do not transfer between them.
+
+- **Stabilization tutorial** (`stabilization-v1`) is five abstract executive
+  decisions. It has no calendar duration or difficulty. The GUI shows one
+  host-provided action card per stage; the CLI also offers beginner guided
+  choices.
+- **Competitive regional market** (`competitive-regional-v1`) is a separate
+  24-month campaign with monthly AP planning, simultaneous AI-rival actions,
+  and lagged public signals. Easy/Normal/Hard/Expert change rival count and AP;
+  it is not network multiplayer.
+- **Regional affiliation** (`regional-affiliation-v1`) is a separate six-stage
+  nonprofit-partner scenario covering assessment, posture, commitments, review,
+  and early integration or independence. It has no AI rivals or difficulty
+  tiers and is not legal, valuation, antitrust, or transaction advice.
 
 ## Start the GUI
 
@@ -49,11 +69,12 @@ simulation outcomes, or replay history.
    ```
 
 4. Open that URL in your browser.
-5. Leave the campaign set to `competitive-regional-v1`, use seed `42`, choose
-   Normal difficulty, and select **Start competitive regional session**. For
-   stabilization or regional affiliation, choose that campaign and select the
-   same start button; difficulty is not used for those campaign-coverage
-   sessions.
+5. Leave the campaign set to **Stabilization tutorial**
+   (`stabilization-v1`), use seed `42`, and select **Start selected session**.
+   Difficulty is not used for this campaign. The same start control launches
+   the competitive or regional-affiliation alternatives when you are ready; for
+   the competitive alternative, the button is **Start competitive regional
+   session**.
 
 The server listens only on your computer's loopback interface. It does not make
 the game available to other computers and does not provide network multiplayer.

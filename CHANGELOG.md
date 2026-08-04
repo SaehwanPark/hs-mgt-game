@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.14.13] - 2026-08-04
+
+- Rebuild the public README around the player journey, with a GUI stabilization
+  tutorial first run, campaign comparison, beginner installation guidance, and
+  maintained live-play screenshots.
+- Separate contributor quickstart, screenshot refresh, and browser-inspection
+  notes into the contributor documentation index. No simulation, host,
+  persistence, schema, campaign, or browser-runtime behavior changed.
+
 ## [0.14.12] - 2026-08-02
 
 - Record the bounded GUI-first technical checkpoint as complete through

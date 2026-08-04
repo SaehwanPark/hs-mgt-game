@@ -28,7 +28,6 @@ CURRENT_FILES = {
     "competitive-regional-v1",
     "regional-affiliation-v1",
     "Chromium evergreen",
-    "Codex in-app browser",
     "deferred",
   ),
   "SPEC.md": ("## Past", "## Present", "## Future", "GUI-focused documentation"),
@@ -38,7 +37,14 @@ CURRENT_FILES = {
     "## Browser support boundary",
     "Chromium evergreen",
   ),
-  "docs/README.md": ("Maintained", "Generated", "Historical", "ADR", "Workspace"),
+  "docs/README.md": (
+    "Maintained",
+    "Generated",
+    "Historical",
+    "ADR",
+    "Workspace",
+    "Codex in-app browser",
+  ),
   "docs/roadmap.md": ("## Current position", "## GUI-first queue", "AI-native", "deferred"),
   "docs/visual_audio_enhancement_roadmap.md": (
     "## Current implemented baseline",

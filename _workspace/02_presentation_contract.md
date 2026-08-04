@@ -5736,3 +5736,26 @@ The release and repository checks establish technical traceability only. They do
 not establish human comprehension, learning, lived accessibility, legal
 clearance, calibration, balance, policy validity, or non-default browser/device
 support.
+
+---
+
+# Presentation Contract — player-first README screenshots v0.14.13
+
+## Capture contract
+
+The README gallery uses five lossless, repository-authored PNGs. GUI captures
+come from the live loopback host in Chromium evergreen at 1440×900, 100% zoom,
+seed `42`; CLI captures come from a consistent readable live terminal profile.
+The competitive hero is a Brief regional-board view with player-visible metrics
+and public rival cards. The stabilization capture shows one host-provided
+action before commit. The affiliation capture is terminal Review after six
+committed stages, with final status, commitments, and decision-quality text and
+without decision controls. All captures remain source-bound and actor-visible.
+
+## Prohibited inference
+
+Do not infer true state, private rival actions, unresolved stochastic inputs,
+causal severity, future outcomes, human learning, legal quality, or policy
+validity from a screenshot. The images are maintained documentation screenshots,
+not runtime/release assets; the manifest records revision, seed/difficulty,
+dimensions, cropping, method, and SHA-256.

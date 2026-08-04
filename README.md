@@ -1,100 +1,117 @@
 # Health Policy Strategy Game
 
-Health Policy Strategy Game is a deterministic strategy simulation about
-leading a fictional nonprofit US health system through financial pressure,
-workforce constraints, payer negotiations, policy oversight, market
-competition, and community trust.
+Health Policy Strategy Game is a fictional, deterministic strategy game about
+leading a nonprofit US health system while finance, workforce, policy,
+community, and market pressures pull in different directions. You make the
+decision; the host reports what was visible, what changed, and what remains
+uncertain.
 
-The current public milestone is a playable Rust prototype at v0.14.12. The
-simulation remains the authority for commands, observations, transitions,
-history, replay, checkpoints, and debriefs. The CLI is the reference interface;
-the loopback GUI is the active presentation-development surface over the same
-host contracts. Its current-task rail switches to an explicit final-debrief
-state when the host reports a terminal session.
-Visible consequence links also retain timing and existing replay-hash context
-with explicit unavailable fallbacks, and committed-effect links show their
-host-reported signed deltas and visible institutional responses with
-registered status-token emphasis.
-The AI-agent playtest recorder also retains host-reported history/hash evidence
-after committed visible-envelope refreshes; missing history remains an explicit
-revision finding rather than being inferred.
-The current bounded GUI-first technical checkpoint is complete; future
-presentation work remains gap-gated and does not imply human-evidence closure.
+The current release is a playable Rust prototype at v0.14.13. It is distributed
+as source code: there is no installer or prebuilt binary. The GUI is the easiest
+way to see the game, while the CLI remains a complete alternative.
 
-![Terminal view of the game's executive report and competitive command entry](https://i.imgur.com/gfmOO3O.png)
+![Live competitive Brief workspace with executive metrics, the regional board, and public rival signals](docs/images/readme/gui-competitive-brief.png)
 
-## Start here
+## Play now
 
-You need a Rust toolchain with Cargo. From the repository root, run:
-
-```bash
-cargo run
-```
-
-For a friendly first session:
-
-1. Press Enter or choose `1` for `stabilization-v1`.
-2. Press Enter for the default deterministic seed.
-3. Choose beginner mode.
-
-## Playable campaigns
-
-- `stabilization-v1` — a five-turn executive stabilization campaign.
-- `competitive-regional-v1` — a 24-month regional-market campaign with AI
-  rivals, simultaneous monthly actions, and lagged information.
-- `regional-affiliation-v1` — a six-stage affiliation campaign covering partner
-  assessment, commitments, review, integration, and debriefing.
-
-Every campaign is deterministic for the same seed and choices. The simulation
-keeps actor-visible information separate from underlying state, records an
-append-only history, and supports replay verification.
-
-## GUI mode
-
-The loopback GUI currently launches all three campaigns:
+The shortest first run is the GUI stabilization tutorial. Install the
+prerequisites using the [beginner installation guide](docs/guides/installation.md),
+then:
 
 ```bash
 cargo run --bin hs-mgt-game-gui
 ```
 
-Keep that terminal running and open the printed URL, normally
-`http://127.0.0.1:7878`. Choose seed `42`, Normal difficulty, and
-**Start competitive session** for the recommended first GUI session.
+Keep that terminal open and visit the printed URL, normally
+`http://127.0.0.1:7878`. Choose **Stabilization tutorial** (`stabilization-v1`)
+and seed `42`. Follow the Brief → Decide → Resolve → Review workspace; the
+tutorial has five abstract executive decisions and does not ask for a calendar
+duration or difficulty.
 
-The GUI uses a progressive Setup/Brief/Decide/Resolve/Review workspace with
-host-ordered actions, event-gated future workspace navigation, host-owned
-checkpoints, replay/history reads, and text-first source/uncertainty fallbacks.
-`gui/index.html` opened directly shows
-demo data; it does not start a live scenario.
+If you prefer a terminal, run `cargo run`, choose `1` for
+`stabilization-v1`, choose beginner guided choices (`b`), and accept seed `42`.
+The [CLI guide](docs/guides/how-to-play.md) explains the prompts and the
+competitive command vocabulary.
 
-The declared default browser target is Chromium evergreen desktop. The Codex in-app browser
-is a development inspection surface. Firefox, WebKit/Safari,
-mobile, and legacy-browser support are deferred and not certified.
+## Screenshots from live play
 
-See [How to Play in GUI Mode](docs/guides/gui-how-to-play.md) for launch,
-settings, alternate ports, checkpoint recovery, and troubleshooting.
+These maintained documentation captures show actor-visible state from the live
+loopback host. They are not runtime or release assets.
+
+| GUI decision workspace | GUI terminal review |
+| --- | --- |
+| ![Seed-42 stabilization tutorial decision workspace showing a host-provided action](docs/images/readme/gui-stabilization-decide.png)<br>*Stabilization tutorial: choose one visible action.* | ![Terminal regional-affiliation Review state with six stages, final status, commitments, and decision-quality explanation](docs/images/readme/gui-affiliation-debrief.png)<br>*Regional affiliation: the true terminal debrief.* |
+
+| CLI beginner choice | CLI competitive report |
+| --- | --- |
+| ![Beginner-guided stabilization choice without local usernames or filesystem paths](docs/images/readme/cli-stabilization-beginner.png)<br>*CLI stabilization: guided first choice.* | ![Competitive executive report with the monthly command prompt](docs/images/readme/cli-competitive-report.png)<br>*CLI competitive: report and monthly prompt.* |
+
+Capture details and SHA-256 checksums are in the
+[screenshot manifest](docs/images/readme/README.md).
+
+## Choose a campaign
+
+The campaigns are alternatives, not sequential chapters. Progress, decisions,
+and checkpoints do not transfer between them.
+
+| Campaign | Purpose | Length | Interface behavior | Difficulty applicability | Recommended audience |
+| --- | --- | --- | --- | --- | --- |
+| **Stabilization tutorial** (`stabilization-v1`) | Five abstract executive decisions about access, capacity, workforce, policy, coalition, and rival pressure. | Five decisions; no calendar duration. | GUI shows one host-provided action card at each stage; the CLI alone offers beginner guided choices. | No difficulty setting. | Everyone's first run; especially new players. |
+| **Competitive regional market** (`competitive-regional-v1`) | A separate 24-month regional-market campaign where your monthly plan meets simultaneous AI-rival actions and lagged public information. | 24 months. | GUI uses the monthly action rail and Brief/Decide/Resolve loop; CLI accepts command batches. | Easy, Normal, Hard, and Expert tiers change rival count and monthly AP. | Players ready for a longer, more information-limited strategy loop. |
+| **Regional affiliation** (`regional-affiliation-v1`) | A separate six-stage nonprofit-partner scenario covering assessment, posture, commitments, review, and early integration or independence. | Six stages. | GUI and CLI expose one bounded stage decision at a time. | No AI rivals or difficulty tiers; not legal, valuation, antitrust, or transaction advice. | Players who want an institutional fit and obligation scenario. |
+
+Competitive is not network multiplayer: rivals are local AI or bounded MCP
+agents. Every campaign is deterministic for the same seed and choices, while
+actor-visible observations remain separate from the engine's true state.
+The regional-affiliation scenario is not legal, valuation, antitrust, or transaction advice.
+
+## Installation in one minute
+
+This is a source-only checkout. Install Rust/Cargo, download the repository as
+a GitHub ZIP (lowest-friction path) or clone it for repeatable updates, open a
+terminal in the repository folder, and run the GUI command above. The full
+macOS, Windows, and Linux walkthrough—including Cargo verification, updates,
+checkpoint cautions, and recovery FAQ—is in
+[Installation and first launch](docs/guides/installation.md).
+
+## Common first-run fixes
+
+- **`cargo` or `git` is not found:** install the tool from the official links
+  in the [installation guide](docs/guides/installation.md), close the terminal,
+  open a new one, and try again.
+- **Connection refused:** the GUI host is not running or compilation has not
+  finished; keep the Cargo terminal open and use the exact printed URL.
+- **The page shows demo data:** you opened `gui/index.html` directly. Start
+  `cargo run --bin hs-mgt-game-gui` for live play.
+- **Port 7878 is busy:** stop the other GUI host or use
+  `cargo run --bin hs-mgt-game-gui -- --bind 127.0.0.1:8787`.
+- **A saved checkpoint seems missing:** checkpoints belong to the host and
+  source checkout; use the GUI's saved-checkpoint finder before starting over.
+
+See the complete [troubleshooting FAQ](docs/guides/installation.md#faq) and
+[GUI recovery guide](docs/guides/gui-how-to-play.md) for more cases.
 
 ## Current boundaries
 
-This is a playable research and educational prototype, not a finished
-educational release or a model of any real institution.
+This is a research and educational prototype, not a finished educational
+release and not a model of any real institution. Game units and thresholds are
+documented abstractions, not calibrated forecasts. Automated and AI-agent
+playtests establish technical evidence only; they do not establish human
+learning, lived accessibility, classroom effectiveness, legal conclusions, or
+policy validity. Do not use the game for operational, clinical, financial,
+regulatory, legal, or policy decisions.
 
-- Numerical thresholds and game units are documented abstractions, not
-  empirically calibrated parameters or forecasts.
-- Rivals are local AI or bounded MCP agents; there is no network multiplayer.
-- Automated and AI-agent playtests support technical and gameplay iteration;
-  they do not establish human learning, lived accessibility, classroom
-  effectiveness, legal conclusions, or policy validity.
-- Asset provenance is machine-checked. Content with incomplete provenance uses
-  a generic fallback and is not promoted to runtime release.
-
-Do not use the game for operational, clinical, financial, regulatory, legal, or
-policy decisions.
+The live host owns commands, legality, transitions, history, replay,
+checkpoints, and debriefs. The declared browser target is Chromium evergreen
+desktop. Firefox, WebKit/Safari, mobile, and legacy-browser support are
+deferred and non-certified. Contributor-only browser inspection notes live in
+the [contributor documentation index](docs/README.md), not in the player path.
 
 ## Learn more
 
 ### Players
 
+- [Installation and first launch](docs/guides/installation.md)
 - [How to Play in the CLI](docs/guides/how-to-play.md)
 - [How to Play in GUI Mode](docs/guides/gui-how-to-play.md)
 
@@ -107,30 +124,6 @@ policy decisions.
 - [Roadmap](docs/roadmap.md)
 - [Design principles](docs/design_principles.md)
 - [Changelog](CHANGELOG.md)
-
-For a longer introduction to the design, read
-[A Management Game Where the Market Talks Back](docs/blog-posts/health-policy-strategy-game.md).
-
-## Contributing
-
-Keep core simulation transitions deterministic and resolve randomness into
-explicit inputs before evaluating a transition. Treat the host as authoritative
-for commands, legality, state, history, replay, checkpoints, and debriefs;
-presentation layers must remain actor-visible and reversible.
-
-Run the standard checks:
-
-```bash
-python3 scripts/check_documentation_currentness.py
-python3 scripts/check_release_metadata.py
-python3 scripts/check_documentation_links.py
-cargo fmt --check
-cargo clippy --all-targets -- -D warnings
-cargo test
-```
-
-Start with the [contributor documentation index](docs/README.md) for software,
-game and domain design, validation, release, and decision-record guidance.
 
 ## License
 

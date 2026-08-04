@@ -1,54 +1,27 @@
 # How To Play
 
-This guide introduces both terminal and GUI play. The CLI and live GUI support
-all three campaigns, with the stabilization and regional-affiliation GUI paths
-using the host-owned campaign-coverage panel. The separate step-by-step guide
-is at [`gui-how-to-play.md`](gui-how-to-play.md).
+This guide covers both the recommended live GUI tutorial and the CLI
+alternative. Install from [Installation and first launch](installation.md),
+then use the [GUI guide](gui-how-to-play.md) for settings, checkpoints,
+alternate ports, and recovery.
 
 ## What this game is
 
-You play as a health-system leader in a fictional US market. You make strategy
-decisions under pressure from finance, workforce, policy, and competitors.
+You lead a fictional nonprofit US health system. Decisions balance finance,
+workforce, policy, community trust, and rivals. The host reports only
+actor-visible information; seeded uncertainty and the same choices produce the
+same run.
 
-Three campaigns are currently visible in the CLI:
+The three campaigns are alternatives rather than sequential chapters. Progress
+and checkpoints do not transfer between them:
 
-- `stabilization-v1`: five-turn executive demo.
-- `competitive-regional-v1`: 24-month competitive campaign with one
-  player-controlled system and AI rivals.
-- `regional-affiliation-v1`: opt-in six-stage nonprofit affiliation decision.
+| Campaign | What you do | Interface and audience |
+| --- | --- | --- |
+| **Stabilization tutorial** (`stabilization-v1`) | Five abstract executive decisions; no calendar duration or difficulty. | Recommended first GUI run; CLI also has beginner guided choices (`b`). |
+| **Competitive regional market** (`competitive-regional-v1`) | A separate 24-month campaign with simultaneous AI-rival actions, monthly AP planning, and lagged public information. | Difficulty tiers apply; this is local AI pressure, not network multiplayer. |
+| **Regional affiliation** (`regional-affiliation-v1`) | A separate six-stage nonprofit-partner scenario covering assessment, posture, commitments, review, and early integration or independence. | No AI rivals or difficulty; it is not legal, valuation, antitrust, or transaction advice. |
 
-The game is deterministic for a given seed and set of choices. A poor outcome
-can still follow a reasonable decision when uncertainty and rival behavior
-interact.
-
-## CLI first-session quickstart
-
-1. Run the game:
-
-   ```bash
-   cargo run
-   ```
-
-2. Choose a campaign:
-   - Enter or `1` for stabilization (recommended first run).
-   - `2` or `c` for competitive.
-   - `3` or `a` for regional affiliation.
-3. If you picked competitive, choose a difficulty:
-   - Easy: 1 AI rival, 4 AP/month.
-   - Normal: 2 AI rivals, 3 AP/month.
-   - Hard: 3 AI rivals, 3 AP/month.
-   - Expert: 4 AI rivals, 2 AP/month.
-4. Choose play style:
-   - `i` (or Enter): interactive.
-   - `b`: beginner guided choices (stabilization flow).
-   - `1`/`2`/`3`: preset strategy paths.
-5. Set seed (or press Enter for default `42`).
-6. Play through all turns/months.
-7. Use global commands any time:
-   - `?` or `help` for context
-   - `q`, `quit`, or `exit` to leave
-
-## GUI first-session quickstart
+## Recommended GUI first run: stabilization tutorial
 
 1. From the repository root, start the live GUI host:
 
@@ -58,20 +31,29 @@ interact.
 
 2. Keep that terminal running and open the printed URL, normally
    `http://127.0.0.1:7878`.
-3. Select a campaign and seed `42`. Difficulty applies only to
-   `competitive-regional-v1`.
-4. Choose **Start selected session**. Competitive uses the action rail; the
-   stabilization and regional-affiliation sessions use the host-shaped
-   campaign-coverage rail.
-5. For competitive, inspect the briefing and regional market, add at least two
-   action drafts, validate the unchanged draft, submit it, then review or skip
-   the resolution. For the other campaigns, inspect the visible stage and
-   choose one host-shaped decision, then review the refreshed stage.
+3. Select **Stabilization tutorial** (`stabilization-v1`) and seed `42`.
+   Difficulty is not used by this campaign.
+4. Choose **Start selected session**. Read the visible brief, choose one
+   host-provided action, review the committed stage, and continue until the
+   terminal Review debrief after five decisions.
 
 Do not open `gui/index.html` directly when you want to play: direct/static mode
-contains demonstration data and no live game host. For audio controls, alternate
-ports, session lifetime, and recovery steps, use
-[`gui-how-to-play.md`](gui-how-to-play.md).
+contains demonstration data and no live game host.
+
+## CLI alternative
+
+1. Run the reference CLI:
+
+   ```bash
+   cargo run
+   ```
+
+2. Choose Enter or `1` for `stabilization-v1`, then `b` for beginner guided
+   choices and seed `42` (press Enter at each default prompt).
+3. To explore other campaigns, choose `2`/`c` for competitive or `3`/`a` for
+   regional affiliation. Competitive difficulty is Easy (1 rival, 4 AP/month),
+   Normal (2, 3 AP), Hard (3, 3 AP), or Expert (4, 2 AP).
+4. Use `?`/`help` for context and `q`, `quit`, or `exit` to leave.
 
 ## Game structure from your perspective
 

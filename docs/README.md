@@ -28,6 +28,28 @@ current implementation instructions.
    an accepted boundary.
 5. Run the documentation-currentness checker before committing documentation.
 
+### Developer quickstart
+
+Work from a clean checkout and keep the source-only workflow intact. The GUI
+host is useful for presentation inspection, but it does not change the Rust
+simulation or host authority:
+
+```bash
+cargo fmt --check
+cargo clippy --all-targets -- -D warnings
+cargo test
+python3 scripts/check_documentation_currentness.py
+python3 scripts/check_documentation_links.py
+python3 scripts/check_release_metadata.py
+python3 -m unittest discover -s tests
+```
+
+For a live GUI smoke, run `cargo run --bin hs-mgt-game-gui`, open the printed
+`http://127.0.0.1:7878` URL in Chromium evergreen, and use seed `42`. Stop the
+host with Ctrl-C. Read [ARCHITECTURE](../ARCHITECTURE.md), the
+[versioning policy](reference/versioning-policy.md), and the
+[changelog](../CHANGELOG.md) before changing public boundaries.
+
 ## GUI and presentation path
 
 1. Read the current [GUI roadmap](visual_audio_enhancement_roadmap.md),
@@ -39,9 +61,29 @@ current implementation instructions.
    remain presentation state.
 4. Use the [GUI player guide](guides/gui-how-to-play.md) and
    [GUI technical reference](../gui/README.md) for current operation.
-5. Treat Chromium evergreen desktop as the default browser target. Codex
-   browser inspection is development evidence; non-default engines are
-   deferred.
+5. Treat Chromium evergreen desktop as the default browser target. The Codex in-app browser
+   is a development inspection surface and its captures are
+   technical evidence; non-default engines are deferred.
+
+### Refreshing the maintained README screenshots
+
+The five images in [`images/readme/`](images/readme/) are documentation
+screenshots, not runtime assets. Refresh them only from the live loopback host:
+
+1. Start the GUI host and open it in Chromium evergreen at 1440×900, 100% zoom.
+2. Use seed `42`; capture the competitive Brief hero, stabilization Decide,
+   and the true terminal affiliation Review/debrief state after all six stages.
+3. Capture the CLI beginner stabilization choice and the competitive report at
+   a consistent readable terminal size. Remove usernames and filesystem paths
+   from the visible frame.
+4. Do not expose hidden state, private rival actions, static demo fixtures, or
+   instructor-only detail. Record campaign, stage, seed/difficulty, dimensions,
+   capture method, revision, cropping, and SHA-256 in
+   [`images/readme/README.md`](images/readme/README.md).
+
+The [presentation contract](../_workspace/02_presentation_contract.md) and
+[presentation QA](../_workspace/03_presentation_qa.md) explain the source-bound and
+actor-visible boundaries used for these captures.
 
 ## Game and domain design path
 

@@ -4782,3 +4782,32 @@ PR/merge/temporary-branch cleanup.
 This checkpoint records technical coverage only. It does not establish human
 comprehension, learning, lived accessibility, legal clearance, calibration,
 balance, policy validity, or non-default browser/device support.
+
+---
+
+# Request Summary — player-first README and installation v0.14.13
+
+## Authorized outcome
+
+Rebuild the public entry point around a non-developer player journey. Recommend
+the live GUI stabilization tutorial with seed `42`, keep CLI play as an
+alternative, explain all three campaigns as independent choices, add a
+cross-platform source-only installation guide and beginner FAQ, and move
+developer quickstart/browser inspection material into `docs/README.md`.
+
+## Screenshot scope
+
+Maintain five repository-authored PNGs under `docs/images/readme/`: one live
+competitive Brief hero, one seed-42 stabilization Decide view, one true
+terminal affiliation Review/debrief after six stages, and two live CLI views.
+Capture only actor-visible state from the current host/CLI; never use static
+demo fixtures, hidden/private rival actions, instructor-only detail, or external
+imagery. Record provenance, dimensions, cropping, revision, and SHA-256 in the
+local manifest.
+
+## Non-goals and evidence limits
+
+No simulation, command, GUI runtime, public API, save format, schema, campaign
+mechanic, packaging, installer, hosted deployment, or browser-support behavior
+changes. Technical checks do not establish human usability, learning, lived
+accessibility, legal advice, valuation/antitrust validity, or policy validity.

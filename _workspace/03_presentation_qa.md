@@ -6501,3 +6501,27 @@ future work is explicitly gap-gated.
 - Automated evidence cannot establish human comprehension, learning, lived
   accessibility, legal clearance, calibration, balance, policy validity, or
   public-release readiness.
+
+---
+
+# Presentation QA — player-first README screenshots v0.14.13
+
+## Status
+
+Pass for the maintained README gallery and contributor handoff. The five PNGs
+are lossless, local, checksum-recorded, and captured from live actor-visible
+state; no external Imgur image remains in the player README.
+
+## Findings and limits
+
+- GUI captures use the live loopback host, Chromium evergreen, seed `42`, and a
+  1440×900 viewport. CLI captures use one consistent readable Terminal profile
+  and remove only the shell title/path and desktop margins.
+- The terminal affiliation capture is genuinely terminal: six committed rows,
+  final status/commitments, expanded decision-quality explanation, and no
+  decision controls. The CLI competitive capture shows the report's visible
+  intelligence gaps and month-one command prompt; no private rival actions or
+  instructor appendix is used.
+- Technical inspection cannot establish human comprehension, learning, lived
+  accessibility, audio quality, browser/device certification, legal clearance,
+  or policy validity. These remain explicit limits in the player README.
